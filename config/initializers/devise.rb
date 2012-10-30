@@ -206,6 +206,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :developer
+  config.omniauth :google_oauth2,
+    configatron.omniauth.google_oauth2.app_id,
+    configatron.omniauth.google_oauth2.app_secret,
+    access_type: "offline",
+    approval_prompt: "force"
   # config.omniauth :google_apps
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 

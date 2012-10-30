@@ -24,7 +24,10 @@ class User < ActiveRecord::Base
     end
 
     self.new.tap do |user|
-      if auth_hash[:info][:name] =~ /(.*?)\s+(.*)/
+      if auth_hash[:info][:first_name]
+        user.first_name = auth_hash[:info][:first_name]
+        user.last_name  = auth_hash[:info][:last_name]
+      elsif auth_hash[:info][:name] =~ /(.*?)\s+(.*)/
         user.first_name = $1.strip
         user.last_name  = $2.strip
       else

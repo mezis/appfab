@@ -8,7 +8,7 @@ gem 'sqlite3'
 # authentication/authorisation
 gem 'devise'
 gem 'omniauth-github'
-gem 'omniauth-google-apps'
+gem 'omniauth-google-oauth2'
 gem 'cancan'
 
 # templates
@@ -25,6 +25,10 @@ gem 'memcache-client'
 gem 'gettext_i18n_rails'
 gem 'gettext',     :require => false, :group => :development
 gem 'ruby_parser', :require => false, :group => :development
+
+# centralized configuration
+gem 'configatron'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
