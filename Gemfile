@@ -67,10 +67,11 @@ group :development do
   gem 'capistrano'
 
   # tdd
-  gem 'rspec-rails'
-  gem 'cucumber-rails', :require => false
-  gem 'capybara-webkit'
-  gem 'machinist'
+  gem 'rspec-rails',      :require => false
+  gem 'cucumber-rails',   :require => false
+  gem 'capybara-webkit',  :require => false
+  gem 'machinist',        :require => false
+  gem 'database_cleaner', :require => false
 end
 
 

@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @votes = Vote.all
   end
