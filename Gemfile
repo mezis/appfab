@@ -6,6 +6,7 @@ gem 'rails', '3.2.8'
 gem 'sqlite3' 
 
 # authentication/authorisation
+gem 'devise'
 gem 'omniauth-github'
 gem 'omniauth-google-apps'
 gem 'cancan'
@@ -56,6 +57,7 @@ group :development do
   gem 'debugger'
   gem 'pry'
   gem 'pry-nav'
+  gem 'pry-rails'
 
   # deployment
   gem 'capistrano'
