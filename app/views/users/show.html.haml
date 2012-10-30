@@ -1,0 +1,27 @@
+- title "User"
+
+%p
+  %strong First Name:
+  = @user.first_name
+%p
+  %strong Last Name:
+  = @user.last_name
+%p
+  %strong Email Address:
+  = @user.email_address
+%p
+  %strong Role:
+  = @user.role
+%p
+  %strong Karma:
+  = @user.karma
+%p
+  %strong Account:
+  = @user.account_id
+
+%p
+  = link_to "Edit", edit_user_path(@user)
+  |
+  = link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", users_path

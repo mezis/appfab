@@ -61,3 +61,5 @@ group :development do
   gem 'capybara-webkit'
   gem 'machinist'
 end
+
+gem "mocha", :group => :test

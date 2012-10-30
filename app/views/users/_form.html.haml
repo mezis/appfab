@@ -1,0 +1,28 @@
+= form_for @user do |f|
+  = f.error_messages
+  %p
+    = f.label :first_name
+    %br
+    = f.text_field :first_name
+  %p
+    = f.label :last_name
+    %br
+    = f.text_field :last_name
+  %p
+    = f.label :email_address
+    %br
+    = f.text_field :email_address
+  %p
+    = f.label :role
+    %br
+    = f.text_field :role
+  %p
+    = f.label :karma
+    %br
+    = f.number_field :karma
+  %p
+    = f.label :account_id
+    %br
+    = f.number_field :account_id
+  %p
+    = f.submit
