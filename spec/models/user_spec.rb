@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  it "should be valid" do
-    User.new.should be_valid
+  it "should not be valid by default" do
+    User.new.should_not be_valid
   end
 end
