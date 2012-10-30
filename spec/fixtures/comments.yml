@@ -1,0 +1,13 @@
+one:
+  idea_id: 1
+  parent_id: 1
+  author_id: 1
+  rating: 1
+  body: MyText
+
+two:
+  idea_id: 1
+  parent_id: 1
+  author_id: 1
+  rating: 1
+  body: MyText

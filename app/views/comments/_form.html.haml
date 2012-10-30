@@ -1,0 +1,24 @@
+= form_for @comment do |f|
+  = f.error_messages
+  %p
+    = f.label :idea_id
+    %br
+    = f.number_field :idea_id
+  %p
+    = f.label :parent_id
+    %br
+    = f.number_field :parent_id
+  %p
+    = f.label :author_id
+    %br
+    = f.number_field :author_id
+  %p
+    = f.label :rating
+    %br
+    = f.number_field :rating
+  %p
+    = f.label :body
+    %br
+    = f.text_area :body
+  %p
+    = f.submit
