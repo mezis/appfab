@@ -35,4 +35,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Devise
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend  ControllerHelpers,   :type => :controller
 end

@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe CommentsController do
-  fixtures :all
+  login_user
   render_views
 
   it "index action should render index template" do
@@ -10,7 +10,7 @@ describe CommentsController do
   end
 
   it "show action should render show template" do
-    get :show, :id => Comment.first
+    get :show, :id => Comment.make!
     response.should render_template(:show)
   end
 
@@ -20,36 +20,36 @@ describe CommentsController do
   end
 
   it "create action should render new template when model is invalid" do
-    Comment.any_instance.stubs(:valid?).returns(false)
+    Comment.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    Comment.any_instance.stubs(:valid?).returns(true)
+    Comment.any_instance.stub(:valid? => true)
     post :create
     response.should redirect_to(comment_url(assigns[:comment]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Comment.first
+    get :edit, :id => Comment.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    Comment.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Comment.first
+    comment = Comment.make!
+    Comment.any_instance.stub(:valid? => false)
+    put :update, :id => comment.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    Comment.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Comment.first
+    put :update, :id => Comment.make!
     response.should redirect_to(comment_url(assigns[:comment]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    comment = Comment.first
+    comment = Comment.make!
     delete :destroy, :id => comment
     response.should redirect_to(comments_url)
     Comment.exists?(comment.id).should be_false

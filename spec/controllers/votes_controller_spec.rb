@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe VotesController do
-  fixtures :all
+  login_user
   render_views
 
   it "index action should render index template" do
@@ -10,7 +10,7 @@ describe VotesController do
   end
 
   it "show action should render show template" do
-    get :show, :id => Vote.first
+    get :show, :id => Vote.make!
     response.should render_template(:show)
   end
 
@@ -20,36 +20,36 @@ describe VotesController do
   end
 
   it "create action should render new template when model is invalid" do
-    Vote.any_instance.stubs(:valid?).returns(false)
+    Vote.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    Vote.any_instance.stubs(:valid?).returns(true)
+    Vote.any_instance.stub(:valid? => true)
     post :create
     response.should redirect_to(vote_url(assigns[:vote]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Vote.first
+    get :edit, :id => Vote.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    Vote.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Vote.first
+    vote = Vote.make!
+    Vote.any_instance.stub(:valid? => false)
+    put :update, :id => vote.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    Vote.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Vote.first
+    put :update, :id => Vote.make!
     response.should redirect_to(vote_url(assigns[:vote]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    vote = Vote.first
+    vote = Vote.make!
     delete :destroy, :id => vote
     response.should redirect_to(votes_url)
     Vote.exists?(vote.id).should be_false

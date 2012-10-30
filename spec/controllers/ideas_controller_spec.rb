@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe IdeasController do
-  fixtures :all
+  login_user
   render_views
 
   it "index action should render index template" do
@@ -10,7 +10,7 @@ describe IdeasController do
   end
 
   it "show action should render show template" do
-    get :show, :id => Idea.first
+    get :show, :id => Idea.make!
     response.should render_template(:show)
   end
 
@@ -20,36 +20,36 @@ describe IdeasController do
   end
 
   it "create action should render new template when model is invalid" do
-    Idea.any_instance.stubs(:valid?).returns(false)
+    Idea.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    Idea.any_instance.stubs(:valid?).returns(true)
+    Idea.any_instance.stub(:valid? => true)
     post :create
     response.should redirect_to(idea_url(assigns[:idea]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Idea.first
+    get :edit, :id => Idea.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    Idea.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Idea.first
+    idea = Idea.make!
+    Idea.any_instance.stub(:valid? => false)
+    put :update, :id => idea.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    Idea.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Idea.first
+    put :update, :id => Idea.make!
     response.should redirect_to(idea_url(assigns[:idea]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    idea = Idea.first
+    idea = Idea.make!
     delete :destroy, :id => idea
     response.should redirect_to(ideas_url)
     Idea.exists?(idea.id).should be_false

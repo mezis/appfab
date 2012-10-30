@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe AccountsController do
-  fixtures :all
+  login_user
   render_views
 
   it "index action should render index template" do
@@ -10,7 +10,7 @@ describe AccountsController do
   end
 
   it "show action should render show template" do
-    get :show, :id => Account.first
+    get :show, :id => Account.make!
     response.should render_template(:show)
   end
 
@@ -20,36 +20,36 @@ describe AccountsController do
   end
 
   it "create action should render new template when model is invalid" do
-    Account.any_instance.stubs(:valid?).returns(false)
+    Account.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    Account.any_instance.stubs(:valid?).returns(true)
+    Account.any_instance.stub(:valid? => true)
     post :create
     response.should redirect_to(account_url(assigns[:account]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Account.first
+    get :edit, :id => Account.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    Account.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Account.first
+    account = Account.make!
+    Account.any_instance.stub(:valid? => false)
+    put :update, :id => account.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    Account.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Account.first
+    put :update, :id => Account.make!
     response.should redirect_to(account_url(assigns[:account]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    account = Account.first
+    account = Account.make!
     delete :destroy, :id => account
     response.should redirect_to(accounts_url)
     Account.exists?(account.id).should be_false

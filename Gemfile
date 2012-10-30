@@ -29,6 +29,8 @@ gem 'ruby_parser', :require => false, :group => :development
 # centralized configuration
 gem 'configatron'
 
+# syntax sugar
+gem 'andand'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -67,11 +69,12 @@ group :development do
   gem 'capistrano'
 
   # tdd
-  gem 'rspec-rails',      :require => false
+  gem 'rspec-rails'
   gem 'cucumber-rails',   :require => false
-  gem 'capybara-webkit',  :require => false
+  gem 'capybara-webkit'
   gem 'machinist',        :require => false
-  gem 'database_cleaner', :require => false
+  gem 'database_cleaner'
+  gem 'faker',            :require => false
 end
 
 

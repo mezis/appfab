@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe NotificationsController do
-  fixtures :all
+  login_user
   render_views
 
   it "index action should render index template" do
@@ -10,7 +10,7 @@ describe NotificationsController do
   end
 
   it "show action should render show template" do
-    get :show, :id => Notification.first
+    get :show, :id => Notification.make!
     response.should render_template(:show)
   end
 
@@ -20,36 +20,36 @@ describe NotificationsController do
   end
 
   it "create action should render new template when model is invalid" do
-    Notification.any_instance.stubs(:valid?).returns(false)
+    Notification.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    Notification.any_instance.stubs(:valid?).returns(true)
+    Notification.any_instance.stub(:valid? => true)
     post :create
     response.should redirect_to(notification_url(assigns[:notification]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Notification.first
+    get :edit, :id => Notification.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    Notification.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Notification.first
+    notification = Notification.make!
+    Notification.any_instance.stub(:valid? => false)
+    put :update, :id => notification.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    Notification.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Notification.first
+    put :update, :id => Notification.make!
     response.should redirect_to(notification_url(assigns[:notification]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    notification = Notification.first
+    notification = Notification.make!
     delete :destroy, :id => notification
     response.should redirect_to(notifications_url)
     Notification.exists?(notification.id).should be_false
