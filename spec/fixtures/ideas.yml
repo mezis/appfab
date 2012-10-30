@@ -1,0 +1,25 @@
+one:
+  title: MyString
+  problem: MyText
+  solution: MyText
+  metrics: MyText
+  deadline: 2012-10-30
+  author_id: 1
+  design_size: 1
+  development_size: 1
+  rating: 1
+  state: MyString
+  category: MyString
+
+two:
+  title: MyString
+  problem: MyText
+  solution: MyText
+  metrics: MyText
+  deadline: 2012-10-30
+  author_id: 1
+  design_size: 1
+  development_size: 1
+  rating: 1
+  state: MyString
+  category: MyString

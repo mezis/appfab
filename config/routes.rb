@@ -3,6 +3,8 @@ Socialp::Application.routes.draw do
 
   resources :users
 
+  resources :ideas
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

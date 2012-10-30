@@ -1,0 +1,42 @@
+- title "Idea"
+
+%p
+  %strong Title:
+  = @idea.title
+%p
+  %strong Problem:
+  = @idea.problem
+%p
+  %strong Solution:
+  = @idea.solution
+%p
+  %strong Metrics:
+  = @idea.metrics
+%p
+  %strong Deadline:
+  = @idea.deadline
+%p
+  %strong Author:
+  = @idea.author_id
+%p
+  %strong Design Size:
+  = @idea.design_size
+%p
+  %strong Development Size:
+  = @idea.development_size
+%p
+  %strong Rating:
+  = @idea.rating
+%p
+  %strong State:
+  = @idea.state
+%p
+  %strong Category:
+  = @idea.category
+
+%p
+  = link_to "Edit", edit_idea_path(@idea)
+  |
+  = link_to "Destroy", @idea, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", ideas_path
