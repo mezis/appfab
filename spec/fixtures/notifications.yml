@@ -1,0 +1,13 @@
+one:
+  user_id: 1
+  subject_type: MyString
+  subject_id: 1
+  body: MyString
+  unread: false
+
+two:
+  user_id: 1
+  subject_type: MyString
+  subject_id: 1
+  body: MyString
+  unread: false

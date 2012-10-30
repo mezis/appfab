@@ -1,4 +1,6 @@
 Socialp::Application.routes.draw do
+  resources :notifications
+
   resources :accounts
 
   resources :users

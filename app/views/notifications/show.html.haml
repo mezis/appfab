@@ -1,0 +1,24 @@
+- title "Notification"
+
+%p
+  %strong User:
+  = @notification.user_id
+%p
+  %strong Subject Type:
+  = @notification.subject_type
+%p
+  %strong Subject:
+  = @notification.subject_id
+%p
+  %strong Body:
+  = @notification.body
+%p
+  %strong Unread:
+  = @notification.unread
+
+%p
+  = link_to "Edit", edit_notification_path(@notification)
+  |
+  = link_to "Destroy", @notification, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", notifications_path

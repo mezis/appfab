@@ -1,0 +1,21 @@
+- title "Notifications"
+
+%table
+  %tr
+    %th User
+    %th Subject type
+    %th Subject
+    %th Body
+    %th Unread
+  - for notification in @notifications
+    %tr
+      %td= notification.user_id
+      %td= notification.subject_type
+      %td= notification.subject_id
+      %td= notification.body
+      %td= notification.unread
+      %td= link_to 'Show', notification
+      %td= link_to 'Edit', edit_notification_path(notification)
+      %td= link_to 'Destroy', notification, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Notification", new_notification_path
