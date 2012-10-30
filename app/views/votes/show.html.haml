@@ -1,0 +1,15 @@
+- title "Vote"
+
+%p
+  %strong Idea:
+  = @vote.idea_id
+%p
+  %strong User:
+  = @vote.user_id
+
+%p
+  = link_to "Edit", edit_vote_path(@vote)
+  |
+  = link_to "Destroy", @vote, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", votes_path
