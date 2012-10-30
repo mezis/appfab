@@ -2,11 +2,23 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# database
+gem 'sqlite3' 
 
-gem 'sqlite3'
+# authentication/authorisation
+gem 'omniauth-github'
+gem 'omniauth-google-apps'
+gem 'cancan'
 
+# templates
+gem 'haml-rails'
+
+# styling
+gem 'compass'
+gem 'bootstrap-sass-rails'
+
+# caching
+gem 'memcache-client'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -31,8 +43,21 @@ gem 'jquery-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
+group :development do
+  # better generators
+  gem 'nifty-generators'
 
-# To use debugger
-# gem 'debugger'
+  # debugging
+  gem 'debugger'
+  gem 'pry'
+  gem 'pry-nav'
+
+  # deployment
+  gem 'capistrano'
+
+  # tdd
+  gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'capybara-webkit'
+  gem 'machinist'
+end
