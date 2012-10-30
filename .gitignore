@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Merge turds
+*.orig
+
+# Ignore ruby schema (migrations should be authoritative)
+db/schema.rb
