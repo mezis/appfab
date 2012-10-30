@@ -20,6 +20,11 @@ gem 'bootstrap-sass-rails'
 # caching
 gem 'memcache-client'
 
+# i18n
+gem 'gettext_i18n_rails'
+gem 'gettext',     :require => false, :group => :development
+gem 'ruby_parser', :require => false, :group => :development
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
