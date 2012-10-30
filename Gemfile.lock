@@ -119,11 +119,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     memcache-client (1.8.5)
-    metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.19)
-    mocha (0.12.7)
-      metaclass (~> 0.0.1)
     multi_json (1.3.6)
     multipart-post (1.1.5)
     net-scp (1.0.4)
@@ -253,7 +250,6 @@ DEPENDENCIES
   jquery-rails
   machinist
   memcache-client
-  mocha
   nifty-generators
   omniauth-github
   omniauth-google-apps
