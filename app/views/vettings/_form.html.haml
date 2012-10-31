@@ -1,0 +1,12 @@
+= form_for @vetting do |f|
+  = f.error_messages
+  %p
+    = f.label :author
+    %br
+    = f.text_field :author
+  %p
+    = f.label :idea
+    %br
+    = f.text_field :idea
+  %p
+    = f.submit

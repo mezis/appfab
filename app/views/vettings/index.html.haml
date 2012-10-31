@@ -1,0 +1,15 @@
+- title "Vettings"
+
+%table
+  %tr
+    %th Author
+    %th Idea
+  - for vetting in @vettings
+    %tr
+      %td= vetting.author
+      %td= vetting.idea
+      %td= link_to 'Show', vetting
+      %td= link_to 'Edit', edit_vetting_path(vetting)
+      %td= link_to 'Destroy', vetting, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Vetting", new_vetting_path
