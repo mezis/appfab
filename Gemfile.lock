@@ -187,6 +187,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -312,6 +313,7 @@ DEPENDENCIES
   nifty-generators
   omniauth-github
   omniauth-google-oauth2
+  pg
   pry
   pry-nav
   pry-rails

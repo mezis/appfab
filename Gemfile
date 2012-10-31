@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 
 # database
-gem 'sqlite3' 
+gem 'sqlite3', :group => :development
+gem 'pg',      :group => :production
 
 # authentication/authorisation
 gem 'devise'
