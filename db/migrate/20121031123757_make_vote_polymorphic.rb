@@ -4,7 +4,7 @@ class MakeVotePolymorphic < ActiveRecord::Migration
     add_column :votes, :subject_type, :string
 
     update %Q{
-      UPDATE `votes` SET subject_type = "Idea", subject_id = idea_id;
+      UPDATE votes SET subject_type = "Idea", subject_id = idea_id;
     }
 
     remove_column :votes, :idea_id
@@ -14,7 +14,7 @@ class MakeVotePolymorphic < ActiveRecord::Migration
     add_column :votes, :idea_id, :integer
 
     update %Q{
-      UPDATE `votes` SET idea_id = subject_id
+      UPDATE votes SET idea_id = subject_id
       WHERE subject_type = "Idea"
     }
 

@@ -4,7 +4,7 @@ class AddAutoAdoptToAccounts < ActiveRecord::Migration
     add_column :accounts, :domain,     :string
 
     update %Q(
-      UPDATE `accounts` SET auto_adopt = (SELECT (1 = 0))
+      UPDATE accounts SET auto_adopt = (SELECT (1 = 0))
     )
   end
 
