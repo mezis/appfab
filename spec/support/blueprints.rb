@@ -24,6 +24,11 @@ User.blueprint do
 end
 
 
+UserRole.blueprint do
+  name       { 'product_manager' }
+  user       { User.last || User.make! }
+end
+
 Comment.blueprint do
   author     { User.last || User.make! }
   idea       { Idea.last || Idea.make! }

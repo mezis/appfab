@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :comments, :as => :author
   has_many :notifications
+  has_many :roles, :class_name => 'UserRole'
 
   validates_presence_of :first_name
   validates_presence_of :karma
