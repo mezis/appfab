@@ -116,6 +116,9 @@ GEM
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
+    guard-bundler (1.0.0)
+      bundler (~> 1.0)
+      guard (~> 1.1)
     guard-cucumber (1.2.2)
       cucumber (>= 1.2.0)
       guard (>= 1.1.0)
@@ -296,6 +299,7 @@ DEPENDENCIES
   gettext
   gettext_i18n_rails
   guard
+  guard-bundler
   guard-cucumber
   guard-rails
   guard-rspec

@@ -86,10 +86,10 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'guard-rails'
+  gem 'guard-bundler'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
   gem 'ruby_gntp'
   gem 'terminal-notifier-guard'
 end
-
