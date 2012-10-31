@@ -1,6 +1,7 @@
 require 'configatron'
 
-configatron.socialp.default_karma = 10
+configatron.socialp.default_karma   = 10
+configatron.socialp.vettings_needed = 2
 
 if Rails.env.production?
   # production-specific settings

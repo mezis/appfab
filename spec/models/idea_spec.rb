@@ -14,4 +14,12 @@ describe Idea do
     @idea = Idea.make!
     Account.last.ideas.should include(@idea)
   end
+
+  it 'becomes "vetted" when vetted twice' do
+    @idea = Idea.make!
+    Vetting.make!(idea: @idea)
+    @idea.reload.vetted?.should be_false
+    Vetting.make!(idea: @idea, user: User.make!)
+    @idea.reload.vetted?.should be_true
+  end
 end

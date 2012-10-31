@@ -45,6 +45,11 @@ Idea.blueprint do
   deadline   { Date.today + 90 }
 end
 
+Idea.blueprint(:sized) do
+  development_size { 1 }
+  design_size      { 2 }
+end
+
 
 Notification.blueprint do
   user       { User.last || User.make! }

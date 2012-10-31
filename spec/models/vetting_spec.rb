@@ -5,9 +5,20 @@ describe Vetting do
     Vetting.new.should_not be_valid
   end
 
-  context 'given an idea' do
+  context 'given anunsized idea' do
     before do
       @idea = Idea.make!
+    end
+
+    it 'cannot be created' do
+      @user = User.make!.plays!(:product_manager)
+      @user.vettings.build(idea: @idea).should_not be_valid
+    end
+  end
+
+  context 'given a sized idea' do
+    before do
+      @idea = Idea.make!(:sized)
     end
 
     it 'can be created by a PM' do
@@ -30,16 +41,12 @@ describe Vetting do
       @user1 = User.make!.plays!(:product_manager)
       @user2 = User.make!.plays!(:product_manager)
       @user1.vettings.create!(idea: @idea)
-      expect {
-        @user2.vettings.create!(idea: @idea)    
-      }.to raise_error
+      @user2.vettings.build(idea: @idea).should_not be_valid
     end
 
     it 'cannot be created twice by the same user' do
       @idea.author.vettings.create!(idea: @idea)
-      expect {
-        @idea.author.vettings.create!(idea: @idea)
-      }.to raise_error
+      @idea.author.vettings.build(idea: @idea).should_not be_valid
     end
 
     it 'triggers notification to the idea author' do
