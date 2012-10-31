@@ -6,4 +6,7 @@ class Vetting < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :idea
+
+  validates_uniqueness_of :user_id, scope: :idea_id
+
 end
