@@ -11,6 +11,10 @@ class Notification::Base < ActiveRecord::Base
   
   default_values unread: true
 
+  scope :of_type, lambda { |type_symbol| 
+    where(type: (Notification.const_get type_symbol.to_s.camelize))
+  }
+
   module CanBeSubject
     def self.included(by)
       by.class_eval do

@@ -6,6 +6,8 @@ class Idea < ActiveRecord::Base
   has_one    :account, :through => :author
   has_many   :vettings, :dependent => :destroy
   has_many   :votes, :as => :subject, :dependent => :destroy
+  has_many   :comments
+  has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
 
   validates_presence_of :rating
   # validates_presence_of :category
@@ -36,6 +38,15 @@ class Idea < ActiveRecord::Base
       transition :submitted => same
     end
 
+  end
+
+
+  def participants
+    User.where id:
+      (self.votes.value_of(:user_id) +
+      self.vettings.value_of(:user_id) +
+      self.comments.value_of(:author_id) +
+      [self.author.id]).uniq
   end
 
 end

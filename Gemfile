@@ -32,6 +32,9 @@ gem 'configatron'
 # syntax sugar
 gem 'andand'
 
+# Access attribute values directly, without instantiating ActiveRecord objects
+gem 'valium'
+
 # as name implies
 gem 'state_machine'
 gem 'default_value_for'

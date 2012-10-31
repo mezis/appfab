@@ -3,6 +3,8 @@ class Notification::VettingObserver < ActiveRecord::Observer
 
   def after_create(vetting)
     return unless vetting.idea # happens in a few tests
-    Notification::NewVetting.create!(recipient:vetting.idea.author, subject:vetting)
+    vetting.idea.participants.each do |user|
+      Notification::NewVetting.create! recipient:user, subject:vetting
+    end
   end
 end
