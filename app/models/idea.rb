@@ -3,4 +3,14 @@ class Idea < ActiveRecord::Base
 
   belongs_to :author, :class_name => 'User'
   has_many   :votes
+
+  validates_presence_of :rating
+
+  validates_presence_of :title, :problem, :solution, :metrics
+  validates_inclusion_of :deadline,
+    allow_nil: true,
+    in: Proc.new { Date.today .. (Date.today + 365) }
+
+  defaults rating: 0
+
 end

@@ -32,6 +32,10 @@ gem 'configatron'
 # syntax sugar
 gem 'andand'
 
+# as name implies
+gem 'state_machine'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -75,7 +79,16 @@ group :development do
   gem 'machinist',        :require => false
   gem 'database_cleaner'
   gem 'faker',            :require => false
+
+  # automated testing
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'guard-rails'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+  gem 'ruby_gntp'
+  gem 'terminal-notifier-guard'
 end
-
-
 

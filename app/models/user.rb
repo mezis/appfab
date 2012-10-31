@@ -17,6 +17,13 @@ class User < ActiveRecord::Base
   has_many :comments, :as => :author
   has_many :notifications
 
+  validates_presence_of :first_name
+  validates_presence_of :karma
+
+  defaults karma: configatron.socialp.default_karma
+
+  before_validation :adopt_account
+  after_create      :notify_account_members
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     if user = self.where(uid: auth_hash[:uid]).first
@@ -28,8 +35,8 @@ class User < ActiveRecord::Base
         user.first_name = auth_hash[:info][:first_name]
         user.last_name  = auth_hash[:info][:last_name]
       elsif auth_hash[:info][:name] =~ /(.*?)\s+(.*)/
-        user.first_name = $1.strip
-        user.last_name  = $2.strip
+        user.first_name = $1.andand.strip
+        user.last_name  = $2.andand.strip
       else
         user.first_name = auth_hash[:info][:name].strip
       end
@@ -41,4 +48,28 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+
+  private
+
+  EmailDomainRE = /@(?<domain>.*)$/
+
+  def domain
+    EmailDomainRE.match(self.email).andand[:domain]
+  end
+
+  def adopt_account
+    return if domain.nil?
+    return if self.account
+    self.account = Account.where(domain:domain, auto_adopt:true).first
+  end
+
+  def notify_account_members
+    self.account or return
+    self.account.users.each do |user|
+      user.notifications.create! subject:self,
+        body:_('User %{user} has just joined your account!') % { user:self.first_name }
+    end
+  end
+
 end
