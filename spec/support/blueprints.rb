@@ -51,10 +51,9 @@ Idea.blueprint(:sized) do
 end
 
 
-Notification.blueprint do
-  user       { User.last || User.make! }
+Notification::Base.blueprint do
+  recipient  { User.last || User.make! }
   subject    { Idea.last || Idea.make! }
-  body       { Faker::Lorem.sentence }
 end
 
 

@@ -16,8 +16,9 @@ class User < ActiveRecord::Base
   has_many :vettings, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :comments, :as => :author, :dependent => :destroy
-  has_many :notifications, :dependent => :destroy
+  has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   include UserRole::UserMethods
+  include Notification::Base::CanBeSubject
 
   validates_presence_of :first_name
   validates_presence_of :karma

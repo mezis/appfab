@@ -3,7 +3,8 @@ class Comment < ActiveRecord::Base
 
   belongs_to :idea
   belongs_to :parent,   :class_name => 'Comment'
-  has_many   :children, :class_name => 'Comment', :as => :parent, :dependent => :destroy
+  has_many   :children, :class_name => 'Comment', :foreign_key => :parent_id,
+                        :dependent => :destroy
   belongs_to :author,   :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
 

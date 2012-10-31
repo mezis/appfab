@@ -5,6 +5,8 @@ class Vetting < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea
 
+  include Notification::Base::CanBeSubject  
+
   validates_presence_of :user
   validates_presence_of :idea
 

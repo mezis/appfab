@@ -1,11 +1,10 @@
 class Notification::UserObserver < ActiveRecord::Observer
   observe :user
 
-  def after_save(user)
-    return unless user.account && user.account_id_changed?
-    user.account.users.each do |user|
-      user.notifications.create! subject:user,
-        body:_('User %{user} has just joined your account!') % { user:user.first_name }
+  def after_save(record)
+    return unless record.account && record.account_id_changed?
+    record.account.users.each do |account_user|
+      Notification::NewUser.create!(recipient:account_user, subject:record)
     end
   end
 

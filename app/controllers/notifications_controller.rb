@@ -2,42 +2,25 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @notifications = Notification.all
+    @notifications = Notification::Base.all
   end
 
   def show
-    @notification = Notification.find(params[:id])
-  end
-
-  def new
-    @notification = Notification.new
-  end
-
-  def create
-    @notification = Notification.new(params[:notification])
-    if @notification.save
-      redirect_to @notification, :notice => "Successfully created notification."
-    else
-      render :action => 'new'
-    end
-  end
-
-  def edit
-    @notification = Notification.find(params[:id])
+    @notification = Notification::Base.find(params[:id])
   end
 
   def update
-    @notification = Notification.find(params[:id])
+    @notification = Notification::Base.find(params[:id])
     if @notification.update_attributes(params[:notification])
-      redirect_to @notification, :notice  => "Successfully updated notification."
+      redirect_to root_path, :notice  => _("Successfully updated notification.")
     else
-      render :action => 'edit'
+      redirect_to root_path, :failure => _("Failed to update notification")
     end
   end
 
   def destroy
-    @notification = Notification.find(params[:id])
+    @notification = Notification::Base.find(params[:id])
     @notification.destroy
-    redirect_to notifications_url, :notice => "Successfully destroyed notification."
+    redirect_to notifications_url, :notice => _("Successfully destroyed notification.")
   end
 end
