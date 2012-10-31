@@ -87,6 +87,7 @@ group :development do
   gem 'guard-cucumber'
   gem 'guard-rails'
   gem 'guard-bundler'
+  gem 'guard-migrate'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false

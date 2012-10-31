@@ -122,6 +122,8 @@ GEM
     guard-cucumber (1.2.2)
       cucumber (>= 1.2.0)
       guard (>= 1.1.0)
+    guard-migrate (0.1.0)
+      guard (>= 0.2.2)
     guard-rails (0.1.1)
       guard (>= 0.2.2)
     guard-rspec (2.1.1)
@@ -301,6 +303,7 @@ DEPENDENCIES
   guard
   guard-bundler
   guard-cucumber
+  guard-migrate
   guard-rails
   guard-rspec
   haml-rails
