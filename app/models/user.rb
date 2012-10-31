@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   belongs_to :account
   has_many :ideas
+  has_many :vettings
   has_many :votes
   has_many :comments, :as => :author
   has_many :notifications
