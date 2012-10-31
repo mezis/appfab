@@ -1,8 +1,8 @@
 class CreateVettings < ActiveRecord::Migration
   def self.up
     create_table :vettings do |t|
-      t.user_id :integer
-      t.idea_id :integer
+      t.integer :user_id
+      t.integer :idea_id
       t.timestamps
     end
   end
