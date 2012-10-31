@@ -13,7 +13,7 @@ class UserRole < ActiveRecord::Base
   module UserMethods
     def self.included(by)
       by.class_eval do
-        has_many :roles, class_name: 'UserRole'
+        has_many :roles, class_name: 'UserRole', :dependent => :destroy
 
         scope :playing, lambda { |*role_names|
           joins(:roles).where('user_roles.name' => role_names)

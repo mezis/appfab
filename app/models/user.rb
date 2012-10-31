@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :role, :karma, :account
 
   belongs_to :account
-  has_many :ideas, :foreign_key => :author_id
-  has_many :vettings
-  has_many :votes
-  has_many :comments, :as => :author
-  has_many :notifications
+  has_many :ideas, :foreign_key => :author_id, :dependent => :destroy
+  has_many :vettings, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
+  has_many :comments, :as => :author, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
   include UserRole::UserMethods
 
   validates_presence_of :first_name

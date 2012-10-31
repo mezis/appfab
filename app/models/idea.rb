@@ -4,8 +4,8 @@ class Idea < ActiveRecord::Base
 
   belongs_to :author, :class_name => 'User'
   has_one    :account, :through => :author
-  has_many   :vettings
-  has_many   :votes, :as => :subject
+  has_many   :vettings, :dependent => :destroy
+  has_many   :votes, :as => :subject, :dependent => :destroy
 
   validates_presence_of :rating
   # validates_presence_of :category
