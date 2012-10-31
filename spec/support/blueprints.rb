@@ -12,7 +12,6 @@ require 'faker'
 Account.blueprint do
   name       { Faker::Company.name }
   domain     { Faker::Internet.domain_name }
-  auto_adopt { true }
 end
 
 
