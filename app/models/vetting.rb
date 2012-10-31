@@ -1,6 +1,6 @@
 class Vetting < ActiveRecord::Base
-  attr_accessible :author, :idea
+  attr_accessible :user, :idea
 
-  belongs_to :author, :class_name => 'User'
+  belongs_to :user
   belongs_to :idea
 end
