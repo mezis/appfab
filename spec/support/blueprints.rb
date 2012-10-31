@@ -50,7 +50,7 @@ end
 
 Vote.blueprint do
   user       { User.last || User.make! }
-  idea       { Idea.last || Idea.make! }
+  subject    { Idea.last || Idea.make! }
 end
 
 

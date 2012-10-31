@@ -3,7 +3,7 @@ class Idea < ActiveRecord::Base
 
   belongs_to :author, :class_name => 'User'
   has_many   :vettings
-  has_many   :votes
+  has_many   :votes, :as => :subject
 
   validates_presence_of :rating
 
