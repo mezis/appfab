@@ -6,5 +6,5 @@ class Comment < ActiveRecord::Base
   has_many   :children, :class_name => 'Comment', :as => :parent
   belongs_to :author,   :class_name => 'User'
 
-  defaults rating: 0
+  default_values rating: 0
 end

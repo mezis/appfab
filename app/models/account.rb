@@ -6,5 +6,5 @@ class Account < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :domain, if: :auto_adopt
 
-  defaults auto_adopt:false
+  default_values auto_adopt:false
 end

@@ -34,6 +34,7 @@ gem 'andand'
 
 # as name implies
 gem 'state_machine'
+gem 'default_value_for'
 
 
 # Gems used only for assets and not required

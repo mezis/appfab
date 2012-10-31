@@ -11,6 +11,6 @@ class Idea < ActiveRecord::Base
     allow_nil: true,
     in: Proc.new { Date.today .. (Date.today + 365) }
 
-  defaults rating: 0
+  default_values rating: 0
 
 end

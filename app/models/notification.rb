@@ -4,5 +4,6 @@ class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :subject, :polymorphic => true
 
-  defaults unread: true
+  
+  default_values unread: true
 end

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :karma
 
-  defaults karma: configatron.socialp.default_karma
+  default_values karma: configatron.socialp.default_karma
 
   before_validation :adopt_account
   after_create      :notify_account_members
