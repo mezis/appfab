@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :provider, :uid
-  attr_accessible :first_name, :last_name, :role, :karma, :account_id
+  attr_accessible :first_name, :last_name, :role, :karma, :account
 
   belongs_to :account
-  has_many :ideas
+  has_many :ideas, :foreign_key => :author_id
   has_many :vettings
   has_many :votes
   has_many :comments, :as => :author

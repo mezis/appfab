@@ -2,6 +2,7 @@ class Idea < ActiveRecord::Base
   attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category
 
   belongs_to :author, :class_name => 'User'
+  has_one    :account, :through => :author
   has_many   :vettings
   has_many   :votes, :as => :subject
 
