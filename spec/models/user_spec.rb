@@ -10,12 +10,18 @@ describe User do
       User.make!.karma.should == 10
     end
 
-    it 'gets user adopted by an account'
+    it 'gets user adopted by an account based on email' do
+      account_member = User.make!
+      account_member.account.update_attributes!(auto_adopt: true)
+      new_user = User.make!(email: "john@#{account_member.account.domain}")
+      new_user.account.should == account_member.account
+    end
 
     it 'notifies of account members' do
       account_member = User.make!
-      User.make!(email: "john@#{account_member.account.domain}")
+      User.make!(account: account_member.account)
       account_member.notifications.should_not be_empty
     end
   end
 end
+
