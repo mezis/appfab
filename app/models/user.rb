@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   default_values karma: configatron.socialp.default_karma
 
   before_validation :adopt_account
-  after_create      :notify_account_members
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     if user = self.where(uid: auth_hash[:uid]).first
@@ -63,14 +62,6 @@ class User < ActiveRecord::Base
     return if domain.nil?
     return if self.account
     self.account = Account.where(domain:domain, auto_adopt:true).first
-  end
-
-  def notify_account_members
-    self.account or return
-    self.account.users.each do |user|
-      user.notifications.create! subject:self,
-        body:_('User %{user} has just joined your account!') % { user:self.first_name }
-    end
   end
 
 end

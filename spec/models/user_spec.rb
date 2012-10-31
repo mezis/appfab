@@ -16,12 +16,6 @@ describe User do
       new_user = User.make!(email: "john@#{account_member.account.domain}")
       new_user.account.should == account_member.account
     end
-
-    it 'notifies of account members' do
-      account_member = User.make!
-      User.make!(account: account_member.account)
-      account_member.notifications.should_not be_empty
-    end
   end
 end
 
