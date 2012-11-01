@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # 
 # Configure fast_gettext to use MO files.
 # Generate MO files from PO files as needed.

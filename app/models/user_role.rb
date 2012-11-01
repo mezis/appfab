@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class UserRole < ActiveRecord::Base
   Names = [:product_manager, :architect, :developer, :benevolent_dictator, :account_owner]
 

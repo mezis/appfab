@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class UserRolesController < ApplicationController
   def index
     @user_roles = UserRole.all

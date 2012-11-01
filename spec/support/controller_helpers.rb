@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module ControllerHelpers
   def login_user(options = {})
     before(:each) do

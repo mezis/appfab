@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'configatron'
 
 configatron.socialp.karma.initial      = +20

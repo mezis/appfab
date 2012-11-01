@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
 

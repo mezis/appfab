@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class VettingsController < ApplicationController
   def index
     @vettings = Vetting.all

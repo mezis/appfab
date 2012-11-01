@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# encoding: UTF-8
 class Vote < ActiveRecord::Base
   attr_accessible :idea, :user, :up
 

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module ErrorMessagesHelper
   # Render error messages for the given objects. The :message and :header_message options are allowed.
   def error_messages_for(*objects)

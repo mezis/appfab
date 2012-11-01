@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AddStiToNotifications < ActiveRecord::Migration
   def up
     add_column    :notifications, :type, :string

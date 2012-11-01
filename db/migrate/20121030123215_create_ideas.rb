@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CreateIdeas < ActiveRecord::Migration
   def self.up
     create_table :ideas do |t|

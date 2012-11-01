@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class VotesController < ApplicationController
   before_filter :authenticate_user!
 

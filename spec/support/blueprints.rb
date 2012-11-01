@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'machinist/active_record'
 require 'faker'
 

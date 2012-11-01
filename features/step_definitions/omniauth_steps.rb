@@ -1,3 +1,4 @@
+# encoding: UTF-8
 Given /I authorise the app with my Google account "(.*?)"/ do |full_name|
   first_name, last_name = full_name.split
   email = full_name.downcase.split.join('.') + '@gmail.com'

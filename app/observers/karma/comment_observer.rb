@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Karma::CommentObserver < ActiveRecord::Observer
   observe :comment
 

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AddAutoAdoptToAccounts < ActiveRecord::Migration
   def self.up
     add_column :accounts, :auto_adopt, :boolean

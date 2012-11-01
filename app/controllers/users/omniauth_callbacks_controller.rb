@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Users::OmniauthCallbacksController < ApplicationController
 
   def developer

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class MakeVotePolymorphic < ActiveRecord::Migration
   def up
     add_column :votes, :subject_id,   :integer

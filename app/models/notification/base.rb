@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Notification::Base < ActiveRecord::Base
   self.table_name = 'notifications'
 

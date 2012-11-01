@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Comment < ActiveRecord::Base
   attr_accessible :idea, :parent, :author, :rating, :body
 

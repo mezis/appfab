@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Rating::VoteObserver < ActiveRecord::Observer
   observe :vote
 

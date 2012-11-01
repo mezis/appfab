@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Account < ActiveRecord::Base
   attr_accessible :name, :auto_adopt, :domain
 

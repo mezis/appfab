@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Karma::IdeaObserver < ActiveRecord::Observer
   observe :idea
 

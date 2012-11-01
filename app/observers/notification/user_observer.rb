@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Notification::UserObserver < ActiveRecord::Observer
   observe :user
 
