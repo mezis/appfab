@@ -12,15 +12,32 @@ describe Karma::IdeaObserver do
   end
 
   context 'when an idea becomes vetted' do
-    it 'the submitter gains karma'
+    it 'the submitter gains karma' do
+      idea.vettings.make! user: User.make!
+      lambda {
+        idea.vettings.make! user: User.make!
+      }.should change { author.reload.karma }.by(1)
+    end
+
+    it 'notifies participants'
   end
 
   context 'when an idea becomes picked' do
-    it 'the submitter gains karma'
+    it 'the submitter gains karma' do
+      idea.update_attribute :state, :vetted
+      lambda { idea.pick» }.should change { author.reload.karma }.by(10)
+    end
+
+    it 'notifies participants'
   end
 
   context 'when an idea goes live' do
-    it 'the submitter gains karma'
+    it 'the submitter gains karma' do
+      idea.update_attribute :state, :signed_off
+      lambda { idea.deliver» }.should change { author.reload.karma }.by(20)
+    end
+
     it 'all commenters gains karma'
+    it 'notifies participants'
   end
 end
