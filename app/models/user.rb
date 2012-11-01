@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :provider, :uid
-  attr_accessible :first_name, :last_name, :role, :karma, :account
+  attr_accessible :first_name, :last_name, :role, :karma, :account, :voting_power
 
   belongs_to :account
   has_many :ideas, :foreign_key => :author_id, :dependent => :destroy
@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :karma
 
-  default_values karma: configatron.socialp.karma.initial
+  default_values karma: configatron.socialp.karma.initial,
+                 voting_power: 1
 
   before_validation :adopt_account
 

@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :idea_id, :parent_id, :author_id, :rating, :body
+  attr_accessible :idea, :parent, :author, :rating, :body
 
   belongs_to :idea
   belongs_to :parent,   :class_name => 'Comment'
@@ -9,4 +9,9 @@ class Comment < ActiveRecord::Base
   has_many   :votes, :as => :subject, :dependent => :destroy
 
   default_values rating: 0
+
+  validates_presence_of :author
+  validates_presence_of :idea
+  validates_presence_of :body
+  validates_presence_of :rating
 end

@@ -25,12 +25,6 @@ describe VotesController do
     response.should render_template(:new)
   end
 
-  it "create action should redirect when model is valid" do
-    Vote.any_instance.stub(:valid? => true)
-    post :create
-    response.should redirect_to(vote_url(assigns[:vote]))
-  end
-
   it "edit action should render edit template" do
     get :edit, :id => Vote.make!
     response.should render_template(:edit)

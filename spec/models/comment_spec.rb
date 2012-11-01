@@ -5,7 +5,7 @@ describe Comment do
     described_class.make.should be_valid
   end
 
-  it "should be valid" do
-    Comment.new.should be_valid
+  it "should not be valid by default" do
+    Comment.new.should_not be_valid
   end
 end
