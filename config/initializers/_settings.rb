@@ -17,6 +17,9 @@ configatron.socialp.karma.idea.live    = +20
 
 configatron.socialp.vettings_needed    = 2
 
+configatron.socialp.design_capacity    = 5
+configatron.socialp.develop_capacity   = 5
+
 
 if Rails.env.production?
   # production-specific settings

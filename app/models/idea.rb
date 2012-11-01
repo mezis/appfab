@@ -26,6 +26,8 @@ class Idea < ActiveRecord::Base
 
   default_values rating: 0
 
+  scope :managed_by, lambda { |user| where(product_manager_id: user) }
+
   state_machine :state, :initial => :submitted do
     state :submitted
     state :vetted
@@ -53,7 +55,7 @@ class Idea < ActiveRecord::Base
     end
 
     event :pick» do
-      transition :vetted => :picked
+      transition :vetted => :picked, :if => :enough_design_capacity?
     end
 
     event :design» do
@@ -61,7 +63,7 @@ class Idea < ActiveRecord::Base
     end
 
     event :approve» do
-      transition :designed => :approved
+      transition :designed => :approved, :if => :enough_development_capacity?
     end
 
     event :implement» do
@@ -106,6 +108,20 @@ class Idea < ActiveRecord::Base
 
   def enough_vettings?
     (vettings.count == configatron.socialp.vettings_needed)
+  end
+
+
+  def enough_design_capacity?
+    configatron.socialp.design_capacity >=
+      Idea.with_state(:picked).managed_by(self.product_manager).sum(:design_size) +
+      self.design_size
+  end
+
+
+  def enough_development_capacity?
+    configatron.socialp.design_capacity >=
+      Idea.with_state(:approved).managed_by(self.product_manager).sum(:development_size) +
+      self.development_size
   end
 
 

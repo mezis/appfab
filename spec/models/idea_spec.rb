@@ -27,4 +27,20 @@ describe Idea do
     Vetting.make!(idea: @idea, user: User.make!)
     @idea.reload.vetted?.should be_true
   end
+
+  it 'cannot be picked if the manager is at design capacity' do
+    @idea = Idea.make!(:vetted, design_size: 4)
+    configatron.temp do
+      configatron.socialp.design_capacity = 3
+      @idea.can_pick»?.should be_false
+    end
+  end
+
+  it 'cannot be approved if the manager is at development capacity' do
+    @idea = Idea.make!(:designed, development_size: 4)
+    configatron.temp do
+      configatron.socialp.design_capacity = 3
+      @idea.can_pick»?.should be_false
+    end
+  end
 end
