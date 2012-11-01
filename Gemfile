@@ -40,6 +40,12 @@ gem 'valium'
 gem 'state_machine'
 gem 'default_value_for'
 
+# attached files & image manipulation
+gem 'dragonfly'
+
+# caching, at the Rack level
+gem 'rack-cache', :require => 'rack/cache'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

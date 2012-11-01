@@ -8,6 +8,7 @@ class Comment < ActiveRecord::Base
                         :dependent => :destroy
   belongs_to :author,   :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
+  has_one    :attachment, :class_name => 'AttachedFile', :as => :owner, :dependent => :destroy
 
   default_values rating: 0
 

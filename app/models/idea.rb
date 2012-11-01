@@ -10,6 +10,7 @@ class Idea < ActiveRecord::Base
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_many   :comments
   has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
+  has_many   :attachments, :class_name => 'AttachedFile', :as => :owner, :dependent => :destroy
 
   validates_presence_of :rating
   # validates_presence_of :category

@@ -9,3 +9,8 @@ Feature: Comments
   Scenario: Editing comment
 
   Scenario: Responding to a comment
+
+  # it 'is editable for 15 minutes'
+  # it 'is deletable for 15 minutes'
+  # it 'notifies parent author when deleted'
+  # it 'is not deletable if it has children'

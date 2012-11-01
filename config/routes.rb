@@ -10,6 +10,7 @@ Socialp::Application.routes.draw do
   resources :votes
   resources :vettings
   resources :user_roles
+  resources :attached_files
 
   devise_for :users, :controllers => {
     omniauth_callbacks: 'users/omniauth_callbacks'

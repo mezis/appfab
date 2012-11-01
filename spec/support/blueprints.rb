@@ -69,3 +69,10 @@ Vetting.blueprint do
   user       { User.last || User.make! }
   idea       { Idea.last || Idea.make! }
 end
+
+
+AttachedFile.blueprint do
+  owner      { User.last || User.make! }
+  uploader   { User.last || User.make! }
+  file       { 'data' }
+end

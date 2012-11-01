@@ -1,0 +1,2 @@
+module AttachedFilesHelper
+end
