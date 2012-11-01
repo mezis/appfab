@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :karma
 
-  default_values karma: configatron.socialp.default_karma
+  default_values karma: configatron.socialp.karma.initial
 
   before_validation :adopt_account
 
@@ -48,6 +48,16 @@ class User < ActiveRecord::Base
       user.uid      = auth_hash[:uid]
       user.password = SecureRandom.base64
       user.save!
+    end
+  end
+
+
+  def change_karma!(options = {})
+    options[:by] or raise AttributeError.new('passing by: is mandatory')
+    self.transaction do
+      self.reload
+      self.karma += options[:by]
+      self.save!
     end
   end
 

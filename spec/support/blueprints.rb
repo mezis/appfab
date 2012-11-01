@@ -60,6 +60,7 @@ end
 Vote.blueprint do
   user       { User.last || User.make! }
   subject    { Idea.last || Idea.make! }
+  up         { true }
 end
 
 

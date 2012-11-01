@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Vetting do
+  its 'factory should work' do
+    described_class.make.should be_valid
+  end
+
   it "should not be valid by default" do
     Vetting.new.should_not be_valid
   end

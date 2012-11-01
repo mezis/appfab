@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe UserRole do
+  its 'factory should work' do
+    described_class.make.should be_valid
+  end
+
   it "should not be valid by default" do
     UserRole.new.should_not be_valid
   end

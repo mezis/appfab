@@ -25,12 +25,6 @@ describe IdeasController do
     response.should render_template(:new)
   end
 
-  it "create action should redirect when model is valid" do
-    Idea.any_instance.stub(:valid? => true)
-    post :create
-    response.should redirect_to(idea_url(assigns[:idea]))
-  end
-
   it "edit action should render edit template" do
     get :edit, :id => Idea.make!
     response.should render_template(:edit)

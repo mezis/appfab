@@ -1,7 +1,21 @@
 require 'configatron'
 
-configatron.socialp.default_karma   = 10
-configatron.socialp.vettings_needed = 2
+configatron.socialp.karma.initial      = +20
+configatron.socialp.karma.vote         = -10
+configatron.socialp.karma.comment      = +1
+configatron.socialp.karma.vetting      = +1
+configatron.socialp.karma.upvoted      = +2
+configatron.socialp.karma.downvoted    = -10
+configatron.socialp.karma.upvote       = +1
+configatron.socialp.karma.downvote     = -1
+
+configatron.socialp.karma.idea.created = +1
+configatron.socialp.karma.idea.vetted  = +1
+configatron.socialp.karma.idea.picked  = +10
+configatron.socialp.karma.idea.live    = +20
+
+configatron.socialp.vettings_needed    = 2
+
 
 if Rails.env.production?
   # production-specific settings
