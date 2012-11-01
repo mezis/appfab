@@ -1,0 +1,24 @@
+<% title "Attachment" %>
+
+<p>
+  <strong>Mime Type:</strong>
+  <%= @attachment.mime_type %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @attachment.name %>
+</p>
+<p>
+  <strong>Owner Type:</strong>
+  <%= @attachment.owner_type %>
+</p>
+<p>
+  <strong>Owner:</strong>
+  <%= @attachment.owner_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_attachment_path(@attachment) %> |
+  <%= link_to "Destroy", @attachment, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", attachments_path %>
+</p>

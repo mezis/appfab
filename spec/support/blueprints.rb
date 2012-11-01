@@ -71,7 +71,7 @@ Vetting.blueprint do
 end
 
 
-AttachedFile.blueprint do
+Attachment.blueprint do
   owner      { User.last || User.make! }
   uploader   { User.last || User.make! }
   file       { 'data' }

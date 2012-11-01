@@ -1,4 +1,4 @@
-class AttachedFile < ActiveRecord::Base
+class Attachment < ActiveRecord::Base
   attr_accessible :mime_type, :name, :owner, :uploader, :file
 
   belongs_to :owner, :polymorphic => true

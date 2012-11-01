@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AttachedFilesController do
+describe AttachmentsController do
   render_views
 
   it "index action should render index template" do
@@ -9,8 +9,7 @@ describe AttachedFilesController do
   end
 
   it "show action should render show template" do
-    require 'pry' ; require 'pry-nav' ; binding.pry
-    get :show, :id => AttachedFile.make!
+    get :show, :id => Attachment.make!
     response.should render_template(:show)
   end
 
@@ -20,38 +19,38 @@ describe AttachedFilesController do
   end
 
   it "create action should render new template when model is invalid" do
-    AttachedFile.any_instance.stub(:valid? => false)
+    Attachment.any_instance.stub(:valid? => false)
     post :create
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
-    AttachedFile.any_instance.stub(:valid? => true)
+    Attachment.any_instance.stub(:valid? => true)
     post :create
-    response.should redirect_to(attached_file_url(assigns[:attachment]))
+    response.should redirect_to(attachment_url(assigns[:attachment]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => AttachedFile.make!
+    get :edit, :id => Attachment.make!
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    attachment = AttachedFile.make!
-    AttachedFile.any_instance.stub(:valid? => false)
+    attachment = Attachment.make!
+    Attachment.any_instance.stub(:valid? => false)
     put :update, :id => attachment
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    put :update, :id => AttachedFile.make!
-    response.should redirect_to(attached_file_url(assigns[:attachment]))
+    put :update, :id => Attachment.make!
+    response.should redirect_to(attachment_url(assigns[:attachment]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    attachment = AttachedFile.make!
+    attachment = Attachment.make!
     delete :destroy, :id => attachment
-    response.should redirect_to(attached_files_url)
-    AttachedFile.exists?(attachment.id).should be_false
+    response.should redirect_to(attachments_url)
+    Attachment.exists?(attachment.id).should be_false
   end
 end
