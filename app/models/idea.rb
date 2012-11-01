@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category
+  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category, :product_manager
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
@@ -11,6 +11,7 @@ class Idea < ActiveRecord::Base
   has_many   :comments
   has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+  belongs_to :product_manager, :class_name => 'User'
 
   validates_presence_of :rating
   # validates_presence_of :category
@@ -20,10 +21,8 @@ class Idea < ActiveRecord::Base
     allow_nil: true,
     in: Proc.new { Date.today .. (Date.today + 365) }
 
-  validates_inclusion_of :design_size,      :in => 0..3, :allow_nil => true
-  validates_inclusion_of :development_size, :in => 0..3, :allow_nil => true
-
-  validate :content_must_not_change, :unless => :submitted?
+  validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
+  validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true
 
   default_values rating: 0
 
@@ -38,8 +37,7 @@ class Idea < ActiveRecord::Base
     state :live
 
     event :vet» do
-      transition :submitted => :vetted,
-        :if => lambda { |idea| idea.vettings.count == configatron.socialp.vettings_needed }
+      transition :submitted => :vetted, :if => :enough_vettings?
       transition :submitted => same
     end
 
@@ -77,6 +75,17 @@ class Idea < ActiveRecord::Base
     event :deliver» do
       transition :signed_off => :live
     end
+
+    # state-specific validations
+    state all - [:submitted] do
+      validate :content_must_not_change
+      validates_presence_of :design_size
+      validates_presence_of :development_size
+    end
+
+    state all - [:submitted, :vetted] do
+      validates_presence_of :product_manager
+    end
   end
 
 
@@ -90,6 +99,14 @@ class Idea < ActiveRecord::Base
 
 
   private
+
+  def sized?
+    design_size.present? && development_size.present?
+  end
+
+  def enough_vettings?
+    (vettings.count == configatron.socialp.vettings_needed)
+  end
 
 
   def content_must_not_change

@@ -21,7 +21,7 @@ describe Idea do
   end
 
   it 'becomes "vetted" when vetted twice' do
-    @idea = Idea.make!
+    @idea = Idea.make!(:sized)
     Vetting.make!(idea: @idea)
     @idea.reload.vetted?.should be_false
     Vetting.make!(idea: @idea, user: User.make!)

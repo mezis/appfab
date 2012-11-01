@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :votes, :dependent => :destroy
   has_many :comments, :as => :author, :dependent => :destroy
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
+  has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   include UserRole::UserMethods
   include Notification::Base::CanBeSubject
 

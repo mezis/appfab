@@ -51,6 +51,12 @@ Idea.blueprint(:sized) do
   design_size      { 2 }
 end
 
+Idea.blueprint(:managed) do
+  development_size { 1 }
+  design_size      { 2 }
+  product_manager  { User.make!.plays!(:product_manager) }
+end
+
 
 Notification::Base.blueprint do
   recipient  { User.last || User.make! }
