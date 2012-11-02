@@ -17,4 +17,6 @@ class Comment < ActiveRecord::Base
   validates_presence_of :idea
   validates_presence_of :body
   validates_presence_of :rating
+
+  default_scope order('created_at DESC')
 end
