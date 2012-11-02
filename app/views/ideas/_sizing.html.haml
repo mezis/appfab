@@ -1,0 +1,21 @@
+-# Context: idea (Idea)
+
+%span.ideas-sizing
+  - if idea.submitted? && current_user.plays?(:architect, :product_manager)
+    %span.badge
+      %i.icon-cog
+      %ul
+        - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field, title|
+          %li
+            - if current_user.plays?(role)
+              - 1.upto(4) do |size|
+                - if idea.send(field) == size
+                  = idea_size_human idea.send(field)
+                - else 
+                  = link_to idea_size_human(size), idea_path(idea, :idea => {field => size}), method: :put
+            - else
+              = idea_size_human idea.send(field)        
+  - elsif idea.sized?
+    %span.badge
+      %i.icon-cog
+      = idea_size_human idea.size

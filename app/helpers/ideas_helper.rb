@@ -20,8 +20,8 @@ module IdeasHelper
     content_tag(:i, '', options.merge(class: safe_join(classes.uniq, ' ')))
   end
 
-  def idea_sizing(idea)
-    case [idea.design_size, idea.development_size].max
+  def idea_size_human(size)
+    case size
     when 1 then s_('T-shirt size|XS')
     when 2 then s_('T-shirt size|S')
     when 3 then s_('T-shirt size|M')

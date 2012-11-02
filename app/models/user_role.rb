@@ -30,11 +30,11 @@ class UserRole < ActiveRecord::Base
       return self
     end
 
-    def plays?(role_name)
-      role_name = role_name.to_sym if role_name.kind_of?(String)
-      Names.include?(role_name) or
-        raise ArgumentError.new("Unknown role '#{role_name}'")
-      return self.roles.where(name: role_name).any?
+    def plays?(*role_names)
+      role_names = role_names.map { |name| name.kind_of?(String) ? name.to_sym : name }
+      (role_names - Names).empty? or
+        raise ArgumentError.new("Unknown roles in arguments")
+      return self.roles.where(name: role_names).any?
     end
   end
 

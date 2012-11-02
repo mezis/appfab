@@ -10,11 +10,11 @@
 
   padding: 0
   margin:  $section_spacing 0
-  overflow: hidden
+  // overflow: hidden
 
-  border: 1px solid $light_gray
-  +border-radius(5px)
-  +background-image(linear-gradient(left top, white, $light_gray))
+  // +border-radius(5px)
+  +background-image(linear-gradient(left top, lighten($light_gray, 50%), $light_gray))
+  +box-shadow($medium_gray 0px 2px 5px)
 
   .body
     padding: $section_padding
@@ -25,7 +25,6 @@
   .meta
     height:   $banner_height
     padding:  0
-    background-color: transparentize($light_gray,0.25)
     text-align: right
 
     > *

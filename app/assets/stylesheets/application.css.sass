@@ -12,6 +12,11 @@
  *= require_tree .
  */
 
-@import "bootstrap"
-@import "bootstrap-responsive"
-@import "font-awesome"
+@import application/variables
+
+// Bootstrap overrides
+$linkColor: $major_color
+
+@import bootstrap
+@import bootstrap-responsive
+@import font-awesome

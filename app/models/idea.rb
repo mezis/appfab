@@ -3,6 +3,16 @@ class Idea < ActiveRecord::Base
   attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
+  StatesForWizard = [
+    N_('Ideas State|submitted'),
+    N_('Ideas State|vetted'),
+    N_('Ideas State|picked'),
+    N_('Ideas State|designed'),
+    N_('Ideas State|approved'),
+    N_('Ideas State|implemented'),
+    N_('Ideas State|signed_off'),
+    N_('Ideas State|live')
+  ]
 
   belongs_to :author, :class_name => 'User'
   has_one    :account, :through => :author
@@ -106,11 +116,16 @@ class Idea < ActiveRecord::Base
   end
 
 
-  private
-
   def sized?
     design_size.present? && development_size.present?
   end
+
+  def size
+    sized? and [design_size, development_size].max
+  end
+
+
+  private
 
   def enough_vettings?
     (vettings.count == configatron.socialp.vettings_needed)

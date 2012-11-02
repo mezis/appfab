@@ -2,12 +2,17 @@
 -# - idea (Idea)
 -# - collapsed (boolean)
 -# - title_type (:link or :none)
+-# - status (:wizard or :header)
 :ruby
-  collapsed  = local_assigns.fetch(:collapsed,  false)
-  title_type = local_assigns.fetch(:title_type, :page)
+  collapsed   = local_assigns.fetch(:collapsed,  false)
+  title_type  = local_assigns.fetch(:title_type, :page)
+  show_status = local_assigns.fetch(:status,     :wizard)
+
+= render 'wizard', idea:idea if show_status == :wizard
 
 .idea_container
-  .idea{ :id => "idea#{idea.id}"}
+  - classes = [idea.state, (show_status == :header) && 'with-header-wizard'].compact
+  .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
       %div{ class: "kind #{idea.kind}"}<
         = idea_icon_for_kind(idea)
@@ -16,11 +21,10 @@
           %i.icon-certificate
             %span.value= idea.rating
       .content
-        - if idea_sizing(idea)
+        = render 'sizing', idea: idea
+        - if show_status == :header
           %span.badge<
-            = idea_sizing(idea)
-        %span.badge<
-          = idea_status(idea)
+            = idea_status(idea)
 
     .body
       %h2.title

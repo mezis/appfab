@@ -1,4 +1,4 @@
-- title "Ideas"
+- title _("Ideas"), show_title:false
 
 - @ideas.each do |idea|
-  = render 'idea', idea:idea, collapsed:true, title_type: :link
+  = render 'idea', idea:idea, collapsed:true, title_type: :link, status: :header
