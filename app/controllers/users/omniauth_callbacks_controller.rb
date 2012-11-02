@@ -19,7 +19,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   private
 
   def _sign_in_from_hash
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
+    Rails.logger.info _auth_hash
     @user = User.find_or_create_from_auth_hash!(_auth_hash)
 
     sign_in @user

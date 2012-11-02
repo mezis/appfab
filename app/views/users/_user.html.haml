@@ -1,0 +1,5 @@
+-# Context: user (User), format (:avatar)
+:ruby
+  format = local_assigns.fetch(:format, :avatar)
+%div{ class: "user format_#{format}", id: "user#{user.id}" }
+  .avatar{ style: "background-image: url(#{user.gravatar_url})" }

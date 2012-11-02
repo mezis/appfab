@@ -1,0 +1,29 @@
+@import compass
+@import application/mixins
+@import application/variables
+
+form.new_comment
+  text-align: right
+
+.comment
+  $avatar_size:   3em
+  padding-left:   ($avatar_size * 1.05)
+  position:       relative
+  .user .avatar
+    +square($avatar_size)
+    +border-radius(5px)
+    +absolute(0,0)
+  .bubble
+    margin-right:   0
+    margin-bottom:  0
+
+  .time_ago
+    font-size:      smaller
+    color:          $medium_gray
+    margin-right:   1ex
+
+  ul.actions
+    text-align:     right
+  li
+    display:        inline
+

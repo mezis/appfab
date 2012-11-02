@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category, :product_manager
+  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
@@ -13,6 +13,9 @@ class Idea < ActiveRecord::Base
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
+  has_many   :vetters, :class_name => 'User', :through => :vettings, :source => :user
+  has_many   :backers, :class_name => 'User', :through => :votes,    :source => :user
+
   validates_presence_of :rating
   # validates_presence_of :category
 
@@ -24,7 +27,10 @@ class Idea < ActiveRecord::Base
   validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
   validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true
 
-  default_values rating: 0
+  validates_presence_of  :kind
+  validates_inclusion_of :kind, :in => %w(bug chore feature)
+
+  default_values rating: 0, kind:'feature'
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
 

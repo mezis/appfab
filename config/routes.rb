@@ -6,7 +6,7 @@ Socialp::Application.routes.draw do
   resources :notifications
   resources :accounts
   resources :ideas
-  resources :comments
+  resources :comments, only: [:create, :update, :destroy]
   resources :votes
   resources :vettings
   resources :user_roles

@@ -42,6 +42,8 @@ gem 'dragonfly'
 # caching, at the Rack level
 gem 'rack-cache', :require => 'rack/cache'
 
+# user avatars
+gem 'gravtastic'
 
 # Gems used only for assets and not required
 # in production environments by default.

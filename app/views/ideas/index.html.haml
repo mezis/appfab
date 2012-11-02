@@ -1,2 +1,4 @@
 - title "Ideas"
 
+- @ideas.each do |idea|
+  = render 'idea', idea:idea, collapsed:true, title_type: :link

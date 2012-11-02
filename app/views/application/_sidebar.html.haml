@@ -1,0 +1,4 @@
+- if current_user
+  .notifications
+    %h4= _('Recent notifications')
+    = render current_user.notifications.unread

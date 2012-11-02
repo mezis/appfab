@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :token_authenticatable
 
+  include Gravtastic
+  has_gravatar :email, size: 80, filetype: :png
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :provider, :uid
@@ -19,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :comments, :as => :author, :dependent => :destroy
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
+  has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings
+  has_many :backed_ideas, :class_name => 'Idea', :through => :votes
+
   include UserRole::UserMethods
   include Notification::Base::CanBeSubject
 
@@ -31,9 +37,7 @@ class User < ActiveRecord::Base
   before_validation :adopt_account
 
   def self.find_or_create_from_auth_hash!(auth_hash)
-    if user = self.where(uid: auth_hash[:uid]).first
-      return user
-    end
+    user = self.where(uid: auth_hash[:uid], provider: auth_hash[:provider]).first and return user
 
     self.new.tap do |user|
       if auth_hash[:info][:first_name]
@@ -62,6 +66,11 @@ class User < ActiveRecord::Base
       self.karma += options[:by]
       self.save!
     end
+  end
+
+
+  def login
+    "@#{first_name}#{last_name}"
   end
 
 

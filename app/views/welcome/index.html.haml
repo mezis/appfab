@@ -1,12 +1,10 @@
 
-.row
-  .span12
-    .hero-unit
-      %h1= configatron.app_name
-      %p The app that helps product teams build fantastic apps.
+.hero-unit
+  %h1= configatron.app_name
+  %p The app that helps product teams build fantastic apps.
 
-      - unless current_user
-        = link_to user_omniauth_authorize_path(:provider => :google_oauth2), :class => 'btn btn-primary' do
-          = _('Sign in with your Google account')
-          &nbsp;
-          %i.icon-caret-right
+  - unless current_user
+    = link_to user_omniauth_authorize_path(:provider => :google_oauth2), :class => 'btn btn-primary' do
+      = _('Sign in with your Google account')
+      &nbsp;
+      %i.icon-caret-right

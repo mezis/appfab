@@ -1,6 +1,11 @@
 = form_for @idea do |f|
   = f.error_messages
 
+  = f.label :kind
+  = f.select :kind, idea_kind_select_options
+  %span.help-block
+    = _('Suggestions for title entry')
+
   = f.label :title
   = f.text_field :title, :placeholder => _('Type something...')
   %span.help-block
@@ -27,3 +32,4 @@
     = _('Suggestions for metrics statement')
 
   = f.submit :class => 'btn btn-primary'
+  %a.btn{ href: ideas_path }= _('Cancel')

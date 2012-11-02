@@ -2,43 +2,37 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
 
-  def index
-    @comments = Comment.all
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
-  def new
-    @comment = Comment.new
-  end
-
   def create
     @comment = Comment.new(params[:comment])
-    if @comment.save
-      redirect_to @comment, :notice => "Successfully created comment."
-    else
-      render :action => 'new'
-    end
-  end
+    @comment.author = current_user
 
-  def edit
-    @comment = Comment.find(params[:id])
+    if @comment.save
+      flash[:success] = _("Successfully posted comment.")
+    else
+      flash[:error] = _("Failed to post comment.")
+    end
+
+    if @comment.idea
+      redirect_to @comment.idea
+    else
+      redirect_to ideas_path
+    end
   end
 
   def update
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
-      redirect_to @comment, :notice  => "Successfully updated comment."
+      flash[:success] = _("Successfully updated comment.")
     else
-      render :action => 'edit'
+      flash[:error] = _("Failed to update comment.")
     end
+    redirect_to @comment.idea
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to comments_url, :notice => "Successfully destroyed comment."
+    flash[:success] = _("Successfully destroyed comment.")
+    redirect_to @comment.idea
   end
 end

@@ -6,7 +6,7 @@
       = page_title
     %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'}/
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    = stylesheet_link_tag :application
+    = stylesheet_link_tag    :application
     = javascript_include_tag :application
     = csrf_meta_tag
     = yield(:head)
@@ -14,12 +14,20 @@
   %body
     = render 'header'
     .container
-      - flash.each do |name, msg|
-        %div{ :class => "flash alert alert-#{name}"}
-          = msg
-          %button.close{ :'data-dismiss' => 'alert' } ×
-
       - if show_title?
-        %h1= yield(:title)
-
-      = yield
+        .row
+          .span12
+            %h1= yield(:title)
+      - if flash.any?
+        .row
+          .span12
+            - flash.each do |name, msg|
+              %div{ :class => "flash alert alert-#{name}"}
+                = msg
+                %button.close{ :'data-dismiss' => 'alert' }<
+                  %i.icon-remove
+      .row
+        .span9
+          = yield
+        .span3
+          = render 'sidebar'

@@ -16,6 +16,8 @@ class Notification::Base < ActiveRecord::Base
     where(type: (Notification.const_get type_symbol.to_s.camelize))
   }
 
+  scope :unread, where(unread:true)
+
   module CanBeSubject
     def self.included(by)
       by.class_eval do

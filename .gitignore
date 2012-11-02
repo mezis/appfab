@@ -19,3 +19,10 @@
 
 # Ignore ruby schema (migrations should be authoritative)
 db/schema.rb
+
+# CTags turds
+.tags
+.tags_sorted_by_file
+
+# Fixtures
+/test/fixtures/*.yml

@@ -1,0 +1,62 @@
+@import compass
+@import compass/css3/transform
+@import application/variables
+
+.with_bubbles
+  $shadow_radius: 6px
+  $nose_size:     10px
+  $shadow:        0 1px $shadow_radius $light_gray
+  $border:        1px solid $medium_gray
+
+  .bubble
+    background-color: white
+    border-radius:    5px
+    border:           $border
+    box-shadow:       $shadow
+    display:          block
+    padding:          10px 18px
+    margin:           1em ($shadow_radius + $nose_size)
+    position:         relative
+    vertical-align:   top
+
+  .tail
+    position: absolute
+    height:  ($shadow_radius + $nose_size)
+    width:   ($shadow_radius + $nose_size)
+    overflow: hidden
+
+    &:before
+      border:            $border
+      background-color:  white
+      box-shadow:        $shadow
+      content:           "\00a0"
+
+      display:           block
+      position:          absolute
+      top:               0px
+      height:            $nose_size
+      width:             $nose_size
+
+  .bubble.left
+    text-align: left
+
+    .tail
+      top:      $nose_size
+      left:   -($shadow_radius + $nose_size)
+
+      &:before
+        +transform(skewX(-45deg))
+        left:              $nose_size
+
+  .bubble.right
+    text-align: right
+
+    .tail
+      top:      $nose_size
+      right:   -($shadow_radius + $nose_size)
+
+      &:before
+        +transform(skewX(45deg))
+        right:             $nose_size
+
+  ​

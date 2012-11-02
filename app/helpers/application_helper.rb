@@ -6,4 +6,7 @@ module ApplicationHelper
     saved_title.blank? ? configatron.app_name : "#{saved_title} - #{configatron.app_name}"
   end
 
+  def tshirt_size_options
+    options_for_select([['XS', 1], ['S', 2], ['M', 3], ['L', 4]]) 
+  end
 end

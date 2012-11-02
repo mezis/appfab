@@ -1,0 +1,8 @@
+-# Context:
+-# - notification (Notification::Base)
+-# - message (String)
+.notification{ id: "notification#{notification.id}" }
+  %button.btn<
+    %i.icon-ok
+  .timestamp= notification.created_at
+  .message= message

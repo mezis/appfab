@@ -4,9 +4,9 @@
 # to do so you may need to add this line to your ApplicationController
 #   helper :layout
 module LayoutHelper
-  def title(page_title, show_title = true)
+  def title(page_title, options = {})
     content_for(:title) { h(page_title.to_s) }
-    @show_title = show_title
+    @show_title = options.fetch(:show_title, true)
   end
 
   def show_title?

@@ -2,7 +2,11 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
 
+  ValidAngles = %w(discussable vettable votable followed)
+  DefaultAngle = ValidAngles.last
+
   def index
+    @angle = get_angle_from_params
     @ideas = Idea.all
   end
 
@@ -40,5 +44,14 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @idea.destroy
     redirect_to ideas_url, :notice => "Successfully destroyed idea."
+  end
+
+
+  private
+
+
+  def get_angle_from_params
+    return params[:angle] if ValidAngles.include?(params[:angle])
+    DefaultAngle
   end
 end

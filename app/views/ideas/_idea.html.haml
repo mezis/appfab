@@ -1,0 +1,72 @@
+-# Context:
+-# - idea (Idea)
+-# - collapsed (boolean)
+-# - title_type (:link or :none)
+:ruby
+  collapsed  = local_assigns.fetch(:collapsed,  false)
+  title_type = local_assigns.fetch(:title_type, :page)
+
+.idea_container
+  .idea{ :id => "idea#{idea.id}"}
+    .meta.top
+      %div{ class: "kind #{idea.kind}"}<
+        = idea_icon_for_kind(idea)
+      - if idea.rating > 0
+        .rating<
+          %i.icon-certificate
+            %span.value= idea.rating
+      .content
+        - if idea_sizing(idea)
+          %span.badge<
+            = idea_sizing(idea)
+        %span.badge<
+          = idea_status(idea)
+
+    .body
+      %h2.title
+        - if title_type == :link
+          = link_to idea.title, idea_path(idea)
+        - else
+          = idea.title
+
+      %p
+        = idea.problem
+
+      .details{ :class => (collapsed ? 'hidden' : '')}
+        %p
+          %strong= _('Solution:')
+          = idea.solution
+        %p
+          %strong= _('Metrics:')
+          = idea.metrics
+
+    .meta.bottom
+      .people
+        .author
+          = render idea.author, format: :avatar
+        .vetters
+          = render idea.vetters.limit(2), format: :avatar
+        .backers
+          = render idea.backers.limit(5), format: :avatar
+
+      .actions
+        %ul
+          %li
+            = link_to idea_path(idea) do
+              %i.icon-fullscreen
+          %li
+            = link_to idea_path(idea, anchor: 'comments') do
+              %i.icon-comments-alt
+              - if (count = idea.comments.count) > 0
+                = count
+          %li
+            = link_to root_path do
+              %i.icon-ban-circle
+          %li.separator
+          %li
+            / veto
+            = link_to edit_idea_path(idea) do
+              %i.icon-pencil
+          %li
+            = link_to  do
+              %i.icon-trash

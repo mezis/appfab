@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class Comment < ActiveRecord::Base
   attr_accessible :idea, :parent, :author, :rating, :body
+  attr_accessible :idea_id, :parent_id
 
   belongs_to :idea
   belongs_to :parent,   :class_name => 'Comment'

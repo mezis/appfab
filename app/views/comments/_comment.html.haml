@@ -1,0 +1,15 @@
+.comment.with_bubbles{ id: "comment#{comment.id}"}
+  = render comment.author, format: :avatar
+  .bubble.left
+    %span.tail
+    .body= comment.body
+  %ul.actions
+    %li.time_ago
+      = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
+    %li
+      %i.icon-thumbs-up
+    %li
+      %i.icon-thumbs-down
+    %li
+      = link_to comment, confirm: _('Are you sure?'), method: :delete do
+        %i.icon-trash

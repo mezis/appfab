@@ -1,0 +1,1 @@
+= render 'notification/notification', notification: new_user, message: _('User %{user} has just joined your account!').html_safe % { user: user_name(new_user.subject) }
