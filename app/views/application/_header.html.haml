@@ -1,0 +1,24 @@
+.navbar.navbar-inverse
+  .navbar-inner
+    %a.brand{href: root_path}= configatron.app_name
+    %ul.nav
+      %li
+        %a{href: new_idea_path} 
+          %i.icon-edit
+          = _('Submit')
+      %li
+        %a{href: ideas_path(angle:'discussable')}
+          %i.icon-comments-alt
+          = _('Discuss')
+      %li
+        %a{href: ideas_path(angle:'vettable')}
+          %i.icon-check
+          = _('Vet')
+      %li
+        %a{href: ideas_path(angle:'votable')}
+          %i.icon-envelope
+          = _('Vote')
+      %li
+        %a{href: ideas_path(angle:'followed')}
+          %i.icon-bookmark-empty
+          = _('Follow')

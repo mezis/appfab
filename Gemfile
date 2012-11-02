@@ -15,10 +15,6 @@ gem 'cancan'
 # templates
 gem 'haml-rails'
 
-# styling
-gem 'compass'
-gem 'bootstrap-sass-rails'
-
 # caching
 gem 'memcache-client'
 
@@ -52,6 +48,11 @@ gem 'rack-cache', :require => 'rack/cache'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+
+  # styling
+  gem 'compass-rails'
+  gem 'bootstrap-sass'
+  gem 'font-awesome-sass-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

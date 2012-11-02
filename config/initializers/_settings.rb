@@ -1,6 +1,8 @@
 # encoding: UTF-8
 require 'configatron'
 
+configatron.app_name                   = 'AppFab'
+
 configatron.socialp.karma.initial      = +20
 configatron.socialp.karma.vote         = -10
 configatron.socialp.karma.comment      = +1

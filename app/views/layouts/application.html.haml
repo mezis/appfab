@@ -3,17 +3,21 @@
 
   %head
     %title
-      = yield(:title) || "Untitled"
+      = page_title
+    %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'}/
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
     = yield(:head)
 
   %body
-    #container
+    = render 'header'
+    .container
       - flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_#{name}"
+        %div{ :class => "flash alert alert-#{name}"}
+          = msg
+          %button.close{ :'data-dismiss' => 'alert' } ×
 
       - if show_title?
         %h1= yield(:title)

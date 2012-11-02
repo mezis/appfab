@@ -11,13 +11,13 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @idea = Idea.new
+    @idea = current_user.ideas.new
   end
 
   def create
-    @idea = Idea.new(params[:idea])
+    @idea = current_user.ideas.new(params[:idea])
     if @idea.save
-      redirect_to @idea, :notice => "Successfully created idea."
+      redirect_to @idea, :notice => _("Successfully submitted idea.")
     else
       render :action => 'new'
     end
