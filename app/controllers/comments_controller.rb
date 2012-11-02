@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     end
 
     if @comment.idea
-      redirect_to @comment.idea
+      redirect_to @comment.idea, anchor: 'comments'
     else
       redirect_to ideas_path
     end
@@ -26,13 +26,13 @@ class CommentsController < ApplicationController
     else
       flash[:error] = _("Failed to update comment.")
     end
-    redirect_to @comment.idea
+    redirect_to @comment.idea, anchor: 'comments'
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:success] = _("Successfully destroyed comment.")
-    redirect_to @comment.idea
+    redirect_to @comment.idea, anchor: 'comments'
   end
 end
