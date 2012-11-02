@@ -68,5 +68,5 @@
             = link_to edit_idea_path(idea) do
               %i.icon-pencil
           %li
-            = link_to  do
+            = link_to idea, confirm: _('Are you sure?'), method: :delete do
               %i.icon-trash
