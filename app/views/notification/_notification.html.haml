@@ -2,7 +2,8 @@
 -# - notification (Notification::Base)
 -# - message (String)
 .notification{ id: "notification#{notification.id}" }
-  %button.btn<
-    %i.icon-ok
-  .timestamp= notification.created_at
   .message= message
+  .footer
+    .timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
+    = link_to '#' do
+      %i.icon-ok

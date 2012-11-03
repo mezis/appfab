@@ -1,0 +1,15 @@
+@import application/mixins
+@import application/variables
+
+.notification
+  margin:    $section_spacing 0
+  font-size: small
+  color:     $medium_gray
+
+  .footer
+    +height(1.5em)
+    .timestamp
+      float:    left
+    a
+      display:  block
+      float:    right

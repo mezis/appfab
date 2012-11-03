@@ -18,6 +18,8 @@ class Notification::Base < ActiveRecord::Base
 
   scope :unread, where(unread:true)
 
+  default_scope order('created_at DESC')
+
   module CanBeSubject
     def self.included(by)
       by.class_eval do
