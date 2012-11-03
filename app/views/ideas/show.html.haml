@@ -1,7 +1,7 @@
-- title @idea.title, show_title:false
+- title @idea.title, :show_title => false
 
 = render 'idea', :idea => @idea, :collapsed => false
 
 #comments
-  = render 'comments/form', comment: Comment.new(idea: @idea)
+  = render 'comments/form', :comment => Comment.new(:idea => @idea)
   = render @idea.comments

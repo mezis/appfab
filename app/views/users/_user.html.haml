@@ -1,5 +1,5 @@
 -# Context: user (User), format (:avatar)
 :ruby
   format = local_assigns.fetch(:format, :avatar)
-%div{ class: "user format_#{format}", id: "user#{user.id}", title:user_tooltip(user), :'data-placement' => 'right' }
-  .avatar{ style: "background-image: url(#{user.gravatar_url})" }
+%div{ :class => "user format_#{format}", :id => "user#{user.id}", :title => user_tooltip(user), :'data-placement' => 'right' }
+  .avatar{ :style => "background-image: url(#{user.gravatar_url})" }

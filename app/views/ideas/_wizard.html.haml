@@ -11,4 +11,4 @@
           when :past   then current_class = (idea.state == state) ? :active : past
           when :active then current_class = :future
           end
-        %td{ class: current_class }= _(state).titleize
+        %td{ :class => current_class }= _(state).titleize

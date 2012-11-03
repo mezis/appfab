@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-31 09:51+0000\n"
+"POT-Creation-Date: 2012-11-03 15:35+0000\n"
 "PO-Revision-Date: 2012-10-30 13:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,214 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+msgid "%{time} ago"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Discuss"
+msgstr ""
+
+msgid "Failed to post comment."
+msgstr ""
+
+msgid "Failed to update comment."
+msgstr ""
+
+msgid "Failed to update notification"
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Idea lacks design sizing"
+msgstr ""
+
+msgid "Idea lacks development sizing"
+msgstr ""
+
+msgid "Idea statement cannot be changed once it is vetted"
+msgstr ""
+
+msgid "Idea state|approved"
+msgstr ""
+
+msgid "Idea state|designed"
+msgstr ""
+
+msgid "Idea state|implemented"
+msgstr ""
+
+msgid "Idea state|live"
+msgstr ""
+
+msgid "Idea state|picked"
+msgstr ""
+
+msgid "Idea state|signed_off"
+msgstr ""
+
+msgid "Idea state|submitted"
+msgstr ""
+
+msgid "Idea state|vetted"
+msgstr ""
+
+msgid "Ideas"
+msgstr ""
+
+msgid "Ideas State|approved"
+msgstr ""
+
+msgid "Ideas State|designed"
+msgstr ""
+
+msgid "Ideas State|implemented"
+msgstr ""
+
+msgid "Ideas State|live"
+msgstr ""
+
+msgid "Ideas State|picked"
+msgstr ""
+
+msgid "Ideas State|signed_off"
+msgstr ""
+
+msgid "Ideas State|submitted"
+msgstr ""
+
+msgid "Ideas State|vetted"
+msgstr ""
+
+msgid "Idea|Bug"
+msgstr ""
+
+msgid "Idea|Chore"
+msgstr ""
+
+msgid "Idea|Feature"
+msgstr ""
+
+msgid "Metrics:"
+msgstr ""
+
+msgid "Post comment"
+msgstr ""
+
+msgid "Recent notifications"
+msgstr ""
+
+msgid "Sign in with your Google account"
+msgstr ""
+
+msgid "Solution:"
+msgstr ""
+
 msgid "Sorry, something went wrong while logging you in."
 msgstr ""
 
+msgid "Submit"
+msgstr ""
+
+msgid "Submit your idea"
+msgstr ""
+
+msgid "Successfully destroyed comment."
+msgstr ""
+
+msgid "Successfully destroyed notification."
+msgstr ""
+
+msgid "Successfully posted comment."
+msgstr ""
+
+msgid "Successfully submitted idea."
+msgstr ""
+
+msgid "Successfully updated comment."
+msgstr ""
+
+msgid "Successfully updated notification."
+msgstr ""
+
+msgid "Suggestions for metrics statement"
+msgstr ""
+
+msgid "Suggestions for problem statement"
+msgstr ""
+
+msgid "Suggestions for solution statement"
+msgstr ""
+
+msgid "Suggestions for title entry"
+msgstr ""
+
+msgid "T-shirt size|L"
+msgstr ""
+
+msgid "T-shirt size|M"
+msgstr ""
+
+msgid "T-shirt size|S"
+msgstr ""
+
+msgid "T-shirt size|XS"
+msgstr ""
+
+msgid "Tooltip|%{user} currently has %{points} %{karma}. They are %{roles}."
+msgstr ""
+
+msgid "Tooltip|Delete Idea"
+msgstr ""
+
+msgid "Tooltip|Dismiss"
+msgstr ""
+
+msgid "Tooltip|Edit Idea"
+msgstr ""
+
+msgid "Tooltip|Expand Idea"
+msgstr ""
+
+msgid "Tooltip|Follow this link to submita new idea"
+msgstr ""
+
+msgid "Tooltip|Show comments"
+msgstr ""
+
+msgid "Tooltip|Show stories currently being discussed"
+msgstr ""
+
+msgid "Tooltip|Show stories open for votes"
+msgstr ""
+
+msgid "Tooltip|Show stories you are following"
+msgstr ""
+
+msgid "Tooltip|Show stories you can vet"
+msgstr ""
+
+msgid "Tooltip|This Idea is a %{kind}"
+msgstr ""
+
+msgid "Tooltip|This shows how an architect and a product manager have sized the idea."
+msgstr ""
+
+msgid "Type something..."
+msgstr ""
+
 msgid "User %{user} has just joined your account!"
+msgstr ""
+
+msgid "Vet"
+msgstr ""
+
+msgid "Vote"
 msgstr ""
 
 msgid "Welcome, %{user}!"
