@@ -1,10 +1,43 @@
+- content_for(:no_sidebar) { true }
 
-.hero-unit
-  %h1= configatron.app_name
-  %p The app that helps product teams build fantastic apps.
+.row
+  .span12
+    .hero-unit
+      %h1= configatron.app_name
+      %p The app that helps product teams build fantastic apps.
 
-  - unless current_user
-    = link_to user_omniauth_authorize_path(:provider => :google_oauth2), :class => 'btn btn-primary' do
-      = _('Sign in with your Google account')
-      &nbsp;
-      %i.icon-caret-right
+      - unless current_user
+        = link_to user_omniauth_authorize_path(:provider => :google_oauth2), :class => 'btn btn-primary' do
+          = _('Sign in with your Google account')
+          &nbsp;
+          %i.icon-caret-right
+.row
+  .span4
+    %h4<>
+      %i.icon-comments-alt
+      Gather brilliant ideas
+    %p
+      Ever been to the pub with your team? They're frustrated because they know what the users want. They're bursting with ideas for new features and know the really painful bug... but lack the avenue to express themselves.
+    %p
+      So throw that old "ideas box" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them.
+    %p
+      %strong How it works:
+      %i Pitch the submissions and comment system.
+  .span4
+    %h4<>
+      %i.icon-envelope
+      Let priorities emerge
+    %p
+      Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?
+    %p
+      Now forget about them. Your staff will vote on what's actually important, and priorities will emerge.
+    %p
+      %strong How it works:
+      %i Pitch the vetting and voting system.
+  .span4
+    %h4<>
+      %i.icon-bookmark-empty
+      Get it done
+    %p
+      Forget about planning.
+      Keep track. Rate limiting.

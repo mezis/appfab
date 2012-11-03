@@ -26,8 +26,11 @@
                 = msg
                 %button.close{ :'data-dismiss' => 'alert' }<
                   %i.icon-remove
-      .row
-        .span9
-          = yield
-        .span3
-          = render 'sidebar'
+      - if (yield :no_sidebar)
+        = yield
+      - else
+        .row
+          .span9
+            = yield
+          .span3
+            = render 'sidebar'
