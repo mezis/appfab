@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+$(document).ready(function() {
+
+  $('[title]').tooltip({
+    delay: { show:150, hide:250 }
+  })
+
+});

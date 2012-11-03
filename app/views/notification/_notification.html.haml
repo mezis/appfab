@@ -5,5 +5,5 @@
   .message= message
   .footer
     .timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
-    = link_to '#' do
+    = link_to '#', title: s_('Tooltip|Dismiss'), :'data-placement' => 'bottom' do
       %i.icon-ok

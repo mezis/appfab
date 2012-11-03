@@ -14,7 +14,7 @@
   - classes = [idea.state, (show_status == :header) && 'with-header-wizard'].compact
   .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
-      %div{ class: "kind #{idea.kind}"}<
+      %div{ class: "kind #{idea.kind}", title: s_('Tooltip|This Idea is a %{kind}') % { kind: idea.kind }, :'data-placement' =>'right' }<
         = idea_icon_for_kind(idea)
       - if idea.rating > 0
         .rating<
@@ -56,21 +56,17 @@
       .actions
         %ul
           %li
-            = link_to idea_path(idea) do
+            = link_to idea_path(idea), title:s_('Tooltip|Expand Idea') do
               %i.icon-fullscreen
           %li
-            = link_to idea_path(idea, anchor: 'comments') do
+            = link_to idea_path(idea, anchor: 'comments'), title:s_('Tooltip|Show comments') do
               %i.icon-comments-alt
               - if (count = idea.comments.count) > 0
                 = count
-          %li
-            = link_to root_path do
-              %i.icon-ban-circle
           %li.separator
           %li
-            / veto
-            = link_to edit_idea_path(idea) do
+            = link_to edit_idea_path(idea), title:s_('Tooltip|Edit Idea') do
               %i.icon-pencil
           %li
-            = link_to idea, confirm: _('Are you sure?'), method: :delete do
+            = link_to idea, confirm: _('Are you sure?'), method: :delete, title:s_('Tooltip|Delete Idea') do
               %i.icon-trash
