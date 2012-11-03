@@ -1,24 +1,28 @@
-.navbar.navbar-inverse
+.navbar.navbar-fixed-top
   .navbar-inner
-    %a.brand{:href => root_path}= configatron.app_name
-    %ul.nav
-      %li
-        %a{:href => new_idea_path, :title => s_('Tooltip|Follow this link to submita new idea'), :'data-placement' => 'bottom'} 
-          %i.icon-edit
-          = _('Submit')
-      %li
-        %a{:href => ideas_path(:angle => 'discussable'), :title => s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
-          %i.icon-comments-alt
-          = _('Discuss')
-      %li
-        %a{:href => ideas_path(:angle => 'vettable'), :title => s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
-          %i.icon-check
-          = _('Vet')
-      %li
-        %a{:href => ideas_path(:angle => 'votable'), :title => s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
-          %i.icon-envelope
-          = _('Vote')
-      %li
-        %a{:href => ideas_path(:angle => 'followed'), :title => s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
-          %i.icon-bookmark-empty
-          = _('Follow')
+    .container
+      %a.brand{:href => root_path}= configatron.app_name
+      %ul.nav
+        %li
+          %a{:href => new_idea_path, :title => s_('Tooltip|Follow this link to submita new idea'), :'data-placement' => 'bottom'} 
+            %i.icon-edit
+            = _('Submit')
+        %li
+          %a{:href => ideas_path(:angle => 'discussable'), :title => s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
+            %i.icon-comments-alt
+            = _('Discuss')
+        %li
+          %a{:href => ideas_path(:angle => 'vettable'), :title => s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
+            %i.icon-check
+            = _('Vet')
+        %li
+          %a{:href => ideas_path(:angle => 'votable'), :title => s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
+            %i.icon-envelope
+            = _('Vote')
+        %li
+          %a{:href => ideas_path(:angle => 'followed'), :title => s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
+            %i.icon-bookmark-empty
+            = _('Follow')
+      - if current_user
+        .brand
+          = render current_user, :name => true, :tooltip => false, :avatar => false

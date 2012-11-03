@@ -14,7 +14,7 @@
 
 @import application/variables
 
-// Bootstrap overrides
+// Bootstrap configuration
 $linkColor:           $major_color
 
 $gridGutterWidth:     40px
@@ -26,5 +26,15 @@ $gridGutterWidth768:  40px
 $gridColumnWidth768:  (768px - ($gridGutterWidth * 11))/12
 
 @import bootstrap
+
+// This needs to be between bootstrap and bootstrap-responsive
+body
+  padding-top: 60px
+
 @import bootstrap-responsive
 @import font-awesome
+
+
+// Bootstrap overrides
+.tooltip-inner
+  line-height: 130%

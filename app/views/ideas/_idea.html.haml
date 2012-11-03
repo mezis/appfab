@@ -57,16 +57,16 @@
         %ul
           %li
             = link_to idea_path(idea), :title => s_('Tooltip|Expand Idea') do
-              %i.icon-fullscreen
+              %i.icon-fullscreen<>
           %li
             = link_to idea_path(idea, :anchor => 'comments'), :title => s_('Tooltip|Show comments') do
-              %i.icon-comments-alt
+              %i.icon-comments-alt<>
               - if (count = idea.comments.count) > 0
                 = count
           %li.separator
           %li
             = link_to edit_idea_path(idea), :title => s_('Tooltip|Edit Idea') do
-              %i.icon-pencil
+              %i.icon-pencil<>
           %li
             = link_to idea, :confirm => _('Are you sure?'), :method => :delete, :title => s_('Tooltip|Delete Idea') do
-              %i.icon-trash
+              %i.icon-trash<>

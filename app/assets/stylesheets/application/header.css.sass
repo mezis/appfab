@@ -1,4 +1,11 @@
-@import "compass"
+@import compass
+@import application/mixins
 
-.navbar-inner
-  +border-radius(0)
+.brand:last-child
+  float:        right
+  font-size:    medium
+
+  .name, .avatar
+    float:        left
+  .avatar
+    +square(1em)

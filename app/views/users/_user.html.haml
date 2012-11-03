@@ -1,5 +1,25 @@
--# Context: user (User), format (:avatar)
+-# Context: user (User), format (:avatar),
+-# name (boolean, default false),
+-# tooltip (boolean, default true)
 :ruby
-  format = local_assigns.fetch(:format, :avatar)
-%div{ :class => "user format_#{format}", :id => "user#{user.id}", :title => user_tooltip(user), :'data-placement' => 'right' }
-  .avatar{ :style => "background-image: url(#{user.gravatar_url})" }
+  show_avatar  = local_assigns.fetch(:avatar,  true)
+  show_tooltip = local_assigns.fetch(:tooltip, true)
+  show_name    = local_assigns.fetch(:name,    false)
+  show_karma   = local_assigns.fetch(:karma,   show_name)
+
+  options = {
+    :class => "user", 
+    :id    => "user#{user.id}"
+  }
+  if show_tooltip
+    options.merge! :title => user_tooltip(user), :'data-placement' => 'right'
+  end
+%div{ options }
+  - if show_name
+    .name
+      = user.first_name
+      %span.karma{ :title => s_('Tooltip|This shows the points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' }
+        = number_with_delimiter user.karma
+        = karma_symbol
+  - if show_avatar
+    .avatar{ :style => "background-image: url(#{user.gravatar_url})" }

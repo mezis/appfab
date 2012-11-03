@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :omniauthable, :token_authenticatable
 
   include Gravtastic
-  has_gravatar :email, size: 80, filetype: :png
+  has_gravatar :email, size: 80, filetype: :png, default: :identicon
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me

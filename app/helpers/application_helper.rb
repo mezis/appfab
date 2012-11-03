@@ -10,6 +10,6 @@ module ApplicationHelper
     options_for_select([['XS', 1], ['S', 2], ['M', 3], ['L', 4]]) 
 
   def karma_symbol
-    content_tag(:i, '', :class => 'icon-leaf')
+    content_tag(:i, '', :class => 'icon-leaf karma')
   end
 end

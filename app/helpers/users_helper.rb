@@ -5,11 +5,17 @@ module UsersHelper
   end
 
   def user_tooltip(user)
-    s_('Tooltip|%{user} currently has %{points} %{karma}. They are %{roles}.') % {
+    lines = []
+    lines.push(s_('Tooltip|%{user} currently has %{points} %{karma}.') % {
       user:   user.first_name,
       points: user.karma,
-      karma:  karma_symbol,
+      karma:  karma_symbol
+    })
+
+    lines.push(s_('Tooltip|They are %{roles}.') % {
       roles:  user.roles.values_of(:name).to_sentence
-    }
+    }) if user.roles.any?
+
+    safe_join(lines.compact, tag(:br))
   end
 end
