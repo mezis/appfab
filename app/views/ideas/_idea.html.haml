@@ -27,16 +27,16 @@
             = idea_status(idea)
 
     .body
-      %h2.title
+      %h3.title
+        = idea.title
         - if title_type == :link
-          = link_to idea.title, idea_path(idea)
-        - else
-          = idea.title
+          = link_to idea_path(idea), :title => s_('Tooltip|Expand Idea') do
+            %i.icon-arrow-right
 
       %p
         = idea.problem
 
-      .details{ :class => (collapsed ? 'hidden' : '')}
+      - unless collapsed
         %p
           %strong= _('Solution:')
           = idea.solution

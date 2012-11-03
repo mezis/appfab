@@ -9,10 +9,11 @@ form.new_comment
   $avatar_size:   3em
   padding-left:   ($avatar_size * 1.05)
   position:       relative
-  .user .avatar
-    +square($avatar_size)
-    +border-radius(5px)
+  .user 
     +absolute(0,0)
+    .avatar
+      +square($avatar_size)
+      +border-radius(5px)
   .bubble
     +border-radius(0px)
     margin-right:   0
