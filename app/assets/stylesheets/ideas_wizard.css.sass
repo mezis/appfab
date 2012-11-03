@@ -1,9 +1,9 @@
 @import compass
 @import application/variables
+@import application/mixins
 
 .idea-wizard
-  +background-image(linear-gradient(left top, lighten($light_gray, 50%), $light_gray))
-  +box-shadow($medium_gray 0px 2px 5px)
+  +appfab-box
   $background-color: rgba($light_gray, 0)
 
   font-size:        smaller
