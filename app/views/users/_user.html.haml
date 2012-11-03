@@ -3,23 +3,16 @@
 -# tooltip (boolean, default true)
 :ruby
   show_avatar  = local_assigns.fetch(:avatar,  true)
-  show_tooltip = local_assigns.fetch(:tooltip, true)
   show_name    = local_assigns.fetch(:name,    false)
   show_karma   = local_assigns.fetch(:karma,   show_name)
 
-  options = {
-    :class => "user", 
-    :id    => "user#{user.id}"
-  }
-  if show_tooltip
-    options.merge! :title => user_tooltip(user), :'data-placement' => 'right'
-  end
-%div{ options }
+.user{ :id => "user#{user.id}", :title => user_tooltip(user), :'data-placement' => 'right' }
   - if show_name
     .name
       = link_to user.first_name, user
-      %span.karma{ :title => s_('Tooltip|This shows the points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' }
-        = number_with_delimiter user.karma
-        = karma_symbol
+      - if show_karma
+        %span.karma{ :title => s_('Tooltip|This shows %{user}\'s current karma.') % { :user => user.first_name }, :'data-placement' => 'bottom' }
+          = number_with_delimiter user.karma
+          = karma_symbol
   - if show_avatar
     .avatar{ :style => "background-image: url(#{user.gravatar_url})" }

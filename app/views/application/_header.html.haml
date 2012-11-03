@@ -25,4 +25,12 @@
             = _('Follow')
       - if current_user
         .brand
-          = render current_user, :name => true, :tooltip => false, :avatar => false
+          .user
+            .name
+              = link_to current_user.first_name, current_user, :title => s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
+              %span.karma{ :title => s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
+                = number_with_delimiter current_user.karma
+                = karma_symbol
+          .sign-out
+            = link_to destroy_user_session_path, :method => :delete, :title => s_('Tooltip|Sign out'), :'data-placement' => 'left' do
+              %i.icon-signout<>
