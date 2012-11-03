@@ -11,12 +11,12 @@ Dragonfly[:files].tap do |dragonfly_app|
 end
 
 
-Socialp::Application.config.middleware.insert 0, 'Rack::Cache', {
+AppFab::Application.config.middleware.insert 0, 'Rack::Cache', {
   :verbose     => true,
   # :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
   # :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
 } # unless Rails.env.production?
   # uncomment the 'unless' with Rails3 ?
 
-Socialp::Application.config.middleware.insert_after 'Rack::Cache', 
+AppFab::Application.config.middleware.insert_after 'Rack::Cache', 
   'Dragonfly::Middleware', :files

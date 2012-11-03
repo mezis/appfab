@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :karma
 
-  default_values karma: configatron.socialp.karma.initial,
+  default_values karma: configatron.app_fab.karma.initial,
                  voting_power: 1
 
   before_validation :adopt_account

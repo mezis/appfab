@@ -128,19 +128,19 @@ class Idea < ActiveRecord::Base
   private
 
   def enough_vettings?
-    (vettings.count == configatron.socialp.vettings_needed)
+    (vettings.count == configatron.app_fab.vettings_needed)
   end
 
 
   def enough_design_capacity?
-    configatron.socialp.design_capacity >=
+    configatron.app_fab.design_capacity >=
       Idea.with_state(:picked).managed_by(self.product_manager).sum(:design_size) +
       self.design_size
   end
 
 
   def enough_development_capacity?
-    configatron.socialp.design_capacity >=
+    configatron.app_fab.design_capacity >=
       Idea.with_state(:approved).managed_by(self.product_manager).sum(:development_size) +
       self.development_size
   end

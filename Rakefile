@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Socialp::Application.load_tasks
+AppFab::Application.load_tasks

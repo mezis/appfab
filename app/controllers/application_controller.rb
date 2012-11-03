@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def set_text_domain
     FastGettext.available_locales = [:en]
-    FastGettext.text_domain = 'socialp'
+    FastGettext.text_domain = 'app_fab'
     session[:locale] = I18n.locale = FastGettext.set_locale(:en)
   end
 

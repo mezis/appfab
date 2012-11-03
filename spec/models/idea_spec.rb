@@ -31,7 +31,7 @@ describe Idea do
   it 'cannot be picked if the manager is at design capacity' do
     @idea = Idea.make!(:vetted, design_size: 4)
     configatron.temp do
-      configatron.socialp.design_capacity = 3
+      configatron.app_fab.design_capacity = 3
       @idea.can_pick»?.should be_false
     end
   end
@@ -39,7 +39,7 @@ describe Idea do
   it 'cannot be approved if the manager is at development capacity' do
     @idea = Idea.make!(:designed, development_size: 4)
     configatron.temp do
-      configatron.socialp.design_capacity = 3
+      configatron.app_fab.design_capacity = 3
       @idea.can_pick»?.should be_false
     end
   end
