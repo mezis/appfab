@@ -8,16 +8,13 @@
   = @user.last_name
 %p
   %strong Email Address:
-  = @user.email_address
-%p
-  %strong Role:
-  = @user.role
+  = @user.email
 %p
   %strong Karma:
   = @user.karma
 %p
   %strong Account:
-  = @user.account_id
+  = @user.account.name
 
 %p
   = link_to "Edit", edit_user_path(@user)

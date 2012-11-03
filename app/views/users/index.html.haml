@@ -12,12 +12,9 @@
     %tr
       %td= user.first_name
       %td= user.last_name
-      %td= user.email_address
-      %td= user.role
+      %td= user.email
       %td= user.karma
-      %td= user.account_id
       %td= link_to 'Show', user
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 
-%p= link_to "New User", new_user_path

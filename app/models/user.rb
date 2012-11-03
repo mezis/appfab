@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :ideas, :foreign_key => :author_id, :dependent => :destroy
   has_many :vettings, :dependent => :destroy
   has_many :votes, :dependent => :destroy
-  has_many :comments, :as => :author, :dependent => :destroy
+  has_many :comments, :foreign_key => :author_id, :dependent => :destroy
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings

@@ -11,10 +11,12 @@ AppFab::Application.routes.draw do
   resources :vettings
   resources :user_roles
   resources :attachments
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
 
-  devise_for :users, :controllers => {
+  devise_for :users, :path => :session, :controllers => {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

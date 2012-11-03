@@ -17,7 +17,7 @@
 %div{ options }
   - if show_name
     .name
-      = user.first_name
+      = link_to user.first_name, user
       %span.karma{ :title => s_('Tooltip|This shows the points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' }
         = number_with_delimiter user.karma
         = karma_symbol

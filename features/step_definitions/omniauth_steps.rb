@@ -48,7 +48,7 @@ end
 
 
 Given /I sign in with Google/ do
-  visit '/users/sign_in'
+  visit '/session/sign_in'
   click_link 'Sign in with Google Oauth2'
 end
 
@@ -56,7 +56,7 @@ end
 Given /I sign in as the developer "(.*?)"/ do |full_name|
   email = full_name.downcase.split.join('.') + '@example.com'
 
-  visit '/users/sign_in'
+  visit '/session/sign_in'
   click_link 'Sign in with Developer'
   fill_in 'name',  with:full_name
   fill_in 'email', with:email
