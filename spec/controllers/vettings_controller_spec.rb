@@ -3,6 +3,8 @@ require 'spec_helper'
 
 describe VettingsController do
   render_views
+  login_user
+  
   let(:idea) { Idea.make! }
   let(:vetting) { Vetting.make! idea:idea }
 
