@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 15:41+0000\n"
+"POT-Creation-Date: 2012-11-04 17:05+0000\n"
 "PO-Revision-Date: 2012-10-30 13:30+0000\n"
 "Last-Translator: Julien Letessier <>\n"
 "Language-Team: English\n"
@@ -17,16 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "%{time} ago"
+msgid "Failed to create vetting."
 msgstr ""
 
-msgid "Are you sure?"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Discuss"
+msgid "Failed to create vote."
 msgstr ""
 
 msgid "Failed to post comment."
@@ -38,13 +32,16 @@ msgstr ""
 msgid "Failed to update notification"
 msgstr ""
 
-msgid "Follow"
-msgstr ""
-
 msgid "Idea lacks design sizing"
 msgstr ""
 
 msgid "Idea lacks development sizing"
+msgstr ""
+
+msgid "Idea size|Design size"
+msgstr ""
+
+msgid "Idea size|Development size"
 msgstr ""
 
 msgid "Idea statement cannot be changed once it is vetted"
@@ -74,7 +71,7 @@ msgstr ""
 msgid "Idea state|vetted"
 msgstr ""
 
-msgid "Ideas"
+msgid "Idea state|voted"
 msgstr ""
 
 msgid "Ideas State|approved"
@@ -101,6 +98,9 @@ msgstr ""
 msgid "Ideas State|vetted"
 msgstr ""
 
+msgid "Ideas State|voted"
+msgstr ""
+
 msgid "Idea|Bug"
 msgstr ""
 
@@ -110,34 +110,25 @@ msgstr ""
 msgid "Idea|Feature"
 msgstr ""
 
-msgid "Metrics:"
+msgid "Not enough design capacity"
 msgstr ""
 
-msgid "Post comment"
-msgstr ""
-
-msgid "Recent notifications"
-msgstr ""
-
-msgid "Sign in with your Google account"
-msgstr ""
-
-msgid "Solution:"
+msgid "Not enough development capacity"
 msgstr ""
 
 msgid "Sorry, something went wrong while logging you in."
 msgstr ""
 
-msgid "Submit"
-msgstr ""
-
-msgid "Submit your idea"
+msgid "Successfully created vetting."
 msgstr ""
 
 msgid "Successfully destroyed comment."
 msgstr ""
 
 msgid "Successfully destroyed notification."
+msgstr ""
+
+msgid "Successfully destroyed vetting."
 msgstr ""
 
 msgid "Successfully posted comment."
@@ -152,79 +143,76 @@ msgstr ""
 msgid "Successfully updated notification."
 msgstr ""
 
-msgid "Suggestions for metrics statement"
-msgstr ""
-
-msgid "Suggestions for problem statement"
-msgstr ""
-
-msgid "Suggestions for solution statement"
-msgstr ""
-
-msgid "Suggestions for title entry"
+msgid "T-shirt size|Extra-small"
 msgstr ""
 
 msgid "T-shirt size|L"
 msgstr ""
 
+msgid "T-shirt size|Large"
+msgstr ""
+
 msgid "T-shirt size|M"
+msgstr ""
+
+msgid "T-shirt size|Medium"
 msgstr ""
 
 msgid "T-shirt size|S"
 msgstr ""
 
+msgid "T-shirt size|Small"
+msgstr ""
+
 msgid "T-shirt size|XS"
 msgstr ""
 
-msgid "Tooltip|%{user} currently has %{points} %{karma}. They are %{roles}."
+msgid "This idea is not pickable at the moment. It probably would put the product manager over design capacity."
 msgstr ""
 
-msgid "Tooltip|Delete Idea"
+msgid "Tooltip|%{user} currently has %{points} %{karma}."
 msgstr ""
 
-msgid "Tooltip|Dismiss"
+msgid "Tooltip|They are %{roles}."
 msgstr ""
 
-msgid "Tooltip|Edit Idea"
+msgid "Tooltip|This idea cannot be backed anymore."
 msgstr ""
 
-msgid "Tooltip|Expand Idea"
+msgid "Tooltip|This idea cannot be backed yet."
 msgstr ""
 
-msgid "Tooltip|Follow this link to submita new idea"
+msgid "Tooltip|This idea cannot be marked as %{state} yet."
 msgstr ""
 
-msgid "Tooltip|Show comments"
+msgid "Tooltip|This idea cannot be vetted yet."
 msgstr ""
 
-msgid "Tooltip|Show stories currently being discussed"
+msgid "Tooltip|This idea has already been %{state}."
 msgstr ""
 
-msgid "Tooltip|Show stories open for votes"
+msgid "Tooltip|This idea has already been vetted."
 msgstr ""
 
-msgid "Tooltip|Show stories you are following"
+msgid "User role|Architect"
 msgstr ""
 
-msgid "Tooltip|Show stories you can vet"
+msgid "User role|Denevolent dictator"
 msgstr ""
 
-msgid "Tooltip|This Idea is a %{kind}"
+msgid "User role|Designer"
 msgstr ""
 
-msgid "Tooltip|This shows how an architect and a product manager have sized the idea."
+msgid "User role|Developer"
 msgstr ""
 
-msgid "Type something..."
+msgid "User role|Product manager"
 msgstr ""
 
-msgid "User %{user} has just joined your account!"
+msgid "Vote cast successfully!"
 msgstr ""
 
-msgid "Vet"
-msgstr ""
-
-msgid "Vote"
+msgid "Vote withdrawn."
 msgstr ""
 
 msgid "Welcome, %{user}!"
