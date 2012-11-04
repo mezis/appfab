@@ -1,11 +1,12 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author_id, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind
+  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
   StatesForWizard = [
     N_('Ideas State|submitted'),
     N_('Ideas State|vetted'),
+    N_('Ideas State|voted'),
     N_('Ideas State|picked'),
     N_('Ideas State|designed'),
     N_('Ideas State|approved'),
@@ -44,11 +45,14 @@ class Idea < ActiveRecord::Base
 
   default_values rating: 0, kind:'feature'
 
+
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
+
 
   state_machine :state, :initial => :submitted do
     state :submitted
     state :vetted
+    state :voted
     state :picked
     state :designed
     state :approved
@@ -62,18 +66,20 @@ class Idea < ActiveRecord::Base
     end
 
     event :vote» do
-      transition :vetted => same
+      transition :vetted => :voted,  :if => :enough_votes?
+      transition :voted  => :vetted, :unless => :enough_votes?
+      transition [:vetted, :voted] => same
     end
 
     event :veto» do
-      transition [:vetted, :picked, :designed] => :submitted do
+      transition [:vetted, :voted, :picked, :designed] => :submitted do
         self.vettings.destroy_all
         self.votes.destroy_all
       end
     end
 
     event :pick» do
-      transition :vetted => :picked, :if => :enough_design_capacity?
+      transition :voted => :picked
     end
 
     event :design» do
@@ -81,7 +87,7 @@ class Idea < ActiveRecord::Base
     end
 
     event :approve» do
-      transition :designed => :approved, :if => :enough_development_capacity?
+      transition :designed => :approved
     end
 
     event :implement» do
@@ -103,10 +109,22 @@ class Idea < ActiveRecord::Base
       validates_presence_of :development_size
     end
 
-    state all - [:submitted, :vetted] do
+    state all - [:submitted, :vetted, :voted] do
       validates_presence_of :product_manager
     end
+
+    state :picked do
+      validate :enough_design_capacity?
+    end
+
+    state :approved do
+      validate :enough_development_capacity?
+    end
   end
+
+  after_save :auto_pick_when_product_manager_is_set, :if => :product_manager_id_changed?
+
+  # Other helpers
 
 
   def participants
@@ -146,26 +164,52 @@ class Idea < ActiveRecord::Base
   end
 
 
+  def is_state_in_future?(state)
+    state = state.to_sym if state.kind_of?(String)
+    all_states.index(self.state.to_sym) < all_states.index(state)
+  end
 
 
   private
 
+
+  def all_states
+    @@all_states ||= self.class.state_machine.states.map(&:name)
+  end
+
+  def auto_pick_when_product_manager_is_set
+    return unless self.product_manager
+    unless self.can_pick»?
+      errors.add :base, _('This idea is not pickable at the moment. It probably would put the product manager over design capacity.')
+      return
+    end
+    self.pick»
+  end
+  
+
   def enough_vettings?
-    (vettings.count == configatron.app_fab.vettings_needed)
+    (vettings.count >= configatron.app_fab.vettings_needed)
+  end
+
+
+  def enough_votes?
+    (votes.count >= configatron.app_fab.votes_needed)
   end
 
 
   def enough_design_capacity?
-    configatron.app_fab.design_capacity >=
+    return if configatron.app_fab.design_capacity >=
       Idea.with_state(:picked).managed_by(self.product_manager).sum(:design_size) +
       self.design_size
+    errors.add :base, _('Not enough design capacity')
   end
 
 
   def enough_development_capacity?
-    configatron.app_fab.design_capacity >=
+    return if configatron.app_fab.design_capacity >=
       Idea.with_state(:approved).managed_by(self.product_manager).sum(:development_size) +
       self.development_size
+    errors.add :base, _('Not enough development capacity')
   end
 
 

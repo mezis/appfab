@@ -2,11 +2,7 @@
 
 .row
   .span9
-    = render 'wizard', :idea => @idea
-  .span3
-.row
-  .span9
-    = render 'idea', :idea => @idea, :collapsed => false
+    = render 'idea', :idea => @idea, :collapsed => false, :status => :header
 
     #comments
       = render 'comments/form', :comment => Comment.new(:idea => @idea)

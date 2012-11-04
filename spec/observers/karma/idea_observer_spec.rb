@@ -25,8 +25,9 @@ describe Karma::IdeaObserver do
   context 'when an idea becomes picked' do
     it 'the submitter gains karma' do
       idea.update_attribute :state, :vetted
-      idea.update_attribute :product_manager_id, User.make!.id
-      lambda { idea.pick» }.should change { author.reload.karma }.by(10)
+      lambda {
+        idea.update_attribute :product_manager_id, User.make!.id      
+      }.should change { author.reload.karma }.by(10)
     end
 
     it 'notifies participants'

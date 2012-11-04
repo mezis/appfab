@@ -33,6 +33,9 @@ class IdeasController < ApplicationController
 
   def update
     @idea = Idea.find(params[:id])
+
+    @idea.product_manager = current_user if params[:idea].andand[:state] == 'picked'
+
     if @idea.update_attributes(params[:idea])
       redirect_to @idea, :notice  => "Successfully updated idea."
     else

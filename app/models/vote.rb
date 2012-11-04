@@ -15,9 +15,8 @@ class Vote < ActiveRecord::Base
 
   scope :on_idea, lambda { |*ideas| where(subject_type:'Idea', subject_id:ideas)}
 
-  after_create do |record|
-    record.subject.vote» if record.subject.respond_to?(:vote»)
-  end
+  after_create  :notify_idea
+  after_destroy :notify_idea
 
   def up?
     self.up
@@ -25,5 +24,13 @@ class Vote < ActiveRecord::Base
 
   def down?
     !self.up
+  end
+
+
+  private
+
+
+  def notify_idea
+    subject.vote» if subject.respond_to?(:vote»)
   end
 end

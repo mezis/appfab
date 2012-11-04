@@ -31,6 +31,10 @@
           = link_to idea_path(idea), :title => s_('Tooltip|Expand Idea') do
             %i.icon-arrow-right
 
+      - if !collapsed && idea.product_manager
+        %div
+          %strong= _('Product manager:')
+          = render idea.product_manager, :avatar => false
       %p
         = idea.problem
 

@@ -18,6 +18,7 @@ configatron.app_fab.karma.idea.picked  = +10
 configatron.app_fab.karma.idea.live    = +20
 
 configatron.app_fab.vettings_needed    = 2
+configatron.app_fab.votes_needed       = 1
 
 configatron.app_fab.design_capacity    = 5
 configatron.app_fab.develop_capacity   = 5

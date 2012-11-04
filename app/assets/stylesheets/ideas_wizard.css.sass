@@ -2,46 +2,24 @@
 @import application/variables
 @import application/mixins
 
-.idea-wizard
-  +appfab-box
-  $background-color: rgba($light_gray, 0)
-
-  font-size:        smaller
-  line-height:      90%
-  color:            white
-  background-color: $background-color
-  overflow:         hidden
-
-  table
-    width:        100%
-    td
-      padding:      1ex
-      &.past
-        background-color: $progress_color
-        +text-shadow($small_text_shadow)
-      &.active
-        +background-image(linear-gradient(left, $progress_color, $background-color))
-        +text-shadow($small_text_shadow)
-      &.future
-        background-color: transparent
-        color:            $medium_gray
-
 .idea.with-header-wizard
   =progress-gradient($x)
-    +background-image(linear-gradient(left, $progress_color, rgba($light_gray, 0) $x))  
+    +background-image(linear-gradient(left, $progress_color 0, $progress_color ($x - 1/9), rgba($light_gray, 0) $x))  
   &.submitted .meta.top
-    +progress-gradient(1/8)
+    +progress-gradient(1/9)
   &.vetted .meta.top
-    +progress-gradient(2/8)
+    +progress-gradient(2/9)
+  &.voted .meta.top
+    +progress-gradient(3/9)
   &.picked .meta.top
-    +progress-gradient(3/8)
+    +progress-gradient(4/9)
   &.designed .meta.top
-    +progress-gradient(4/8)
+    +progress-gradient(5/9)
   &.approved .meta.top
-    +progress-gradient(5/8)
+    +progress-gradient(6/9)
   &.implemented .meta.top
-    +progress-gradient(6/8)
+    +progress-gradient(7/9)
   &.signed_off .meta.top
-    +progress-gradient(7/8)
+    +progress-gradient(8/9)
   &.live .meta.top
-    +progress-gradient(8/8)
+    +progress-gradient(9/9)

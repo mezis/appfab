@@ -3,7 +3,7 @@
 -# tooltip (boolean, default true)
 :ruby
   show_avatar  = local_assigns.fetch(:avatar,  true)
-  show_name    = local_assigns.fetch(:name,    false)
+  show_name    = local_assigns.fetch(:name,    !show_avatar)
   show_karma   = local_assigns.fetch(:karma,   show_name)
 
 .user{ :id => "user#{user.id}", :title => user_tooltip(user), :'data-placement' => 'right' }
