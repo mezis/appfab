@@ -10,6 +10,10 @@ class Vote < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, scope: [:subject_id, :subject_type]
 
+  default_values up: true
+
+  scope :on_idea, lambda { |*ideas| where(subject_type:'Idea', subject_id:ideas)}
+
   after_create do |record|
     record.subject.vote» if record.subject.respond_to?(:vote»)
   end

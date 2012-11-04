@@ -7,5 +7,7 @@ class Notification::VettingObserver < ActiveRecord::Observer
     vetting.idea.participants.each do |user|
       Notification::NewVetting.create! recipient:user, subject:vetting
     end
+  ensure
+    return true
   end
 end

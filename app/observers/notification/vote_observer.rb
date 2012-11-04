@@ -12,5 +12,7 @@ class Notification::VoteObserver < ActiveRecord::Observer
         Notification::NewVoteOnIdea.create! recipient:user, subject:record
       end
     end
+  ensure
+    return true
   end
 end

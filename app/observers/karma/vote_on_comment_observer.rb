@@ -5,11 +5,15 @@ class Karma::VoteOnCommentObserver < ActiveRecord::Observer
   def after_create(record)
     return unless record.subject_type == 'Comment'
     change_karma(record, +1)
+  ensure
+    return true
   end
 
   def after_destroy(record)
     return unless record.subject_type == 'Comment'
     change_karma(record, -1)
+  ensure
+    return true
   end
 
   private

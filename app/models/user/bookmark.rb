@@ -5,7 +5,7 @@ class User::Bookmark < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea
 
-  validates_uniqueness_of :idea_id, :scope => :user_id
+  validates_uniqueness_of :user_id, :scope => :idea_id
 
   scope :idea_is, lambda { |idea| where(:idea_id => idea.id) }
 end

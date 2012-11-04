@@ -7,6 +7,8 @@ class Notification::UserObserver < ActiveRecord::Observer
     record.account.users.each do |account_user|
       Notification::NewUser.create!(recipient:account_user, subject:record)
     end
+  ensure
+    return true
   end
 
 end

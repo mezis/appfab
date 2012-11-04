@@ -130,15 +130,15 @@ class Idea < ActiveRecord::Base
   # Search angles
   
   def self.discussable_by(user)
-    user.account.ideas
+    user.account ? user.account.ideas : user.ideas
   end
 
   def self.vettable_by(user)
-    user.account.ideas.with_state('submitted')
+    discussable_by(user).with_state('submitted')
   end
 
   def self.votable_by(user)
-    user.account.ideas.with_state('vetted')
+    discussable_by(user).with_state('vetted')
   end
 
   def self.followed_by(user)

@@ -1,44 +1,30 @@
 # encoding: UTF-8
 class VotesController < ApplicationController
   before_filter :authenticate_user!
-
-  def index
-    @votes = Vote.all
-  end
-
-  def show
-    @vote = Vote.find(params[:id])
-  end
-
-  def new
-    @vote = Vote.new
-  end
+  before_filter :load_idea
 
   def create
-    @vote = Vote.new(params[:vote])
+    @vote = @idea.votes.new
+    @vote.user = current_user
+
     if @vote.save
-      redirect_to @vote, :notice => "Successfully created vote."
+      flash[:success] = _("Vote cast successfully!")
     else
-      render :action => 'new'
+      flash[:error] = _("Failed to create vote.")
     end
-  end
 
-  def edit
-    @vote = Vote.find(params[:id])
-  end
-
-  def update
-    @vote = Vote.find(params[:id])
-    if @vote.update_attributes(params[:vote])
-      redirect_to @vote, :notice  => "Successfully updated vote."
-    else
-      render :action => 'edit'
-    end
+    redirect_to @idea
   end
 
   def destroy
-    @vote = Vote.find(params[:id])
+    @vote = @idea.votes.find(params[:id])
     @vote.destroy
-    redirect_to votes_url, :notice => "Successfully destroyed vote."
+    redirect_to @idea, :notice => _("Vote withdrawn.")
+  end
+
+  private
+
+  def load_idea
+    @idea = Idea.find(params.delete(:idea_id))
   end
 end

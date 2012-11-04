@@ -21,5 +21,7 @@ class BookmarkObserver < ActiveRecord::Observer
       return if user.bookmarks.idea_is(idea).any?
       user.bookmarks.create!(idea: idea)
     end
+  ensure
+    return true
   end
 end

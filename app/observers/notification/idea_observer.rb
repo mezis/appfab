@@ -7,5 +7,7 @@ class Notification::IdeaObserver < ActiveRecord::Observer
     record.account.users.playing(:product_manager, :architect).each do |user|
       Notification::NewIdea.create! subject:record, recipient:user
     end
+  ensure
+    return true
   end
 end

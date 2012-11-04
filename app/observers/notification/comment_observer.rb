@@ -7,5 +7,7 @@ class Notification::CommentObserver < ActiveRecord::Observer
     record.idea.participants.each do |user|
       Notification::NewComment.create! subject:record, recipient:user
     end
+  ensure
+    return true
   end
 end

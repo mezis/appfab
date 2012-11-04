@@ -48,10 +48,16 @@
 
   / vote
   - if idea.vetted?
-    %li
-      = link_to idea_votes_path(idea), :method => :post, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vote, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
-        %i.icon-envelope
-        = _('Vote for this')
+    - if vote = current_user.votes.on_idea(idea).first
+      %li
+        = link_to idea_vote_path(idea, vote), :method => :delete, :class => 'btn btn-block', :title => s_('Tooltip|By pressing this you cancel your backing of this story. You will get back %{points} %{karma_icon}.') % { :points => -configatron.app_fab.karma.vote, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
+          %i.icon-check
+          = _('Withdraw your vote')
+    - else
+      %li
+        = link_to idea_votes_path(idea), :method => :post, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vote, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
+          %i.icon-envelope
+          = _('Vote for this')
   - else
     %li
       %a.btn.btn-block.disabled{ :title => s_('Tooltip|This idea cannot be backed yet.'), :'data-placement' => :left }
