@@ -19,25 +19,37 @@
                 %a.btn.disabled= idea_size_human(size)
   - else
     %li
-      %a.btn.disabled= _('Idea sized')
+      %a.btn.btn-block.disabled= _('Idea sized')
 
   / vetting
   - if idea.submitted?
-    - if idea.sized?
+    - if vetting = current_user.vettings.where(:idea_id => idea.id).first
       %li
-        = link_to vettings_path, :method => :post, :class => 'btn btn-primary btn-block', :title => s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vetting, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
+        = link_to idea_vetting_path(idea, vetting), :method => :delete, :class => 'btn btn-block', :title => s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vetting, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
+          %i.icon-check
+          = _('Cancel your vetting')
+    - elsif idea.sized?
+      %li
+        = link_to idea_vettings_path(idea), :method => :post, :class => 'btn btn-primary btn-block', :title => s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vetting, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
           %i.icon-check
           = _('Vet this idea')
     - else
       %li
-        %a.btn.btn-blockdisabled{ :title => s_('Tooltip|The idea need to be sized by an architect and a product manager before you can vet it.'), :'data-placement' => :left }
+        %a.btn.btn-block.disabled{ :title => s_('Tooltip|The idea need to be sized by an architect and a product manager before you can vet it.'), :'data-placement' => :left }
+          %i.icon-check
           = _('Vet this idea')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ :title => s_('Tooltip|This idea cannot be vetted right now.'), :'data-placement' => :left }
+        %i.icon-check
+        = _('Vet this idea')
+
 
 
   / vote
   - if idea.vetted?
     %li
-      = link_to votes_path(:idea_id => idea), :method => :post, :class => 'btn btn-block', :title => s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vote, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
+      = link_to idea_votes_path(idea), :method => :post, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { :points => configatron.app_fab.karma.vote, :karma_icon => user_karma_symbol }, :'data-placement' => :left do
         %i.icon-envelope
         = _('Vote for this')
   - else
@@ -51,7 +63,7 @@
   / pick
   - if idea.vetted? && idea.votes.any?
     %li
-      = link_to idea_path(idea, :product_manager_id => current_user), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => :left do
+      = link_to idea_path(idea, :product_manager_id => current_user), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => :left do
         = _('Pick this idea')
   - else
     %li
@@ -63,7 +75,7 @@
   / design
   - if idea.picked?
     %li
-      = link_to idea_path(idea, :state => 'designed'), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.'), :'data-placement' => :left do
+      = link_to idea_path(idea, :state => 'designed'), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.'), :'data-placement' => :left do
         = _('Mark as designed')
   - else
     %li
@@ -74,7 +86,7 @@
   / approve
   - if idea.designed?
     %li
-      = link_to idea_path(idea, :state => 'approved'), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => :left do
+      = link_to idea_path(idea, :state => 'approved'), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => :left do
         = _('Approve')
   - else
     %li
@@ -87,7 +99,7 @@
   / implement
   - if idea.approved?
     %li
-      = link_to idea_path(idea, :state => 'implemented'), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), :'data-placement' => :left do
+      = link_to idea_path(idea, :state => 'implemented'), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), :'data-placement' => :left do
         = _('Mark as implemented')
   - else
     %li
@@ -101,7 +113,7 @@
   / sign off
   - if idea.implemented?
     %li
-      = link_to idea_path(idea, :state => 'signed_off'), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => :left do
+      = link_to idea_path(idea, :state => 'signed_off'), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => :left do
         = _('Sign off')
   - else
     %li
@@ -117,7 +129,7 @@
   / deliver
   - if idea.signed_off?
     %li
-      = link_to idea_path(idea, :state => 'live'), :method => :update, :class => 'btn btn-block', :title => s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => :left do
+      = link_to idea_path(idea, :state => 'live'), :method => :update, :class => 'btn btn-block btn-primary', :title => s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => :left do
         = _('Deliver')
   - else
     %li

@@ -25,6 +25,8 @@ class Idea < ActiveRecord::Base
 
   has_many   :vetters, :class_name => 'User', :through => :vettings, :source => :user
   has_many   :backers, :class_name => 'User', :through => :votes,    :source => :user
+  has_many   :bookmarks,   :class_name => 'User::Bookmark', :dependent => :destroy
+
 
   validates_presence_of :rating
   # validates_presence_of :category

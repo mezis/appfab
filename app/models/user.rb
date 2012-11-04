@@ -22,8 +22,8 @@ class User < ActiveRecord::Base
   has_many :comments, :foreign_key => :author_id, :dependent => :destroy
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
-  has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings
-  has_many :backed_ideas, :class_name => 'Idea', :through => :votes
+  has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
+  has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :idea
   has_many :bookmarks, :class_name => 'User::Bookmark', :dependent => :destroy
   has_many :bookmarked_ideas, :class_name => 'Idea', :through => :bookmarks, :source => :idea
 
@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
                  voting_power: 1
 
   before_validation :adopt_account
+
+  scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     user = self.where(uid: auth_hash[:uid], provider: auth_hash[:provider]).first and return user

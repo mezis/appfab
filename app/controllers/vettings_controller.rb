@@ -2,50 +2,28 @@
 class VettingsController < ApplicationController
   before_filter :load_idea
 
-  def index
-    @vettings = Vetting.all
-  end
-
-  def show
-    @vetting = Vetting.find(params[:id])
-  end
-
-  def new
-    @vetting = Vetting.new
-  end
-
   def create
-    @vetting = Vetting.new(params[:vetting])
+    @vetting = @idea.vettings.new(params[:vetting])
+    @vetting.user = current_user
+
     if @vetting.save
-      redirect_to @vetting, :notice => "Successfully created vetting."
+      flash[:success] = _("Successfully created vetting.")
     else
-      render :action => 'new'
+      flash[:error] = _("Failed to create vetting.")
     end
-  end
 
-  def edit
-    @vetting = Vetting.find(params[:id])
-  end
-
-  def update
-    @vetting = Vetting.find(params[:id])
-    if @vetting.update_attributes(params[:vetting])
-      redirect_to @vetting, :notice  => "Successfully updated vetting."
-    else
-      render :action => 'edit'
-    end
+    redirect_to @idea
   end
 
   def destroy
-    @vetting = Vetting.find(params[:id])
+    @vetting = @idea.vettings.find(params[:id])
     @vetting.destroy
-    redirect_to vettings_url, :notice => "Successfully destroyed vetting."
+    redirect_to @idea, :notice => _("Successfully destroyed vetting.")
   end
 
   private
 
   def load_idea
-    return unless params[:idea_id]
-    @idea = Idea.find(params[:idea_id])
+    @idea = Idea.find(params.delete(:idea_id))
   end
 end

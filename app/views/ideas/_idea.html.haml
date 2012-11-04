@@ -47,9 +47,9 @@
         .author
           = render idea.author, :format => :avatar
         .vetters
-          = render idea.vetters.limit(2), :format => :avatar
+          = render idea.vetters.excluding(idea.author).limit(2), :format => :avatar
         .backers
-          = render idea.backers.limit(5), :format => :avatar
+          = render idea.backers.excluding(idea.author, idea.vetters).limit(5), :format => :avatar
 
       .actions
         %ul

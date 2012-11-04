@@ -5,8 +5,13 @@ class BookmarkObserver < ActiveRecord::Observer
   def after_save(record)
     idea = case record
       when Idea                   then record
-      when Vetting, Vote, Comment then record.idea
+      when Vetting, Comment       then record.idea
+      when Vote                   then record.subject
     end
+
+    # bail if not an idea (can happen for Votes)
+    return unless idea.kind_of?(Idea)
+
     user = case record
       when Idea, Comment then record.author
       when Vetting, Vote then record.user

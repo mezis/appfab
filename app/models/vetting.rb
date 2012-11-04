@@ -14,6 +14,8 @@ class Vetting < ActiveRecord::Base
 
   validate :idea_must_be_sized
 
+  scope :idea_is, lambda { |idea| where(idea_id: idea.id) }
+
   after_create { |record| record.idea.andand.vet» }
 
   private
