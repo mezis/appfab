@@ -18,9 +18,12 @@
                 %a.btn.btn-info.disabled= idea_size_human(size)
               - else
                 %a.btn.disabled= idea_size_human(size)
-  - else
+  - elsif idea.sized?
     %li
       %a.btn.btn-block.disabled= _('Idea sized')
+  - else
+    %li
+      %a.btn.btn-block.disabled= _('Idea not sized')
 
   / vet
   - if idea.can_vet»?
