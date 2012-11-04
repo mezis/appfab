@@ -22,7 +22,7 @@
         = render 'sizing', :idea => idea
         - if show_status == :header
           %span.badge{ :title => s_('Tooltip|The current progress on this idea') }<
-            = idea_status(idea)
+            = idea_status(idea.state)
 
     .body
       %h3.title

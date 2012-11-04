@@ -156,7 +156,11 @@ class Idea < ActiveRecord::Base
   end
 
   def self.votable_by(user)
-    discussable_by(user).with_state('vetted')
+    discussable_by(user).with_state('vetted', 'voted')
+  end
+
+  def self.buildable_by(user)
+    discussable_by(user).with_state('picked', 'designed', 'approved', 'implemented', 'signed_off')
   end
 
   def self.followed_by(user)

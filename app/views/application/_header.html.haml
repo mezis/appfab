@@ -20,6 +20,10 @@
             %i.icon-envelope
             = _('Vote')
         %li
+          %a{:href => ideas_path(:angle => 'buildable'), :title => s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
+            %i.icon-cogs
+            = _('Build')
+        %li
           %a{:href => ideas_path(:angle => 'followed'), :title => s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty
             = _('Follow')

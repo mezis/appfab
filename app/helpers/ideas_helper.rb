@@ -38,17 +38,18 @@ module IdeasHelper
     end
   end
 
-  def idea_status(idea)
-    case idea.state
-    when 'submitted'   then s_('Idea state|submitted')    
-    when 'vetted'      then s_('Idea state|vetted')
-    when 'voted'       then s_('Idea state|voted')
-    when 'picked'      then s_('Idea state|picked')    
-    when 'designed'    then s_('Idea state|designed')      
-    when 'approved'    then s_('Idea state|approved')      
-    when 'implemented' then s_('Idea state|implemented')        
-    when 'signed_off'  then s_('Idea state|signed_off')        
-    when 'live'        then s_('Idea state|live')
+  def idea_status(state)
+    state = state.to_sym if state.kind_of?(String)
+    case state
+    when :submitted   then s_('Idea state|submitted')    
+    when :vetted      then s_('Idea state|vetted')
+    when :voted       then s_('Idea state|voted')
+    when :picked      then s_('Idea state|picked')    
+    when :designed    then s_('Idea state|designed')      
+    when :approved    then s_('Idea state|approved')      
+    when :implemented then s_('Idea state|implemented')        
+    when :signed_off  then s_('Idea state|signed_off')        
+    when :live        then s_('Idea state|live')
     end
   end
 
@@ -68,7 +69,7 @@ module IdeasHelper
       when :voted
         s_('Tooltip|This idea cannot be backed yet.')
       else
-        s_('Tooltip|This idea cannot be marked as %{state} yet.') % { :state => state.to_s }
+        s_('Tooltip|This idea cannot be marked as %{state} yet.') % { :state => idea_status(state) }
       end
     else
       case state
@@ -77,7 +78,7 @@ module IdeasHelper
       when :voted
         s_('Tooltip|This idea cannot be backed anymore.')
       else
-        s_('Tooltip|This idea has already been %{state}.') % { :state => state.to_s }
+        s_('Tooltip|This idea has already been %{state}.') % { :state => idea_status(state) }
       end
     end
   end
