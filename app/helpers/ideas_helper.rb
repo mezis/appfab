@@ -50,5 +50,12 @@ module IdeasHelper
     when 'live'        then s_('Idea state|live')
     end
   end
+
+  def idea_size_type_name(field)
+    case field.to_s
+    when 'design_size'      then s_('Idea size|Design size')
+    when 'development_size' then s_('Idea size|Development size')
+    end
+  end
 end
 

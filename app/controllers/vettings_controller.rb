@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class VettingsController < ApplicationController
+  before_filter :load_idea
+
   def index
     @vettings = Vetting.all
   end
@@ -38,5 +40,12 @@ class VettingsController < ApplicationController
     @vetting = Vetting.find(params[:id])
     @vetting.destroy
     redirect_to vettings_url, :notice => "Successfully destroyed vetting."
+  end
+
+  private
+
+  def load_idea
+    return unless params[:idea_id]
+    @idea = Idea.find(params[:idea_id])
   end
 end

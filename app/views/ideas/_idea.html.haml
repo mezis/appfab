@@ -2,13 +2,11 @@
 -# - idea (Idea)
 -# - collapsed (boolean)
 -# - title_type (:link or :none)
--# - status (:wizard or :header)
+-# - status (:none or :header)
 :ruby
   collapsed   = local_assigns.fetch(:collapsed,  false)
   title_type  = local_assigns.fetch(:title_type, :page)
-  show_status = local_assigns.fetch(:status,     :wizard)
-
-= render 'wizard', :idea => idea if show_status == :wizard
+  show_status = local_assigns.fetch(:status,     :none)
 
 .idea_container
   - classes = [idea.state, (show_status == :header) && 'with-header-wizard'].compact

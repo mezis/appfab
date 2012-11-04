@@ -97,3 +97,8 @@ Attachment.blueprint do
   uploader   { User.last || User.make! }
   file       { 'data' }
 end
+
+User::Bookmark.blueprint do
+  user       { User.last || User.make! }
+  idea       { Idea.last || Idea.make! }
+end

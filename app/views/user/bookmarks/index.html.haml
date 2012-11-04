@@ -1,0 +1,15 @@
+- title "User/Bookmarks"
+
+%table
+  %tr
+    %th Idea
+    %th User
+  - for user_bookmark in @user_bookmarks
+    %tr
+      %td= user_bookmark.idea_id
+      %td= user_bookmark.user_id
+      %td= link_to 'Show', user_bookmark
+      %td= link_to 'Edit', edit_user_bookmark_path(user_bookmark)
+      %td= link_to 'Destroy', user_bookmark, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New User/Bookmark", new_user_bookmark_path

@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
 
   def index
     @angle = get_angle_from_params
-    @ideas = Idea.all
+    @ideas = Idea.send(:"#{@angle}_by", current_user)
   end
 
   def show

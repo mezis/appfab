@@ -1,6 +1,19 @@
 - title _("Ideas"), :show_title => false
 .row
   .span9
+    -if @ideas.empty?
+      / <div class="alert alert-block">
+      /   <button type="button" class="close" data-dismiss="alert">×</button>
+      /   <h4>Warning!</h4>
+      /   Best check yo self, you're not...
+      / </div>
+      .alert.alert-block
+        %h4= _('Sorry! I\'m afraid there are no %{qualifier} ideas at the moment.') % { :qualifier => @angle }
+        = _('Perhaps you could %{submit_link} a new one?').html_safe % { :submit_link => link_to(_('sumbit'), new_idea_path)}
+        - if Idea.discussable_by(current_user).any?
+          %br/
+          = _('Or you could %{discuss_link} ideas with others?').html_safe % { :discuss_link => link_to(_('discuss'), ideas_path(:angle => 'discussable'))}
+
     - @ideas.each do |idea|
       = render 'idea', :idea => idea, :collapsed => true, :title_type => :link, :status => :header
   .span3

@@ -1,0 +1,12 @@
+= form_for @user_bookmark do |f|
+  = f.error_messages
+  %p
+    = f.label :idea_id
+    %br
+    = f.number_field :idea_id
+  %p
+    = f.label :user_id
+    %br
+    = f.number_field :user_id
+  %p
+    = f.submit

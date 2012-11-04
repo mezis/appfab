@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings
   has_many :backed_ideas, :class_name => 'Idea', :through => :votes
+  has_many :bookmarks, :class_name => 'User::Bookmark', :dependent => :destroy
+  has_many :bookmarked_ideas, :class_name => 'Idea', :through => :bookmarks, :source => :idea
 
   include UserRole::UserMethods
   include Notification::Base::CanBeSubject

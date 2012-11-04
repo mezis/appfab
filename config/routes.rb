@@ -1,17 +1,20 @@
 # encoding: UTF-8
 AppFab::Application.routes.draw do
 
+
   get "welcome/index"
 
   resources :notifications
   resources :accounts
   resources :ideas
-  resources :comments, only: [:create, :update, :destroy]
   resources :votes
   resources :vettings
+  resources :comments, only: [:create, :update, :destroy]
   resources :user_roles
   resources :attachments
   resources :users, only: [:index, :show, :edit, :update, :destroy]
+
+  namespace(:user){ resources :bookmarks }
 
   devise_for :users, :path => :session, :controllers => {
     omniauth_callbacks: 'users/omniauth_callbacks'
