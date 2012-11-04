@@ -1,4 +1,7 @@
 - title _("Ideas"), :show_title => false
-
-- @ideas.each do |idea|
-  = render 'idea', :idea => idea, :collapsed => true, :title_type => :link, :status => :header
+.row
+  .span9
+    - @ideas.each do |idea|
+      = render 'idea', :idea => idea, :collapsed => true, :title_type => :link, :status => :header
+  .span3
+    / filters will go here

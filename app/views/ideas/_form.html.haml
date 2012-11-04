@@ -1,35 +1,61 @@
-= form_for @idea do |f|
+= form_for idea do |f|
   = f.error_messages
 
-  = f.label :kind
-  = f.select :kind, idea_kind_select_options
-  %span.help-block
-    = _('Suggestions for title entry')
+  .row
+    .span12
+    .span8
+      = f.label :kind
+      = f.select :kind, idea_kind_select_options
+    .span4
+      %span.help-block
+        = _('Help for kind entry')
 
-  = f.label :title
-  = f.text_field :title, :placeholder => _('Type something...')
-  %span.help-block
-    = _('Suggestions for title entry')
+  .row
+    .span12
+      = f.label :title
+    .span8
+      = f.text_field :title, :placeholder => _('Type something...')
+    .span4
+      %span.help-block
+        = _('Suggestions for title entry')
 
-  = f.label :problem
-  = f.text_area :problem, :rows => 4, :placeholder => _('Type something...')
-  %span.help-block
-    = _('Suggestions for problem statement')
+  .row
+    .span12
+      = f.label :problem
+    .span8
+      = f.text_area :problem, :rows => 4, :placeholder => _('Type something...')
+    .span4
+      %span.help-block
+        = _('Suggestions for problem statement')
 
-  = f.label :solution
-  = f.text_area :solution, :rows => 4, :placeholder => _('Type something...')
-  %span.help-block
-    = _('Suggestions for solution statement')
+  .row
+    .span12
+      = f.label :solution
+    .span8
+      = f.text_area :solution, :rows => 4, :placeholder => _('Type something...')
+    .span4
+      %span.help-block
+        = _('Suggestions for solution statement')
 
-  = f.label :metrics
-  = f.text_area :metrics, :rows => 4, :placeholder => _('Type something...')
-  %span.help-block
-    = _('Suggestions for metrics statement')
+  .row
+    .span12
+      = f.label :metrics
+    .span8
+      = f.text_area :metrics, :rows => 4, :placeholder => _('Type something...')
+    .span4
+      %span.help-block
+        = _('Suggestions for metrics statement')
 
-  = f.label :deadline
-  = f.text_field :deadline, :placeholder => 'YYYY-MM-DD'
-  %span.help-block
-    = _('Suggestions for metrics statement')
+  .row
+    .span12
+      = f.label :deadline
+    .span8
+      = f.text_field :deadline, :placeholder => 'YYYY-MM-DD'
+    .span4
+      %span.help-block
+        = _('Suggestions for metrics statement')
 
-  = f.submit :class => 'btn btn-primary'
-  %a.btn{ :href => ideas_path }= _('Cancel')
+  .row
+    .span12
+      = f.submit :class => 'btn btn-primary'
+      %a.btn{ :href => ideas_path }= _('Cancel')

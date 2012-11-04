@@ -1,4 +1,4 @@
-.navbar.navbar-fixed-top
+.navbar.navbar-fixed-top#header
   .navbar-inner
     .container
       %a.brand{:href => root_path}= configatron.app_name
@@ -24,13 +24,13 @@
             %i.icon-bookmark-empty
             = _('Follow')
       - if current_user
-        .brand
-          .user
-            .name
-              = link_to current_user.first_name, current_user, :title => s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
-              %span.karma{ :title => s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
-                = number_with_delimiter current_user.karma
-                = karma_symbol
-          .sign-out
+        %ul.nav.pull-right
+          %li.name
+            = link_to current_user.first_name, current_user, :title => s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
+          %li.karma{ :title => s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
+            %a
+              = number_with_delimiter current_user.karma
+              = user_karma_symbol
+          %li.sign-out
             = link_to destroy_user_session_path, :method => :delete, :title => s_('Tooltip|Sign out'), :'data-placement' => 'left' do
               %i.icon-signout<>

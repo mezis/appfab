@@ -1,16 +1,14 @@
 @import compass
 @import application/mixins
+@import application/variables
 
-.brand:last-child
-  float:        right
-  font-size:    medium
+#header
+  a[href]:hover
+    color: $major_color
 
-  .name, .avatar
-    float:        left
-  .avatar
-    +square(1em)
-
-  > *
-    display:      block
-    float:        left
-    margin-left:  1ex
+  li.name a
+    padding-right:  .33ex
+  li.karma a
+    padding-left:   .33ex
+    i
+      margin:         0

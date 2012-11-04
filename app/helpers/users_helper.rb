@@ -9,7 +9,7 @@ module UsersHelper
     lines.push(s_('Tooltip|%{user} currently has %{points} %{karma}.') % {
       user:   user.first_name,
       points: user.karma,
-      karma:  karma_symbol
+      karma:  user_karma_symbol
     })
 
     lines.push(s_('Tooltip|They are %{roles}.') % {
@@ -17,5 +17,9 @@ module UsersHelper
     }) if user.roles.any?
 
     safe_join(lines.compact, tag(:br))
+  end
+
+  def user_karma_symbol
+    content_tag(:i, '', :class => 'icon-leaf karma')
   end
 end

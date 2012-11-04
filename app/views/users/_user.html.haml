@@ -13,6 +13,6 @@
       - if show_karma
         %span.karma{ :title => s_('Tooltip|This shows %{user}\'s current karma.') % { :user => user.first_name }, :'data-placement' => 'bottom' }
           = number_with_delimiter user.karma
-          = karma_symbol
+          = user_karma_symbol
   - if show_avatar
     .avatar{ :style => "background-image: url(#{user.gravatar_url})" }

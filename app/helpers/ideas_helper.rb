@@ -29,6 +29,15 @@ module IdeasHelper
     end
   end
 
+  def idea_size_human_long(size)
+    case size
+    when 1 then s_('T-shirt size|Extra-small')
+    when 2 then s_('T-shirt size|Small')
+    when 3 then s_('T-shirt size|Medium')
+    when 4 then s_('T-shirt size|Large')
+    end
+  end
+
   def idea_status(idea)
     case idea.state
     when 'submitted'   then s_('Idea state|submitted')    
