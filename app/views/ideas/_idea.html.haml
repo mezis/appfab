@@ -32,7 +32,7 @@
             %i.icon-arrow-right
 
       - if !collapsed && idea.product_manager
-        %div
+        .product_manager
           %strong= _('Product manager:')
           = render idea.product_manager, avatar: false
       %p
