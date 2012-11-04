@@ -13,10 +13,21 @@ module UsersHelper
     })
 
     lines.push(s_('Tooltip|They are %{roles}.') % {
-      roles:  user.roles.values_of(:name).to_sentence
+      roles:  user.roles.values_of(:name).map { |role| user_role_name(role).downcase }.to_sentence
     }) if user.roles.any?
 
     safe_join(lines.compact, tag(:br))
+  end
+
+  def user_role_name(role)
+    role = role.to_sym if role.kind_of?(String)
+    case role
+    when :benevolent_dictator then s_('User role|Denevolent dictator')
+    when :product_manager     then s_('User role|Product manager')
+    when :architect           then s_('User role|Architect')
+    when :designer            then s_('User role|Designer')
+    when :developer           then s_('User role|Developer')
+    end
   end
 
   def user_karma_symbol
