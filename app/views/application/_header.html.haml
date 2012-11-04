@@ -3,41 +3,42 @@
     .container
       %a.brand{href: root_path}= configatron.app_name
       %ul.nav
-        %li
-          %a{href: new_idea_path, title: s_('Tooltip|Follow this link to submita new idea'), :'data-placement' => 'bottom'} 
+        = content_tag_with_path_checking(:li, new_idea_path) do |path|
+          %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
             %i.icon-edit
             = _('Submit')
-        %li
-          %a{href: ideas_path(angle: 'discussable'), title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'discussable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
             %i.icon-comments-alt
             = _('Discuss')
-        %li
-          %a{href: ideas_path(angle: 'vettable'), title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'vettable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
             %i.icon-check
             = _('Vet')
-        %li
-          %a{href: ideas_path(angle: 'votable'), title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'votable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
             %i.icon-envelope
             = _('Vote')
-        %li
-          %a{href: ideas_path(angle: 'buildable'), title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'buildable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
             %i.icon-cogs
             = _('Build')
-        %li
-          %a{href: ideas_path(angle: 'followed'), title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'followed')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty
             = _('Follow')
       - if current_user
         %ul.nav.pull-right
-          %li.name
-            = link_to current_user.first_name, current_user, title: s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
-          %li.karma{ title: s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
-            %a
-              = number_with_delimiter current_user.karma
-              = user_karma_symbol
-          %li.inbox{ title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }
-            %a
-              = number_with_delimiter current_user.notifications.unread.count
+          = content_tag_with_path_checking(:li, user_path(current_user), class:'name') do |path|
+            = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
+              = current_user.first_name
+              %span.karma
+                = number_with_delimiter current_user.karma
+                = user_karma_symbol
+          = content_tag_with_path_checking(:li, notifications_path, class:'inbox', title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left') do |path|
+            = link_to path do
+              - count = current_user.notifications.unread.count
+              = number_with_delimiter(count) if count > 0
               %i.icon-inbox
           %li.sign-out
             = link_to destroy_user_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do

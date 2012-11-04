@@ -1,0 +1,1 @@
+= render 'notification/notification', notification: new_idea, message: _('%{user} submitted a new idea "%{idea_title}" (%{idea_link})').html_safe % { user: user_name(new_idea.subject.author), idea_title: new_idea.subject.title, idea_link: link_to("##{new_idea.subject.id}", new_idea.subject) }

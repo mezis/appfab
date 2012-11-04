@@ -1,0 +1,36 @@
+- title _('Notifications'), show_title:false
+
+.row
+  .span9
+    - if @notifications.empty?
+      .alert.alert-block
+        - if @angle == 'unread'
+          %h4= _('Great! Nothing to see here.')
+          = _('You have no unread notifications.')
+        - elsif @angle == 'all'
+          %h4= _('I\'m afraid you have no notifications yet.')
+        - if Idea.discussable_by(current_user).any?
+          %br/
+          = _('Perhaps it\'s time to %{discuss_link} ideas with others?').html_safe % { discuss_link: link_to(_('discuss'), ideas_path(angle: 'discussable'))}
+    - else
+      %table.table
+        %thead
+          %th= _('Notifications')
+          %th/
+          %th/
+        %tbody
+          = render @notifications
+  .span3
+    %ul.nav.nav-pills.nav-stacked
+      - if @angle == 'unread'
+        %li.active
+          %a= _('Show unread')
+      - else
+        %li
+          = link_to _('Show unread'), notifications_path(angle: 'unread')
+      - if @angle == 'all'
+        %li.active
+          %a= _('Show all')
+      - else
+        %li
+          = link_to _('Show all'), notifications_path(angle: 'all')

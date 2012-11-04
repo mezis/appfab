@@ -26,3 +26,5 @@ db/schema.rb
 
 # Fixtures
 /test/fixtures/*.yml
+
+.rbenv-version

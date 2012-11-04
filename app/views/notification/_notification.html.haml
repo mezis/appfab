@@ -1,9 +1,13 @@
 -# Context:
 -# - notification (Notification::Base)
 -# - message (String)
-.notification{ id: "notification#{notification.id}" }
-  .message= message
-  .footer
-    .timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
-    = link_to '#', title: s_('Tooltip|Dismiss'), :'data-placement' => 'bottom' do
-      %i.icon-ok
+%tr.notification{ id: "notification#{notification.id}", class: (notification.unread ? 'unread' : 'read') }
+  %td.message= message
+  %td.timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
+  %td.action
+    - if notification.unread
+      = link_to notification_path(notification, notification: { unread: false }), method: :put, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
+        %i.icon-check
+    - else
+      = link_to notification_path(notification, notification: { unread: true }), method: :put, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
+        %i.icon-check-empty

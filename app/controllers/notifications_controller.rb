@@ -2,26 +2,37 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
+  ValidAngles = %w(unread all)
+  DefaultAngle = ValidAngles.first
+
   def index
-    @notifications = Notification::Base.all
+    @angle = session[:notifications_angle] = get_angle_from_params
+    @notifications = current_user.notifications.send(@angle.to_sym)
   end
 
   def show
-    @notification = Notification::Base.find(params[:id])
+    @notification = current_user.notifications.find(params[:id])
   end
 
   def update
-    @notification = Notification::Base.find(params[:id])
+    @notification = current_user.notifications.find(params[:id])
     if @notification.update_attributes(params[:notification])
-      redirect_to root_path, :notice  => _("Successfully updated notification.")
+      redirect_to notifications_path, :notice  => _("Successfully updated notification.")
     else
-      redirect_to root_path, :failure => _("Failed to update notification")
+      redirect_to notifications_path, :failure => _("Failed to update notification")
     end
   end
 
   def destroy
-    @notification = Notification::Base.find(params[:id])
+    @notification = current_user.notifications.find(params[:id])
     @notification.destroy
     redirect_to notifications_url, :notice => _("Successfully destroyed notification.")
+  end
+
+  private
+
+  def get_angle_from_params
+    return params[:angle] if ValidAngles.include?(params[:angle])
+    session[:notifications_angle] || DefaultAngle
   end
 end

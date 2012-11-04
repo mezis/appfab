@@ -17,7 +17,7 @@ class UserRole < ActiveRecord::Base
         has_many :roles, class_name: 'UserRole', :dependent => :destroy
 
         scope :playing, lambda { |*role_names|
-          joins(:roles).where('user_roles.name' => role_names)
+          joins(:roles).where('user_roles.name' => role_names).group('users.id')
         }
       end
     end

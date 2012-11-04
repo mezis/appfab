@@ -1,7 +1,6 @@
 # encoding: UTF-8
 AppFab::Application.routes.draw do
 
-
   get "welcome/index"
 
   resources :notifications
