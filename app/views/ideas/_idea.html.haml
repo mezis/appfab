@@ -10,31 +10,31 @@
 
 .idea_container
   - classes = [idea.state, (show_status == :header) && 'with-header-wizard'].compact
-  .idea{ :id => "idea#{idea.id}", :class => classes.join(' ') }
+  .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
-      %div{ :class => "kind #{idea.kind}", :title => s_('Tooltip|This Idea is a %{kind}') % { :kind => idea.kind }, :'data-placement' =>'right' }<
+      %div{ class: "kind #{idea.kind}", title: s_('Tooltip|This Idea is a %{kind}') % { kind: idea.kind }, :'data-placement' =>'right' }<
         = idea_icon_for_kind(idea)
       - if idea.rating > 0
         .rating<
           %i.icon-certificate
             %span.value= idea.rating
       .content
-        = render 'sizing', :idea => idea
+        = render 'sizing', idea: idea
         - if show_status == :header
-          %span.badge{ :title => s_('Tooltip|The current progress on this idea') }<
+          %span.badge{ title: s_('Tooltip|The current progress on this idea') }<
             = idea_status(idea.state)
 
     .body
       %h3.title
         = idea.title
         - if title_type == :link
-          = link_to idea_path(idea), :title => s_('Tooltip|Expand Idea') do
+          = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
             %i.icon-arrow-right
 
       - if !collapsed && idea.product_manager
         %div
           %strong= _('Product manager:')
-          = render idea.product_manager, :avatar => false
+          = render idea.product_manager, avatar: false
       %p
         = idea.problem
 
@@ -49,26 +49,26 @@
     .meta.bottom
       .people
         .author
-          = render idea.author, :format => :avatar
+          = render idea.author, format: :avatar
         .vetters
-          = render idea.vetters.excluding(idea.author).limit(2), :format => :avatar
+          = render idea.vetters.excluding(idea.author).limit(2), format: :avatar
         .backers
-          = render idea.backers.excluding(idea.author, idea.vetters).limit(5), :format => :avatar
+          = render idea.backers.excluding(idea.author, idea.vetters).limit(5), format: :avatar
 
       .actions
         %ul
           %li
-            = link_to idea_path(idea), :title => s_('Tooltip|Expand Idea') do
+            = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
               %i.icon-fullscreen<>
           %li
-            = link_to idea_path(idea, :anchor => 'comments'), :title => s_('Tooltip|Show comments') do
+            = link_to idea_path(idea, anchor: 'comments'), title: s_('Tooltip|Show comments') do
               %i.icon-comments-alt<>
               - if (count = idea.comments.count) > 0
                 = count
           %li.separator
           %li
-            = link_to edit_idea_path(idea), :title => s_('Tooltip|Edit Idea') do
+            = link_to edit_idea_path(idea), title: s_('Tooltip|Edit Idea') do
               %i.icon-pencil<>
           %li
-            = link_to idea, :confirm => _('Are you sure?'), :method => :delete, :title => s_('Tooltip|Delete Idea') do
+            = link_to idea, confirm: _('Are you sure?'), method: :delete, title: s_('Tooltip|Delete Idea') do
               %i.icon-trash<>

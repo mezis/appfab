@@ -1,40 +1,40 @@
 .navbar.navbar-fixed-top#header
   .navbar-inner
     .container
-      %a.brand{:href => root_path}= configatron.app_name
+      %a.brand{href: root_path}= configatron.app_name
       %ul.nav
         %li
-          %a{:href => new_idea_path, :title => s_('Tooltip|Follow this link to submita new idea'), :'data-placement' => 'bottom'} 
+          %a{href: new_idea_path, title: s_('Tooltip|Follow this link to submita new idea'), :'data-placement' => 'bottom'} 
             %i.icon-edit
             = _('Submit')
         %li
-          %a{:href => ideas_path(:angle => 'discussable'), :title => s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
+          %a{href: ideas_path(angle: 'discussable'), title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
             %i.icon-comments-alt
             = _('Discuss')
         %li
-          %a{:href => ideas_path(:angle => 'vettable'), :title => s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
+          %a{href: ideas_path(angle: 'vettable'), title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
             %i.icon-check
             = _('Vet')
         %li
-          %a{:href => ideas_path(:angle => 'votable'), :title => s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
+          %a{href: ideas_path(angle: 'votable'), title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
             %i.icon-envelope
             = _('Vote')
         %li
-          %a{:href => ideas_path(:angle => 'buildable'), :title => s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
+          %a{href: ideas_path(angle: 'buildable'), title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
             %i.icon-cogs
             = _('Build')
         %li
-          %a{:href => ideas_path(:angle => 'followed'), :title => s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
+          %a{href: ideas_path(angle: 'followed'), title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty
             = _('Follow')
       - if current_user
         %ul.nav.pull-right
           %li.name
-            = link_to current_user.first_name, current_user, :title => s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
-          %li.karma{ :title => s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
+            = link_to current_user.first_name, current_user, title: s_('Tooltip|This is you! Click here to see or edit your profile.'), :'data-placement' => 'bottom'
+          %li.karma{ title: s_('Tooltip|This shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'left' }
             %a
               = number_with_delimiter current_user.karma
               = user_karma_symbol
           %li.sign-out
-            = link_to destroy_user_session_path, :method => :delete, :title => s_('Tooltip|Sign out'), :'data-placement' => 'left' do
+            = link_to destroy_user_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
               %i.icon-signout<>

@@ -1,11 +1,11 @@
-- title @idea.title, :show_title => false
+- title @idea.title, show_title: false
 
 .row
   .span9
-    = render 'idea', :idea => @idea, :collapsed => false, :status => :header
+    = render 'idea', idea: @idea, collapsed: false, status: :header
 
     #comments
-      = render 'comments/form', :comment => Comment.new(:idea => @idea)
+      = render 'comments/form', comment: Comment.new(idea: @idea)
       = render @idea.comments
   .span3
-    = render 'action', :idea => @idea
+    = render 'action', idea: @idea

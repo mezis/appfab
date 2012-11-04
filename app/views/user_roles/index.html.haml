@@ -10,6 +10,6 @@
       %td= user_role.name
       %td= link_to 'Show', user_role
       %td= link_to 'Edit', edit_user_role_path(user_role)
-      %td= link_to 'Destroy', user_role, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Destroy', user_role, confirm: 'Are you sure?', method: :delete
 
 %p= link_to "New User Role", new_user_role_path

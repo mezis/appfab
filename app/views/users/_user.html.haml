@@ -6,13 +6,13 @@
   show_name    = local_assigns.fetch(:name,    !show_avatar)
   show_karma   = local_assigns.fetch(:karma,   show_name)
 
-.user{ :id => "user#{user.id}", :title => user_tooltip(user), :'data-placement' => 'right' }
+.user{ id: "user#{user.id}", title: user_tooltip(user), :'data-placement' => 'right' }
   - if show_name
     .name
       = link_to user.first_name, user
       - if show_karma
-        %span.karma{ :title => s_('Tooltip|This shows %{user}\'s current karma.') % { :user => user.first_name }, :'data-placement' => 'bottom' }
+        %span.karma{ title: s_('Tooltip|This shows %{user}\'s current karma.') % { user: user.first_name }, :'data-placement' => 'bottom' }
           = number_with_delimiter user.karma
           = user_karma_symbol
   - if show_avatar
-    .avatar{ :style => "background-image: url(#{user.gravatar_url})" }
+    .avatar{ style: "background-image: url(#{user.gravatar_url})" }

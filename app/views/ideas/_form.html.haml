@@ -14,7 +14,7 @@
     .span12
       = f.label :title
     .span8
-      = f.text_field :title, :placeholder => _('Type something...')
+      = f.text_field :title, placeholder: _('Type something...')
     .span4
       %span.help-block
         = _('Suggestions for title entry')
@@ -23,7 +23,7 @@
     .span12
       = f.label :problem
     .span8
-      = f.text_area :problem, :rows => 4, :placeholder => _('Type something...')
+      = f.text_area :problem, rows: 4, placeholder: _('Type something...')
     .span4
       %span.help-block
         = _('Suggestions for problem statement')
@@ -32,7 +32,7 @@
     .span12
       = f.label :solution
     .span8
-      = f.text_area :solution, :rows => 4, :placeholder => _('Type something...')
+      = f.text_area :solution, rows: 4, placeholder: _('Type something...')
     .span4
       %span.help-block
         = _('Suggestions for solution statement')
@@ -41,7 +41,7 @@
     .span12
       = f.label :metrics
     .span8
-      = f.text_area :metrics, :rows => 4, :placeholder => _('Type something...')
+      = f.text_area :metrics, rows: 4, placeholder: _('Type something...')
     .span4
       %span.help-block
         = _('Suggestions for metrics statement')
@@ -50,12 +50,12 @@
     .span12
       = f.label :deadline
     .span8
-      = f.text_field :deadline, :placeholder => 'YYYY-MM-DD'
+      = f.text_field :deadline, placeholder: 'YYYY-MM-DD'
     .span4
       %span.help-block
         = _('Suggestions for metrics statement')
 
   .row
     .span12
-      = f.submit :class => 'btn btn-primary'
-      %a.btn{ :href => ideas_path }= _('Cancel')
+      = f.submit class: 'btn btn-primary'
+      %a.btn{ href: ideas_path }= _('Cancel')

@@ -10,6 +10,6 @@
 %p
   = link_to "Edit", edit_user_bookmark_path(@user_bookmark)
   |
-  = link_to "Destroy", @user_bookmark, :confirm => 'Are you sure?', :method => :delete
+  = link_to "Destroy", @user_bookmark, confirm: 'Are you sure?', method: :delete
   |
   = link_to "View All", user_bookmarks_path

@@ -1,9 +1,9 @@
 -# Context:
 -# - notification (Notification::Base)
 -# - message (String)
-.notification{ :id => "notification#{notification.id}" }
+.notification{ id: "notification#{notification.id}" }
   .message= message
   .footer
-    .timestamp= _('%{time} ago') % { :time => time_ago_in_words(notification.created_at) }
-    = link_to '#', :title => s_('Tooltip|Dismiss'), :'data-placement' => 'bottom' do
+    .timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
+    = link_to '#', title: s_('Tooltip|Dismiss'), :'data-placement' => 'bottom' do
       %i.icon-ok

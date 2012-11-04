@@ -1,33 +1,33 @@
-- title _("Ideas"), :show_title => false
+- title _("Ideas"), show_title: false
 .row
   .span9
     -if @ideas.empty?
       .alert.alert-block
-        %h4= _('Sorry! I\'m afraid there are no %{qualifier} ideas at the moment.') % { :qualifier => @angle }
-        = _('Perhaps you could %{submit_link} a new one?').html_safe % { :submit_link => link_to(_('sumbit'), new_idea_path)}
+        %h4= _('Sorry! I\'m afraid there are no %{qualifier} ideas at the moment.') % { qualifier: @angle }
+        = _('Perhaps you could %{submit_link} a new one?').html_safe % { submit_link: link_to(_('sumbit'), new_idea_path)}
         - if Idea.discussable_by(current_user).any?
           %br/
-          = _('Or you could %{discuss_link} ideas with others?').html_safe % { :discuss_link => link_to(_('discuss'), ideas_path(:angle => 'discussable'))}
+          = _('Or you could %{discuss_link} ideas with others?').html_safe % { discuss_link: link_to(_('discuss'), ideas_path(angle: 'discussable'))}
 
     - @ideas.each do |idea|
-      = render 'idea', :idea => idea, :collapsed => true, :title_type => :link, :status => :header
+      = render 'idea', idea: idea, collapsed: true, title_type: :link, status: :header
   .span3
     %ul.nav.nav-pills.nav-stacked
       %li.active
         %a
-          = _('All %{qualifier} ideas') % { :qualifier => @angle }
+          = _('All %{qualifier} ideas') % { qualifier: @angle }
       %li
         %a
-          = _('Your ideas') % { :angle => @angle }
+          = _('Your ideas') % { angle: @angle }
       %li
         %a
-          = _('Commented by you') % { :angle => @angle }
+          = _('Commented by you') % { angle: @angle }
       %li
         %a
-          = _('Vetted by you') % { :angle => @angle }
+          = _('Vetted by you') % { angle: @angle }
       %li
         %a
-          = _('Backed by you') % { :angle => @angle }
+          = _('Backed by you') % { angle: @angle }
 
     %ul.nav.nav-pills.nav-stacked
       %li
