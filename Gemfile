@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails'
 
 # database
-gem 'sqlite3', :group => :development
+gem 'mysql2',  :group => :development
 gem 'pg',      :group => :production
 
 # authentication/authorisation
@@ -30,6 +30,7 @@ gem 'configatron'
 gem 'andand'
 
 # Access attribute values directly, without instantiating ActiveRecord objects
+# (until Rails 3.2 and #pluck)
 gem 'valium'
 
 # as name implies
@@ -64,15 +65,6 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
 group :development do
   # better generators
   gem 'nifty-generators'
@@ -106,4 +98,7 @@ group :development do
   gem 'rb-fchange', :require => false
   gem 'ruby_gntp'
   gem 'terminal-notifier-guard'
+
+  # heroku interaction
+  gem 'taps'
 end
