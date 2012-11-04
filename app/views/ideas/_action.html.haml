@@ -51,7 +51,7 @@
   - if idea.can_vote»?
     - if vote = current_user.votes.on_idea(idea).first
       %li
-        = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story. You will get back %{points} %{karma_icon}.') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => :bottom do
+        = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => :bottom do
           %i.icon-check
           = _('Withdraw your vote')
     - else
