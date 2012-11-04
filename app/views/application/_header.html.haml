@@ -35,6 +35,10 @@
             %a
               = number_with_delimiter current_user.karma
               = user_karma_symbol
+          %li.inbox{ title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }
+            %a
+              = number_with_delimiter current_user.notifications.unread.count
+              %i.icon-inbox
           %li.sign-out
             = link_to destroy_user_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
               %i.icon-signout<>
