@@ -46,6 +46,10 @@ gem 'rack-cache', :require => 'rack/cache'
 # user avatars
 gem 'gravtastic'
 
+# monitoring
+gem 'newrelic_rpm', :group => :production
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
