@@ -1,4 +1,4 @@
-= AppFab
+# AppFab
 
 This app aims to let teams manage a product in a participative, social way.
 
