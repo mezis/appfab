@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind
+  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind, :active_at
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
   StatesForWizard = [
@@ -206,6 +206,11 @@ class Idea < ActiveRecord::Base
     joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
   end
 
+
+  # called from subresources (comments, vettings, votes)
+  def ping!
+    update_attributes! active_at: Time.now
+  end
 
 
   def is_state_in_future?(state)
