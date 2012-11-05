@@ -31,6 +31,8 @@ class Vote < ActiveRecord::Base
 
 
   def notify_idea
-    subject.vote» if subject.respond_to?(:vote»)
+    return unless subject.kind_of(Idea)
+    subject.vote»
+    subject.ping!
   end
 end

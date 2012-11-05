@@ -19,4 +19,6 @@ class Comment < ActiveRecord::Base
   validates_presence_of :rating
 
   default_scope order('created_at DESC')
+
+  after_create { |record| record.idea.andand.ping! }
 end

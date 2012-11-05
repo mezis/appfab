@@ -83,5 +83,14 @@ module IdeasHelper
     end
   end
 
+
+  def ideas_filter_qualifier(filter)
+    case filter
+    when 'authored'  then _('that you authored')
+    when 'commented' then _('that you commented')
+    when 'vetted'    then _('that you vetted')
+    when 'backed'    then _('that you backed')
+    end
+  end
 end
 

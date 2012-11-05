@@ -16,8 +16,8 @@ class Karma::IdeaObserver < ActiveRecord::Observer
 
   def after_save(record)
     return unless record.state_changed?
-    return unless %w(vetted picked live).include? record.state
-    record.author.change_karma! by:configatron.app_fab.karma.idea.send(record.state.to_sym)
+    return unless [:vetted, :picked, :live].include? record.state_name
+    record.author.change_karma! by:configatron.app_fab.karma.idea.send(record.state_name)
   ensure
     return true
   end

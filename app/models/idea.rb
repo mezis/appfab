@@ -50,15 +50,15 @@ class Idea < ActiveRecord::Base
 
 
   state_machine :state, :initial => :submitted do
-    state :submitted
-    state :vetted
-    state :voted
-    state :picked
-    state :designed
-    state :approved
-    state :implemented
-    state :signed_off
-    state :live
+    state :submitted,    value: 0
+    state :vetted,       value: 1
+    state :voted,        value: 2
+    state :picked,       value: 3
+    state :designed,     value: 4
+    state :approved,     value: 5
+    state :implemented,  value: 6
+    state :signed_off,   value: 7
+    state :live,         value: 8
 
     event :vet» do
       transition :submitted => :vetted, :if => :enough_vettings?
@@ -168,13 +168,61 @@ class Idea < ActiveRecord::Base
   end
 
 
-  def is_state_in_future?(state)
-    state = state.to_sym if state.kind_of?(String)
-    all_states.index(self.state.to_sym) < all_states.index(state)
+  # Search orders
+
+
+  def self.by_rating
+    order('ideas.rating DESC')
+  end
+
+  def self.by_activity
+    order('ideas.active_at DESC')
+  end
+
+  def self.by_progress
+    order('ideas.state DESC')
+  end
+
+  def self.by_creation
+    order('ideas.created_at DESC')
   end
 
 
+  # Search filters
+
+  def self.authored_by(user)
+    where(author_id: user.id)
+  end
+
+  def self.commented_by(user)
+    joins(:comments).where('comments.author_id = ?', user.id).group('ideas.id')
+  end
+
+  def self.vetted_by(user)
+    joins(:vettings).where('vettings.user_id = ?', user.id).group('ideas.id')
+  end
+
+  def self.backed_by(user)
+    joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
+  end
+
+
+
+  def is_state_in_future?(state)
+    state = state.to_sym if state.kind_of?(String)
+    all_states.index(self.state_name) < all_states.index(state)
+  end
+
+
+
+
   private
+
+
+  before_save do |record|
+    record.active_at = record.updated_at if record.updated_at > record.active_at
+  end
+
 
 
   def all_states

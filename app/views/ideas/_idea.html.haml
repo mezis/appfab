@@ -9,7 +9,7 @@
   show_status = local_assigns.fetch(:status,     :none)
 
 .idea_container
-  - classes = [idea.state, (show_status == :header) && 'with-header-wizard'].compact
+  - classes = [idea.state_name, (show_status == :header) && 'with-header-wizard'].compact
   .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
       %div{ class: "kind #{idea.kind}", title: s_('Tooltip|This Idea is a %{kind}') % { kind: idea.kind }, :'data-placement' =>'right' }<
@@ -22,7 +22,7 @@
         = render 'sizing', idea: idea
         - if show_status == :header
           %span.badge{ title: s_('Tooltip|The current progress on this idea') }<
-            = idea_status(idea.state)
+            = idea_status(idea.state_name)
 
     .body
       %h3.title
