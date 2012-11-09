@@ -4,7 +4,7 @@ class ConvertIdeaStatesToInteger < ActiveRecord::Migration
     add_column :ideas, :state_integer, :integer
     States.each_with_index do |state_name, index|
       update %Q{
-        UPDATE ideas SET state_integer = #{index} WHERE state = "#{state_name}"
+        UPDATE ideas SET state_integer = #{index} WHERE state = '#{state_name}'
       }
     end
     remove_column :ideas, :state
@@ -16,7 +16,7 @@ class ConvertIdeaStatesToInteger < ActiveRecord::Migration
     add_column :ideas, :state, :string
     States.each_with_index do |state_name, index|
       update %Q{
-        UPDATE ideas SET state = "#{state_name}" WHERE state_integer = #{index}
+        UPDATE ideas SET state = '#{state_name}' WHERE state_integer = #{index}
       }
     end
     remove_column :ideas, :state_integer
