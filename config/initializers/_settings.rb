@@ -25,9 +25,8 @@ configatron.app_fab.develop_capacity   = 5
 
 
 if Rails.env.production?
-  # production-specific settings
-  configatron.omniauth.google_oauth2.app_id     = '829784005951-octuu39kre09vnkg44uen7jvr4o96rnd.apps.googleusercontent.com'
-  configatron.omniauth.google_oauth2.app_secret = 'fW_q7ngOBH2ptMhpp4dvP-Rr'
+  configatron.omniauth.google_oauth2.app_id     = ENV['GOOGLE_OAUTH2_APP_ID']
+  configatron.omniauth.google_oauth2.app_secret = ENV['GOOGLE_OAUTH2_APP_SECRET']
 else
   configatron.omniauth.google_oauth2.app_id     = '829784005951.apps.googleusercontent.com'
   configatron.omniauth.google_oauth2.app_secret = 'pxnPqfWV2m6DHg4XygEhOYlW'
