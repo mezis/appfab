@@ -71,39 +71,37 @@ gem 'jquery-rails'
 
 group :development do
   # better generators
-  gem 'nifty-generators'
+  gem 'nifty-generators', :require => false
 
   # debugging
   gem 'debugger'
-  gem 'pry'
-  gem 'pry-nav'
+  gem 'pry',              :require => false
+  gem 'pry-nav',          :require => false
   gem 'pry-rails'
-
-  # deployment
-  gem 'capistrano'
+  gem 'ruby-prof',        :require => false
 
   # tdd
-  gem 'rspec-rails'
+  gem 'rspec-rails',      :require => false
   gem 'cucumber-rails',   :require => false
-  gem 'capybara-webkit'
+  gem 'capybara-webkit',  :require => false
   gem 'machinist',        :require => false
   gem 'database_cleaner'
   gem 'faker',            :require => false
   gem 'launchy',          :require => false # for capybara's save_and_open_page
 
   # automated testing
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
-  gem 'guard-rails'
-  gem 'guard-bundler'
-  gem 'guard-migrate'
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
+  gem 'guard',            :require => false
+  gem 'guard-rspec',      :require => false
+  gem 'guard-cucumber',   :require => false
+  gem 'guard-rails',      :require => false
+  gem 'guard-bundler',    :require => false
+  gem 'guard-migrate',    :require => false
+  gem 'rb-inotify',       :require => false
+  gem 'rb-fsevent',       :require => false
+  gem 'rb-fchange',       :require => false
   gem 'ruby_gntp'
   gem 'terminal-notifier-guard'
 
   # heroku interaction
-  gem 'taps'
+  gem 'taps',             :require => false
 end
