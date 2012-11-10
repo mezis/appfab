@@ -3,15 +3,18 @@ require 'spec_helper'
 
 describe Karma::IdeaObserver do
   let(:author)  { User.make! }
-  let(:idea) { Idea.make!(:managed, author: author) }
+  let(:idea) { Idea.make!(blueprint.to_sym, author: author) }
 
   context 'when a idea is submitted' do
+    let(:blueprint) { :sized }
     it 'the submitter gains karma' do
       lambda { idea }.should change(author, :karma).by(1)
     end
   end
 
   context 'when an idea becomes vetted' do
+    let(:blueprint) { :sized }
+
     it 'the submitter gains karma' do
       idea.vettings.make! user: User.make!
       lambda {
@@ -23,10 +26,13 @@ describe Karma::IdeaObserver do
   end
 
   context 'when an idea becomes picked' do
+    let(:blueprint) { :voted }
+
     it 'the submitter gains karma' do
-      idea.update_attribute :state, :vetted
+      idea.state_name.should == :voted
       lambda {
-        idea.update_attribute :product_manager_id, User.make!.id      
+        idea.pick»
+        idea.state_name.should == :picked
       }.should change { author.reload.karma }.by(10)
     end
 
@@ -34,8 +40,10 @@ describe Karma::IdeaObserver do
   end
 
   context 'when an idea goes live' do
+    let(:blueprint) { :signed_off }
+
     it 'the submitter gains karma' do
-      idea.update_attribute :state, :signed_off
+      idea.state_name.should == :signed_off
       lambda { idea.deliver» }.should change { author.reload.karma }.by(20)
     end
 
