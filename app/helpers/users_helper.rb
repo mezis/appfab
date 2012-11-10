@@ -22,7 +22,7 @@ module UsersHelper
   def user_role_name(role)
     role = role.to_sym if role.kind_of?(String)
     case role
-    when :benevolent_dictator then s_('User role|Denevolent dictator')
+    when :benevolent_dictator then s_('User role|Benevolent dictator')
     when :product_manager     then s_('User role|Product manager')
     when :architect           then s_('User role|Architect')
     when :designer            then s_('User role|Designer')
