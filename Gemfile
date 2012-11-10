@@ -89,6 +89,7 @@ group :development do
   gem 'machinist',        :require => false
   gem 'database_cleaner'
   gem 'faker',            :require => false
+  gem 'launchy',          :require => false # for capybara's save_and_open_page
 
   # automated testing
   gem 'guard'
