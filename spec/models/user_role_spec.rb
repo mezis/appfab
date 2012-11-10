@@ -60,8 +60,8 @@ describe UserRole::UserMethods do
     it 'returns users with the given roles' do
       User.make!.plays!(:developer)
       User.make!.plays!(:product_manager)
-      User.playing(:developer).count.should == 1
-      User.playing(:developer, :product_manager).count.should == 2
+      User.playing(:developer).length.should == 1
+      User.playing(:developer, :product_manager).length.should == 2
     end
   end
 end
