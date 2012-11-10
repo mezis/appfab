@@ -24,11 +24,10 @@ class User < ActiveRecord::Base
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
   has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :idea
-  has_many :bookmarks, :class_name => 'User::Bookmark', :dependent => :destroy
-  has_many :bookmarked_ideas, :class_name => 'Idea', :through => :bookmarks, :source => :idea
 
   include UserRole::UserMethods
   include Notification::Base::CanBeSubject
+  include User::Bookmark::UserMethods
 
   validates_presence_of :first_name
   validates_presence_of :karma

@@ -48,6 +48,7 @@ class IdeasController < ApplicationController
     @idea.product_manager = current_user if params[:idea].andand[:state] == 'picked'
 
     if @idea.update_attributes(params[:idea])
+      current_user.bookmarked_ideas.add!(@idea)
       redirect_to @idea, :notice  => "Successfully updated idea."
     else
       render :action => 'edit'

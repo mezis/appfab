@@ -49,4 +49,12 @@ describe IdeasController do
     response.should redirect_to(ideas_url)
     Idea.exists?(idea.id).should be_false
   end
+
+  it "update action should cause the idea to be bookmarked" do
+    idea = Idea.make!(author: User.make!)
+    @current_user.bookmarked_ideas.should_not include(idea) # sanity check
+    put :update, :id => idea
+    @current_user.bookmarked_ideas.reload.should include(idea)
+  end
+
 end
