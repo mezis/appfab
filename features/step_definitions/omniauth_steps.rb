@@ -1,5 +1,5 @@
 # encoding: UTF-8
-Given /I authorise the app with my Google account "(.*?)"/ do |full_name|
+Given /^I authorise the app with my Google account "(.*?)"$/ do |full_name|
   first_name, last_name = full_name.split
   email = full_name.downcase.split.join('.') + '@example.com'
 
@@ -40,20 +40,20 @@ Given /I authorise the app with my Google account "(.*?)"/ do |full_name|
 end
 
 
-Given /I do not authorise the app with my Google account/ do
+Given /^I do not authorise the app with my Google account$/ do
   omniauth_test_mode
   setup_omniauth_filter
   OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
 end
 
 
-Given /I sign in with Google/ do
+Given /^I sign in with Google$/ do
   visit '/session/sign_in'
   click_link 'Sign in with Google Oauth2'
 end
 
 
-Given /I sign in as the developer "(.*?)"/ do |full_name|
+Given /^I sign in as the developer "(.*?)"$/ do |full_name|
   email = full_name.downcase.split.join('.') + '@example.com'
 
   visit '/session/sign_in'
