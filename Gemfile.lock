@@ -294,7 +294,7 @@ DEPENDENCIES
   bootstrap-sass
   cancan
   capybara-webkit
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   compass-rails
   configatron
   cucumber-rails
@@ -337,7 +337,7 @@ DEPENDENCIES
   ruby-prof
   ruby_gntp
   ruby_parser
-  sass-rails (~> 3.2.3)
+  sass-rails
   state_machine
   taps
   terminal-notifier-guard

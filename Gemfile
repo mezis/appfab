@@ -34,7 +34,7 @@ gem 'andand'
 gem 'valium'
 
 # as name implies
-gem 'state_machine'
+gem 'state_machine', :require => false
 gem 'default_value_for'
 
 # attached files & image manipulation
@@ -44,7 +44,7 @@ gem 'dragonfly'
 gem 'rack-cache', :require => 'rack/cache'
 
 # user avatars
-gem 'gravtastic'
+gem 'gravtastic', :require => false
 
 # monitoring
 gem 'newrelic_rpm', :group => :production
@@ -53,8 +53,8 @@ gem 'newrelic_rpm', :group => :production
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 
   # styling
   gem 'compass-rails'
@@ -74,7 +74,7 @@ group :development do
   gem 'nifty-generators', :require => false
 
   # debugging
-  gem 'debugger'
+  gem 'debugger',         :require => false
   gem 'pry',              :require => false
   gem 'pry-nav',          :require => false
   gem 'pry-rails'
@@ -85,7 +85,7 @@ group :development do
   gem 'cucumber-rails',   :require => false
   gem 'capybara-webkit',  :require => false
   gem 'machinist',        :require => false
-  gem 'database_cleaner'
+  gem 'database_cleaner', :require => false
   gem 'faker',            :require => false
   gem 'launchy',          :require => false # for capybara's save_and_open_page
 
@@ -99,8 +99,8 @@ group :development do
   gem 'rb-inotify',       :require => false
   gem 'rb-fsevent',       :require => false
   gem 'rb-fchange',       :require => false
-  gem 'ruby_gntp'
-  gem 'terminal-notifier-guard'
+  gem 'ruby_gntp',        :require => false
+  gem 'terminal-notifier-guard', :require => false
 
   # heroku interaction
   gem 'taps',             :require => false

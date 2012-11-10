@@ -1,3 +1,6 @@
+require 'ruby_gntp'
+require 'terminal-notifier-guard'
+
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 

@@ -1,4 +1,6 @@
 # encoding: UTF-8
+require 'state_machine'
+
 class Idea < ActiveRecord::Base
   attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind, :active_at
 
