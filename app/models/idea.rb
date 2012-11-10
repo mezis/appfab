@@ -122,7 +122,6 @@ class Idea < ActiveRecord::Base
     end
   end
 
-  after_save :auto_pick_when_product_manager_is_set, :if => :product_manager_id_changed?
 
   # Other helpers
 
@@ -225,7 +224,9 @@ class Idea < ActiveRecord::Base
 
 
   before_save do |record|
-    record.active_at = record.updated_at if record.updated_at > record.active_at
+    unless record.updated_at.nil?
+      record.active_at = record.updated_at if record.active_at.nil? || record.updated_at > record.active_at
+    end
   end
 
 
@@ -233,16 +234,6 @@ class Idea < ActiveRecord::Base
   def all_states
     @@all_states ||= self.class.state_machine.states.map(&:name)
   end
-
-  def auto_pick_when_product_manager_is_set
-    return unless self.product_manager
-    unless self.can_pick»?
-      errors.add :base, _('This idea is not pickable at the moment. It probably would put the product manager over design capacity.')
-      return
-    end
-    self.pick»
-  end
-  
 
   def enough_vettings?
     (vettings.count >= configatron.app_fab.vettings_needed)
