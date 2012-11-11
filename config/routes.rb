@@ -15,7 +15,9 @@ AppFab::Application.routes.draw do
   resources :attachments
   resources :users, only: [:index, :show, :edit, :update, :destroy]
 
-  namespace(:user){ resources :bookmarks }
+  namespace :user do
+    resources :bookmarks, only: [:create, :destroy]
+  end
 
   devise_for :users, :path => :session, :controllers => {
     omniauth_callbacks: 'users/omniauth_callbacks'
