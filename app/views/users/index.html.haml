@@ -1,20 +1,27 @@
-- title "Users"
+- title "Users", show_title:false
 
-%table
-  %tr
-    %th First name
-    %th Last name
-    %th Email address
-    %th Role
-    %th Karma
-    %th Account
-  - for user in @users
-    %tr
-      %td= user.first_name
-      %td= user.last_name
-      %td= user.email
-      %td= user.karma
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete
+.row
+  .span3
+    %p= _('There currently are %{count} users in this account.') % { count: current_user.account.users.count }
+    %p= _('They have a total of %{count} %{karma_symbol}.').html_safe % { count: current_user.account.users.sum(:karma), karma_symbol:user_karma_symbol }
+  .span9
+    - @users.each do |user|
+      = render user, name:true, avatar:true, big:true
 
+/ %table
+/   %tr
+/     %th First name
+/     %th Last name
+/     %th Email address
+/     %th Role
+/     %th Karma
+/     %th Account
+/   - for user in @users
+/     %tr
+/       %td= user.first_name
+/       %td= user.last_name
+/       %td= user.email
+/       %td= user.karma
+/       %td= link_to 'Show', user
+/       %td= link_to 'Edit', edit_user_path(user)
+/       %td= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete

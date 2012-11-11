@@ -1,5 +1,6 @@
 @import compass
 @import application/mixins
+@import application/variables
 
 .user
   $avatar_size: 2em
@@ -10,3 +11,45 @@
     +filter(saturate(5%))
     &:hover
       +filter(none)
+
+.user-big-avatar
+  $border-size:         8px
+
+  width:                100%
+  height:               200px
+  background-position:  center
+  background-repeat:    no-repeat
+  border:               $border-size solid white
+  border-bottom-width:  (3* $border-size)
+
+  +box-sizing(border-box)
+  +background-size(cover)
+  +filter(saturate(5%))
+  +box-shadow($medium_gray 0px 2px 5px)
+
+  margin-bottom:        (3* $border-size)
+
+
+#users-index
+  .user
+    +box-sizing(border-box)
+    position:             relative
+    width:                240px
+    float:                left
+    padding:              1ex
+    padding-top:          0
+    .name
+      width:                100%
+      float:                right
+    .avatar
+      @extend .user-big-avatar
+      float:                left
+
+#users-show
+  h1
+    margin: 0
+  .avatar
+    @extend .user-big-avatar
+  .karma
+    text-align:           center
+    font-size:            x-large

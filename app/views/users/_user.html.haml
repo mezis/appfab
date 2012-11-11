@@ -2,11 +2,12 @@
 -# name (boolean, default false),
 -# tooltip (boolean, default true)
 :ruby
-  show_avatar  = local_assigns.fetch(:avatar,  true)
-  show_name    = local_assigns.fetch(:name,    !show_avatar)
-  show_karma   = local_assigns.fetch(:karma,   show_name)
+  show_avatar    = local_assigns.fetch(:avatar, true)
+  show_name      = local_assigns.fetch(:name,   !show_avatar)
+  show_karma     = local_assigns.fetch(:karma,  show_name)
+  avatar_options = local_assigns.fetch(:big,    false) ? { size:512 } : {}
 
-.user{ id: "user#{user.id}", title: user_tooltip(user), :'data-placement' => 'right' }
+.user.clearfix{ id: "user#{user.id}", title: user_tooltip(user), :'data-placement' => 'right' }
   - if show_name
     .name
       = link_to user.first_name, user
@@ -15,4 +16,4 @@
           = number_with_delimiter user.karma
           = user_karma_symbol
   - if show_avatar
-    .avatar{ style: "background-image: url(#{user.gravatar_url})" }
+    .avatar{ style: "background-image: url(#{user.gravatar_url(avatar_options)})" }

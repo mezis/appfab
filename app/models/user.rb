@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :omniauthable, :token_authenticatable
 
   include Gravtastic
-  has_gravatar :email, size: 80, filetype: :png, default: :identicon
+  has_gravatar :email, size: 80, filetype: :jpg, default: :identicon
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
-  has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :idea
+  has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :user
 
   include UserRole::UserMethods
   include Notification::Base::CanBeSubject
@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
 
   def self.find_or_create_from_auth_hash!(auth_hash)
+    Rails.logger.debug("Auth hash: #{auth_hash.inspect}")
     user = self.where(uid: auth_hash[:uid], provider: auth_hash[:provider]).first and return user
 
     self.new.tap do |user|

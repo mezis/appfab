@@ -1,20 +1,27 @@
-- title "User"
+- title @user.first_name, show_title:false
 
-%p
-  %strong First Name:
-  = @user.first_name
-%p
-  %strong Last Name:
-  = @user.last_name
-%p
-  %strong Email Address:
-  = @user.email
-%p
-  %strong Karma:
-  = @user.karma
-%p
-  %strong Account:
-  = @user.account.name
+.row
+  .span3
+    .avatar{ style: "background-image: url(#{@user.gravatar_url(size: 512)})" }
+    .karma
+      - @user.karma.times do
+        = user_karma_symbol
+  .span9
+    .section
+      %h1= @user.full_name
+      .roles= user_roles_sentence(@user)
+
+    %ul
+      - if @user.current_sign_in_at || @user.last_sign_in_at
+        %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(@user.current_sign_in_at || @user.last_sign_in_at) }
+      - if count = @user.ideas.count and count > 0
+        %li= n_('Has submitted an idea', 'Has submitted %{count} ideas', count) % { count:count }
+      - if count = @user.vetted_ideas.count and count > 0
+        %li= n_('Has vetted one idea', 'Has vetted %{count} ideas', count) % { count:count }
+      - if count = @user.backed_ideas.count and count > 0
+        %li= n_('Is a backer of one idea', 'Is a backer of %{count} ideas', count) % { count:count }
+      - if count = @user.notifications.unread.count and count > 0
+        %li= n_('Has an unread notification', 'Has %{count} unread notifications', count) % { count:count }
 
 %p
   = link_to "Edit", edit_user_path(@user)
