@@ -55,7 +55,7 @@
     - if vote = current_user.votes.on_idea(idea).first
       %li
         = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => :bottom do
-          %i.icon-check
+          %i.icon-envelope
           = _('Withdraw your vote')
     - else
       %li
@@ -74,10 +74,12 @@
   - if idea.can_pick»?
     %li
       = link_to idea_path(idea, idea: { state: :picked }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => :bottom do
+        %i.icon-cog
         = _('Pick this idea')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:picked), :'data-placement' => :bottom }
+        %i.icon-cog
         = _('Pick this idea')
 
 
@@ -97,10 +99,12 @@
   - if idea.can_approve»?
     %li
       = link_to idea_path(idea, idea: { state: 'approved' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => :bottom do
+        %i.icon-ok-circle
         = _('Approve')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:approved), :'data-placement' => :bottom }
+        %i.icon-ok-circle
         = _('Approve')
 
 
@@ -124,10 +128,12 @@
   - if idea.can_sign_off»?
     %li
       = link_to idea_path(idea, idea: { state: 'signed_off' } ), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => :bottom do
+        %i.icon-ok-sign
         = _('Sign off')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:signed_off), :'data-placement' => :bottom }
+        %i.icon-ok-sign
         = _('Sign off')
 
 
@@ -140,10 +146,12 @@
   - if idea.can_deliver»?
     %li
       = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => :bottom do
+        %i.icon-truck
         = _('Deliver')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:implemented), :'data-placement' => :bottom }
+        %i.icon-truck
         = _('Deliver')
 
 
@@ -158,6 +166,7 @@
   - else
     %li
       %a.btn.btn-block.disabled{ title: s_('Tooltip|This idea cannot be vetoed.'), :'data-placement' => :bottom }
+        %i.icon-ban-circle
         = _('Veto')
 
 

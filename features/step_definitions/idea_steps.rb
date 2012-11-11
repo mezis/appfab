@@ -59,6 +59,15 @@ When /^I cancel my vote for the idea$/ do
   click_on "Withdraw your vote"
 end
 
+When /^I approve the idea$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  within '#ideas-show' do
+    click_on "Approve"
+  end
+end
+
+
 
 # expectations
 
@@ -71,24 +80,22 @@ end
 Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|
   negate = (negate == 'cannot')
   idea = Mentions[Idea]
-  visit "/ideas/#{idea.id}"
 
   expectation = case action_name
-  when 'size'
-    have_selector('a[href]', text: 'XL')
-  when 'unvet'
-    have_selector('a[href]', text: 'Cancel your vetting')
-  when 'vet'
-    have_selector('a[href]', text: 'Vet this idea')
-  when 'vote for'
-    have_selector('a[href]', text: 'Vote for this')
-  when 'remove my vote for'
-    have_selector('a[href]', text: 'Withdraw your vote')
+  when 'size'               then have_selector('a[href]', text: 'XL')
+  when 'unvet'              then have_selector('a[href]', text: 'Cancel your vetting')
+  when 'vet'                then have_selector('a[href]', text: 'Vet this idea')
+  when 'vote for'           then have_selector('a[href]', text: 'Vote for this')
+  when 'remove my vote for' then have_selector('a[href]', text: 'Withdraw your vote')
+  when 'approve'            then have_selector('a[href]', text: 'Approve')
   else
     raise NotImplementedError
   end  
 
-  page.send(negate ? :should_not : :should, expectation) 
+  visit "/ideas/#{idea.id}"
+  within '#ideas-show' do
+    page.send(negate ? :should_not : :should, expectation) 
+  end
 end
 
 

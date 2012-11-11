@@ -127,16 +127,22 @@ class Idea < ActiveRecord::Base
     end
   end
 
+  def self.state_value(state_name)
+    state_name = state_name.to_sym if state_name.kind_of?(String)
+    self.state_machine.states[state_name].value
+  end
+
 
   # Other helpers
 
 
   def participants
-    User.where id:
-      (self.votes.value_of(:user_id) +
+    User.where id:(
+      self.votes.value_of(:user_id) +
       self.vettings.value_of(:user_id) +
       self.comments.value_of(:author_id) +
-      [self.author.id]).uniq
+      [self.author.id]
+    ).uniq
   end
 
 
@@ -156,19 +162,27 @@ class Idea < ActiveRecord::Base
   end
 
   def self.vettable_by(user)
-    discussable_by(user).with_state('submitted')
+    discussable_by(user).with_state(:submitted)
   end
 
   def self.votable_by(user)
-    discussable_by(user).with_state('vetted', 'voted')
+    discussable_by(user).with_state(:vetted, :voted)
   end
 
   def self.pickable_by(user)
-    discussable_by(user).with_state('voted')
+    discussable_by(user).with_state(:voted)
+  end
+
+  def self.approvable_by(user)
+    with_state(:designed)
+  end
+
+  def self.signoffable_by(user)
+    with_state(:implemented)
   end
 
   def self.buildable_by(user)
-    discussable_by(user).with_state('picked', 'designed', 'approved', 'implemented', 'signed_off')
+    discussable_by(user).with_state(:picked, :designed, :approved, :implemented, :signed_off)
   end
 
   def self.followed_by(user)

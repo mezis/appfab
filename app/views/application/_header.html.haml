@@ -23,10 +23,18 @@
           %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
             %i.icon-cog
             = _('Pick')
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'approvable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show designed stories ready to be approved'), :'data-placement' => 'bottom'}
+            %i.icon-ok-circle
+            = _('Approve')
         = content_tag_with_path_checking(:li, ideas_path(angle: 'buildable')) do |path|
           %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
             %i.icon-cogs
             = _('Build')
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'signoffable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show implemented stories ready to be signed off'), :'data-placement' => 'bottom'}
+            %i.icon-ok-sign
+            = _('Sign Off')
         = content_tag_with_path_checking(:li, ideas_path(angle: 'followed')) do |path|
           %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty

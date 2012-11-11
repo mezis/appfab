@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   before_filter :authenticate_user!
   before_filter :cleanup_session
 
-  ValidAngles = %w(discussable vettable votable pickable buildable followed)
+  ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
 
   ValidOrders  = %w(rating activity progress creation)
@@ -12,7 +12,9 @@ class IdeasController < ApplicationController
     'vettable'    => 'activity',
     'votable'     => 'activity',
     'pickable'    => 'rating',
+    'approvable'  => 'activity',
     'buildable'   => 'progress',
+    'signoffable' => 'activity',
     'followed'    => 'activity'
   }
 
@@ -53,7 +55,11 @@ class IdeasController < ApplicationController
   def update
     @idea = Idea.find(params[:id])
 
-    @idea.product_manager = current_user if params[:idea].andand[:state] == 'picked'
+    # state changes: map state names to values
+    if state = params[:idea].andand[:state]
+      @idea.product_manager = current_user if state == 'picked'
+      params[:idea][:state] = Idea.state_value(state)
+    end
 
     if @idea.update_attributes(params[:idea])
       current_user.bookmarked_ideas.add!(@idea)
@@ -80,7 +86,8 @@ class IdeasController < ApplicationController
 
   def set_angle_from_params
     session[:ideas_angle] = begin
-      (ValidAngles.include?(params[:angle]) and params[:angle]) ||
+      (ValidAngles.include?(params[:angle])        and params[:angle]) ||
+      (ValidAngles.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
       session[:ideas_angle] ||
       DefaultAngle
     end
@@ -89,8 +96,8 @@ class IdeasController < ApplicationController
   def set_order_from_params_and_angle
     session[:ideas_order] ||= {}
     session[:ideas_order][@angle] = begin
-      (ValidOrders.include?(params[:order]) and params[:order]) || 
-      session[:ideas_order][@angle] ||
+      (ValidOrders.include?(params[:order])                and params[:order]) || 
+      (ValidOrders.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) || 
       DefaultOrder[@angle]
     end
   end
@@ -98,8 +105,8 @@ class IdeasController < ApplicationController
   def set_filter_from_params_and_angle
     session[:ideas_filter] ||= {}
     session[:ideas_filter][@angle] = begin
-      (ValidOrders.include?(params[:filter]) and params[:filter]) || 
-      session[:ideas_filter][@angle] ||
+      (ValidOrders.include?(params[:filter])                and params[:filter]) || 
+      (ValidOrders.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
       DefaultFilter
     end
   end
