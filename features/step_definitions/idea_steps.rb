@@ -24,7 +24,7 @@ When /^I submit an idea "(.*)"?$/ do |title|
   fill_in 'idea_solution', with: idea.solution
   fill_in 'idea_metrics',  with: idea.metrics
   click_button 'Create Idea'
-  Mentions[Idea] = Idea.last if Idea.last
+  Mentions[Idea] = Idea.last
 end
 
 
