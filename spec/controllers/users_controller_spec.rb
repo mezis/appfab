@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  login_user
   render_views
 
   it "index action should render index template" do
