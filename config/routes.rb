@@ -10,7 +10,10 @@ AppFab::Application.routes.draw do
     resources :votes,    only: [:create, :destroy]
   end
 
-  resources :comments, only: [:create, :update, :destroy]
+  resources :comments, only: [:create, :update, :destroy] do
+    resources :votes, only: [:create, :destroy]
+  end
+
   resources :user_roles
   resources :attachments
   resources :users, only: [:index, :show, :edit, :update, :destroy]

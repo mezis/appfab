@@ -9,6 +9,10 @@ form.new_comment
   $avatar_size:   3em
   padding-left:   ($avatar_size * 1.05)
   position:       relative
+
+  &.downvoted
+    opacity:        0.5
+
   .user 
     +absolute(0,0)
     .avatar

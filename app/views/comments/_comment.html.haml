@@ -1,4 +1,13 @@
-.comment.with_bubbles{ id: "comment#{comment.id}" }
+:ruby
+  current_user_vote = comment.votes.by_user(current_user).first
+  comment_class = if comment.rating > 0
+    'upvoted'
+  elsif comment.rating < 0
+    'downvoted'
+  else
+    'neutral'
+  end
+.comment.with_bubbles{ id: "comment#{comment.id}", class: comment_class }
   = render comment.author, format: :avatar
   .bubble.left
     %span.tail
@@ -6,10 +15,27 @@
   %ul.actions
     %li.time_ago
       = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
+    - if current_user_vote && current_user_vote.up
+      %li
+        %a.disabled
+          %i.icon-thumbs-up
+      %li
+        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote' do
+          %i.icon-thumbs-down
+    - elsif current_user_vote # downvoted by user
+      %li
+        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote' do
+          %i.icon-thumbs-up
+      %li
+        %a.disabled
+          %i.icon-thumbs-down
+    - else
+      %li
+        = link_to comment_votes_path(comment, vote: { up:true }), method: :post, class: 'upvote' do
+          %i.icon-thumbs-up
+      %li
+        = link_to comment_votes_path(comment, vote: { up:false }), method: :post, class: 'downvote' do
+          %i.icon-thumbs-down
     %li
-      %i.icon-thumbs-up
-    %li
-      %i.icon-thumbs-down
-    %li
-      = link_to comment, confirm: _('Are you sure?'), method: :delete, class: 'delete' do
+      = link_to comment_path(comment), confirm: _('Are you sure?'), method: :delete, class: 'delete' do
         %i.icon-trash
