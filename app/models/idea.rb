@@ -180,7 +180,7 @@ class Idea < ActiveRecord::Base
 
 
   def self.by_rating
-    order('ideas.rating DESC')
+    order('(ideas.rating / (ideas.development_size + ideas.design_size)) DESC')
   end
 
   def self.by_activity

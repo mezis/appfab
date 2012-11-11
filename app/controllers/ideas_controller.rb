@@ -1,20 +1,28 @@
 # encoding: UTF-8
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :cleanup_session
 
   ValidAngles = %w(discussable vettable votable pickable buildable followed)
   DefaultAngle = ValidAngles.last
 
   ValidOrders  = %w(rating activity progress creation)
-  DefaultOrder = ValidOrders.last
+  DefaultOrder = {
+    'discussable' => 'activity',
+    'vettable'    => 'activity',
+    'votable'     => 'activity',
+    'pickable'    => 'rating',
+    'buildable'   => 'progress',
+    'followed'    => 'activity'
+  }
 
   ValidFilters = %w(all authored commented vetted backed)
   DefaultFilter = ValidFilters.first
 
   def index
-    @angle  = get_angle_from_params
-    @order  = session[:ideas_order]  = get_order_from_params
-    @filter = session[:ideas_filter] = get_filter_from_params
+    @angle  = set_angle_from_params
+    @order  = set_order_from_params_and_angle
+    @filter = set_filter_from_params_and_angle
     @ideas = Idea.
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
@@ -64,19 +72,35 @@ class IdeasController < ApplicationController
 
   private
 
-
-  def get_angle_from_params
-    return params[:angle] if ValidAngles.include?(params[:angle])
-    DefaultAngle
+  def cleanup_session
+    session.delete :ideas_angle  unless session[:ideas_angle].kind_of?(String)
+    session.delete :ideas_order  unless session[:ideas_order].kind_of?(Hash)
+    session.delete :ideas_filter unless session[:ideas_filter].kind_of?(Hash)
   end
 
-  def get_order_from_params
-    return params[:order] if ValidOrders.include?(params[:order])
-    session[:ideas_order] || DefaultOrder
+  def set_angle_from_params
+    session[:ideas_angle] = begin
+      (ValidAngles.include?(params[:angle]) and params[:angle]) ||
+      session[:ideas_angle] ||
+      DefaultAngle
+    end
   end
 
-  def get_filter_from_params
-    return params[:filter] if ValidFilters.include?(params[:filter])
-    session[:ideas_filter] || DefaultFilter
+  def set_order_from_params_and_angle
+    session[:ideas_order] ||= {}
+    session[:ideas_order][@angle] = begin
+      (ValidOrders.include?(params[:order]) and params[:order]) || 
+      session[:ideas_order][@angle] ||
+      DefaultOrder[@angle]
+    end
+  end
+
+  def set_filter_from_params_and_angle
+    session[:ideas_filter] ||= {}
+    session[:ideas_filter][@angle] = begin
+      (ValidOrders.include?(params[:filter]) and params[:filter]) || 
+      session[:ideas_filter][@angle] ||
+      DefaultFilter
+    end
   end
 end
