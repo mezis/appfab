@@ -1,8 +1,7 @@
 -# Context:
 -# - notification (Notification::Base)
--# - message (String)
 %tr.notification{ id: "notification#{notification.id}", class: (notification.unread ? 'unread' : 'read') }
-  %td.message= message
+  %td.message= render notification.class.name.underscore, notification: notification
   %td.timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
   %td.action
     - if notification.unread

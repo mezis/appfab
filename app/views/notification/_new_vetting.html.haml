@@ -1,0 +1,8 @@
+:ruby
+  data = { 
+    user:       user_name(notification.subject.user),
+    idea_title: notification.subject.idea.title,
+    idea_link:  link_to("##{notification.subject.idea.id}", notification.subject.idea)
+  }
+
+= _('Idea "%{idea_title}" (%{idea_link}) was vetted by %{user}').html_safe % data

@@ -1,0 +1,8 @@
+:ruby
+  data = {
+    user:       user_name(notification.subject.author),
+    idea_title: notification.subject.idea.title,
+    idea_link:  link_to("##{notification.subject.idea.id}", notification.subject.idea)
+  }
+
+= _('%{user} commented on "%{idea_title}" (%{idea_link})').html_safe % data

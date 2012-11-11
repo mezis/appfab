@@ -19,7 +19,8 @@
           %th/
           %th/
         %tbody
-          = render @notifications
+          - @notifications.each do |notification|
+            = render 'notification/base', notification: notification
   .span3
     %ul.nav.nav-pills.nav-stacked
       - if @angle == 'unread'

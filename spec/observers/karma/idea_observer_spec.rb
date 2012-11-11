@@ -17,12 +17,12 @@ describe Karma::IdeaObserver do
 
     it 'the submitter gains karma' do
       idea.vettings.make! user: User.make!
+      idea.reload
       lambda {
         idea.vettings.make! user: User.make!
+        idea.reload.state_name.should == :vetted
       }.should change { author.reload.karma }.by(1)
     end
-
-    it 'notifies participants'
   end
 
   context 'when an idea becomes picked' do
@@ -35,8 +35,6 @@ describe Karma::IdeaObserver do
         idea.state_name.should == :picked
       }.should change { author.reload.karma }.by(10)
     end
-
-    it 'notifies participants'
   end
 
   context 'when an idea goes live' do
@@ -48,6 +46,5 @@ describe Karma::IdeaObserver do
     end
 
     it 'all commenters gains karma'
-    it 'notifies participants'
   end
 end

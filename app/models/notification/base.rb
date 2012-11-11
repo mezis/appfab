@@ -23,7 +23,7 @@ class Notification::Base < ActiveRecord::Base
   module CanBeSubject
     def self.included(by)
       by.class_eval do
-        has_many :notifications_as_subject, :class_name => 'Notification::Base', :as => :subject, :dependent => :nullify
+        has_many :notifications_as_subject, :class_name => 'Notification::Base', :as => :subject, :dependent => :destroy
       end
     end
   end

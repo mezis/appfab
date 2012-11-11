@@ -1,0 +1,9 @@
+:ruby
+  data = {
+    user:       user_name(notification.subject.user),
+    idea_title: notification.subject.subject.title,
+    idea_link:  link_to("##{notification.subject.subject.id}", notification.subject.subject),
+    upvoted_or_downvoted: notification.subject.up ? _('upvoted') : _('downvoted')
+  }
+
+= _('Your comment on "%{idea_title}" (%{idea_link}) was %{upvoted_or_downvoted}').html_safe % data

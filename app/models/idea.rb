@@ -31,6 +31,7 @@ class Idea < ActiveRecord::Base
   has_many   :bookmarks,   :class_name => 'User::Bookmark', :dependent => :destroy
 
 
+  validates_presence_of :author
   validates_presence_of :rating
   # validates_presence_of :category
 
