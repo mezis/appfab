@@ -10,10 +10,6 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.send(@angle.to_sym)
   end
 
-  def show
-    @notification = current_user.notifications.find(params[:id])
-  end
-
   def update
     @notification = current_user.notifications.find(params[:id])
     if @notification.update_attributes(params[:notification])

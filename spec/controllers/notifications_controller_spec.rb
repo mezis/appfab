@@ -10,11 +10,6 @@ describe NotificationsController do
     response.should render_template(:index)
   end
 
-  it "show action should render show template" do
-    get :show, :id => Notification::Base.make!
-    response.should render_template(:show)
-  end
-
   it "update action should render edit template when model is invalid" do
     notification = Notification::Base.make!
     Notification::Base.any_instance.stub(:valid? => false)
