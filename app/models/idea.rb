@@ -26,9 +26,10 @@ class Idea < ActiveRecord::Base
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
-  has_many   :vetters, :class_name => 'User', :through => :vettings, :source => :user
-  has_many   :backers, :class_name => 'User', :through => :votes,    :source => :user
-  has_many   :bookmarks,   :class_name => 'User::Bookmark', :dependent => :destroy
+  has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
+  has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
+  has_many   :backers,    :class_name => 'User', :through => :votes,    :source => :user
+  has_many   :bookmarks,  :class_name => 'User::Bookmark', :dependent => :destroy
 
 
   validates_presence_of :author
@@ -51,6 +52,7 @@ class Idea < ActiveRecord::Base
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
 
+  scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
 
   state_machine :state, :initial => :submitted do
     state :submitted,    value: 0

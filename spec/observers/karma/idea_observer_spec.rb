@@ -45,6 +45,16 @@ describe Karma::IdeaObserver do
       lambda { idea.deliver» }.should change { author.reload.karma }.by(20)
     end
 
-    it 'all commenters gains karma'
+    it 'all commenters gains karma' do
+      commenter = User.make!
+      idea.comments.make! author: commenter
+      lambda { idea.deliver» }.should change { commenter.reload.karma }.by(1)
+    end
+
+    it 'all backers gains karma' do
+      backer = User.make!
+      idea.votes.make! user: backer
+      lambda { idea.deliver» }.should change { backer.reload.karma }.by(1)
+    end
   end
 end

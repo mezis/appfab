@@ -12,10 +12,17 @@ configatron.app_fab.karma.downvoted    = -10
 configatron.app_fab.karma.upvote       = +1
 configatron.app_fab.karma.downvote     = -1
 
-configatron.app_fab.karma.idea.created = +1
-configatron.app_fab.karma.idea.vetted  = +1
-configatron.app_fab.karma.idea.picked  = +10
-configatron.app_fab.karma.idea.live    = +20
+configatron.app_fab.karma.idea.author.created = +1
+configatron.app_fab.karma.idea.author.vetted  = +1
+configatron.app_fab.karma.idea.author.picked  = +10
+configatron.app_fab.karma.idea.author.live    = +20
+
+configatron.app_fab.karma.idea.commenter.vetted  = +0
+configatron.app_fab.karma.idea.commenter.picked  = +1
+configatron.app_fab.karma.idea.commenter.live    = +1
+
+configatron.app_fab.karma.idea.backer.picked     = +1
+configatron.app_fab.karma.idea.backer.live       = +1
 
 configatron.app_fab.vettings_needed    = 2
 configatron.app_fab.votes_needed       = 1
