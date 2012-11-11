@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 
 gem 'rails'
 
@@ -74,7 +75,6 @@ group :development do
   gem 'nifty-generators', :require => false
 
   # debugging
-  gem 'debugger',         :require => false
   gem 'pry',              :require => false
   gem 'pry-nav',          :require => false
   gem 'pry-rails'
