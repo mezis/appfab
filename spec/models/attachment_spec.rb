@@ -1,7 +1,13 @@
 require 'spec_helper'
+require 'digest'
 
 describe Attachment do
   let(:user) { User.make! }
+
+  before(:all) do
+    @image_data = File.read('spec/assets/image.jpg')
+    @image_hash = Digest::MD5.hexdigest(@image_data)
+  end
 
   it "should not be valid by default" do
     Attachment.new.should_not be_valid
@@ -9,8 +15,8 @@ describe Attachment do
 
   context 'given a file blob' do
     before do
-      @file = Tempfile.new('spec')
-      @file.write 'fubar'
+      @file = Tempfile.new('spec.jpg')
+      @file.write @image_data
     end
 
     after do
@@ -25,7 +31,8 @@ describe Attachment do
 
     it 'can retrieve files' do
       attachment.save!
-      Attachment.last.file.data.should == 'fubar'
+      digest = Digest::MD5.hexdigest(Attachment.last.file.data)
+      digest.should == @image_hash
     end
   end
 end

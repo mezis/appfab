@@ -114,7 +114,8 @@ end
 Attachment.blueprint do
   owner      { User.last || User.make! }
   uploader   { User.last || User.make! }
-  file       { 'data' }
+  # a very small valid PNG (http://garethrees.org/2007/11/14/pngcrush/)
+  file       { Base64.decode64('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==') }
 end
 
 User::Bookmark.blueprint do
