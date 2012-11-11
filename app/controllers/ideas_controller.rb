@@ -2,7 +2,7 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
 
-  ValidAngles = %w(discussable vettable votable buildable followed)
+  ValidAngles = %w(discussable vettable votable pickable buildable followed)
   DefaultAngle = ValidAngles.last
 
   ValidOrders  = %w(rating activity progress creation)

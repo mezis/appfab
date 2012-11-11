@@ -47,6 +47,18 @@ When /^I unvet the idea$/ do
   click_on "Cancel your vetting"
 end
 
+When /^I vote for the idea$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  click_on "Vote for this"
+end
+
+When /^I cancel my vote for the idea$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  click_on "Withdraw your vote"
+end
+
 
 # expectations
 
@@ -68,6 +80,10 @@ Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|
     have_selector('a[href]', text: 'Cancel your vetting')
   when 'vet'
     have_selector('a[href]', text: 'Vet this idea')
+  when 'vote for'
+    have_selector('a[href]', text: 'Vote for this')
+  when 'remove my vote for'
+    have_selector('a[href]', text: 'Withdraw your vote')
   else
     raise NotImplementedError
   end  

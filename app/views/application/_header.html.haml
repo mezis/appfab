@@ -19,6 +19,10 @@
           %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
             %i.icon-envelope
             = _('Vote')
+        = content_tag_with_path_checking(:li, ideas_path(angle: 'pickable')) do |path|
+          %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
+            %i.icon-cog
+            = _('Pick')
         = content_tag_with_path_checking(:li, ideas_path(angle: 'buildable')) do |path|
           %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
             %i.icon-cogs
