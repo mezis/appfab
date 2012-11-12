@@ -1,42 +1,27 @@
 # encoding: UTF-8
 class UserRolesController < ApplicationController
-  def index
-    @user_roles = UserRole.all
-  end
-
-  def show
-    @user_role = UserRole.find(params[:id])
-  end
-
-  def new
-    @user_role = UserRole.new
-  end
+  before_filter :authenticate_user!
+  before_filter :load_user
 
   def create
-    @user_role = UserRole.new(params[:user_role])
+    @user_role = @user.roles.new(params[:user_role])
     if @user_role.save
-      redirect_to @user_role, :notice => "Successfully created user role."
+      flash[:success] = _("Successfully created user role.")
     else
-      render :action => 'new'
+      flash[:error] = _("Failed to created user role.")
     end
-  end
-
-  def edit
-    @user_role = UserRole.find(params[:id])
-  end
-
-  def update
-    @user_role = UserRole.find(params[:id])
-    if @user_role.update_attributes(params[:user_role])
-      redirect_to @user_role, :notice  => "Successfully updated user role."
-    else
-      render :action => 'edit'
-    end
+    redirect_to @user
   end
 
   def destroy
-    @user_role = UserRole.find(params[:id])
+    @user_role = @user.roles.find(params[:id])
     @user_role.destroy
-    redirect_to user_roles_url, :notice => "Successfully destroyed user role."
+    redirect_to @user, :notice => "Successfully destroyed user role."
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:user_id])
   end
 end

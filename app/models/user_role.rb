@@ -34,7 +34,7 @@ class UserRole < ActiveRecord::Base
       role_names = role_names.map { |name| name.kind_of?(String) ? name.to_sym : name }
       (role_names - Names).empty? or
         raise ArgumentError.new("Unknown roles in arguments")
-      return self.roles.where(name: role_names).any?
+      return self.roles.where(name: role_names).first
     end
   end
 
