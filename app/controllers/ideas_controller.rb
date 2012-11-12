@@ -85,6 +85,7 @@ class IdeasController < ApplicationController
   end
 
   def set_angle_from_params
+    params[:angle] =
     session[:ideas_angle] = begin
       (ValidAngles.include?(params[:angle])        and params[:angle]) ||
       (ValidAngles.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
@@ -95,6 +96,7 @@ class IdeasController < ApplicationController
 
   def set_order_from_params_and_angle
     session[:ideas_order] ||= {}
+    params[:order] =
     session[:ideas_order][@angle] = begin
       (ValidOrders.include?(params[:order])                and params[:order]) || 
       (ValidOrders.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) || 
@@ -104,9 +106,10 @@ class IdeasController < ApplicationController
 
   def set_filter_from_params_and_angle
     session[:ideas_filter] ||= {}
+    params[:filter] =
     session[:ideas_filter][@angle] = begin
-      (ValidOrders.include?(params[:filter])                and params[:filter]) || 
-      (ValidOrders.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
+      (ValidFilters.include?(params[:filter])                and params[:filter]) || 
+      (ValidFilters.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
       DefaultFilter
     end
   end
