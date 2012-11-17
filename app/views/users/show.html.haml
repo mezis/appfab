@@ -29,7 +29,7 @@
     = link_to "Edit", edit_user_path(@user), class: 'btn btn-block'
     = link_to "View All", users_path, class: 'btn btn-block'
 
-    %br/
+    %h4= _('Roles')
 
     - UserRole::Names.each do |role_name|
       - if role = @user.plays?(role_name)
