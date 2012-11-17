@@ -92,6 +92,9 @@ GEM
       multipart-post (~> 1.1)
     fast_gettext (0.6.11)
     ffi (1.1.5)
+    fileuploader-rails (2.1.2)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     font-awesome-sass-rails (2.0.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -295,6 +298,7 @@ DEPENDENCIES
   devise
   dragonfly
   faker
+  fileuploader-rails
   font-awesome-sass-rails
   gettext
   gettext_i18n_rails

@@ -40,6 +40,7 @@ gem 'default_value_for'
 
 # attached files & image manipulation
 gem 'dragonfly'
+gem 'fileuploader-rails'
 
 # caching, at the Rack level
 gem 'rack-cache', :require => 'rack/cache'
