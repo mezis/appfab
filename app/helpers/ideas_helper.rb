@@ -14,6 +14,12 @@ module IdeasHelper
     ])
   end
 
+  def idea_category_select_options(user)
+    options_for_select(user.account.categories.sort.map { |category|
+      [category, category]
+    })
+  end
+
   def idea_icon_for_kind(idea, options = {})
     classes = options.fetch(:class, '').split
     classes.push IdeaIcons[idea.kind.to_sym]
@@ -90,6 +96,17 @@ module IdeasHelper
     when 'commented' then _('that you commented')
     when 'vetted'    then _('that you vetted')
     when 'backed'    then _('that you backed')
+    end
+  end
+
+  def ideas_category_qualifier(category)
+    case 
+    when 'none'
+      _('without a category')
+    when 'all'
+      nil
+    else
+      _('in the %{category} category') % { category:category }
     end
   end
 end

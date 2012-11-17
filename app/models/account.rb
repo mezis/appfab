@@ -8,5 +8,15 @@ class Account < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :domain, if: :auto_adopt
 
-  default_values auto_adopt:false
+  store :settings, accessors: [ :categories ]
+
+  default_values auto_adopt:false, categories: lambda { Set.new }
+
+
+  def categories_with_default
+    return categories_without_default if categories_without_default.kind_of?(Set)
+    self.categories = Set.new
+  end
+  alias_method_chain :categories, :default
+
 end

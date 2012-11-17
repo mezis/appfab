@@ -3,12 +3,21 @@
 
   .row
     .span12
-    .span8
       = f.label :kind
+    .span8
       = f.select :kind, idea_kind_select_options
     .span4
       %span.help-block
         = _('Help for kind entry')
+
+  .row
+    .span12
+      = f.label :category
+    .span8
+      = f.select :category, idea_category_select_options(current_user)
+    .span4
+      %span.help-block
+        = _('Help for category entry')
 
   .row
     .span12

@@ -47,6 +47,9 @@ class Idea < ActiveRecord::Base
   validates_presence_of  :kind
   validates_inclusion_of :kind, :in => %w(bug chore feature)
 
+  validates_inclusion_of :category, in: lambda { |idea| idea.account.categories }, allow_nil:true
+
+
   default_values rating: 0, kind:'feature'
 
 

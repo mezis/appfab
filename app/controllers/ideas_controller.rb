@@ -22,13 +22,15 @@ class IdeasController < ApplicationController
   DefaultFilter = ValidFilters.first
 
   def index
-    @angle  = set_angle_from_params
-    @order  = set_order_from_params_and_angle
-    @filter = set_filter_from_params_and_angle
+    @angle    = set_angle_from_params
+    @order    = set_order_from_params_and_angle
+    @filter   = set_filter_from_params_and_angle
+    @category = set_category_from_params_and_angle
     @ideas = Idea.
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
-    @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter == 'all'
+    @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter   == 'all'
+    @ideas = @ideas.where(category: @category) unless @category == 'all'
   end
 
   def show
@@ -111,6 +113,17 @@ class IdeasController < ApplicationController
       (ValidFilters.include?(params[:filter])                and params[:filter]) || 
       (ValidFilters.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
       DefaultFilter
+    end
+  end
+
+  def set_category_from_params_and_angle
+    session[:ideas_category] ||= {}
+    params[:category] =
+    session[:ideas_category][@angle] = begin
+      valid_categories = (current_user.account.andand.categories || []) + %w(all)
+      (valid_categories.include?(params[:category])                and params[:category]) || 
+      (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) || 
+      'all'
     end
   end
 end
