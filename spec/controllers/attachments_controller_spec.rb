@@ -1,56 +1,34 @@
 require 'spec_helper'
 
 describe AttachmentsController do
+  login_user
   render_views
+  let(:idea) { Idea.make! }
 
-  it "index action should render index template" do
-    get :index
-    response.should render_template(:index)
+  let(:file) { 
+    Rack::Test::UploadedFile.new(Rails.root.join('spec/assets/image.jpg'), 'image/jpeg')
+  }
+
+
+  it "create action redirects if not Ajax" do
+    post :create, idea_id: idea.id
+    response.should redirect_to(idea_path(idea))
   end
 
-  it "show action should render show template" do
-    get :show, :id => Attachment.make!
-    response.should render_template(:show)
+  it "create action should render JSON when model is invalid" do
+    xhr :post, :create, idea_id: idea.id, format: :json
+    response.body.should == %({"success":false})
   end
 
-  it "new action should render new template" do
-    get :new
-    response.should render_template(:new)
+  it "create action should render JSON when model is valid" do
+    xhr :post, :create, idea_id: idea.id, format: :json, attachment: { file: file }
+    response.body.should == %({"success":true})
   end
 
-  it "create action should render new template when model is invalid" do
-    Attachment.any_instance.stub(:valid? => false)
-    post :create
-    response.should render_template(:new)
-  end
-
-  it "create action should redirect when model is valid" do
-    Attachment.any_instance.stub(:valid? => true)
-    post :create
-    response.should redirect_to(attachment_url(assigns[:attachment]))
-  end
-
-  it "edit action should render edit template" do
-    get :edit, :id => Attachment.make!
-    response.should render_template(:edit)
-  end
-
-  it "update action should render edit template when model is invalid" do
-    attachment = Attachment.make!
-    Attachment.any_instance.stub(:valid? => false)
-    put :update, :id => attachment
-    response.should render_template(:edit)
-  end
-
-  it "update action should redirect when model is valid" do
-    put :update, :id => Attachment.make!
-    response.should redirect_to(attachment_url(assigns[:attachment]))
-  end
-
-  it "destroy action should destroy model and redirect to index action" do
-    attachment = Attachment.make!
-    delete :destroy, :id => attachment
-    response.should redirect_to(attachments_url)
+  it "destroy action should destroy model and redirect to idea" do
+    attachment = Attachment.make! owner: idea
+    delete :destroy, idea_id: idea.id, id: attachment.id
+    response.should redirect_to(idea_path(idea))
     Attachment.exists?(attachment.id).should be_false
   end
 end

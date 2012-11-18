@@ -1,0 +1,83 @@
+@import application/mixins
+@import compass
+
+.attachment
+  $thumb_size: 64px
+
+  // +inline-block
+  +box-sizing(border-box)
+
+  text-align:      center
+  text-decoration: none
+  // color:           inherit
+  // color:           $medium_gray
+  // padding:         1ex
+  margin:             1ex
+  float:              left
+
+  +filter(saturate(5%))
+  &:hover
+    +filter(none)
+
+  .thumb
+    +box-sizing(border-box)
+    +appfab-box
+    display:  block
+    width:    ($thumb_size * 3/4)
+    height:   $thumb_size
+    border:   1px solid $medium_gray
+    margin:   0 auto
+  .name
+    +single-line
+    width:       $thumb_size
+    font-size:   x-small
+    line-height: 100%
+
+.attachment-thumb
+  +border-radius(3px)
+  +square(180px)
+  +background-size(contain)
+  background-repeat:  no-repeat
+  margin:             1ex 0
+
+#attachments
+  +clearfix
+  margin-bottom:   $section_spacing
+
+#uploader
+  .btn
+    position: relative
+  .qq-upload-drop-area
+    +absolute(0, 0)
+    +square(100%)
+    z-index:          2
+    background-color: $major_color
+    opacity:          0.33
+  .qq-upload-drop-area-active
+    opacity:          0.66
+  .qq-upload-list
+    list-style-type:  none
+    margin:           1ex 0
+    li
+      +clearfix
+      margin-bottom:    1ex
+      padding:          1ex
+  .qq-upload-file
+    +single-line
+    display:          block
+  .qq-upload-size
+    display:          block
+    float:            left
+    margin-right:     1ex
+  .qq-upload-cancel, .qq-upload-retry
+    display:          block
+    float:            right
+    margin-left:      1ex
+  .qq-upload-spinner
+    +square(15px)
+    display:          block
+    float:            right
+    background:       url("/assets/loading.gif")
+    vertical-align:   text-bottom
+  .alert-success .qq-upload-retry
+    display:          none

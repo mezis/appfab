@@ -20,7 +20,8 @@
 $(document).ready(function() {
 
   $('[title]').tooltip({
-    delay: { show:150, hide:250 }
+    delay: { show:150, hide:250 },
+    html: true
   })
 
 });

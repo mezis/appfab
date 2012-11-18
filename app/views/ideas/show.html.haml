@@ -4,8 +4,11 @@
   .span9
     = render 'idea', idea: @idea, collapsed: false, status: :header
 
+    #attachments
+      = render @idea.attachments
     #comments
       = render 'comments/form', comment: Comment.new(idea: @idea)
       = render @idea.comments
   .span3
     = render 'action', idea: @idea
+    = render 'attachments/uploader', idea: @idea

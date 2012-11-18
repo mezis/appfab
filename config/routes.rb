@@ -6,15 +6,15 @@ AppFab::Application.routes.draw do
   resources :notifications
   resources :accounts
   resources :ideas do
-    resources :vettings, only: [:create, :destroy]
-    resources :votes,    only: [:create, :destroy]
+    resources :vettings,    only: [:create, :destroy]
+    resources :votes,       only: [:create, :destroy]
+    resources :attachments, only: [:create, :destroy, :show]
   end
 
   resources :comments, only: [:create, :update, :destroy] do
     resources :votes, only: [:create, :destroy]
   end
 
-  resources :attachments
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resources :roles, only: [:create, :destroy], controller: :user_roles
   end

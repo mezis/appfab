@@ -1,3 +1,5 @@
+@import application/variables
+
 =height($dim)
   display:     block
   height:      $dim
@@ -15,3 +17,8 @@
 =appfab-box
   +background-image(linear-gradient(left top, lighten($light_gray, 50%), $light_gray))
   +box-shadow($medium_gray 0px 2px 5px)
+
+=single-line
+  overflow:         hidden
+  white-space:      nowrap
+  text-overflow:    ellipsis

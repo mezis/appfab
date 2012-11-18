@@ -2,8 +2,8 @@ class Storage::DataStore
 
   # +temp_object+ should respond to +data+ and +meta+
   def store(temp_object, opts={})
-    Storage::File.transaction do
-      file = Storage::File.create!(metadata: temp_object.meta)
+    ::Storage::File.transaction do
+      file = ::Storage::File.create!(metadata: temp_object.meta)
       file.data = temp_object.data
       file.save!
 
@@ -13,12 +13,12 @@ class Storage::DataStore
   end
 
   def retrieve(uid)
-    file = Storage::File.find(uid.to_i)
+    file = ::Storage::File.find(uid.to_i)
     file.update_attributes!(accessed_at: Time.now)
     [ file.data, file.metadata ]
   end
 
   def destroy(uid)
-    Storage::File.destroy(uid.to_i)
+    ::Storage::File.destroy(uid.to_i)
   end
 end
