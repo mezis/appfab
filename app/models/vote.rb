@@ -5,6 +5,7 @@ class Vote < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :subject, :polymorphic => true
+  include Notification::Base::CanBeSubject  
 
   validates_presence_of :user
   validates_presence_of :subject

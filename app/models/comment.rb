@@ -10,6 +10,7 @@ class Comment < ActiveRecord::Base
   belongs_to :author,   :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_one    :attachment, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+  include Notification::Base::CanBeSubject  
 
   default_values rating: 0
 

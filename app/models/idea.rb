@@ -25,6 +25,7 @@ class Idea < ActiveRecord::Base
   has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
+  include Notification::Base::CanBeSubject  
 
   has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
