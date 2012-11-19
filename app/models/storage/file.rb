@@ -13,16 +13,14 @@ class Storage::File < ActiveRecord::Base
 
 
   def data=(data)
-    compressed_data = Zlib::Deflate.deflate(data)
     self.chunks.each(&:mark_for_destruction)
-    (compressed_data.length / MaxChunkSize + 1).times do |index|
-      chunk = compressed_data[index * MaxChunkSize, MaxChunkSize]
+    (data.length / MaxChunkSize + 1).times do |index|
+      chunk = data[index * MaxChunkSize, MaxChunkSize]
       self.chunks.new(data:chunk, idx:index)
     end
   end
 
   def data
-    compressed_data = self.chunks.order(:idx).value_of(:data).join
-    Zlib::Inflate.inflate(compressed_data)
+    self.chunks.order(:idx).map(&:data).join
   end
 end
