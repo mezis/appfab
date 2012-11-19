@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 17:08+0000\n"
+"POT-Creation-Date: 2012-11-19 12:14+0000\n"
 "PO-Revision-Date: 2012-10-30 13:30+0000\n"
 "Last-Translator: Julien Letessier <>\n"
 "Language-Team: English\n"
@@ -17,10 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "Bookmark successfuly added."
+msgstr ""
+
+msgid "Failed to add bookmark."
+msgstr ""
+
 msgid "Failed to create vetting."
 msgstr ""
 
 msgid "Failed to create vote."
+msgstr ""
+
+msgid "Failed to created user role."
 msgstr ""
 
 msgid "Failed to post comment."
@@ -119,7 +128,13 @@ msgstr ""
 msgid "Sorry, something went wrong while logging you in."
 msgstr ""
 
+msgid "Successfully created user role."
+msgstr ""
+
 msgid "Successfully created vetting."
+msgstr ""
+
+msgid "Successfully destroyed attachment."
 msgstr ""
 
 msgid "Successfully destroyed comment."
@@ -132,6 +147,9 @@ msgid "Successfully destroyed vetting."
 msgstr ""
 
 msgid "Successfully posted comment."
+msgstr ""
+
+msgid "Successfully removed bookmark."
 msgstr ""
 
 msgid "Successfully submitted idea."
@@ -167,9 +185,6 @@ msgstr ""
 msgid "T-shirt size|XS"
 msgstr ""
 
-msgid "This idea is not pickable at the moment. It probably would put the product manager over design capacity."
-msgstr ""
-
 msgid "Tooltip|%{user} currently has %{points} %{karma}."
 msgstr ""
 
@@ -194,10 +209,13 @@ msgstr ""
 msgid "Tooltip|This idea has already been vetted."
 msgstr ""
 
+msgid "User role|Account owner"
+msgstr ""
+
 msgid "User role|Architect"
 msgstr ""
 
-msgid "User role|Denevolent dictator"
+msgid "User role|Benevolent dictator"
 msgstr ""
 
 msgid "User role|Designer"
@@ -216,4 +234,22 @@ msgid "Vote withdrawn."
 msgstr ""
 
 msgid "Welcome, %{user}!"
+msgstr ""
+
+msgid "in the %{category} category"
+msgstr ""
+
+msgid "that you authored"
+msgstr ""
+
+msgid "that you backed"
+msgstr ""
+
+msgid "that you commented"
+msgstr ""
+
+msgid "that you vetted"
+msgstr ""
+
+msgid "without a category"
 msgstr ""
