@@ -22,4 +22,16 @@ module ApplicationHelper
       yield path, is_current
     end
   end
+
+  # conditional link_to that generates a disabled link when the condition fails 
+  def can_link_to(*args, &block)
+    options = args.last { |arg| arg.kind_of?(Hash) }.dup
+    if options.delete(:if)
+      link_to(*args, &block)
+    else
+      options.slice!(:class, :id)
+      options[:class] = [options.fetch(:class, '').split + %w(disabled)].join(' ')
+      content_tag(:a, options, &block)
+    end
+  end
 end

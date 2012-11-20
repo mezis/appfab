@@ -58,7 +58,7 @@
       .actions
         %ul
           %li
-            = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
+            = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
               %i.icon-fullscreen<>
           %li
             = link_to idea_path(idea, anchor: 'comments'), title: s_('Tooltip|Show comments') do
@@ -67,8 +67,8 @@
                 = count
           %li.separator
           %li
-            = link_to edit_idea_path(idea), title: s_('Tooltip|Edit Idea') do
+            = can_link_to edit_idea_path(idea), if:can?(:edit, idea), title: s_('Tooltip|Edit Idea') do
               %i.icon-pencil<>
           %li
-            = link_to idea, confirm: _('Are you sure?'), method: :delete, title: s_('Tooltip|Delete Idea') do
+            = can_link_to idea, confirm: _('Are you sure?'), method: :delete, if:can?(:destroy,idea), title: s_('Tooltip|Delete Idea') do
               %i.icon-trash<>
