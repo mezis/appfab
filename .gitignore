@@ -27,4 +27,7 @@ db/schema.rb
 # Fixtures
 /test/fixtures/*.yml
 
+# Heroku/Taps turds
+push_*.dat
+
 .rbenv-version
