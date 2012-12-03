@@ -27,14 +27,27 @@ module ApplicationHelper
     end
   end
 
-  # conditional link_to that generates a disabled link when the condition fails 
+  # conditional link_to that generates a disabled link when the condition fails
+  # path a boolean to the +if+ options,
+  # a +can?+ array of parameters to the +auth+ option,
+  # or both.
+  # 
+  # e.g.
+  #   can_link_to foo_path, if:(a || b), auth:[:update, Stuff]
+  # 
   def can_link_to(*args, &block)
     options = args.last { |arg| arg.kind_of?(Hash) }.dup
-    if options.delete(:if)
+
+    auth_criteria  = options.delete(:auth)
+    auth_condition = auth_criteria.nil? ? true : can?(*auth_criteria)
+    if_condition   = options.fetch(:if, true)
+
+    if if_condition && auth_condition
       link_to(*args, &block)
     else
       options.slice!(:class, :id)
       options[:class] = [options.fetch(:class, '').split + %w(disabled)].join(' ')
+      options[:title] = not_authorized_message(*auth_criteria) if auth_criteria
       content_tag(:a, options, &block)
     end
   end
