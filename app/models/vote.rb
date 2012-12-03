@@ -18,6 +18,7 @@ class Vote < ActiveRecord::Base
   scope :by_user,   lambda { |user| where(user_id:user.id) }
   scope :upvote,    where(up:true)
   scope :downvote,  where(up:false)
+  scope :recently_created, lambda { where('created_at > ?', 15.minutes.ago) }
 
   after_create  :notify_idea
   after_destroy :notify_idea

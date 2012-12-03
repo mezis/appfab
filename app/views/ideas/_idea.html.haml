@@ -67,8 +67,8 @@
                 = count
           %li.separator
           %li
-            = can_link_to edit_idea_path(idea), if:can?(:edit, idea), title: s_('Tooltip|Edit Idea') do
+            = can_link_to edit_idea_path(idea), auth:[:edit, idea], title: s_('Tooltip|Edit Idea') do
               %i.icon-pencil<>
           %li
-            = can_link_to idea, confirm: _('Are you sure?'), method: :delete, if:can?(:destroy,idea), title: s_('Tooltip|Delete Idea') do
+            = can_link_to idea, confirm: _('Are you sure?'), method: :delete, auth:[:destroy,idea], title: s_('Tooltip|Delete Idea') do
               %i.icon-trash<>

@@ -1,47 +1,51 @@
 -# Pass me an +idea+
+- if can?(:update, idea)
+  - uploader_tempate = capture do
+    .qq-uploader<
+      .btn.btn-block.qq-upload-button>
+        .drop-area.qq-upload-drop-area<>
+        %i.icon-upload
+        = _('Attach a file')
+      %ul.qq-upload-list<>
 
-- uploader_tempate = capture do
-  .qq-uploader<
-    .btn.btn-block.qq-upload-button>
-      .drop-area.qq-upload-drop-area<>
-      %i.icon-upload
-      = _('Attach a file')
-    %ul.qq-upload-list<>
+  - file_template = capture do
+    %li.alert<
+      .qq-progress-bar<>
+      %span.qq-upload-spinner>
+      %span.qq-upload-finished>
+      %span.qq-upload-file>
+      %span.qq-upload-size>
+      %a.qq-upload-cancel{ href: '#' }= _('Cancel')
+      %a.qq-upload-retry{ href: '#' }= _('Retry')
+      %span.qq-upload-status-text
 
-- file_template = capture do
-  %li.alert<
-    .qq-progress-bar<>
-    %span.qq-upload-spinner>
-    %span.qq-upload-finished>
-    %span.qq-upload-file>
-    %span.qq-upload-size>
-    %a.qq-upload-cancel{ href: '#' }= _('Cancel')
-    %a.qq-upload-retry{ href: '#' }= _('Retry')
-    %span.qq-upload-status-text
-
-#uploader{ :title => s_('Tooltip|Drop one or more file here to attach them, or click the button.'), 'data-placement' => :left }
-:javascript
-  $(document).ready(function () {
-    uploader = new qq.FineUploader({
-      element: document.getElementById('uploader'),
-      request: {
-        endpoint: '#{idea_attachments_path(idea)}',
-        customHeaders: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  #uploader{ :title => s_('Tooltip|Drop one or more file here to attach them, or click the button.'), 'data-placement' => :left }
+  :javascript
+    $(document).ready(function () {
+      uploader = new qq.FineUploader({
+        element: document.getElementById('uploader'),
+        request: {
+          endpoint: '#{idea_attachments_path(idea)}',
+          customHeaders: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          forceMultipart: true,
+          inputName: 'attachment[file]'
         },
-        forceMultipart: true,
-        inputName: 'attachment[file]'
-      },
-      classes: {
-        success: 'alert alert-success',
-        fail: 'alert alert-error'
-      },
-      template: '#{j uploader_tempate}',
-      fileTemplate: '#{j file_template}',
-      validation: {
-        allowedExtensions: ['jpg', 'png', 'txt', 'md'],
-        sizeLimit: #{5 * (1<<20)}
-      },
-      debug: true
+        classes: {
+          success: 'alert alert-success',
+          fail: 'alert alert-error'
+        },
+        template: '#{j uploader_tempate}',
+        fileTemplate: '#{j file_template}',
+        validation: {
+          allowedExtensions: ['jpg', 'png', 'txt', 'md'],
+          sizeLimit: #{5 * (1<<20)}
+        },
+        debug: true
+      });
     });
-  });
+- else
+  .btn.btn-block.disabled{ title:not_authorized_message(:update, idea) }
+    %i.icon-upload
+    = _('Attach a file')

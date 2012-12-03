@@ -3,7 +3,7 @@
 - placement = :left
 %ul.ideas-actions
   / size
-  - if idea.submitted? && current_user.plays?(:architect, :product_manager)
+  - if idea.submitted? && can?(:size, idea)
     - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field, title|
       %li
         .btn-group
@@ -26,11 +26,12 @@
     %li
       %a.btn.btn-block.disabled= _('Idea not sized')
 
+
   / vet
-  - if idea.can_vet»?
+  - if idea.can_vet»? && can?(:create, idea.vettings.build)
     - if vetting = current_user.vettings.where(idea_id: idea.id).first
       %li
-        = link_to idea_vetting_path(idea, vetting), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+        = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
           %i.icon-check
           = _('Cancel your vetting')
     - elsif idea.sized?
@@ -52,7 +53,7 @@
 
 
   / vote
-  - if idea.can_vote»?
+  - if idea.can_vote»? && can?(:create, idea.votes.build)
     - if vote = current_user.votes.on_idea(idea).first
       %li
         = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do

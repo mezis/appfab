@@ -6,9 +6,28 @@ class Ability
     user ||= User.new?
 
     # Idea permissions
-    can [:create, :read], Idea, :author => { :account_id => user.account_id }
-    can :edit,            Idea, :author_id => user.id, :state => Idea.state_value(:submitted)
-    can :destroy,         Idea, :author_id => user.id, :state => Idea.state_value(:submitted)
+    can [:create, :read], Idea, author: { account_id: user.account_id }
+    can :update,          Idea, author_id: user.id, state: Idea.state_value(:submitted)
+    can :destroy,         Idea, author_id: user.id, state: Idea.state_value(:submitted)
+
+    # Comment
+    can    [:create], Comment, idea: { author: { account_id: user.account_id } }
+    can    [:read],   Comment, author: { account_id: user.account_id }
+    can    [:vote],   Comment
+    cannot [:vote],   Comment, author_id: user.id
+    can    [:update, :destroy], Comment.recently_updated, author_id: user.id
+
+    # Sizing / Vetting
+    if user.plays?(:product_manager, :architect)
+      can :size,     Idea
+      can :create,   Vetting
+      can :destroy,  Vetting.recently_created
+    end
+
+    # Vote on ideas
+    can :create,  Vote, subject_type: 'Idea'
+    can :destroy, Vote.recently_created
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -15,27 +15,34 @@
   %ul.actions
     %li.time_ago
       = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
-    - if current_user_vote && current_user_vote.up
+    - if !can?(:vote, comment)
       %li
         %a.disabled
           %i.icon-thumbs-up
       %li
-        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote' do
+        %a.disabled
+          %i.icon-thumbs-down
+    - elsif current_user_vote && current_user_vote.up
+      %li
+        %a.disabled
+          %i.icon-thumbs-up
+      %li
+        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote', title:_('Cancel your upvote') do
           %i.icon-thumbs-down
     - elsif current_user_vote # downvoted by user
       %li
-        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote' do
+        = link_to comment_vote_path(comment, current_user_vote), method: :delete, class: 'delete-vote', title:_('Cancel your downvote') do
           %i.icon-thumbs-up
       %li
         %a.disabled
           %i.icon-thumbs-down
     - else
       %li
-        = link_to comment_votes_path(comment, vote: { up:true }), method: :post, class: 'upvote' do
+        = link_to comment_votes_path(comment, vote: { up:true }), method: :post, class: 'upvote', title:_('Upvote this comment') do
           %i.icon-thumbs-up
       %li
-        = link_to comment_votes_path(comment, vote: { up:false }), method: :post, class: 'downvote' do
+        = link_to comment_votes_path(comment, vote: { up:false }), method: :post, class: 'downvote', title:_('Downvote this comment') do
           %i.icon-thumbs-down
     %li
-      = link_to comment_path(comment), confirm: _('Are you sure?'), method: :delete, class: 'delete' do
+      = can_link_to comment_path(comment), auth:[:destroy, comment], confirm: _('Are you sure?'), method: :delete, class: 'delete', title:_('Delete this comment') do
         %i.icon-trash

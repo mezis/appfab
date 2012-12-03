@@ -21,5 +21,7 @@ class Comment < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  scope :recently_updated, lambda { where('updated_at > ?', 15.minutes.ago) }
+
   after_create { |record| record.idea.andand.ping! }
 end
