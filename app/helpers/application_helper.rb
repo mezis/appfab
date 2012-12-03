@@ -1,6 +1,10 @@
 # encoding: UTF-8
 module ApplicationHelper
 
+  # wrapper for +content_tag+ that yields a url for +options+,
+  # unless the current action matches +options+, in which case it
+  # yields '#'.
+  # suitable to generate navigation links.
   def content_tag_with_path_checking(tag, options = {})
     html_options = options.delete(:html) || {}
 
