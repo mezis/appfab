@@ -11,30 +11,36 @@
           %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
             %i.icon-comments-alt
             = _('Discuss')
-        = content_tag_with_path_checking(:li, angle: 'vettable') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
-            %i.icon-check
-            = _('Vet')
-        = content_tag_with_path_checking(:li, angle: 'votable') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
-            %i.icon-envelope
-            = _('Vote')
-        = content_tag_with_path_checking(:li, angle: 'pickable') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
-            %i.icon-cog
-            = _('Pick')
-        = content_tag_with_path_checking(:li, angle: 'approvable') do |path|
-          %a{href: path, title: s_('Tooltip|Show designed stories ready to be approved'), :'data-placement' => 'bottom'}
-            %i.icon-ok-circle
-            = _('Approve')
-        = content_tag_with_path_checking(:li, angle: 'buildable') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
-            %i.icon-cogs
-            = _('Build')
-        = content_tag_with_path_checking(:li, angle: 'signoffable') do |path|
-          %a{href: path, title: s_('Tooltip|Show implemented stories ready to be signed off'), :'data-placement' => 'bottom'}
-            %i.icon-ok-sign
-            = _('Sign Off')
+        - if can?(:create, Vetting)
+          = content_tag_with_path_checking(:li, angle: 'vettable') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
+              %i.icon-check
+              = _('Vet')
+        - if can?(:create, Vote)
+          = content_tag_with_path_checking(:li, angle: 'votable') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
+              %i.icon-envelope
+              = _('Vote')
+        - if can?(:pick, Idea)
+          = content_tag_with_path_checking(:li, angle: 'pickable') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
+              %i.icon-cog
+              = _('Pick')
+        - if can?(:approve, Idea)
+          = content_tag_with_path_checking(:li, angle: 'approvable') do |path|
+            %a{href: path, title: s_('Tooltip|Show designed stories ready to be approved'), :'data-placement' => 'bottom'}
+              %i.icon-ok-circle
+              = _('Approve')
+        - if current_user.plays?(:architect, :product_manager, :designer, :developer)
+          = content_tag_with_path_checking(:li, angle: 'buildable') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
+              %i.icon-cogs
+              = _('Build')
+        - if can?(:sign_off, Idea)
+          = content_tag_with_path_checking(:li, angle: 'signoffable') do |path|
+            %a{href: path, title: s_('Tooltip|Show implemented stories ready to be signed off'), :'data-placement' => 'bottom'}
+              %i.icon-ok-sign
+              = _('Sign Off')
         = content_tag_with_path_checking(:li, angle: 'followed') do |path|
           %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty

@@ -24,9 +24,9 @@ class Ability
       can :destroy,  Vetting.recently_created
     end
 
-    # Vote on ideas
-    can :create,  Vote, subject_type: 'Idea'
-    can :destroy, Vote.recently_created
+    # Vote
+    can :create,  Vote
+    can :destroy, Vote.recently_created, user_id: user.id
 
     # Idea lifecycle
     if user.plays?(:product_manager)
