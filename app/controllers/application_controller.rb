@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = FastGettext.set_locale(:en)
   end
 
+
+  def render_error_page(error, options = {})
+    render template:"errors/#{error}", locals:options.slice(:message), status:error
+  end
+
 end
