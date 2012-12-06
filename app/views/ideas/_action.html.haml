@@ -28,20 +28,26 @@
 
 
   / vet
-  - if idea.can_vet»? && can?(:create, idea.vettings.build)
-    - if vetting = current_user.vettings.where(idea_id: idea.id).first
-      %li
-        = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
-          %i.icon-check
-          = _('Cancel your vetting')
-    - elsif idea.sized?
-      %li
-        = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
-          %i.icon-check
-          = _('Vet this idea')
+  - if idea.can_vet»?
+    - if can?(:create, idea.vettings.build)
+      - if vetting = current_user.vettings.where(idea_id: idea.id).first
+        %li
+          = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+            %i.icon-check
+            = _('Cancel your vetting')
+      - elsif idea.sized?
+        %li
+          = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+            %i.icon-check
+            = _('Vet this idea')
+      - else
+        %li
+          %a.btn.btn-block.disabled{ title: s_('Tooltip|The idea need to be sized by an architect and a product manager before you can vet it.'), :'data-placement' => placement }
+            %i.icon-check
+            = _('Vet this idea')
     - else
       %li
-        %a.btn.btn-block.disabled{ title: s_('Tooltip|The idea need to be sized by an architect and a product manager before you can vet it.'), :'data-placement' => placement }
+        %a.btn.btn-block.disabled{ title: s_('Tooltip|Only architects and product managers can vet ideas.'), :'data-placement' => placement }
           %i.icon-check
           = _('Vet this idea')
   - else
@@ -53,15 +59,21 @@
 
 
   / vote
-  - if idea.can_vote»? && can?(:create, idea.votes.build)
-    - if vote = current_user.votes.on_idea(idea).first
-      %li
-        = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
-          %i.icon-envelope
-          = _('Withdraw your vote')
+  - if idea.can_vote»?
+    - if can?(:create, idea.votes.build)
+      - if vote = current_user.votes.on_idea(idea).first
+        %li
+          = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+            %i.icon-envelope
+            = _('Withdraw your vote')
+      - else
+        %li
+          = link_to idea_votes_path(idea), method: :post, class: 'btn btn-block btn-primary', title: s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+            %i.icon-envelope
+            = _('Vote for this')
     - else
       %li
-        = link_to idea_votes_path(idea), method: :post, class: 'btn btn-block btn-primary', title: s_('Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+        %a.btn.btn-block.disabled{ title: not_authorized_message(:vote, idea), :'data-placement' => placement }
           %i.icon-envelope
           = _('Vote for this')
   - else
@@ -74,10 +86,16 @@
 
   / pick
   - if idea.can_pick»?
-    %li
-      = link_to idea_path(idea, idea: { state: :picked }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => placement do
-        %i.icon-cog
-        = _('Pick this idea')
+    - if can?(:pick, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: :picked }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => placement do
+          %i.icon-cog
+          = _('Pick this idea')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: not_authorized_message(:pick, idea), :'data-placement' => placement }
+          %i.icon-cog
+          = _('Pick this idea')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:picked), :'data-placement' => placement }
@@ -88,9 +106,14 @@
 
   / design
   - if idea.can_design»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'designed' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.'), :'data-placement' => placement do
-        = _('Mark as designed')
+    - if can?(:design, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'designed' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.<br/>Make sure you\'ve attached design files!'), :'data-placement' => placement do
+          = _('Mark as designed')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as designed.'), :'data-placement' => placement }
+          = _('Mark as designed')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:designed), :'data-placement' => placement }
@@ -99,10 +122,16 @@
 
   / approve
   - if idea.can_approve»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'approved' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => placement do
-        %i.icon-ok-circle
-        = _('Approve')
+    - if can?(:approve, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'approved' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => placement do
+          %i.icon-ok-circle
+          = _('Approve')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can approve an idea design.'), :'data-placement' => placement }
+          %i.icon-ok-circle
+          = _('Approve')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:approved), :'data-placement' => placement }
@@ -114,9 +143,14 @@
 
   / implement
   - if idea.can_implement»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'implemented' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), :'data-placement' => placement do
-        = _('Mark as implemented')
+    - if can?(:implement, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'implemented' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), :'data-placement' => placement do
+          = _('Mark as implemented')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as implemented.'), :'data-placement' => placement }
+          = _('Mark as implemented')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:implemented), :'data-placement' => placement }
@@ -128,10 +162,16 @@
 
   / sign off
   - if idea.can_sign_off»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'signed_off' } ), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => placement do
-        %i.icon-ok-sign
-        = _('Sign off')
+    - if can?(:sign_off, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'signed_off' } ), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => placement do
+          %i.icon-ok-sign
+          = _('Sign off')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can sign off a staged idea.'), :'data-placement' => placement }
+          %i.icon-ok-sign
+          = _('Sign off')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:signed_off), :'data-placement' => placement }
@@ -146,10 +186,16 @@
 
   / deliver
   - if idea.can_deliver»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => placement do
-        %i.icon-truck
-        = _('Deliver')
+    - if can?(:deliver, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => placement do
+          %i.icon-truck
+          = _('Deliver')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as delivered.'), :'data-placement' => placement }
+          %i.icon-truck
+          = _('Deliver')
   - else
     %li
       %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:implemented), :'data-placement' => placement }
@@ -161,10 +207,16 @@
 
   / deliver
   - if idea.can_veto»?
-    %li
-      = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Veto this idea. Use with caution and please leave a comment mentionning why you\'re vetoing this idea.<br/>Note that all votes and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, :'data-placement' => placement do
-        %i.icon-ban-circle
-        = _('Veto')
+    - if can?(:veto, idea)
+      %li
+        = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Veto this idea. Use with caution and please leave a comment mentionning why you\'re vetoing this idea.<br/>Note that all votes and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, :'data-placement' => placement do
+          %i.icon-ban-circle
+          = _('Veto')
+    - else
+      %li
+        %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can sign off a staged idea.'), :'data-placement' => placement }
+          %i.icon-ban-circle
+          = _('Veto')
   - else
     %li
       %a.btn.btn-block.disabled{ title: s_('Tooltip|This idea cannot be vetoed.'), :'data-placement' => placement }
