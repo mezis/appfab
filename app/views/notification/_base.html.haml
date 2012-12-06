@@ -5,8 +5,8 @@
   %td.timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
   %td.action
     - if notification.unread
-      = link_to notification_path(notification, notification: { unread: false }), method: :put, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
+      = can_link_to notification_path(notification, notification: { unread: false }), auth:[:update, notification], method: :put, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
         %i.icon-check
     - else
-      = link_to notification_path(notification, notification: { unread: true }), method: :put, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
+      = can_link_to notification_path(notification, notification: { unread: true }), auth:[:update, notification], method: :put, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
         %i.icon-check-empty

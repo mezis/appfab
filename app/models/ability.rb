@@ -48,5 +48,9 @@ class Ability
     if user.plays?(:account_owner)
       can [:create, :destroy], UserRole
     end
+
+    # Notification
+    can :read,   Notification::Base, recipient_id: user.id
+    can :update, Notification::Base, recipient_id: user.id
   end
 end
