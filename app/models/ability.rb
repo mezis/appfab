@@ -3,7 +3,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new?
+    user ||= User.new
 
     # Idea permissions
     can [:create, :read], Idea, author: { account_id: user.account_id }

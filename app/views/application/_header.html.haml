@@ -31,7 +31,7 @@
             %a{href: path, title: s_('Tooltip|Show designed stories ready to be approved'), :'data-placement' => 'bottom'}
               %i.icon-ok-circle
               = _('Approve')
-        - if current_user.plays?(:architect, :product_manager, :designer, :developer)
+        - if current_user.andand.plays?(:architect, :product_manager, :designer, :developer)
           = content_tag_with_path_checking(:li, angle: 'buildable') do |path|
             %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
               %i.icon-cogs
