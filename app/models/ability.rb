@@ -43,6 +43,15 @@ class Ability
       can :veto,     Idea
     end
 
+    # User
+    can :read, User, account_id: user.account_id
+    can :edit, User, id: user.id
+
+    if user.plays?(:account_owner)
+      can :edit, User, account_id: user.account_id
+      can :update_voting_power, User, account_id: user.account_id
+    end
+
     # User role
     can :read, UserRole
     if user.plays?(:account_owner)

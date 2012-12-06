@@ -14,7 +14,8 @@
     %ul
       - if @user.current_sign_in_at || @user.last_sign_in_at
         %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(@user.current_sign_in_at || @user.last_sign_in_at) }
-      %li= _('%{first_name} has %{count} %{karma_symbol}').html_safe % { first_name:@user.first_name, count:@user.karma, karma_symbol:user_karma_symbol }
+      %li= _('Has %{count} %{karma_symbol}').html_safe % { count:@user.karma, karma_symbol:user_karma_symbol }
+      %li= _('Has ×%{count} voting power.') % { count:@user.voting_power }
       - if count = @user.ideas.count and count > 0
         %li= n_('Has submitted an idea', 'Has submitted %{count} ideas', count) % { count:count }
       - if count = @user.vetted_ideas.count and count > 0
@@ -26,8 +27,10 @@
 
   .span3
 
-    = link_to "Edit", edit_user_path(@user), class: 'btn btn-block'
-    = link_to "View All", users_path, class: 'btn btn-block'
+    = can_link_to edit_user_path(@user), auth:[:edit, @user], class: 'btn btn-block' do
+      = _("Edit %{user}") % { user:@user.first_name }
+    = link_to users_path, class: 'btn btn-block' do
+      = _("View all users")
 
     %h4= _('Roles')
 

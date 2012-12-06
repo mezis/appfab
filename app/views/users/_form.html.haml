@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for user do |f|
   = f.error_messages
   %p
     = f.label :first_name
@@ -8,5 +8,11 @@
     = f.label :last_name
     %br
     = f.text_field :last_name
+  - if can?(:update_voting_power, user)
+    %p
+      = f.label :voting_power
+      %br
+      = f.select :voting_power, options_for_select([['1',1],['2',2],['3',3],['5',5],['8',8]], user.voting_power)
   %p
-    = f.submit
+    = link_to _('Cancel'), user, class: 'btn'
+    = f.submit class: 'btn btn-primary'
