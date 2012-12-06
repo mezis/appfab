@@ -42,5 +42,11 @@ class Ability
       can :sign_off, Idea
       can :veto,     Idea
     end
+
+    # User role
+    can :read, UserRole
+    if user.plays?(:account_owner)
+      can [:create, :destroy], UserRole
+    end
   end
 end
