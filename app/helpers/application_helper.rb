@@ -45,7 +45,7 @@ module ApplicationHelper
     if if_condition && auth_condition
       link_to(*args, &block)
     else
-      options.slice!(:class, :id)
+      options.slice!(:class, :id, :'data-placement')
       options[:class] = [options.fetch(:class, '').split + %w(disabled)].join(' ')
       options[:title] = not_authorized_message(*auth_criteria) if auth_criteria
       content_tag(:a, options, &block)
