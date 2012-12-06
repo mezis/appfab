@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :require_account!
   before_filter :cleanup_session
 
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
@@ -26,7 +27,7 @@ class IdeasController < ApplicationController
     @order    = set_order_from_params_and_angle
     @filter   = set_filter_from_params_and_angle
     @category = set_category_from_params_and_angle
-    @ideas = Idea.
+    @ideas = current_account.ideas.
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
     @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter   == 'all'
@@ -34,7 +35,7 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @idea = Idea.find(params[:id])
+    @idea = current_account.ideas.find(params[:id])
   end
 
   def new
@@ -51,11 +52,11 @@ class IdeasController < ApplicationController
   end
 
   def edit
-    @idea = Idea.find(params[:id])
+    @idea = current_account.ideas.find(params[:id])
   end
 
   def update
-    @idea = Idea.find(params[:id])
+    @idea = current_account.ideas.find(params[:id])
 
     # state changes: map state names to values
     if state = params[:idea].andand[:state]
