@@ -38,6 +38,9 @@
       %li{ class: (@order == 'creation' && 'active')}
         = link_to ideas_path(params.merge(order:'creation')) do
           = _('Sort by creation')
+      %li{ class: (@order == 'size' && 'active')}
+        = link_to ideas_path(params.merge(order:'size')) do
+          = _('Sort by size')
 
     %ul.nav.nav-pills.nav-stacked
       %li{ class: (@filter == 'all' && 'active')}

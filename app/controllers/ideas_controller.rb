@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
 
-  ValidOrders  = %w(rating activity progress creation)
+  ValidOrders  = %w(rating activity progress creation size)
   DefaultOrder = {
     'discussable' => 'activity',
     'vettable'    => 'activity',
