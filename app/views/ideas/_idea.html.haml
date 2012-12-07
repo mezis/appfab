@@ -26,10 +26,13 @@
 
     .body
       %h3.title
-        = idea.title
         - if title_type == :link
           = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
+            %span= idea.title
             %i.icon-arrow-right
+        - else
+          = idea.title
+
 
       - if !collapsed && idea.product_manager
         .product_manager
