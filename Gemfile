@@ -53,7 +53,7 @@ gem 'newrelic_rpm', :group => :production
 
 # styled user input (markdown)
 gem 'html-pipeline'
-
+gem 'charlock_holmes', git: 'git://github.com/brianmario/charlock_holmes.git', branch: 'bundle-icu'
 
 # Gems used only for assets and not required
 # in production environments by default.
