@@ -175,11 +175,11 @@ class Idea < ActiveRecord::Base
   end
 
   def self.approvable_by(user)
-    with_state(:designed)
+    discussable_by(user).with_state(:designed)
   end
 
   def self.signoffable_by(user)
-    with_state(:implemented)
+    discussable_by(user).with_state(:implemented)
   end
 
   def self.buildable_by(user)
