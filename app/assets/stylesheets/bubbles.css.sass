@@ -19,6 +19,12 @@
     position:         relative
     vertical-align:   top
 
+    .body
+      *:last-child
+        margin-bottom: 0
+      *:first-child
+        margin-top:    0
+
   .tail
     position: absolute
     height:  ($shadow_radius + $nose_size)
@@ -58,5 +64,3 @@
       &:before
         +transform(skewX(45deg))
         right:             $nose_size
-
-  ​
