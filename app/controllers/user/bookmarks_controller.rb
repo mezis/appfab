@@ -2,7 +2,8 @@ class User::BookmarksController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    @user_bookmark = current_user.bookmarks.new(params[:user_bookmark])
+    idea = current_account.ideas.find(params[:user_bookmark][:idea_id])
+    @user_bookmark = current_user.bookmarks.new(idea:idea)
     if @user_bookmark.save
       flash[:success] = _('Bookmark successfuly added.')
     else

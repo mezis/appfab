@@ -31,7 +31,7 @@ class Idea < ActiveRecord::Base
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
   has_many   :backers,    :class_name => 'User', :through => :votes,    :source => :user
   has_many   :bookmarks,  :class_name => 'User::Bookmark', :dependent => :destroy
-
+  has_many   :bookmarkers, :through => :bookmarks, :source => :idea
 
   validates_presence_of :author
   validates_presence_of :rating

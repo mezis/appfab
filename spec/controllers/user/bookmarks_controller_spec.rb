@@ -4,16 +4,18 @@ describe User::BookmarksController do
   login_user
   render_views
 
+  let(:idea) { Idea.make! }
+
   it "create action should redirect when model is invalid" do
     User::Bookmark.any_instance.stub(:valid? => false)
-    post :create
-    response.should redirect_to(ideas_path(angle: 'followed'))
+    post :create, user_bookmark: { idea_id: idea.id }
+    response.should redirect_to(idea_path(idea))
   end
 
   it "create action should redirect when model is valid" do
     User::Bookmark.any_instance.stub(:valid? => true)
-    post :create
-    response.should redirect_to(ideas_path(angle: 'followed'))
+    post :create, user_bookmark: { idea_id: idea.id }
+    response.should redirect_to(idea_path(idea))
   end
 
   it "destroy action should destroy model and redirect to followed ideas" do
