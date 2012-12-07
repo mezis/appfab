@@ -1,5 +1,15 @@
 - title @idea.title, show_title: false
 
+- if @just_created
+  .row
+    .span12
+      %div.alert.alert-block.alert-success
+        %button.close{ :'data-dismiss' => 'alert' }<
+          %i.icon-remove
+        %h4= _('Awesome! Your idea was sumbitted.')
+        %p= _('As it is the most recently active story, it now appears at the top the the discussion list.')
+        %p= _('This means your team should now start discussing it! Take part in the discussion to perfect your idea. Once it is correctly formatted and documented, a product manager and an architect should vet it, and the voting will start!')
+
 .row
   .span9
     = render 'idea', idea: @idea, collapsed: false, status: :header

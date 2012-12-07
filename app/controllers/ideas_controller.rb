@@ -35,6 +35,8 @@ class IdeasController < ApplicationController
   end
 
   def show
+    @just_created = flash[:just_created]
+    flash.delete(:just_created)
     @idea = current_account.ideas.find(params[:id])
   end
 
@@ -45,7 +47,8 @@ class IdeasController < ApplicationController
   def create
     @idea = current_user.ideas.new(params[:idea])
     if @idea.save
-      redirect_to @idea, :notice => _("Successfully submitted idea.")
+      flash[:just_created] = true
+      redirect_to @idea
     else
       render :action => 'new'
     end
