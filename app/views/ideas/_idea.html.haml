@@ -39,15 +39,15 @@
           %strong= _('Product manager:')
           = render idea.product_manager, avatar: false
       %p
-        = idea.problem
+        != pipeline_render idea.problem
 
       - unless collapsed
         %p
           %strong= _('Solution:')
-          = idea.solution
+          != pipeline_render idea.solution
         %p
           %strong= _('Metrics:')
-          = idea.metrics
+          != pipeline_render idea.metrics
 
     .meta.bottom
       .people
