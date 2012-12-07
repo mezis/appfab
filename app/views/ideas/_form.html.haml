@@ -57,14 +57,5 @@
 
   .row
     .span12
-      = f.label :deadline
-    .span8
-      = f.text_field :deadline, placeholder: 'YYYY-MM-DD'
-    .span4
-      %span.help-block
-        = _('Suggestions for metrics statement')
-
-  .row
-    .span12
       = f.submit class: 'btn btn-primary'
       %a.btn{ href: ideas_path }= _('Cancel')

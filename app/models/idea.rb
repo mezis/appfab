@@ -38,9 +38,6 @@ class Idea < ActiveRecord::Base
   # validates_presence_of :category
 
   validates_presence_of :title, :problem, :solution, :metrics
-  validates_inclusion_of :deadline,
-    allow_nil: true,
-    in: Proc.new { Date.today .. (Date.today + 365) }
 
   validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
   validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true

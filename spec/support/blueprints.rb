@@ -43,7 +43,6 @@ Idea.blueprint do
   problem    { Faker::Lorem.paragraph }
   solution   { Faker::Lorem.paragraph }
   metrics    { Faker::Lorem.paragraph }
-  deadline   { Date.today + 90 }
 end
 
 Idea.blueprint(:submitted) do
