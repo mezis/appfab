@@ -10,6 +10,18 @@
         %p= _('As it is the most recently active story, it now appears at the top the the discussion list.')
         %p= _('This means your team should now start discussing it! Take part in the discussion to perfect your idea. Once it is correctly formatted and documented, a product manager and an architect should vet it, and the voting will start!')
 
+- if @idea.can_vote»? && can?(:create, @idea.votes.build)
+  .row
+    .span12
+      %div.alert.alert-block
+        %button.close{ :'data-dismiss' => 'alert' }<
+          %i.icon-remove
+        %h4= _('Time to vote!')
+        %p= _('Please consider your decision to vote for an idea carefully.')
+        %p= _(' You can only back so many ideas , as each vote will cost you %{count} %{karma}.').html_safe % { count: -configatron.app_fab.karma.vote, karma:user_karma_symbol }
+        %p= _('You can withdraw your vote within 15 minutes of casting it if you\'re having second thoughts, but after that point, it will be final!')
+
+
 .row
   .span9
     = render 'idea', idea: @idea, collapsed: false, status: :header
