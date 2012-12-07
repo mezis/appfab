@@ -32,3 +32,13 @@
 
   .brand
     font-family:    $headingsFontFamily
+
+
+@media (max-width: 768px)
+  #header li span
+    display: none
+    &.karma
+      display: inherit
+@media (max-width: 480px)
+  #header li span.figure
+    display: none
