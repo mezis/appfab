@@ -2,22 +2,41 @@ module PipelineHelper
 
   def pipeline_render(text)
     hash = Digest::SHA1.hexdigest(text)
-    Rails.cache.fetch("pipeline_render/#{pipeline_cache_version}/#{hash}") do
-      pipeline_default.call(text)[:output].to_s
+    Rails.cache.fetch("pipeline_render/#{CACHE_VERSION}/#{hash}") do
+      markdown.render(text)
     end
   end
 
   private
 
-  def pipeline_default
-    pipeline = HTML::Pipeline.new [
-      HTML::Pipeline::MarkdownFilter,
-      HTML::Pipeline::SyntaxHighlightFilter,
-      HTML::Pipeline::EmojiFilter
-    ], { gfm:true }
-  end
+  CACHE_VERSION = 3
 
-  def pipeline_cache_version
-    1
+  PARSER_OPTIONS = {
+    no_intra_emphasis:    true,
+    tables:               true,
+    fenced_code_blocks:   true,
+    autolink:             true,
+    strikethrough:        true,
+    lax_spacing:          true,
+    space_after_headers:  true,
+    superscript:          true,
+  }
+
+  RENDERER_OPTIONS = {
+    filter_html:          true,
+    no_images:            true,
+    no_links:             false,
+    no_styles:            true,
+    safe_links_only:      true,
+    with_toc_data:        false,
+    hard_wrap:            true,
+    xhtml:                true,
+  }
+
+  def markdown
+    @markdown ||= begin
+      renderer = Redcarpet::Render::XHTML.new(RENDERER_OPTIONS)
+      Redcarpet::Markdown.new(renderer, PARSER_OPTIONS)
+    end
   end
 end
