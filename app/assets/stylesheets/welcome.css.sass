@@ -1,3 +1,21 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import compass
+@import application/variables
+
+#welcome-index
+
+  #states
+    margin-left:  0
+    text-align:   center
+    li
+      +inline-block
+      &:last-child
+        // +box-shadow(0px 1px 5px $major_color)
+        background-color: $major_color
+
+  h4 i
+    margin-right: 1ex
+  #pitch p
+    text-align: justify
+    +hyphens(auto)
+  .how-it-works
+    +opacity(0.5)

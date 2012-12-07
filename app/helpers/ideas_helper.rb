@@ -54,7 +54,7 @@ module IdeasHelper
     when :designed    then s_('Idea state|designed')      
     when :approved    then s_('Idea state|approved')      
     when :implemented then s_('Idea state|implemented')        
-    when :signed_off  then s_('Idea state|signed_off')        
+    when :signed_off  then s_('Idea state|signed off')        
     when :live        then s_('Idea state|live')
     end
   end
