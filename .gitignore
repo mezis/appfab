@@ -30,4 +30,7 @@ db/schema.rb
 # Heroku/Taps turds
 push_*.dat
 
+# Finder turds
+.DS_Store
+
 .rbenv-version
