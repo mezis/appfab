@@ -18,7 +18,7 @@ class Idea < ActiveRecord::Base
   ]
 
   belongs_to :author, :class_name => 'User'
-  has_one    :account, :through => :author
+  belongs_to :account
   has_many   :vettings, :dependent => :destroy
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_many   :comments
@@ -33,26 +33,19 @@ class Idea < ActiveRecord::Base
   has_many   :bookmarks,  :class_name => 'User::Bookmark', :dependent => :destroy
   has_many   :bookmarkers, :through => :bookmarks, :source => :idea
 
-  validates_presence_of :author
-  validates_presence_of :rating
-  # validates_presence_of :category
-
-  validates_presence_of :title, :problem, :solution, :metrics
-
+  validates_presence_of  :author
+  validates_presence_of  :account
+  validates_presence_of  :rating
+  validates_presence_of  :title, :problem, :solution, :metrics
   validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
   validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true
-
   validates_presence_of  :kind
   validates_inclusion_of :kind, :in => %w(bug chore feature)
-
   validates_inclusion_of :category, in: lambda { |idea| idea.account.categories }, allow_nil:true
-
 
   default_values rating: 0, kind:'feature'
 
-
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
-
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
 
   state_machine :state, :initial => :submitted do
@@ -294,5 +287,4 @@ class Idea < ActiveRecord::Base
     return unless (changes.keys & ImmutableAfterVetting).any?
     errors.add :base, _('Idea statement cannot be changed once it is vetted')
   end
-
 end

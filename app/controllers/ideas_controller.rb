@@ -46,6 +46,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = current_user.ideas.new(params[:idea])
+    @idea.account = current_account
     if @idea.save
       flash[:just_created] = true
       redirect_to @idea

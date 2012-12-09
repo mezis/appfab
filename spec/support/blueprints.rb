@@ -39,6 +39,7 @@ end
 
 Idea.blueprint do
   author     { User.last || User.make! }
+  account    { Account.last || Account.make! }
   title      { Faker::Lorem.sentence }
   problem    { Faker::Lorem.paragraph }
   solution   { Faker::Lorem.paragraph }
