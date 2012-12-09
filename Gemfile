@@ -54,6 +54,11 @@ gem 'newrelic_rpm', :group => :production
 # styled user input (markdown)
 gem 'redcarpet'
 
+# a standard web UX library
+gem 'jquery-rails'
+
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -71,7 +76,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
 
 group :development do
   # better generators
@@ -107,4 +111,8 @@ group :development do
 
   # heroku interaction
   gem 'taps',             :require => false
+
+  # is that a DBA in your pocket, or are you just happy to see me?
+  gem 'query_reviewer'
 end
+

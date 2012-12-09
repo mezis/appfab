@@ -30,3 +30,6 @@
                   %i.icon-remove
       = yield
     = render 'footer'
+
+    - if Rails.env.development?
+      = query_review_output

@@ -188,6 +188,7 @@ GEM
       pry (~> 0.9.10)
     pry-rails (0.2.2)
       pry (>= 0.9.10)
+    query_reviewer (0.1.6)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -328,6 +329,7 @@ DEPENDENCIES
   pry
   pry-nav
   pry-rails
+  query_reviewer
   rack-cache
   rails
   rb-fchange
