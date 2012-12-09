@@ -5,13 +5,12 @@ describe AccountsController do
   login_user
   render_views
 
-  it "index action should render index template" do
-    get :index
-    response.should render_template(:index)
+  before do
+    @current_user.plays! :account_owner
   end
 
   it "show action should render show template" do
-    get :show, :id => Account.make!
+    get :show, :id => @current_user.account
     response.should render_template(:show)
   end
 
@@ -33,24 +32,24 @@ describe AccountsController do
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Account.make!
+    get :edit, :id => @current_user.account
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
-    account = Account.make!
+    account = @current_user.account
     Account.any_instance.stub(:valid? => false)
     put :update, :id => account.id
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    put :update, :id => Account.make!
+    put :update, :id => @current_user.account
     response.should redirect_to(account_url(assigns[:account]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    account = Account.make!
+    account = @current_user.account
     delete :destroy, :id => account
     response.should redirect_to(accounts_url)
     Account.exists?(account.id).should be_false

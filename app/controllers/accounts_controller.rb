@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     authorize! :update, @account
 
-    categories = params[:account].delete(:categories)
+    categories = params[:account].andand.delete(:categories)
     if categories.kind_of?(String)
       params[:account][:categories] = Set.new categories.split(/\s*,\s*/)
     end

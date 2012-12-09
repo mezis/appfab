@@ -6,7 +6,7 @@ describe UsersController do
 
   it "index action should render index template" do
     get :index
-    response.should render_template(:index)
+    response.should redirect_to(account_url(@current_user.account))
   end
 
   it "show action should render show template" do
