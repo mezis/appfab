@@ -28,6 +28,7 @@ class IdeasController < ApplicationController
     @filter   = set_filter_from_params_and_angle
     @category = set_category_from_params_and_angle
     @ideas = current_account.ideas.
+      includes(:vettings).
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
     @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter   == 'all'
