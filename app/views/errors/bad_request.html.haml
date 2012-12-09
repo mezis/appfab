@@ -1,6 +1,8 @@
-- title _('Uh-oh...')
+- title _('Uh-oh...'), show_title:false
 
-%h3= _("Sorry, we could get that page for you.")
+%h3
+  %i.icon-cloud
+  = _("Sorry, we could get that page for you.")
 
 - if defined?(message)
   %p= message

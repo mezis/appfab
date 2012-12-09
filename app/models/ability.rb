@@ -60,5 +60,12 @@ class Ability
     # Notification
     can :read,   Notification::Base, recipient_id: user.id
     can :update, Notification::Base, recipient_id: user.id
+
+    # Account
+    can :create, Account
+    can :read, Account, id: user.account_id
+    if user.plays?(:account_owner)
+      can [:update, :destroy], Account, id: user.account_id
+    end
   end
 end

@@ -4,7 +4,7 @@ AppFab::Application.routes.draw do
   get "welcome/index"
 
   resources :notifications
-  resources :accounts
+  resources :accounts, except: [:index]
   resources :ideas do
     resources :vettings,    only: [:create, :destroy]
     resources :votes,       only: [:create, :destroy]

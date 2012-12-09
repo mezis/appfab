@@ -1,8 +1,3 @@
 - title "Edit Account"
 
-= render 'form'
-
-%p
-  = link_to "Show", @account
-  |
-  = link_to "View All", accounts_path
+= render 'form', account:@account

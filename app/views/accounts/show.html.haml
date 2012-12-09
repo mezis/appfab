@@ -1,12 +1,17 @@
-- title "Account"
+- title _("Team %{team_name}") % { team_name:@account.name }, show_title:false
 
-%p
-  %strong Name:
-  = @account.name
+.row
+  .span9
+    - @account.users.each do |user|
+      = render user, name:true, avatar:true, big:true
 
-%p
-  = link_to "Edit", edit_account_path(@account)
-  |
-  = link_to "Destroy", @account, confirm: 'Are you sure?', method: :delete
-  |
-  = link_to "View All", accounts_path
+  .span3
+    %h3= _("Team %{team_name}") % { team_name:@account.name }
+    %p= _('There currently are %{count} users in this team.') % { count: current_account.users.count }
+    %p= _('They have a total of %{count} %{karma_symbol}.').html_safe % { count: current_account.users.sum(:karma), karma_symbol:user_karma_symbol }
+
+    = can_link_to edit_account_path(@account), auth:[:update, @account], class:'btn btn-block' do
+      = _("Edit")
+    = can_link_to @account, auth:[:destroy, @account], confirm: 'Are you sure?', method: :delete, class:'btn btn-block' do
+      = _("Destroy")
+

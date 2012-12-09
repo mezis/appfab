@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @users = current_account.andand.users
+    redirect_to account_path(current_account)
   end
 
   def show

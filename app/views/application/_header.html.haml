@@ -53,8 +53,14 @@
             %i.icon-bookmark-empty
             = header_angle_counter('followed')
             %span= _('Follow')
+
       - if current_user
         %ul.nav.pull-right
+          - if current_account
+            = content_tag_with_path_checking(:li, controller: 'accounts', action: 'show', id: current_account.to_param, html: { class:'account' }) do |path|
+              = link_to path, title: s_('Tooltip|This is your active team!<br/>Click here to see team details.'), :'data-placement' => 'bottom' do
+                %span= current_account.name
+                %i.icon-group
           = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
             = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
               %span= current_user.first_name

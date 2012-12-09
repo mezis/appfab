@@ -1,8 +1,14 @@
-= form_for @account do |f|
+= form_for account do |f|
   = f.error_messages
-  %p
-    = f.label :name
-    %br
-    = f.text_field :name
-  %p
-    = f.submit
+
+  .row
+    .span8
+      = f.label :name
+      = f.text_field :name
+    .span8
+      = label_tag 'account[categories]', _('Categories')
+      = text_field_tag 'account[categories]', account.categories.sort.join(', ')
+  .row
+    .span12
+      = f.submit class:'btn btn-primary'
+      = link_to _('Cancel'), (account.new_record? ? root_path : account_path(account)), class:'btn'

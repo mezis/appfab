@@ -1,9 +1,0 @@
-- title "Users", show_title:false
-
-.row
-  .span3
-    %p= _('There currently are %{count} users in this account.') % { count: current_account.users.count }
-    %p= _('They have a total of %{count} %{karma_symbol}.').html_safe % { count: current_account.users.sum(:karma), karma_symbol:user_karma_symbol }
-  .span9
-    - @users.each do |user|
-      = render user, name:true, avatar:true, big:true

@@ -1,6 +1,8 @@
-- title _('Hey!')
+- title _('Hey!'), show_title:false
 
-%h3= _("Sorry, but we can't let you access that page.")
+%h3
+  %i.icon-lock
+  = _("Sorry, but we can't let you access that page.")
 
 - if defined?(message)
   %p= message
