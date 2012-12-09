@@ -30,7 +30,7 @@
       = render @idea.attachments
     #comments
       = render 'comments/form', comment: Comment.new(idea: @idea)
-      = render @idea.comments
+      = render @idea.comments.by_created_at
   .span3
     = render 'action', idea: @idea
     = render 'attachments/uploader', idea: @idea
