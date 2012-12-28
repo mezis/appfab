@@ -1,13 +1,13 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe UserRole do
+describe User::Role do
   its 'factory should work' do
     described_class.make.should be_valid
   end
 
   it "should not be valid by default" do
-    UserRole.new.should_not be_valid
+    User::Role.new.should_not be_valid
   end
 
   it 'does not allow duplicates' do
@@ -17,7 +17,7 @@ describe UserRole do
   end
 end
 
-describe UserRole::UserMethods do
+describe User::Role::UserMethods do
   describe '#plays?' do
     before do
       @user = User.make!

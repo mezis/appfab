@@ -52,9 +52,9 @@ class Ability
     end
 
     # User role
-    can :read, UserRole
+    can :read, User::Role
     if user.plays?(:account_owner)
-      can [:create, :destroy], UserRole
+      can [:create, :destroy], User::Role
     end
 
     # Notification

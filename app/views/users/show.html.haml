@@ -34,11 +34,11 @@
 
     %h4= _('Roles')
 
-    - UserRole::Names.each do |role_name|
+    - User::Role::Names.each do |role_name|
       - if role = @user.plays?(role_name)
         = can_link_to user_role_path(@user, role), auth:[:destroy, role], method: :delete, class: 'btn btn-block  active', :'data-placement' => 'left' do
           = user_role_name(role_name)
       - else
-        = can_link_to user_roles_path(@user, user_role: {name: role_name}), auth:[:create, UserRole], method: :post, class: 'btn btn-block', :'data-placement' => 'left' do
+        = can_link_to user_roles_path(@user, user_role: {name: role_name}), auth:[:create, User::Role], method: :post, class: 'btn btn-block', :'data-placement' => 'left' do
           = user_role_name(role_name)
 

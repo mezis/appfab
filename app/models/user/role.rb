@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class UserRole < ActiveRecord::Base
+class User::Role < ActiveRecord::Base
   Names = [:product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
 
   attr_accessible :user, :name, :user_id
@@ -14,7 +14,7 @@ class UserRole < ActiveRecord::Base
   module UserMethods
     def self.included(by)
       by.class_eval do
-        has_many :roles, class_name: 'UserRole', :dependent => :destroy
+        has_many :roles, class_name: 'User::Role', :dependent => :destroy
 
         scope :playing, lambda { |*role_names|
           joins(:roles).where('user_roles.name' => role_names).group('users.id')

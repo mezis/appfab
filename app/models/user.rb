@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
   has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :user
 
-  include UserRole::UserMethods
+  include User::Role::UserMethods
   include Notification::Base::CanBeSubject
   include User::Bookmark::UserMethods
 

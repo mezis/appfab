@@ -25,7 +25,7 @@ User.blueprint do
 end
 
 
-UserRole.blueprint do
+User::Role.blueprint do
   name       { 'product_manager' }
   user       { User.last || User.make! }
 end
