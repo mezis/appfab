@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
   before_filter :require_account!
   before_filter :cleanup_session
 

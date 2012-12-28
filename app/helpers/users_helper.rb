@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module UsersHelper
   def user_name(user)
-    link_to(user.login, root_path, title:user_tooltip(user))
+    link_to(user.first_name, root_path, title:user_tooltip(user))
   end
 
   def user_tooltip(user)

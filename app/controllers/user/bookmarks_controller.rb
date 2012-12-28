@@ -1,5 +1,5 @@
 class User::BookmarksController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
 
   def create
     idea = current_account.ideas.find(params[:user_bookmark][:idea_id])

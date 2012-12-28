@@ -20,10 +20,10 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def _sign_in_from_hash
     Rails.logger.info _auth_hash
-    @user = User.find_or_create_from_auth_hash!(_auth_hash)
+    login = Login.find_or_create_from_auth_hash!(_auth_hash)
 
-    sign_in @user
-    flash[:success] = _('Welcome, %{user}!') % { user: @user.first_name }
+    sign_in login
+    flash[:success] = _('Welcome, %{user}!') % { user: login.first_name }
     redirect_to ideas_path(angle: IdeasController::DefaultAngle)
   end
 

@@ -1,13 +1,16 @@
 = form_for user do |f|
   = f.error_messages
-  %p
-    = f.label :first_name
-    %br
-    = f.text_field :first_name
-  %p
-    = f.label :last_name
-    %br
-    = f.text_field :last_name
+  
+  - f.fields_for :login do |ff|
+    %p
+      = ff.label :first_name
+      %br
+      = ff.text_field :first_name
+    %p
+      = ff.label :last_name
+      %br
+      = ff.text_field :last_name
+
   - if can?(:update_voting_power, user)
     %p
       = f.label :voting_power

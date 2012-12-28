@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class VotesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
   before_filter :load_idea_or_comment
   before_filter :parse_up_param, only: [:create]
 

@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
   before_filter :load_idea
 
   def show

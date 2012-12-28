@@ -16,4 +16,4 @@
           = number_with_delimiter user.karma
           = user_karma_symbol
   - if show_avatar
-    .avatar{ style: "background-image: url(#{user.gravatar_url(avatar_options)})" }
+    .avatar{ style: "background-image: url(#{user.login.gravatar_url(avatar_options)})" }

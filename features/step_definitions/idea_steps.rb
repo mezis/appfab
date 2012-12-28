@@ -1,15 +1,15 @@
 # state
 
 Given /^an? (\w+) idea "(.*?)"?$/ do |state, title|
-  user = @current_user || User.last || User.make!
+  user = (@current_login && @current_login.users.last) || User.last || User.make!
   title ||= Faker::Lorem.sentence
   idea = Idea.make!(state.to_sym, author: user, title: title)
   Mentions[Idea] = idea
 end
 
 Given /"(.*)" has vetted the idea/ do |first_name|
-  user = User.find_by_first_name(first_name)
   idea = Mentions[Idea]
+  user = idea.account.users.first_name_is(first_name).first
   idea.vettings.make! user:user
 end
 

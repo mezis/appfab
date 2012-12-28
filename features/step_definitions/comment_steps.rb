@@ -18,8 +18,8 @@ When /^I delete the comment$/ do
 end
 
 When /^a comment "(.*?)" by "(.*?)"$/ do |body, first_name|
-  author = User.find_by_first_name(first_name)
   idea = Mentions[Idea]
+  author = idea.account.users.first_name_is(first_name).first
   comment = idea.comments.make!(author:author, body:body)
   Mentions[Comment] = comment
 end

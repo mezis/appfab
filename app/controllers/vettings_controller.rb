@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class VettingsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
   before_filter :load_idea
 
   def create

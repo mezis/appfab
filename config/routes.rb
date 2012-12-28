@@ -23,7 +23,7 @@ AppFab::Application.routes.draw do
     resources :bookmarks, only: [:create, :destroy]
   end
 
-  devise_for :users, :path => :session, :controllers => {
+  devise_for :logins, :path => :session, :controllers => {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 

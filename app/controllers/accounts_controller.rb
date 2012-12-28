@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class AccountsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_login!
 
   def show
     @account = Account.find(params[:id])

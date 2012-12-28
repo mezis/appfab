@@ -16,10 +16,12 @@ describe User do
     end
 
     it 'gets user adopted by an account based on email' do
-      account_member = User.make!
-      account_member.account.update_attributes!(auto_adopt: true)
-      new_user = User.make!(email: "john@#{account_member.account.domain}")
-      new_user.account.should == account_member.account
+      # account_member = User.make!
+      # account_member.account.update_attributes!(auto_adopt: true)
+      account = Account.make!(domain:'example.com', auto_adopt:true)
+      
+      new_login = Login.make!(email: "john@example.com")
+      new_login.accounts.should include(account)
     end
   end
 end

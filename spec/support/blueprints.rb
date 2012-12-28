@@ -15,12 +15,15 @@ Account.blueprint do
   domain     { Faker::Internet.domain_name }
 end
 
-
-User.blueprint do
+Login.blueprint do
   first_name { Faker::Name.first_name }
   last_name  { Faker::Name.last_name }
   email      { Faker::Internet.email }
   password   { 'test-password' }
+end
+
+User.blueprint do
+  login
   account    { Account.last || Account.make! }
 end
 
