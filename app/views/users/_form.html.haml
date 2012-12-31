@@ -1,7 +1,7 @@
 = form_for user do |f|
   = f.error_messages
-  
-  - f.fields_for :login do |ff|
+
+  = f.fields_for :login do |ff|
     %p
       = ff.label :first_name
       %br
