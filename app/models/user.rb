@@ -3,7 +3,7 @@
 class User < ActiveRecord::Base
   extend Forwardable
 
-  attr_accessible :karma, :account, :voting_power
+  attr_accessible :karma, :account, :voting_power, :login_attributes
 
   belongs_to :login
   belongs_to :account
@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
   has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
-  has_many :backed_ideas, :class_name => 'Idea', :through => :votes, :source => :user
-
+  
   include User::Role::UserMethods
   include Notification::Base::CanBeSubject
   include User::Bookmark::UserMethods
@@ -34,6 +33,13 @@ class User < ActiveRecord::Base
 
   scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
   scope :first_name_is, lambda { |name| joins(:login).where('logins.first_name = ?', name) }
+
+
+  # this is not implemented as an association, since polymorphism and has_many through do not play well together
+  def backed_ideas
+    Idea.backed_by(self)
+  end
+
 
   def change_karma!(options = {})
     options[:by] or raise AttributeError.new('passing by: is mandatory')

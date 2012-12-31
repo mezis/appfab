@@ -48,6 +48,8 @@ class Idea < ActiveRecord::Base
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
 
+  scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
+
   state_machine :state, :initial => :submitted do
     state :submitted,    value: 0
     state :vetted,       value: 1
@@ -152,7 +154,7 @@ class Idea < ActiveRecord::Base
   # Search angles
   
   def self.discussable_by(user)
-    user.account ? user.account.ideas : user.ideas
+    user.account.ideas
   end
 
   def self.vettable_by(user)

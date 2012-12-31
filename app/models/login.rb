@@ -21,6 +21,8 @@ class Login < ActiveRecord::Base
 
   validates_presence_of :first_name
 
+  default_scope includes(:users)
+
   after_save :adopt_account
 
   def self.find_or_create_from_auth_hash!(auth_hash)
