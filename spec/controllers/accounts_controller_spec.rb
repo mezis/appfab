@@ -9,6 +9,13 @@ describe AccountsController do
     @current_user.plays! :account_owner
   end
 
+  describe 'index' do
+    it "redirects to root" do
+      get :index
+      response.should redirect_to('/')
+    end
+  end
+
   it "show action should render show template" do
     get :show, :id => @current_user.account
     response.should render_template(:show)

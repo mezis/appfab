@@ -9,9 +9,9 @@ module ApplicationHelper
     html_options = options.delete(:html) || {}
 
     if current_user
-      options_to_match = options.reverse_merge(controller: 'ideas', action: 'index')
+      options_to_match = options.reverse_merge(controller: 'ideas')
       is_current = (params.symbolize_keys.slice(*options_to_match.keys) == options_to_match)
-      path = url_for(options_to_match)
+      path = url_for(options_to_match.reverse_merge(action: 'index'))
 
       if is_current
         classes = html_options.fetch(:class, '').split
