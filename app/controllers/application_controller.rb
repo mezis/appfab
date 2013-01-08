@@ -12,13 +12,20 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale = FastGettext.set_locale(:en)
   end
 
+
   def current_user
-    @current_user ||= (current_login && current_login.users.first)
+    return nil unless current_login && current_account
+    @current_user ||= current_account.users.where(login_id:current_login.id).first
   end
   helper_method :current_user
 
   def current_account
-    current_user.andand.account
+    return unless current_login
+    @current_account ||= begin
+      (account_id = session[:account_id].to_i) &&
+      current_login.accounts.where(id:account_id).first ||
+      current_login.accounts.first
+    end
   end
   helper_method :current_account
 
