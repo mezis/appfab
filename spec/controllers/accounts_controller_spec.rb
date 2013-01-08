@@ -53,5 +53,7 @@ describe AccountsController do
     delete :destroy, :id => account
     response.should redirect_to(accounts_url)
     Account.exists?(account.id).should be_false
+
+    it 'switches to another account'
   end
 end

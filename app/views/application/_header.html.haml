@@ -56,13 +56,35 @@
             = header_angle_counter('followed')
             %span= _('Follow')
 
-      - if current_user
-        %ul.nav.pull-right
-          - if current_account
-            = content_tag_with_path_checking(:li, controller: 'accounts', action: 'show', id: current_account.to_param, html: { class:'account' }) do |path|
-              = link_to path, title: s_('Tooltip|This is your active team!<br/>Click here to see team details.'), :'data-placement' => 'bottom' do
-                %span= current_account.name
-                %i.icon-group
+      %ul.nav.pull-right
+        - if current_account
+          = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
+            %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
+              %span= current_account.name
+              %i.icon-group
+            %ul.dropdown-menu
+              %li
+                = link_to current_account do
+                  %i.icon-user
+                  = _('List team members')
+              %li
+                = can_link_to edit_account_path(current_account), auth:[:update, current_account], :'data-placement' => 'left' do
+                  %i.icon-edit
+                  = _('Edit team')
+              - if login_other_accounts.any?
+                %li.divider
+                %li
+                  %a.disabled= _('Switch to another team:')
+                - login_other_accounts.each do |account|
+                  %li
+                    = link_to session_path(account_id:account), method:'put' do
+                      %i.icon-group
+                      = account.name
+              %li.divider
+              %li
+                = link_to new_account_path do
+                  = _('New product team')
+        - if current_user
           = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
             = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
               %span= current_login.first_name
@@ -74,6 +96,7 @@
               - count = current_user.notifications.unread.count
               %span.figure= number_with_delimiter(count) if count > 0
               %i.icon-inbox
+        - if current_login
           %li.sign-out
             = link_to destroy_login_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
               %i.icon-eject<>

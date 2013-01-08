@@ -27,6 +27,8 @@ AppFab::Application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  resource :session, only:[:update]
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
