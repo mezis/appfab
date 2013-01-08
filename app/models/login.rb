@@ -28,6 +28,9 @@ class Login < ActiveRecord::Base
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     Rails.logger.debug("Auth hash: #{auth_hash.inspect}")
+    if auth_hash[:provider] == 'developer'
+      user = self.where(email: auth_hash[:info][:email]).first and return user
+    end
     user = self.where(uid: auth_hash[:uid], provider: auth_hash[:provider]).first and return user
 
     self.new.tap do |user|
