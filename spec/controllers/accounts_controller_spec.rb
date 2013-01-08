@@ -33,8 +33,7 @@ describe AccountsController do
   end
 
   it "create action should redirect when model is valid" do
-    Account.any_instance.stub(:valid? => true)
-    post :create
+    post :create, account: { name: 'test team' }
     response.should redirect_to(account_url(assigns[:account]))
   end
 
@@ -55,11 +54,13 @@ describe AccountsController do
     response.should redirect_to(account_url(assigns[:account]))
   end
 
-  it "destroy action should destroy model and redirect to index action" do
-    account = @current_user.account
-    delete :destroy, :id => account
-    response.should redirect_to(accounts_url)
-    Account.exists?(account.id).should be_false
+  describe 'destroy' do
+    it "destroys model and redirect to index action" do
+      account = @current_user.account
+      delete :destroy, :id => account
+      response.should redirect_to('/')
+      Account.exists?(account.id).should be_false
+    end
 
     it 'switches to another account'
   end
