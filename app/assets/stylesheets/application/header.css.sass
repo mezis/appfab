@@ -7,6 +7,8 @@
     color: $major_color
 
   .brand
+    font-family:    $headingsFontFamily
+
     position:       relative
     .badge
       display:        block
@@ -17,7 +19,7 @@
       opacity:        0.9
       +rotate(-30deg)
 
-  ul
+  ul.nav
     .badge-small
       padding:        1px 6px 1px 6px
       font-size:      9px
@@ -27,23 +29,33 @@
       right:          -2px
       top:            1px
 
-  li
-    position:       relative
-  li a
-    padding-left:   1ex
-    padding-right:  1.25ex // slightly bigger cause the left has the icon
-  li.sign-out a
-    padding-right:  0
+    > li
+      position:       relative
+      > a
+        padding-left:   1ex
+        padding-right:  1.25ex // slightly bigger cause the left has the icon
+      &.sign-out a
+        padding-right:  0
 
-  li.name a
-    padding-right:  .33ex
-  li.karma a
-    padding-left:   .33ex
-    i
-      margin:         0
+      &.name a
+        padding-right:  .33ex
+      &.karma a
+        padding-left:   .33ex
+        i
+          margin:         0
 
-  .brand
-    font-family:    $headingsFontFamily
+  ul.dropdown-menu
+    a:hover
+      color: white
+      i
+        // fixes weird bug with font awesome
+        background-image: inherit
+    li
+      a.disabled, a.disabled:hover
+        cursor: default
+        background-color: inherit
+        background-image: inherit
+        color: inherit
 
 
 @media (max-width: 768px)
