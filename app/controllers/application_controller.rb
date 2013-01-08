@@ -32,13 +32,16 @@ class ApplicationController < ActionController::Base
 
   def require_account!
     return true if current_account
-    render_error_page :bad_request, message: _('You need to be attached to an account before you can access this page. Time to speak to your account manager!')
-    true
+    render_error_page :missing_account
   end
 
 
   def render_error_page(error, options = {})
-    render template:"errors/#{error}", locals:options.slice(:message), status:error
+    status = case error
+    when :missing_account then :bad_request
+    else error
+    end
+    render template:"errors/#{error}", locals:options.slice(:message), status:status
   end
 
 
