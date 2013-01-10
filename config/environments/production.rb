@@ -45,12 +45,20 @@ AppFab::Application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
-
+  config.action_controller.default_url_options = { host: ENV['APP_DOMAIN'], protocol:'https' }
+  
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.smtp_settings = {
+    address:    'smtp.mandrillapp.com',
+    port:       587,
+    user_name:  'julien.letessier@gmail.com',
+    password:   ENV['MANDRILL_API_KEY']
+  }
+  config.action_mailer.default_url_options = { host:'localhost', only_path:false }
 
   # Enable threaded mode
   # config.threadsafe!

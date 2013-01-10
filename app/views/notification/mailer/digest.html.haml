@@ -1,0 +1,30 @@
+.email.notification-digest
+  .container
+    .row
+      .span12
+        .well.well-small.header
+          %p
+            %strong= _('Hi there %{user},') % { user:@user.login.first_name }
+
+          %p
+            = _('Things have been happening in team %{name}.') % { name:@user.account.name }
+            %br/
+            = _('Here\'s a digest of the most recent notifications you missed...')
+          %p.last= _('See you soon on %{appname}!').html_safe % { appname:link_to(configatron.app_name, root_url)  }
+    .row
+      .span12
+        %ul
+          - @user.notifications.unread.limit(10).each do |notification|
+            %li<
+              .ago.pull-right
+                = _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
+              = render notification.class.name.underscore, notification: notification
+
+
+    .row
+      .span12
+        .well.well-small.footer
+          = link_to root_url do
+            %img{ src:"#{root_url}appfab-favicon.png"}
+          = "#{configatron.app_name}."
+          = _('The app that helps product teams build fantastic apps.')
