@@ -31,7 +31,7 @@ configatron.app_fab.design_capacity    = 5
 configatron.app_fab.develop_capacity   = 5
 
 
-if Rails.env.production?
+if Rails.env.production? || Rails.env.staging?
   configatron.omniauth.google_oauth2.app_id     = ENV['GOOGLE_OAUTH2_APP_ID']
   configatron.omniauth.google_oauth2.app_secret = ENV['GOOGLE_OAUTH2_APP_SECRET']
 else
