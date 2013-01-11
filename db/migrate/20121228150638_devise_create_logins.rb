@@ -18,6 +18,14 @@ class DeviseCreateLogins < ActiveRecord::Migration
       FROM logins
     }
 
+    # pgSQL only
+    if ActiveRecord::Base.connection.class.name =~ /PostgreSQL/
+      execute %Q{
+        SELECT SETVAL('users_id_seq', MAX(id))
+        FROM users
+      }
+    end
+
     remove_columns :logins, :account_id, :karma, :voting_power
 
     add_index :users, [:account_id, :login_id]
