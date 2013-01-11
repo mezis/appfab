@@ -58,7 +58,7 @@ AppFab::Application.configure do
     user_name:  'julien.letessier@gmail.com',
     password:   ENV['MANDRILL_API_KEY']
   }
-  config.action_mailer.default_url_options = { host:'localhost', only_path:false }
+  config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'], protocol:'https', only_path:false }
 
   # Enable threaded mode
   # config.threadsafe!
