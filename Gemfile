@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '1.9.2'
 
 gem 'rails'
@@ -31,7 +31,7 @@ gem 'configatron'
 gem 'andand'
 
 # Access attribute values directly, without instantiating ActiveRecord objects
-# (until Rails 3.2 and #pluck)
+# (because Rails' #pluck breaks a lot with joins)
 gem 'valium'
 
 # as name implies
