@@ -22,6 +22,9 @@ describe NotificationsController do
     response.should redirect_to(notifications_path)
   end
 
+  it "update action allows 'all' as id"
+  it "bails when any parameter but 'id' and 'unread' are passed"
+
   it "destroy action should destroy model and redirect to index action" do
     notification = Notification::Base.make!
     delete :destroy, :id => notification

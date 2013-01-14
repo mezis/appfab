@@ -22,6 +22,9 @@
           - @notifications.each do |notification|
             = render 'notification/base', notification: notification
   .span3
+    = can_link_to notification_path('all', notification: { unread: false }), auth:[:update, Notification::Base], method: :put, :'data-placement' => 'left', class:'btn btn-block' do
+      = _('Mark all as read')
+    %hr/
     %ul.nav.nav-pills.nav-stacked
       - if @angle == 'unread'
         %li.active

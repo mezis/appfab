@@ -11,12 +11,18 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    @notification = current_user.notifications.find(params[:id])
-    if @notification.update_attributes(params[:notification])
-      redirect_to notifications_path, :notice  => _("Successfully updated notification.")
+    if params[:id] == 'all'
+      @notifications = current_user.notifications
     else
-      redirect_to notifications_path, :failure => _("Failed to update notification")
+      @notifications = current_user.notifications.where(id: params[:id].to_i)
     end
+
+    @notifications.find_each do |notification|
+      next if notification.update_attributes(params[:notification])
+      redirect_to notifications_path, :failure => _("Failed to update notification.")
+      return
+    end
+    redirect_to notifications_path, :notice  => _("Successfully updated notification.")
   end
 
   def destroy
