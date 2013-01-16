@@ -31,8 +31,13 @@ class IdeasController < ApplicationController
       includes(:vettings).
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
-    @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter   == 'all'
-    @ideas = @ideas.where(category: @category) unless @category == 'all'
+    @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter == 'all'
+
+    if @category == 'none'
+      @ideas = @ideas.where(category: nil)
+    elsif @category != 'all'
+      @ideas = @ideas.where(category: @category)
+    end
   end
 
   def show
@@ -126,7 +131,7 @@ class IdeasController < ApplicationController
     session[:ideas_category] ||= {}
     params[:category] =
     session[:ideas_category][@angle] = begin
-      valid_categories = (current_user.account.andand.categories || []) + %w(all)
+      valid_categories = (current_user.account.andand.categories || []) + %w(all none)
       (valid_categories.include?(params[:category])                and params[:category]) || 
       (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) || 
       'all'
