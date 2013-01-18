@@ -11,8 +11,9 @@ class Notification::Mailer < ActionMailer::Base
     end
   end
 
-  def digest(user)
+  def digest(user, notifications)
     @user = user
+    @notifications = notifications
     headers['X-MC-Tags'] = 'appfab,notification-digest'
     mail to: user.login.email,
       subject: _('Notifications for team %{name} at %{appname}') % {

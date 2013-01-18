@@ -20,6 +20,20 @@ class Notification::Base < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  module Recipient
+    def self.included(by)
+      by.class_eval do
+        has_many :notifications, :foreign_key => :recipient_id, :class_name => 'Notification::Base', :dependent => :destroy, :extend => AssociationMethods
+      end
+    end
+
+    module AssociationMethods
+      def read!
+        update_all(unread:false)
+      end
+    end
+  end
+
   module CanBeSubject
     def self.included(by)
       by.class_eval do

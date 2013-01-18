@@ -2,8 +2,11 @@ namespace :appfab do
   namespace :emails do
     task :send_notifications_digest => :environment do
       User.find_each do |user|
-        Notification::Mailer.digest(user).deliver
         next unless user.notifications.unread.count > 0
+
+        notifications = user.notifications.unread.limit(10)
+        Notification::Mailer.digest(user, notifications).deliver
+        notifications.read!
       end
     end
   end
