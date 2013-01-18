@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Notification::VoteObserver do
   context 'vote on ideas' do
-    let(:vote) { Vote.make! subject: Idea.make! }
+    let(:vote) { Vote.make! user: User.make!, subject: Idea.make! }
 
     it 'notifies idea participants' do
       @user = User.make!

@@ -9,6 +9,7 @@ class Notification::VoteObserver < ActiveRecord::Observer
       Notification::NewVoteOnComment.create! recipient:record.subject.author, subject:record
     when Idea
       record.subject.participants.each do |user|
+        next if user == record.subject.author # don't get notified for my own votes
         Notification::NewVoteOnIdea.create! recipient:user, subject:record
       end
     end
