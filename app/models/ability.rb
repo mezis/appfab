@@ -7,7 +7,7 @@ class Ability
 
     # Idea permissions
     can [:create, :read], Idea, author: { account_id: user.account_id }
-    can :update,          Idea, author_id: user.id, state: Idea.state_value(:submitted)
+    can :update,          Idea, author: { account_id: user.account_id }, state: Idea.state_value(:submitted)
     can :destroy,         Idea, author_id: user.id, state: Idea.state_value(:submitted)
 
     # Comment
