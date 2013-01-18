@@ -211,9 +211,8 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
     configatron.omniauth.google_oauth2.app_id,
     configatron.omniauth.google_oauth2.app_secret,
-    access_type: "offline",
-    approval_prompt: ""
-  # config.omniauth :google_apps
+    access_type: "online",
+    approval_prompt: "auto"
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
   # ==> Warden configuration
