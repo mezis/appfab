@@ -13,6 +13,12 @@ Given /"(.*)" has vetted the idea/ do |first_name|
   idea.vettings.make! user:user
 end
 
+Given /"(.*)" has backed the idea/ do |first_name|
+  idea = Mentions[Idea]
+  user = idea.account.users.first_name_is(first_name).first
+  idea.votes.make! user:user
+end
+ 
 # actions
 
 When /^I submit an idea "(.*)"?$/ do |title|

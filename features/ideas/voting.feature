@@ -4,8 +4,11 @@ Feature: Voting for ideas
   I want to vote for ideas
 
   Background:
+    Given a user named "Alphonse"
     Given a user named "Ulysse"
     And a vetted idea "Solo, make it so"
+    # as an idea needs at least 2 votes:
+    And "Alphonse" has backed the idea
     And I sign in as "Ulysse"
     
 
