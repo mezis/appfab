@@ -10,4 +10,9 @@ describe WelcomeController do
     end
   end
 
+  describe '#static_page' do
+    it 'returns not found for unknown pages'
+    it 'shows content for known pages'
+  end
+
 end

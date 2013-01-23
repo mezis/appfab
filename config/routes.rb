@@ -29,6 +29,7 @@ AppFab::Application.routes.draw do
 
   resource :session, only:[:update]
 
+  match 'page/:page' => 'welcome#static_page', :as => :static_page
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
