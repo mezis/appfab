@@ -38,6 +38,7 @@ class Notification::Base < ActiveRecord::Base
     def self.included(by)
       by.class_eval do
         has_many :notifications_as_subject, :class_name => 'Notification::Base', :as => :subject, :dependent => :destroy
+        has_many :notified_users, :through => :notifications_as_subject, :source => :recipient
       end
     end
   end
