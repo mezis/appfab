@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   delegate [:first_name, :last_name, :email, :gravatar_url] => :login
 
   scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
+  scope :excluding_ids, lambda { |*ids| where('users.id NOT IN (?)', ids.flatten.uniq) }
   scope :first_name_is, lambda { |name| joins(:login).where('logins.first_name = ?', name) }
 
 
