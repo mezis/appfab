@@ -10,6 +10,22 @@ describe NotificationsController do
     response.should render_template(:index)
   end
 
+  context '(angles)' do
+    before do
+      Notification::NewUser.create! recipient:@current_user, subject:@current_user, unread:false
+    end
+
+    it "'all' angle shows read notifications" do
+      get :index, angle:'all'
+      assigns[:notifications].should_not be_empty
+    end
+
+    it "'unread' angle does not show read notifications" do
+      get :index, angle:'unread'
+      assigns[:notifications].should be_empty
+    end
+  end
+
   it "update action should render edit template when model is invalid" do
     notification = Notification::Base.make!
     Notification::Base.any_instance.stub(:valid? => false)
