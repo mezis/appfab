@@ -3,13 +3,15 @@
     %h1= _('Release notes')
 
     .well
-      %h3=l Date.parse('2013-01-23'), format: :long
+      :markdown
+        ### 23 January 2013
 
-      %ul
-        %li= _("Fixes Omniauth issues")
-        %li= _("Raises the minimum votes per idea to 2")
-        %li= _("Lets all account members edit an idea, not just the author")
-        %li= _("Prevents spammy notifications on a user's own actions")
-        %li= _("Avoids sending empty notifications emails")
-        %li= _("Marks notifications as read when emailing")
-        %li= _("Adds marketing messages and release notes")
+        This is the first post-alpha release.
+
+        - Fixes Omniauth issues
+        - Raises the minimum votes per idea to 2
+        - Lets all account members edit an idea, not just the author
+        - Prevents spammy notifications on a user's own actions
+        - Avoids sending empty notifications emails
+        - Marks notifications as read when emailing
+        - Adds marketing messages and release notes
