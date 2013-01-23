@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
 
   def index
     @angle = session[:notifications_angle] = get_angle_from_params
-    @notifications = current_user.notifications.send(@angle.to_sym)
+    @notifications = current_user.notifications.send(@angle.to_sym).by_most_recent
   end
 
   def update

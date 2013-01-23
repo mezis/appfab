@@ -4,7 +4,7 @@ namespace :appfab do
       User.find_each do |user|
         next unless user.notifications.unread.count > 0
 
-        notifications = user.notifications.unread.limit(10)
+        notifications = user.notifications.unread.by_most_recent.limit(10)
         Notification::Mailer.digest(user, notifications).deliver
         notifications.read!
       end

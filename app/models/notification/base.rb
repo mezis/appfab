@@ -17,8 +17,8 @@ class Notification::Base < ActiveRecord::Base
   }
 
   scope :unread, where(unread:true)
+  scope :by_most_recent, order('created_at DESC')
 
-  default_scope order('created_at DESC')
 
   module Recipient
     def self.included(by)
