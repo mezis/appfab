@@ -38,14 +38,14 @@
         .product_manager
           %strong= _('Product manager:')
           = render idea.product_manager, avatar: false
-      %p
+      .markdown
         != pipeline_render idea.problem
 
       - unless collapsed
-        %p
+        .markdown
           %strong= _('Solution:')
           != pipeline_render idea.solution
-        %p
+        .markdown
           %strong= _('Metrics:')
           != pipeline_render idea.metrics
 

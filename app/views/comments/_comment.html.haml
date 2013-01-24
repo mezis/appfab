@@ -11,7 +11,7 @@
   = render comment.author, format: :avatar
   .bubble.left
     %span.tail
-    .body!= pipeline_render comment.body
+    .body.markdown!= pipeline_render comment.body
   %ul.actions
     %li.time_ago
       = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
