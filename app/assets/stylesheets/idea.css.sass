@@ -42,6 +42,10 @@
 
   .kind
     float: left
+    .state, .sizing
+      font-size: smaller
+      padding:   0 1ex
+
   .rating
     $badge_size:  36px
     position: absolute
@@ -84,3 +88,11 @@
       &.separator:before
         color: gray
         content: "|"
+
+.idea
+  .mutable
+    +transition-property(opacity)
+    +transition-duration(150ms)
+    +opacity(0.05)
+  &:hover .mutable
+    +opacity(1.00)

@@ -114,6 +114,6 @@ end
 Then /^the idea should be (\w+)$/ do |state_name|
   idea = Mentions[Idea]
   visit "/ideas/#{idea.id}"
-  find('.idea .badge.state').should have_content(state_name)
+  find('.idea .state').should have_content(state_name)
 end
 

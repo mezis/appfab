@@ -18,11 +18,16 @@
         .rating<
           %i.icon-certificate{ title: _('The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter.'), :'data-placement' => 'right' }
             %span.value= idea.rating
-      .content
-        = render 'sizing', idea: idea
+      .content.mutable
         - if show_status == :header
-          %span.badge.state{ title: s_('Tooltip|The current progress on this idea') }<
+          .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
             = idea_status(idea.state_name)
+        - if idea.sized?
+          .size.muted.pull-right{ title: s_('Tooltip|An architect and a product manager have sized the idea as a %{size} effort.') % { size: idea_size_human_long(idea.size) } }
+            - 1.upto idea.size do
+              %i.icon-circle
+            - (idea.size + 1).upto 4 do
+              %i.icon-circle-blank
 
     .body
       %h3.title
@@ -58,7 +63,7 @@
         .backers
           = render idea.backers.excluding(idea.author, idea.vetters).limit(5), format: :avatar
 
-      .actions
+      .actions.mutable
         %ul
           %li
             = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
