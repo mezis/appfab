@@ -3,15 +3,6 @@
 
   .row
     .span12
-      = f.label :kind
-    .span7
-      = f.select :kind, idea_kind_select_options
-    .span5
-      %span.help-block
-        = _('There are thress types of ideas: features (additions or improvements to a product), bugs (fixing improper behaviour of a product), and chores (requests for data).')
-
-  .row
-    .span12
       = f.label :category
     .span7
       = f.select :category, idea_category_select_options(current_user)

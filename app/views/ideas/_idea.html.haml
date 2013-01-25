@@ -12,8 +12,6 @@
   - classes = [idea.state_name, (show_status == :header) && 'with-header-wizard'].compact
   .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
-      %div{ class: "kind #{idea.kind}", title: s_('Tooltip|This Idea is a %{kind}') % { kind: idea.kind }, :'data-placement' =>'right' }<
-        = idea_icon_for_kind(idea)
       - if idea.rating > 0
         .rating<
           %i.icon-certificate{ title: _('The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter.'), :'data-placement' => 'right' }

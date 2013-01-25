@@ -20,12 +20,6 @@ module IdeasHelper
     })
   end
 
-  def idea_icon_for_kind(idea, options = {})
-    classes = options.fetch(:class, '').split
-    classes.push IdeaIcons[idea.kind.to_sym]
-    content_tag(:i, '', options.merge(class: safe_join(classes.uniq, ' ')))
-  end
-
   def idea_size_human(size)
     case size
     when 1 then s_('T-shirt size|XS')

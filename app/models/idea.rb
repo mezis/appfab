@@ -2,7 +2,7 @@
 require 'state_machine'
 
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :kind, :active_at
+  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :state, :category, :product_manager, :active_at
 
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
   StatesForWizard = [
@@ -39,11 +39,9 @@ class Idea < ActiveRecord::Base
   validates_presence_of  :title, :problem, :solution, :metrics
   validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
   validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true
-  validates_presence_of  :kind
-  validates_inclusion_of :kind, :in => %w(bug chore feature)
   validates_inclusion_of :category, in: lambda { |idea| idea.account.categories }, allow_nil:true
 
-  default_values rating: 0, kind:'feature'
+  default_values rating: 0
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
