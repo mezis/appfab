@@ -54,30 +54,39 @@ describe NotificationsController do
     end
   end
 
-  it "update action should render edit template when model is invalid" do
-    notification = Notification::Base.make!
-    Notification::Base.any_instance.stub(:valid? => false)
-    put :update, :id => notification.id
-    response.should redirect_to(notifications_path)
+  describe '#update' do
+    it "renders edit template when model is invalid" do
+      notification = Notification::Base.make!
+      Notification::Base.any_instance.stub(:valid? => false)
+      put :update, :id => notification.id
+      response.should redirect_to(notifications_path)
+    end
+
+    it "redirects when model is valid" do
+      put :update, :id => Notification::Base.make!
+      response.should redirect_to(notifications_path)
+    end
+
+    it "allows 'all' as id" do
+      n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
+      put :update, id: 'all', notification: { unread:false }
+      n1.reload.should_not be_unread
+      n2.reload.should_not be_unread
+    end
+
+    it "bails when any parameter but 'id' and 'unread' are passed" do
+      notification = Notification::Base.make!
+      expect {
+        put :update, id: notification.id, notification: { recipient_id:123 }
+      }.to raise_exception(ActiveModel::MassAssignmentSecurity::Error)
+    end
   end
 
-  it "update action should redirect when model is valid" do
-    put :update, :id => Notification::Base.make!
-    response.should redirect_to(notifications_path)
-  end
-
-  it "update action allows 'all' as id" do
-    n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
-    put :update, id: 'all', notification: { unread:false }
-    n1.reload.should_not be_unread
-    n2.reload.should_not be_unread
-  end
-
-  it "bails when any parameter but 'id' and 'unread' are passed"
-
-  it "destroy action should destroy model and redirect to index action" do
-    notification = Notification::Base.make!
-    delete :destroy, :id => notification
-    Notification::Base.exists?(notification.id).should be_false
+  describe '#destroy' do
+    it "destroys model and redirect to index action" do
+      notification = Notification::Base.make!
+      delete :destroy, :id => notification
+      Notification::Base.exists?(notification.id).should be_false
+    end
   end
 end
