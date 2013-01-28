@@ -21,6 +21,7 @@
         %tbody
           - @notifications.each do |notification|
             = render 'notification/base', notification: notification
+
   .span3
     = can_link_to notification_path('all', notification: { unread: false }), auth:[:update, Notification::Base], method: :put, :'data-placement' => 'left', class:'btn btn-block' do
       = _('Mark all as read')
@@ -38,3 +39,6 @@
       - else
         %li
           = link_to _('Show all'), notifications_path(angle: 'all')
+    - if @notifications.total_pages > 1
+      %hr/
+      = will_paginate @notifications, class:'will-paginate'
