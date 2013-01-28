@@ -66,7 +66,13 @@ describe NotificationsController do
     response.should redirect_to(notifications_path)
   end
 
-  it "update action allows 'all' as id"
+  it "update action allows 'all' as id" do
+    n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
+    put :update, id: 'all', notification: { unread:false }
+    n1.reload.should_not be_unread
+    n2.reload.should_not be_unread
+  end
+
   it "bails when any parameter but 'id' and 'unread' are passed"
 
   it "destroy action should destroy model and redirect to index action" do
