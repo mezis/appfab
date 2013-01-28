@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
 
   ValidAngles = %w(unread all)
   DefaultAngle = ValidAngles.first
+  PER_PAGE = 25
 
   def index
     @angle = session[:notifications_angle] = get_angle_from_params
@@ -11,7 +12,10 @@ class NotificationsController < ApplicationController
       when 'all'    then :scoped
       when 'unread' then :unread
     end
-    @notifications = current_user.notifications.send(angle_scope).by_most_recent
+    @notifications = current_user.notifications.
+      send(angle_scope).
+      by_most_recent.
+      paginate(per_page:PER_PAGE, page:params[:page])
   end
 
   def update

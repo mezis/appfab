@@ -291,6 +291,7 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.3)
+    will_paginate (3.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     yamler (0.1.0)
@@ -355,3 +356,4 @@ DEPENDENCIES
   terminal-notifier-guard
   uglifier (>= 1.0.3)
   valium
+  will_paginate
