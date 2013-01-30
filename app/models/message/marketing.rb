@@ -22,7 +22,6 @@ class Message::Marketing < ActiveRecord::Base
 
     existing_recipient_ids = self.notified_users.value_of(:id)
     scope = scope.excluding_ids(existing_recipient_ids) if existing_recipient_ids.any?
-    puts "excluding users #{existing_recipient_ids.inspect}"
     
     transaction do
       scope.find_each do |user|

@@ -125,3 +125,7 @@ User::Bookmark.blueprint do
   user       { User.last || User.make! }
   idea       { Idea.last || Idea.make! }
 end
+
+Message::Marketing.blueprint do
+  summary    { { 'en' => Faker::Lorem.sentence } }
+end
