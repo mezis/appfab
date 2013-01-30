@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_text_domain
 
+  protected
+
+  def reset_login
+    @current_account = nil
+    @current_user    = nil
+  end
+
   private
 
   def set_text_domain

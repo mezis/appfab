@@ -57,6 +57,7 @@ class AccountsController < ApplicationController
   def destroy
     @account = Account.find(params[:id])
     authorize! :destroy, @account
+    reset_login if @account == current_account
     @account.destroy
     redirect_to root_path, :notice => _("Successfully destroyed team %{name}.") % { name:@account.name }
   end

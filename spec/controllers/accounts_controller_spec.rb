@@ -62,6 +62,13 @@ describe AccountsController do
       Account.exists?(account.id).should be_false
     end
 
-    it 'switches to another account'
+    it 'switches to another account' do
+      current_account = @current_user.account
+      other_account   = Account.make!
+      @current_user.login.users.create! account:other_account
+
+      delete :destroy, :id => current_account
+      controller.send(:current_account).should == other_account
+    end
   end
 end
