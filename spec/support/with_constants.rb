@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module WithConstants
 
   def with_constants(options = {})
