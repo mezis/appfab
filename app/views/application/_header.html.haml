@@ -60,7 +60,7 @@
         - if current_account
           = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
             %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
-              %span= current_account.name
+              %span.team-name= current_account.name
               %i.icon-group
             %ul.dropdown-menu
               %li

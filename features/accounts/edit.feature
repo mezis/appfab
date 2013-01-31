@@ -3,8 +3,15 @@ Feature: Create teams
   In order to manage my team
   I want to edit team settings
 
+  Background:
+    Given an account owner named "Anatole"
+    And I sign in as "Anatole"
+
   Scenario: Edit team name
-    Given pending
+    When I change my account name to "Foobar"
+    Then the account name is "Foobar"
+
 
   Scenario: Edit categories
-    Given pending
+    When I change my account categories to "foo, bar"
+    Then the account categories are "foo, bar"

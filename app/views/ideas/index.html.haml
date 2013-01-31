@@ -13,7 +13,7 @@
     - @ideas.each do |idea|
       = render 'idea', idea: idea, collapsed: true, title_type: :link, status: :header
   .span3
-    %ul.nav.nav-pills.nav-stacked
+    %ul.filter-category.nav.nav-pills.nav-stacked
       %li{ class: (@category == 'all' && 'active')}
         = link_to ideas_path(params.merge(category:'all')) do
           = _('All Categories')
@@ -25,7 +25,7 @@
         = link_to ideas_path(params.merge(category:'none')) do
           = _('No category')
 
-    %ul.nav.nav-pills.nav-stacked
+    %ul.filter-status.nav.nav-pills.nav-stacked
       %li{ class: (@order == 'rating' && 'active')}
         = link_to ideas_path(params.merge(order:'rating')) do
           = _('Sort by rating')
@@ -42,7 +42,7 @@
         = link_to ideas_path(params.merge(order:'size')) do
           = _('Sort by size')
 
-    %ul.nav.nav-pills.nav-stacked
+    %ul.filter-participation.nav.nav-pills.nav-stacked
       %li{ class: (@filter == 'all' && 'active')}
         = link_to ideas_path(params.merge(filter:'all')) do
           = _('All %{qualifier} ideas') % { qualifier: @angle }
