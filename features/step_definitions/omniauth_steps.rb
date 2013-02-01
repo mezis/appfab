@@ -75,7 +75,7 @@ def setup_omniauth_filter
     end
 
     def stub_omniauth
-      request.env["devise.mapping"] = Devise.mappings[:user] 
+      request.env["devise.mapping"] = Devise.mappings[:login] 
       request.env["omniauth.auth"]  = OmniAuth.config.mock_auth[:google_oauth2] 
     end
   end

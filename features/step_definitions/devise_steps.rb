@@ -26,5 +26,6 @@ Given /^I sign in as "(\w+)"$/ do |first_name|
   click_on 'Sign In'
   @current_login = login
 
-  Mentions[Login] = login
+  Mentions[Login]   = login
+  Mentions[Account] = current_account
 end

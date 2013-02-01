@@ -6,18 +6,42 @@ Given /^a category "(.*?)"$/ do |category|
   account.save!
 end
 
+Given /^the account name is "(.*?)"$/ do |name|
+  Mentions[Account].update_attribute :name, name
+end
+
 # actions
 
 When /^I change my account (\w+) to "(.*?)"$/ do |field, value|
-  account = Mentions[Login].accounts.first
+  Mentions[Account] = account = current_account
   visit "/accounts/#{account.id}/edit"
   fill_in field.capitalize, with:value
   click_on "Update Account"
 end
 
+When /^I create an account "(.*?)"$/ do |name|
+  visit '/accounts/new'
+  fill_in 'Name', with:name
+  click_on "Create Account"
+  Mentions[Account] = current_account
+end
+
+When /^I switch to the account "(.*?)"$/ do |name|
+  within '#account-menu' do
+    click_on name
+  end
+  Mentions[Account] = current_account
+end
+
+When /^I delete the account$/ do
+  id = current_account.id
+  visit "/accounts/#{id}"
+  click_on "Destroy"
+end
+
 # expectations
 
-Then /^the account (\w+) (?:is|are) "(.*?)"/ do |field, value|
+Then /^the account (\w+) should be "(.*?)"/ do |field, value|
   case field
   when 'name'
     visit '/'
@@ -31,3 +55,8 @@ Then /^the account (\w+) (?:is|are) "(.*?)"/ do |field, value|
     end
   end
 end
+
+Then /^I should be prompted to create an account$/ do
+  page.should have_selector('form#new_account')
+end
+

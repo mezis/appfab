@@ -9,9 +9,9 @@ Feature: Create teams
 
   Scenario: Edit team name
     When I change my account name to "Foobar"
-    Then the account name is "Foobar"
+    Then the account name should be "Foobar"
 
 
   Scenario: Edit categories
     When I change my account categories to "foo, bar"
-    Then the account categories are "foo, bar"
+    Then the account categories should be "foo, bar"
