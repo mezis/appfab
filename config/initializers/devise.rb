@@ -207,7 +207,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :developer
+  config.omniauth :developer unless Rails.env.production?
   config.omniauth :google_oauth2,
     configatron.omniauth.google_oauth2.app_id,
     configatron.omniauth.google_oauth2.app_secret,
