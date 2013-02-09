@@ -63,6 +63,9 @@ gem 'roadie'
 # Pagination
 gem 'will_paginate'
 
+# exception reporting
+gem 'sentry-raven'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
