@@ -42,4 +42,5 @@ RSpec.configure do |config|
   # Devise
   config.include Devise::TestHelpers, :type => :controller
   config.extend  ControllerHelpers,   :type => :controller
+  config.extend  ViewHelpers,         :type => :view
 end

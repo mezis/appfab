@@ -94,7 +94,7 @@ module IdeasHelper
   end
 
   def ideas_category_qualifier(category)
-    case 
+    case category
     when 'none'
       _('without a category')
     when 'all'
