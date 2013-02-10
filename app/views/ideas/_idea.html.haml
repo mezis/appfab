@@ -56,10 +56,8 @@
       .people
         .author
           = render idea.author, format: :avatar
-        .vetters
-          = render idea.vetters.excluding(idea.author).limit(2), format: :avatar
-        .backers
-          = render idea.backers.excluding(idea.author, idea.vetters).limit(5), format: :avatar
+        .others
+          = render idea.participants, format: :avatar
 
       .actions.mutable
         %ul

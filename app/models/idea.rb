@@ -38,12 +38,15 @@ class Idea < ActiveRecord::Base
   # Other helpers
 
   def participants
-    User.where id:(
-      self.votes.value_of(:user_id) +
-      self.vettings.value_of(:user_id) +
-      self.comments.value_of(:author_id) +
-      [self.author.id]
-    ).uniq
+    ids = Rails.cache.fetch("m/idea/#{id}/#{updated_at.to_i}/participants") do
+      [
+        self.votes.value_of(:user_id),
+        self.vettings.value_of(:user_id),
+        self.comments.value_of(:author_id),
+        self.author.id
+      ].flatten.uniq
+    end
+    ids.map { |id| User.find(id) }
   end
 
 
