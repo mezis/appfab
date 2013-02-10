@@ -9,8 +9,10 @@ class Storage::File < ActiveRecord::Base
   default_value_for(:metadata) { Hash.new }
   default_value_for(:accessed_at) { Time.current }
 
-  MaxChunkSize = 256_000
-
+  # BLOB is typically 65k maximum, but in our case
+  # there's a 4/3 overhead for Base64 encoding, and up to 1% overhead
+  # for worst case GZip compression.
+  MaxChunkSize = 32_768
 
   def data=(data)
     self.chunks.each(&:mark_for_destruction)
