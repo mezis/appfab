@@ -114,7 +114,6 @@ group :development do
   gem 'rb-inotify',       :require => false
   gem 'rb-fsevent',       :require => false
   gem 'rb-fchange',       :require => false
-  gem 'ruby_gntp',        :require => false
   gem 'terminal-notifier-guard', :require => false
 
   # heroku interaction
