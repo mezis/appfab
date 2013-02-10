@@ -7,6 +7,8 @@ development: &local
   adapter:  mysql2
   database: appfab_dev
   user:     root
+  host:     localhost
+  socket:   /opt/local/var/run/mysql51/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
