@@ -91,6 +91,7 @@ group :development do
   # debugging
   gem 'pry',              :require => false
   gem 'pry-nav',          :require => false
+  gem 'pry-doc',          :require => false
   gem 'pry-rails'
   gem 'ruby-prof',        :require => false
 
