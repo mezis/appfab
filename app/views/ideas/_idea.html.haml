@@ -4,15 +4,16 @@
 -# - title_type (:link or :none)
 -# - status (:none or :header)
 :ruby
-  collapsed    = local_assigns.fetch(:collapsed,   false)
-  title_link   = local_assigns.fetch(:title_link,  false)
+  collapsed     = local_assigns.fetch(:collapsed,   false)
+  title_link    = local_assigns.fetch(:title_link,  false)
+  muted_details = local_assigns.fetch(:muted,       false)
 
 .idea_container
   - classes = [idea.state_name, 'with-header-wizard']
   .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
-      .content.mutable
+      .content{ class: (muted_details && 'mutable') }
         .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
           = idea_status(idea.state_name)
         - if idea.sized?
@@ -49,7 +50,7 @@
     .meta.bottom
       = render 'idea_people', idea:idea
 
-      .actions.mutable
+      .actions{ class: (muted_details && 'mutable') }
         %ul
           %li
             = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
