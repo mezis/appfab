@@ -3,7 +3,6 @@
     .container
       %a.brand{href: root_path}<
         %span= configatron.app_name
-        %span.badge= _('alpha')
       %ul.nav
         = content_tag_with_path_checking(:li, action: 'new') do |path|
           %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
