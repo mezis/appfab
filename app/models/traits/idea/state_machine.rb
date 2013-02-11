@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'state_machine'
 
-module Idea::StateMachine
+module Traits::Idea::StateMachine
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
   StatesForWizard = [
@@ -17,9 +17,7 @@ module Idea::StateMachine
   ]
 
   def self.included(klass)
-    klass.class_eval do
-      attr_accessible :state
-    end
+    klass.class_eval { attr_accessible :state }
     klass.send :extend, ClassMethods
     klass.send :setup_state_machine
   end

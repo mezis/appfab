@@ -12,8 +12,8 @@ class Idea < ActiveRecord::Base
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
-  include Notification::Base::CanBeSubject
-  include Idea::StateMachine
+  include Notification::Base::CanBeSubject  
+  include Traits::Idea::StateMachine
 
   has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
@@ -31,9 +31,9 @@ class Idea < ActiveRecord::Base
 
   default_values rating: 0
 
-  scope :managed_by,     lambda { |user| where(product_manager_id: user) }
+  scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
-  scope :backed_by,      lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
+  scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
 
   # Other helpers
 
@@ -45,7 +45,7 @@ class Idea < ActiveRecord::Base
         self.comments.value_of(:author_id),
         self.author.id
       ].flatten.uniq
-    end
+  end
     ids.map { |id| User.find(id) }
   end
 
@@ -154,4 +154,4 @@ class Idea < ActiveRecord::Base
     end
   end
 
-end
+  end
