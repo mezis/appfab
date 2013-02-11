@@ -86,7 +86,7 @@ class Idea < ActiveRecord::Base
   end
 
   def self.buildable_by(user)
-    discussable_by(user).with_state(:picked, :designed, :approved, :implemented, :signed_off)
+    discussable_by(user).with_state(:picked, :approved, :signed_off)
   end
 
   def self.followed_by(user)
