@@ -12,7 +12,7 @@
           %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
             = header_angle_counter('discussable')
             %i.icon-comments-alt
-            %span= _('Discuss')
+            %span= _('All ideas')
         - if can?(:create, Vetting)
           = content_tag_with_path_checking(:li, angle: 'vettable') do |path|
             %a{href: path, title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
