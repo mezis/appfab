@@ -5,6 +5,8 @@
 
 .row
   .span12
+    = render 'no_ideas_banner'
+  .span12
     .af-rtable
       - state_names.each do |state_name|
         .af-rtable-column{ class: "ideas-#{state_name}" }
