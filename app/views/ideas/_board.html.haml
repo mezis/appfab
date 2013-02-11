@@ -1,0 +1,14 @@
+-# Give me an array of +ideas+
+
+- grouped_ideas = @ideas.group_by(&:state_name)
+- state_names = Idea.state_machine.states.map(&:name)
+
+.row
+  .span12
+    .af-rtable
+      - state_names.each do |state_name|
+        .af-rtable-column{ class: "ideas-#{state_name}" }
+          %h4.af-column-heading= idea_status(state_name)
+          - grouped_ideas[state_name].andand.each do |idea|
+            .af-rtable-cell
+              = render 'idea_mini', idea:idea, title_link:true

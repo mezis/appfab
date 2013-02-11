@@ -1,0 +1,4 @@
+- if idea.rating > 0
+  .rating<
+    %i.icon-certificate{ title: _('The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter.'), :'data-placement' => 'right' }
+      %span.value= idea.rating

@@ -1,0 +1,15 @@
+-# Context:
+-# - idea (Idea)
+
+.idea_container
+  - classes = [idea.state_name, 'with-header-wizard']
+  .idea.idea-mini{ id: "idea#{idea.id}", class: classes.join(' ') }
+    .meta.top
+      = render 'idea_rating', idea:idea
+    .body
+      %h3.title
+        = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
+          %span= idea.title
+
+    .meta.bottom
+      = render 'idea_people', idea:idea

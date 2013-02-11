@@ -22,11 +22,16 @@ class IdeasController < ApplicationController
   ValidFilters = %w(all authored commented vetted backed)
   DefaultFilter = ValidFilters.first
 
+  ValidViews = %w(cards board)
+  DefaultView = ValidViews.first
+
   def index
     @angle    = set_angle_from_params
     @order    = set_order_from_params_and_angle
     @filter   = set_filter_from_params_and_angle
     @category = set_category_from_params_and_angle
+    @view     = set_view_from_params
+
     @ideas = current_account.ideas.
       includes(:vettings).
       send(:"#{@angle}_by", current_user).
@@ -104,6 +109,16 @@ class IdeasController < ApplicationController
       (ValidAngles.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
       session[:ideas_angle] ||
       DefaultAngle
+    end
+  end
+
+  def set_view_from_params
+    params[:view] =
+    session[:ideas_view] = begin
+      (ValidViews.include?(params[:view])        and params[:view]) ||
+      (ValidViews.include?(session[:ideas_view]) and session[:ideas_view]) ||
+      session[:ideas_view] ||
+      DefaultView
     end
   end
 

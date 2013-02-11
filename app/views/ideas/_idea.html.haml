@@ -4,22 +4,17 @@
 -# - title_type (:link or :none)
 -# - status (:none or :header)
 :ruby
-  collapsed   = local_assigns.fetch(:collapsed,  false)
-  title_type  = local_assigns.fetch(:title_type, :page)
-  show_status = local_assigns.fetch(:status,     :none)
+  collapsed    = local_assigns.fetch(:collapsed,   false)
+  title_link   = local_assigns.fetch(:title_link,  false)
 
 .idea_container
-  - classes = [idea.state_name, (show_status == :header) && 'with-header-wizard'].compact
-  .idea{ id: "idea#{idea.id}", class: classes.join(' ') }
+  - classes = [idea.state_name, 'with-header-wizard']
+  .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.join(' ') }
     .meta.top
-      - if idea.rating > 0
-        .rating<
-          %i.icon-certificate{ title: _('The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter.'), :'data-placement' => 'right' }
-            %span.value= idea.rating
+      = render 'idea_rating', idea:idea
       .content.mutable
-        - if show_status == :header
-          .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
-            = idea_status(idea.state_name)
+        .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
+          = idea_status(idea.state_name)
         - if idea.sized?
           .size.muted.pull-right{ title: s_('Tooltip|An architect and a product manager have sized the idea as a %{size} effort.') % { size: idea_size_human_long(idea.size) } }
             - 1.upto idea.size do
@@ -29,13 +24,12 @@
 
     .body
       %h3.title
-        - if title_type == :link
+        - if title_link
           = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
             %span= idea.title
             %i.icon-arrow-right
         - else
           = idea.title
-
 
       - if !collapsed && idea.product_manager
         .product_manager
@@ -53,11 +47,7 @@
           != pipeline_render idea.metrics
 
     .meta.bottom
-      .people
-        .author
-          = render idea.author, format: :avatar
-        .others
-          = render idea.participants, format: :avatar
+      = render 'idea_people', idea:idea
 
       .actions.mutable
         %ul

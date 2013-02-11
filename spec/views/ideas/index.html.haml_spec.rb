@@ -13,6 +13,7 @@ describe "ideas/index.html.haml" do
   before :each do
     assign :ideas,    ideas
     assign :category, category
+    assign :view,     'cards'
   end
 
   describe "'sorry' banner" do
