@@ -5,8 +5,9 @@
 // a column representing 1 state
 .af-rtable-column
   padding:    5px
-  border:     2px solid white
-  +border-radius(5px)
+  border:     1px solid white
+  // +border-radius(5px)
+  +box-shadow($medium_gray 1px 3px 3px inset)
 
   &:nth-child(2n)
     background-color: $light_gray
@@ -23,6 +24,8 @@
     width:           10%
 
 +respond-to(desktop)
+  .af-rtable-column
+    margin-bottom:  $section_spacing
   .af-rtable-cell
     box-sizing: border-box
     display:    inline-block
@@ -30,6 +33,8 @@
     padding:    1ex
 
 +respond-to(tablet)
+  .af-rtable-column
+    margin-bottom:  $section_spacing
   .af-rtable-cell
     box-sizing: border-box
     display:    inline-block
