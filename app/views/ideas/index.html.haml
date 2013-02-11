@@ -1,4 +1,7 @@
 - title _("Ideas"), show_title: false
 
+- content_for :after_header do
+  = render 'filters'
+
 %div{ class: "ideas-#{@view}"}
   = render @view

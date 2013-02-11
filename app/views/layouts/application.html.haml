@@ -13,8 +13,9 @@
     = csrf_meta_tag
     = yield(:head)
 
-  %body
+  %body{ id: "#{params[:controller]}-#{params[:action]}" }
     = render 'header'
+    = yield :after_header
     .container{ id: body_id }
       - if show_title?
         .row
@@ -29,6 +30,7 @@
                 %button.close{ :'data-dismiss' => 'alert' }<
                   %i.icon-remove
       = yield
+    = yield :before_footer
     = render 'footer'
 
     - if Rails.env.development?

@@ -1,48 +1,54 @@
 -# Requires @category, @order, @filter
 
-%ul.filter-category.nav.nav-tabs.nav-stacked
-  %li{ class: (@category == 'all' && 'active')}
-    = link_to ideas_path(params.merge(category:'all')) do
-      = _('All Categories')
-  - account_categories(current_user).each do |category|
-    %li{ class: (@category == category && 'active')}
-      = link_to ideas_path(params.merge(category:category)) do
-        = category
-  %li{ class: (@category == 'none' && 'active')}
-    = link_to ideas_path(params.merge(category:'none')) do
-      = _('No category')
+- filters = capture do
+  .navbar-inner
+    .container
+      %ul.nav.pull-right
+        .btn-group
+          - IdeasController::ValidViews.each do |view|
+            - is_current = (@view == view)
+            - classes = ['btn', is_current && 'active'].compact.join(' ')
+            = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current do
+              %i{ class:idea_view_icon(view) }
 
-%ul.filter-status.nav.nav-tabs.nav-stacked
-  %li{ class: (@order == 'rating' && 'active')}
-    = link_to ideas_path(params.merge(order:'rating')) do
-      = _('Sort by rating')
-  %li{ class: (@order == 'activity' && 'active')}
-    = link_to ideas_path(params.merge(order:'activity')) do
-      = _('Sort by activity')
-  %li{ class: (@order == 'progress' && 'active')}
-    = link_to ideas_path(params.merge(order:'progress')) do
-      = _('Sort by progress')
-  %li{ class: (@order == 'creation' && 'active')}
-    = link_to ideas_path(params.merge(order:'creation')) do
-      = _('Sort by creation')
-  %li{ class: (@order == 'size' && 'active')}
-    = link_to ideas_path(params.merge(order:'size')) do
-      = _('Sort by size')
+      %ul.nav.pull-left
+        %li.dropdown
+          %a.dropdown-toggle{:'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#'}
+            = account_category_title(@category)
+            %span.caret
+          %ul.dropdown-menu
+            - categories = %w[all] + account_categories(current_user) + %w[none]
+            - categories.each do |category|
+              - is_current = (@category == category)
+              %li{ class: (is_current && 'disabled')}
+                = can_link_to ideas_path(params.merge(category:category)), if:!is_current do
+                  = account_category_title(category)
 
-%ul.filter-participation.nav.nav-tabs.nav-stacked
-  %li{ class: (@filter == 'all' && 'active')}
-    = link_to ideas_path(params.merge(filter:'all')) do
-      = _('All %{qualifier} ideas') % { qualifier: @angle }
-  %li{ class: (@filter == 'authored' && 'active')}
-    = link_to ideas_path(params.merge(filter:'authored')) do
-      = _('Your ideas')
-  %li{ class: (@filter == 'commented' && 'active')}
-    = link_to ideas_path(params.merge(filter:'commented')) do
-      = _('Commented by you')
-  %li{ class: (@filter == 'vetted' && 'active')}
-    = link_to ideas_path(params.merge(filter:'vetted')) do
-      = _('Vetted by you')
-  %li{ class: (@filter == 'backed' && 'active')}
-    = link_to ideas_path(params.merge(filter:'backed')) do
-      = _('Backed by you')
+      %ul.nav.pull-left
+        %li.dropdown
+          %a.dropdown-toggle{:'data-toggle' => 'dropdown', href:'#'}
+            = idea_order_human(@order)
+            %span.caret
+          %ul.dropdown-menu
+            - IdeasController::ValidOrders.each do |order|
+              - is_current = (@order == order)
+              %li{ class: (is_current && 'disabled')}
+                = can_link_to ideas_path(params.merge(order:order)), if:!is_current do
+                  = idea_order_human(order)
 
+      %ul.nav.pull-left
+        %li.dropdown
+          %a.dropdown-toggle{:'data-toggle' => 'dropdown', href:'#'}
+            = idea_filter_human(@filter)
+            %span.caret
+          %ul.dropdown-menu
+            - IdeasController::ValidFilters.each do |filter|
+              - is_current = (@filter == filter)
+              %li{ class: (is_current && 'disabled')}
+                = can_link_to ideas_path(params.merge(filter:filter)), if:!is_current do
+                  = idea_filter_human(filter)
+
+.navbar.navbar-fixed-bottom.visible-desktop
+  != filters
+.navbar.navbar-fixed-top.hidden-desktop
+  != filters
