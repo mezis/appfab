@@ -1,3 +1,5 @@
+@import compass
+
 .navbar
   .navbar-inner
     padding-top:    0
@@ -6,3 +8,8 @@
   & + .navbar
     // negate the margin of the preceeding navbar
     margin-top:     -20px
+
+
+.navbar-inverse
+  .navbar-inner
+    +background-image(linear-gradient(top, #444, #111))
