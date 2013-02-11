@@ -1,0 +1,37 @@
+@import compass
+@import application/variables
+@import application/mixins
+
+// a column representing 1 state
+.af-rtable-column
+  padding:    5px
+  border:     2px solid white
+  +border-radius(5px)
+
+  &:nth-child(2n)
+    background-color: $light_gray
+  &:nth-child(2n+1)
+    background-color: lighten($light_gray, 3.0)
+
++respond-to(wide)
+  .af-rtable
+    display:         table
+    position:        relative
+    border-collapse: collapse
+  .af-rtable-column
+    display:         table-cell
+    width:           10%
+
++respond-to(desktop)
+  .af-rtable-cell
+    box-sizing: border-box
+    display:    inline-block
+    width:      33%
+    padding:    1ex
+
++respond-to(tablet)
+  .af-rtable-cell
+    box-sizing: border-box
+    display:    inline-block
+    width:      49%
+    padding:    1ex
