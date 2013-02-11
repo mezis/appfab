@@ -14,8 +14,12 @@
       %ul.nav.pull-left
         %li.dropdown
           %a.dropdown-toggle{:'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#'}
-            = account_category_title(@category)
-            %span.caret
+            .hidden-phone
+              = account_category_title(@category)
+              %span.caret
+            .visible-phone
+              %i.icon-sitemap
+              %span.caret
           %ul.dropdown-menu
             - categories = %w[all] + account_categories(current_user) + %w[none]
             - categories.each do |category|
@@ -27,8 +31,12 @@
       %ul.nav.pull-left
         %li.dropdown
           %a.dropdown-toggle{:'data-toggle' => 'dropdown', href:'#'}
-            = idea_order_human(@order)
-            %span.caret
+            .hidden-phone
+              = idea_order_human(@order)
+              %span.caret
+            .visible-phone
+              %i.icon-sort
+              %span.caret
           %ul.dropdown-menu
             - IdeasController::ValidOrders.each do |order|
               - is_current = (@order == order)
@@ -39,8 +47,12 @@
       %ul.nav.pull-left
         %li.dropdown
           %a.dropdown-toggle{:'data-toggle' => 'dropdown', href:'#'}
-            = idea_filter_human(@filter)
-            %span.caret
+            .hidden-phone
+              = idea_filter_human(@filter)
+              %span.caret
+            .visible-phone
+              %i.icon-filter
+              %span.caret
           %ul.dropdown-menu
             - IdeasController::ValidFilters.each do |filter|
               - is_current = (@filter == filter)
