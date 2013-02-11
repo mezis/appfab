@@ -14,6 +14,9 @@ describe "ideas/index.html.haml" do
     assign :ideas,    ideas
     assign :category, category
     assign :view,     'cards'
+    assign :order,    'activity'
+    assign :angle,    'discussable'
+    assign :filter,   'all'
   end
 
   describe "'sorry' banner" do
@@ -45,15 +48,4 @@ describe "ideas/index.html.haml" do
     end
 
   end
-  # it "displays all the widgets" do
-  #   assign(:widgets, [
-  #     stub_model(Widget, :name => "slicer"),
-  #     stub_model(Widget, :name => "dicer")
-  #   ])
-
-  #   render
-
-  #   rendered.should contain("slicer")
-  #   rendered.should contain("dicer")
-  # end
 end

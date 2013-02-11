@@ -20,7 +20,7 @@
             .visible-phone
               %i.icon-sitemap
               %span.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.filter-category
             - categories = %w[all] + account_categories(current_user) + %w[none]
             - categories.each do |category|
               - is_current = (@category == category)
@@ -37,7 +37,7 @@
             .visible-phone
               %i.icon-sort
               %span.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.filter-order
             - IdeasController::ValidOrders.each do |order|
               - is_current = (@order == order)
               %li{ class: (is_current && 'disabled')}
@@ -53,7 +53,7 @@
             .visible-phone
               %i.icon-filter
               %span.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.filter-filter
             - IdeasController::ValidFilters.each do |filter|
               - is_current = (@filter == filter)
               %li{ class: (is_current && 'disabled')}

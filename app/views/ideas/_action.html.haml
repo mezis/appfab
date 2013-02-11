@@ -1,7 +1,7 @@
 -# encoding: UTF-8
 -# Context: idea (Idea)
 - placement = :left
-%ul.ideas-actions
+%ul#ideas-action
   / size
   - if idea.submitted? && can?(:size, idea)
     - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field, title|

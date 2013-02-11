@@ -99,7 +99,7 @@ Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|
   end  
 
   visit "/ideas/#{idea.id}"
-  within '#ideas-show' do
+  within '#ideas-action' do
     page.send(negate ? :should_not : :should, expectation) 
   end
 end

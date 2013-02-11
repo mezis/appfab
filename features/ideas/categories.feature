@@ -14,5 +14,5 @@ Feature: Grouping ideas by category
   Scenario: Filter by category
     When I set the idea category to "TV Show"
     Then the idea should be listed in category "TV Show"
-    And the idea should be listed in category "All Categories"
+    And the idea should be listed in category "All categories"
     But the idea should not be listed in category "Movie"
