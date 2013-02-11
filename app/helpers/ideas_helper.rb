@@ -35,6 +35,7 @@ module IdeasHelper
     when 2 then s_('T-shirt size|Small')
     when 3 then s_('T-shirt size|Medium')
     when 4 then s_('T-shirt size|Large')
+    else raise ArgumentError
     end
   end
 
@@ -50,6 +51,7 @@ module IdeasHelper
     when :implemented then s_('Idea state|implemented')        
     when :signed_off  then s_('Idea state|signed off')        
     when :live        then s_('Idea state|live')
+    else raise ArgumentError
     end
   end
 
@@ -57,6 +59,37 @@ module IdeasHelper
     case field.to_s
     when 'design_size'      then s_('Idea size|Design size')
     when 'development_size' then s_('Idea size|Development size')
+    else raise ArgumentError
+    end
+  end
+
+  def idea_order_human(order)
+    case order
+    when 'rating'   then _('Sort by rating')
+    when 'activity' then _('Sort by activity')
+    when 'progress' then _('Sort by progress')
+    when 'creation' then _('Sort by creation')
+    when 'size'     then _('Sort by size')
+    else raise ArgumentError
+    end
+  end
+
+  def idea_filter_human(filter)
+    case filter
+    when 'all'       then _('Unfiltered')
+    when 'authored'  then _('Your ideas')
+    when 'commented' then _('Commented by you')
+    when 'vetted'    then _('Vetted by you')
+    when 'backed'    then _('Backed by you')
+    end
+  end
+
+  def idea_view_icon(view)
+    case view
+    when 'cards' then 'icon-list-alt'
+    when 'board' then 'icon-columns'
+    when 'list'  then 'icon-table'
+    else raise ArgumentError
     end
   end
 
@@ -90,6 +123,8 @@ module IdeasHelper
     when 'commented' then _('that you commented')
     when 'vetted'    then _('that you vetted')
     when 'backed'    then _('that you backed')
+    when 'all'       then nil
+    else raise ArgumentError
     end
   end
 
@@ -100,7 +135,7 @@ module IdeasHelper
     when 'all'
       nil
     else
-      _('in the %{category} category') % { category:category }
+      _('in the "%{category}" category') % { category:category }
     end
   end
 end
