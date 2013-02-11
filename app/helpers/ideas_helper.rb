@@ -14,10 +14,10 @@ module IdeasHelper
     ])
   end
 
-  def idea_category_select_options(user)
+  def idea_category_select_options(user, idea)
     options_for_select(user.account.categories.sort.map { |category|
       [category, category]
-    })
+    }, selected:idea.category)
   end
 
   def idea_size_human(size)

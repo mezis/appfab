@@ -5,7 +5,7 @@
     .span12
       = f.label :category
     .span7
-      = f.select :category, idea_category_select_options(current_user)
+      = f.select :category, idea_category_select_options(current_user, idea)
     .span5
       %span.help-block
         = _('Ideas have one (mandatory) category. This typically designates the main area the idea applies to, or the main category of users which will be affected, should the idea be completed.')

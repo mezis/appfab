@@ -18,6 +18,11 @@ Given /"(.*)" has backed the idea/ do |first_name|
   user = idea.account.users.first_name_is(first_name).first
   idea.votes.make! user:user
 end
+
+Given /^the idea (\w+) is "(.*?)"$/ do |field_name, value|
+  idea = Mentions[Idea]
+  idea.update_attribute field_name.to_sym, value
+end
  
 # actions
 
@@ -31,6 +36,13 @@ When /^I submit an idea "(.*)"?$/ do |title|
   fill_in 'idea_metrics',  with: idea.metrics
   click_button 'Create Idea'
   Mentions[Idea] = Idea.last
+end
+
+When /^I change the idea title to "(.*?)"$/ do |title|
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}/edit"
+  fill_in 'Title', with:title
+  click_on "Update Idea"
 end
 
 
@@ -117,3 +129,14 @@ Then /^the idea should be (\w+)$/ do |state_name|
   find('.idea .state').should have_content(state_name)
 end
 
+Then /^the idea title should be "(.*?)"$/ do |title|
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  find('.idea .title').should have_content(title)
+end
+
+Then /^the idea category should be "(.*?)"$/ do |category|
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  find('.idea .category').should have_content(category)
+end
