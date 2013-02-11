@@ -111,14 +111,6 @@ class Idea < ActiveRecord::Base
     state all - [:submitted, :vetted, :voted] do
       validates_presence_of :product_manager
     end
-
-    state :picked do
-      validate :enough_design_capacity?
-    end
-
-    state :approved do
-      validate :enough_development_capacity?
-    end
   end
 
   def self.state_value(state_name)
