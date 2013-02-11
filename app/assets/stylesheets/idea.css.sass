@@ -3,6 +3,8 @@
 @import compass
 @import compass/css3/images
 
+
+// general idea styling -- used on all index pages and show pages
 .idea_container
   position: relative
 .idea
@@ -19,16 +21,10 @@
     padding:          $section_padding
 
   .title
-    white-space:      nowrap
-    text-overflow:    ellipsis
-    overflow:         hidden
     a
       span
         color:            $textColor
       text-decoration:  none
-    i
-      font-size:        medium
-
 
   .meta
     height:   $banner_height
@@ -87,6 +83,7 @@
         color: gray
         content: "|"
 
+// mute-able blocks on idea cards
 .idea
   .mutable
     +transition-property(opacity)
@@ -94,3 +91,26 @@
     +opacity(0.05)
   &:hover .mutable
     +opacity(1.00)
+
+
+// maxi-format idea specifics
+.idea.idea-maxi
+  .title
+    white-space:      nowrap
+    text-overflow:    ellipsis
+    overflow:         hidden
+    i
+      font-size:        medium
+
+
+// mini-format idea overrides
+.idea.idea-mini
+  .meta.top
+    height: 1ex
+  .body
+    padding:     0.66ex
+  .title
+    margin:      0
+    font-size:   medium
+    font-weight: normal
+    line-height: 1.3
