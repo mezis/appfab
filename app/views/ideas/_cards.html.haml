@@ -2,6 +2,8 @@
 
 .row
   .span3
+    .muted
+      != ideas_copy_for_angle(@angle)
   .span9
     = render 'no_ideas_banner'
     - @ideas.each do |idea|
