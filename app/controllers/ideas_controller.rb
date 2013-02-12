@@ -74,15 +74,24 @@ class IdeasController < ApplicationController
   def update
     @idea = current_account.ideas.find(params[:id])
 
-    # state changes: map state names to values
+    # specifics on state changes
     if state = params[:idea].andand[:state]
-      @idea.product_manager = current_user if state == 'picked'
+      # auto-set product manager when picking
+      if state == Idea.state_value(:picked)
+        @idea.product_manager = current_user
+      end
+
+      # if this is a draft promoted to submitted, flash :just_created
+      if state == Idea.state_value(:submitted)
+        flash[:just_created] = true
+      end
     end
 
     if @idea.update_attributes(params[:idea])
       current_user.bookmarked_ideas.add!(@idea)
-      redirect_to @idea, :notice  => "Successfully updated idea."
+      redirect_to @idea, notice:_("Successfully updated idea.")
     else
+      flash.discard
       render :action => 'edit'
     end
   end
