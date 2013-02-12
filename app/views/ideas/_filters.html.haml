@@ -8,7 +8,7 @@
           - IdeasController::ValidViews.each do |view|
             - is_current = (@view == view)
             - classes = ['btn', is_current && 'active'].compact.join(' ')
-            = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current do
+            = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current, title:ideas_view_tooltip(view) do
               %i{ class:idea_view_icon(view) }
 
       %ul.nav.pull-left

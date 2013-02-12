@@ -155,5 +155,13 @@ module IdeasHelper
 
     pipeline_render text
   end
+
+  def ideas_view_tooltip(view)
+    case view
+    when 'cards' then s_('Tooltip|Show ideas in card view')
+    when 'board' then s_('Tooltip|Show ideas in board view')
+    else raise ArgumentError
+    end
+  end
 end
 
