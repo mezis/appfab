@@ -34,7 +34,7 @@ gem 'andand'
 # (because Rails' #pluck breaks a lot with joins)
 gem 'valium'
 
-# as name implies
+# activerecord extensions
 gem 'state_machine', :require => false
 gem 'default_value_for'
 
@@ -65,6 +65,9 @@ gem 'will_paginate'
 
 # exception reporting
 gem 'sentry-raven'
+
+# coffeescript in Haml
+gem 'coffee-filter'
 
 # Gems used only for assets and not required
 # in production environments by default.
