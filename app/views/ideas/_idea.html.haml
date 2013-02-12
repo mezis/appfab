@@ -37,7 +37,7 @@
       - if !collapsed && idea.product_manager
         .product_manager
           %strong= _('Product manager:')
-          = render idea.product_manager, avatar: false
+          = render idea.product_manager, avatar:false, classes:'user-inline'
       .markdown
         != pipeline_render idea.problem
 

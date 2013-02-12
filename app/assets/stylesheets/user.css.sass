@@ -24,6 +24,9 @@
     padding:   50%
     +box-sizing(border-box)
 
+  .name
+    white-space: nowrap
+
   &.user-large
     $padding-size:        8px
 
@@ -41,3 +44,8 @@
   &.user-fit
     width: 100%
     height: auto
+
+  &.user-inline
+    display: inline-block
+    .name
+      display: inline

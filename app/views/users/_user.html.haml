@@ -20,15 +20,6 @@
     options.merge! class: classes
   end
 
-  if show_tooltip && show_karma
-    karma_attrs = {
-      title: s_('Tooltip|This shows %{user}\'s current karma.') % { user: user.first_name },
-      :'data-placement' => 'bottom'
-    }
-  else
-    karma_attrs = {}
-  end
-
   avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
 
 
@@ -40,6 +31,6 @@
       .name
         = user.first_name
         - if show_karma
-          %span.karma{ karma_attrs }
+          %span.karma
             = number_with_delimiter user.karma
             = user_karma_symbol
