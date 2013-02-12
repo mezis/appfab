@@ -15,9 +15,10 @@ module IdeasHelper
   end
 
   def idea_category_select_options(user, idea)
-    options_for_select(user.account.categories.sort.map { |category|
-      [category, category]
-    }, selected:idea.category)
+    pairs = user.account.categories.sort.map { |category| [category, category] }
+    pairs.unshift [_('Unspecified'), 'none']
+    pairs.unshift [_('Pick a category'), nil]
+    options_for_select(pairs, selected:(idea.category || 'none'))
   end
 
   def idea_size_human(size)

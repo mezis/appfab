@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
   before_filter :require_account!
   before_filter :cleanup_session
   before_filter :map_state_names, only:[:create, :update]
+  before_filter :map_no_category, only:[:create, :update]
 
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
@@ -166,5 +167,12 @@ class IdeasController < ApplicationController
     # map state names to values
     return unless state = params[:idea].andand[:state]
     params[:idea][:state] = Idea.state_value(state)
+  end
+
+  def map_no_category
+    # map 'none' category to the valid nil
+    return unless category = params[:idea].andand[:category]
+    return unless category == 'none'
+    params[:idea][:category] = nil
   end
 end
