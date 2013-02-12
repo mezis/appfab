@@ -4,9 +4,11 @@
 %ul#ideas-action
   / size
   - if idea.submitted? && can?(:size, idea)
-    - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field|
+    - [[:product_manager, :design_size, :picture], [:architect, :development_size, :wrench]].each do |role,field,icon|
       %li{ class:field }
-        .btn-group
+        .btn-group.ht-as-table
+          .btn.disabled
+            %i{ class: "icon-#{icon}" }
           - 1.upto(4) do |size|
             - if current_user.plays?(role)
               - if idea.send(field) == size
