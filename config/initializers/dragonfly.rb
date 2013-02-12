@@ -12,9 +12,9 @@ end
 
 
 AppFab::Application.config.middleware.insert 0, 'Rack::Cache', {
-  :verbose     => true,
   # :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
   # :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
+  :verbose     => false,
 } # unless Rails.env.production?
   # uncomment the 'unless' with Rails3 ?
 
