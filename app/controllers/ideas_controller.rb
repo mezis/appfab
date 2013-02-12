@@ -3,6 +3,7 @@ class IdeasController < ApplicationController
   before_filter :authenticate_login!
   before_filter :require_account!
   before_filter :cleanup_session
+  before_filter :map_state_names, only:[:create, :update]
 
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
@@ -76,7 +77,6 @@ class IdeasController < ApplicationController
     # state changes: map state names to values
     if state = params[:idea].andand[:state]
       @idea.product_manager = current_user if state == 'picked'
-      params[:idea][:state] = Idea.state_value(state)
     end
 
     if @idea.update_attributes(params[:idea])
@@ -151,5 +151,11 @@ class IdeasController < ApplicationController
       (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) || 
       'all'
     end
+  end
+
+  def map_state_names
+    # map state names to values
+    return unless state = params[:idea].andand[:state]
+    params[:idea][:state] = Idea.state_value(state)
   end
 end
