@@ -5,6 +5,7 @@ module Traits::Idea::StateMachine
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
   StatesForWizard = [
+    N_('Ideas State|draft'),
     N_('Ideas State|submitted'),
     N_('Ideas State|vetted'),
     N_('Ideas State|voted'),
@@ -73,6 +74,7 @@ module Traits::Idea::StateMachine
 
     def setup_state_machine
       state_machine :state, :initial => :submitted do
+        state :draft,        value: -1
         state :submitted,    value: 0
         state :vetted,       value: 1
         state :voted,        value: 2
@@ -125,14 +127,18 @@ module Traits::Idea::StateMachine
           transition :signed_off => :live
         end
 
+        state all - [:draft] do
+          validates_presence_of :problem, :solution, :metrics
+        end
+
         # state-specific validations
-        state all - [:submitted] do
+        state all - [:draft, :submitted] do
           validate :content_must_not_change
           validates_presence_of :design_size
           validates_presence_of :development_size
         end
 
-        state all - [:submitted, :vetted, :voted] do
+        state all - [:draft, :submitted, :vetted, :voted] do
           validates_presence_of :product_manager
         end
       end

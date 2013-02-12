@@ -24,7 +24,7 @@ class Idea < ActiveRecord::Base
   validates_presence_of  :author
   validates_presence_of  :account
   validates_presence_of  :rating
-  validates_presence_of  :title, :problem, :solution, :metrics
+  validates_presence_of  :title
   validates_inclusion_of :design_size,      :in => 1..4, :allow_nil => true
   validates_inclusion_of :development_size, :in => 1..4, :allow_nil => true
   validates_inclusion_of :category, in: lambda { |idea| idea.account.categories }, allow_nil:true
@@ -62,7 +62,7 @@ class Idea < ActiveRecord::Base
   # Search angles
   
   def self.discussable_by(user)
-    user.account.ideas
+    user.account.ideas.without_state(:draft)
   end
 
   def self.vettable_by(user)

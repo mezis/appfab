@@ -6,9 +6,10 @@ class Ability
     user ||= User.new
 
     # Idea permissions
+    draft_or_submitted = [:draft, :submitted].map { |sym| Idea.state_value(sym) }
     can [:create, :read], Idea, author: { account_id: user.account_id }
-    can :update,          Idea, author: { account_id: user.account_id }, state: Idea.state_value(:submitted)
-    can :destroy,         Idea, author_id: user.id, state: Idea.state_value(:submitted)
+    can :update,          Idea, author: { account_id: user.account_id }, state:draft_or_submitted
+    can :destroy,         Idea, author_id: user.id, state:draft_or_submitted
 
     # Comment
     can    [:create], Comment, idea: { author: { account_id: user.account_id } }

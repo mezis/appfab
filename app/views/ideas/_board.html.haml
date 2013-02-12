@@ -1,7 +1,7 @@
 -# Give me an array of +ideas+
 
 - grouped_ideas = @ideas.group_by(&:state_name)
-- state_names = Idea.state_machine.states.map(&:name)
+- state_names = ideas_board_states
 
 .row
   .span12

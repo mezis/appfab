@@ -42,6 +42,7 @@ module IdeasHelper
   def idea_status(state)
     state = state.to_sym if state.kind_of?(String)
     case state
+    when :draft       then s_('Idea state|draft')
     when :submitted   then s_('Idea state|submitted')    
     when :vetted      then s_('Idea state|vetted')
     when :voted       then s_('Idea state|voted')
@@ -162,6 +163,10 @@ module IdeasHelper
     when 'board' then s_('Tooltip|Show ideas in board view')
     else raise ArgumentError
     end
+  end
+
+  def ideas_board_states
+    Idea.state_machine.states.sort_by(&:value).map(&:name) - [:draft]
   end
 end
 
