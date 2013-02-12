@@ -49,7 +49,7 @@ Then /^the account (\w+) should be "(.*?)"/ do |field, value|
 
   when 'categories'
     visit '/ideas'
-    text = page.find('.filter-category').text
+    text = page.first('.filter-category').text
     value.split(/\s*,\s*/).each do |category|
       text.should =~ /\b#{category}\b/
     end

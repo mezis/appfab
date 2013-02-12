@@ -13,7 +13,7 @@
     = csrf_meta_tag
     = yield(:head)
 
-  %body{ id: "#{params[:controller]}-#{params[:action]}" }
+  %body
     = render 'header'
     = yield :after_header
     .container{ id: body_id }

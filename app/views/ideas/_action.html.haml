@@ -4,8 +4,8 @@
 %ul#ideas-action
   / size
   - if idea.submitted? && can?(:size, idea)
-    - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field, title|
-      %li
+    - [[:product_manager, :design_size], [:architect, :development_size]].each do |role,field|
+      %li{ class:field }
         .btn-group
           - 1.upto(4) do |size|
             - if current_user.plays?(role)

@@ -3,6 +3,9 @@
 Then /^the idea should( not)? be listed in category "(.*?)"$/ do |negate, category|
   idea = Mentions[Idea]
   visit '/ideas'
-  click_on category
+
+  within first(".filter-category") do
+    click_on category
+  end
   page.send (negate ? :should_not : :should), have_selector("#idea#{idea.id}")
 end

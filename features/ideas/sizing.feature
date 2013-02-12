@@ -14,10 +14,10 @@ Feature: Sizing ideas
     Then I cannot size the idea
 
     When I sign in as "Alphonse"
-    And I design-size the idea as "L"
+    And I development-size the idea as "L"
 
     When I sign in as "Peter"
-    And I development-size the idea as "M"
+    And I design-size the idea as "M"
 
     When I sign in as "Ursula"
     Then I see the idea is sized

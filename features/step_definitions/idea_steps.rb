@@ -55,7 +55,7 @@ end
 When /^I (design|development)-size the idea as "(\w+)"$/ do |size_type, size|
   idea = Mentions[Idea]
   visit "/ideas/#{idea.id}"
-  click_on size
+  find(".#{size_type}_size a", text:size).click
 end
 
 
