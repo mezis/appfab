@@ -1,7 +1,9 @@
 = form_for idea do |f|
-  = f.error_messages
+  - if idea.errors.any?
+    .alert.alert-error
+      = f.error_messages
 
-  .row
+  .row.control-group
     .span12
       = f.label :category
     .span7
@@ -10,7 +12,7 @@
       %span.help-block
         = _('Ideas have one (mandatory) category. This typically designates the main area the idea applies to, or the main category of users which will be affected, should the idea be completed.')
 
-  .row
+  .row.control-group
     .span12
       = f.label :title
     .span7
@@ -19,7 +21,7 @@
       %span.help-block
         = _('This is your pitch. Keep it short and to the point, and bear in mind that many users will not continue with the details if your title is not appealing.')
 
-  .row
+  .row.control-group
     .span12
       = f.label :problem
     .span7
@@ -28,7 +30,7 @@
       %span.help-block
         = _('This is where you state the problem your idea aims to solve. It will be displayed after the title in the index of idea, so keep in mind it\'s core to how others will discover and consider your idea (or will ignore it). Make this about specific users, use cases, and data-backed facts. If the problem you are trying to solve is not obvious after reading this, your team will not go any further.')
 
-  .row
+  .row.control-group
     .span12
       = f.label :solution
     .span7
@@ -37,7 +39,7 @@
       %span.help-block
         = _('How would you suggest to solve the issue above? Try your best to be SMART here: address your specific problem, show that this solution is realistic and can be achieved within your team constraints. If this is pie-in-the-sky, again, people will drop. Make sure you attach any relevant data and diagrams, as a napkin sketch is almost mandatory here. You\'ll have a chance to do so on the next page.')
 
-  .row
+  .row.control-group
     .span12
       = f.label :metrics
     .span7
@@ -50,3 +52,6 @@
     .span12
       = f.submit class: 'btn btn-primary'
       %a.btn{ href: ideas_path }= _('Cancel')
+  :coffeescript
+
+    $('.field_with_errors').closest('.control-group').addClass('error')
