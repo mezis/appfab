@@ -1,5 +1,5 @@
 # encoding: UTF-8
 
-Given /I should see a (.*?) message/ do |kind|
+Given /I should see an? (.*?) message/ do |kind|
   page.should have_selector(".flash.alert-#{kind}")
 end

@@ -24,15 +24,16 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil unless current_login && current_account
-    @current_user ||= current_account.users.where(login_id:current_login.id).first
+    @current_user ||= current_account.users.find_by_login_id(current_login.id)
   end
   helper_method :current_user
+
 
   def current_account
     return unless current_login
     @current_account ||= begin
       (account_id = session[:account_id].to_i) &&
-      current_login.accounts.where(id:account_id).first ||
+      current_login.accounts.find_by_id(account_id) ||
       current_login.accounts.first
     end
   end
@@ -42,6 +43,29 @@ class ApplicationController < ActionController::Base
   def require_account!
     return true if current_account
     render_error_page :missing_account
+  end
+
+
+  def acting_real_user
+    real_user = User.find_by_id(session[:real_user_id])
+
+    if real_user == current_user
+      session.delete(:real_user_id) and return
+    else
+      real_user
+    end
+  end
+  helper_method :acting_real_user
+
+
+  def acting_real_user=(user)
+    if user.nil?
+      session.delete(:real_user_id)
+    elsif user.kind_of?(User)
+      session[:real_user_id] = user.id
+    else
+      raise ArgumentError
+    end
   end
 
 

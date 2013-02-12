@@ -86,7 +86,7 @@
         - if current_user
           = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
             = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
-              %span= current_login.first_name
+              %span.first-name= current_login.first_name
               %span.karma
                 %span.figure= number_with_delimiter current_user.karma
                 = user_karma_symbol

@@ -7,7 +7,19 @@ Given /^a category "(.*?)"$/ do |category|
 end
 
 Given /^the account name is "(.*?)"$/ do |name|
-  Mentions[Account].update_attribute :name, name
+  current_account.update_attribute :name, name
+end
+
+Given /^an account "(.*?)"$/ do |name|
+  Mentions[Account] = Account.make! name:name
+end
+
+Given /^(?:I am|"(.*?)" is) a member of account "(.*?)"$/ do |who, account_name|
+  account = Account.find_by_name(account_name)
+  login = who ? Login.find_by_first_name(who) : current_login
+
+  login.users.create! account:account
+  Mentions[Account] = account
 end
 
 # actions

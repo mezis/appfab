@@ -46,3 +46,7 @@
         = can_link_to user_roles_path(@user, user_role: {name: role_name}), auth:[:create, User::Role], method: :post, class: 'btn btn-block', :'data-placement' => 'left' do
           = user_role_name(role_name)
 
+    - if current_user.plays?(:account_owner)
+      %hr/
+      = link_to session_path(user_id:@user.id), method: :put, class: 'btn btn-block' do
+        = _('Act as user')
