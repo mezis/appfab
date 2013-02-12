@@ -169,5 +169,31 @@ module IdeasHelper
   def ideas_board_states
     Idea.state_machine.states.sort_by(&:value).map(&:name) - [:draft]
   end
+
+
+  def idea_copy_for_state(state_name)
+    case state_name
+    when :draft
+      _("This idea is a draft: only you can see it in lists of ideas, although other users can view it if you give the a link. You can edit it until it's ready for submission.")
+    when :submitted
+      _("This idea was submitted, but is not vetted yet. It needs to be looked at by both a product manager and an architect, each of whom will estimate the effort involved and vet it. They also can just comment on it and ask you to provide more details, give it a better title, or elaborate on the problem statement for instance: only specific, precise ideas can be sized properly.")
+    when :vetted
+      _("This idea has been vetted by a product manager and an architect, but has not received enough votes yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} for an idea to proceed.") % { minimum_votes:configatron.app_fab.votes_needed }
+    when :voted
+      _("Great! This idea has received more than the minimum votes. Assuming it is or becomes one of the top rated ideas, a product team will pick it up and start working on it.")
+    when :picked
+      _("This idea has been picked by a product manager. This is the design phase: development has not started yet, but the product team is planning to. The outcome may be a detailed roadmap, an identified 'minimum viable product' line, and a set of wireframes for instance. Oh, and everyone who backed it got a bit of extra karma.")
+    when :designed
+      _("This idea has been designed by a product team: at this point they know almost exactly what to do, and have a good idea of the roadmap and time to first release. It is waiting for an approval by the 'benevolent dictator'.")
+    when :approved
+      _("This idea has been designed and approved. The product team that picked it up is working its magic (which might involve writing code) to implement it.")
+    when :implemented
+      _("This idea has been picked, designed, implemented, and fully tested. It should be demo-able in a staging environment, and is just waiting for the 'benevolent dictator' to sign it off before release.")
+    when :signed_off
+      _("Awesome! This idea has been signed off, and is ready to go live. It's just a matter of running regression tests and planning a release now, almost there!")
+    when :live
+      _("Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra karma.")
+    end
+  end
 end
 

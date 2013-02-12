@@ -42,3 +42,9 @@
   .span3
     = render 'action', idea: @idea
     = render 'attachments/uploader', idea: @idea
+
+    %hr/
+    .ht-with-margin-icon.muted
+      .ht-margin-icon
+        %i.icon-info-sign
+      != idea_copy_for_state(@idea.state_name)
