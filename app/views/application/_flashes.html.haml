@@ -1,7 +1,6 @@
-.row
-  .span12
-    - flash.each do |name, msg|
-      %div{ class: "flash alert alert-#{name}"}
-        = msg
-        %button.close{ :'data-dismiss' => 'alert' }<
-          %i.icon-remove
+- flash.each do |name, msg|
+  %div{ class: "flash alert alert-#{name}"}
+    .container
+      = msg
+      %button.close{ :'data-dismiss' => 'flash' }<
+        %i.icon-remove

@@ -5,9 +5,11 @@
     padding-top:    0
     padding-bottom: 0
 
-  & + .navbar
-    // negate the margin of the preceeding navbar
-    margin-top:     -20px
+// negate the margin of the preceeding navbar
+.navbar + .navbar,
+.navbar + .flash,
+.flash + .flash
+  margin-top:     -20px
 
 
 .navbar-inverse
