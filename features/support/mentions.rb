@@ -1,12 +1,13 @@
 module Mentions
+  class Error < Exception ; end
   extend self
 
   def [](model)
-    @mentions[model] or raise "No #{model.name} mentionned yet"
+    @mentions[model] or raise Error.new("No #{model.name} mentioned yet")
   end
 
   def []=(model, instance)
-    raise unless instance.kind_of?(model)
+    raise Error.new('No model passed') unless instance.kind_of?(model)
     @mentions[model] = instance
   end
 

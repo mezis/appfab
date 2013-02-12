@@ -2,6 +2,7 @@
   - if idea.errors.any?
     .alert.alert-error
       = f.error_messages
+  = hidden_field_tag 'idea[state]', idea.state_name
 
   .row.control-group
     .span12
@@ -50,8 +51,25 @@
 
   .row
     .span12
-      = f.submit class: 'btn btn-primary'
-      %a.btn{ href: ideas_path }= _('Cancel')
+      - data_options = { disable_with:_('Saving...') }
+      - if idea.new_record?
+        = f.submit _('Submit idea'),   class: 'btn btn-primary', data:data_options
+        = f.submit _('Save as draft'), class: 'btn', data:data_options.merge(setstate:'draft')
+        - cancel_path = ideas_path
+      - elsif idea.draft?
+        = f.submit _('Submit idea'), class: 'btn', data:data_options.merge(setstate:'submitted')
+        = f.submit _('Update draft'), class: 'btn btn-primary', data:data_options
+        - cancel_path = idea_path(idea)
+      - else
+        = f.submit _('Update idea'), class: 'btn btn-primary', data:data_options
+        - cancel_path = idea_path(idea)
+      %a.btn{ href: cancel_path }= _('Cancel')
+
   :coffeescript
+    $("input[data-setstate]").click(() ->
+      state_value = $(this).data('setstate')
+      $(this).closest('form').find('input#idea_state').val(state_value)
+      true
+    )
 
     $('.field_with_errors').closest('.control-group').addClass('error')

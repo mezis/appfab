@@ -26,23 +26,29 @@ end
  
 # actions
 
-When /^I submit an idea "(.*)"?$/ do |title|
-  idea = Idea.make title:title
+When /^I submit an? (idea|draft) "(.*)"?$/ do |idea_or_draft, title|
+  idea = Idea.make(title:title).destroy
 
   visit '/ideas/new'
   fill_in 'idea_title',    with: idea.title
   fill_in 'idea_problem',  with: idea.problem
   fill_in 'idea_solution', with: idea.solution
   fill_in 'idea_metrics',  with: idea.metrics
-  click_button 'Create Idea'
+
+  if (idea_or_draft == 'draft')
+    click_button 'Save as draft'
+  else
+    click_button 'Submit idea'
+  end
+  wait_for_page_load
   Mentions[Idea] = Idea.last
 end
 
-When /^I change the idea title to "(.*?)"$/ do |title|
+When /^I change the (idea|draft) title to "(.*?)"$/ do |idea_or_draft, title|
   idea = Mentions[Idea]
   visit "/ideas/#{idea.id}/edit"
-  fill_in 'Title', with:title
-  click_on "Update Idea"
+  fill_in 'idea_title', with:title
+  click_on "Update #{idea_or_draft}"
 end
 
 
@@ -83,6 +89,12 @@ When /^I approve the idea$/ do
   within '#ideas-show' do
     click_on "Approve"
   end
+end
+
+When /^I publish the draft$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}/edit"
+  click_on "Submit idea"
 end
 
 
