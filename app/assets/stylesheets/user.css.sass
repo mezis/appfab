@@ -3,56 +3,41 @@
 @import application/variables
 
 .user
-  $avatar_size: 2em
+  $small-avatar-size: 2em
+  $large-avatar-size: 128px
+
+  position: relative
+  width:    $small-avatar-size
+  height    auto
 
   .avatar
-    +square($avatar_size)
     +background-size(cover)
+    +border-radius(2px)
+
     +filter(saturate(5%))
     &:hover
       +filter(none)
 
-.user-big-avatar
-  $border-size:         8px
-
-  width:                100%
-  height:               200px
-  background-position:  center
-  background-repeat:    no-repeat
-  border:               $border-size solid white
-  border-bottom-width:  (3* $border-size)
-
-  +box-sizing(border-box)
-  +background-size(cover)
-  +filter(saturate(5%))
-  +box-shadow($medium_gray 0px 2px 5px)
-
-  margin-bottom:        (3* $border-size)
-
-
-#accounts-show
-  .user
-    +box-sizing(border-box)
-    position:             relative
-    width:                240px
-    float:                left
-    padding:              1ex
-    padding-top:          0
-    .name
-      width:                100%
-      float:                right
-    .avatar
-      @extend .user-big-avatar
-      float:                left
-
-#users-show
-  h1
-    margin: 0
+  // make the avatar square
   .avatar
-    @extend .user-big-avatar
-  .karma-icons
-    text-align:           center
-    font-size:            large
+    width:     auto
+    padding:   50%
+    +box-sizing(border-box)
 
-  .actions
-    float: right
+  &.user-large
+    $padding-size:        8px
+
+    padding: $padding-size
+    width:   $large-avatar-size
+    +box-shadow($medium_gray 0px 4px 7px -2px)
+
+    .avatar
+      & + .name
+        margin-top: $padding-size
+        text-align: center
+      &:last-child
+        margin-bottom: (3 * $padding-size)
+
+  &.user-fit
+    width: 100%
+    height: auto

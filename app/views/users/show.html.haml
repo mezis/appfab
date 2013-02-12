@@ -4,7 +4,8 @@
 
 .row
   .span3
-    .avatar{ style: "background-image: url(#{@user.gravatar_url(size: 512)})" }
+    = render @user, avatar:512, name:false, tooltip:false, classes:'user-large user-fit'
+    %hr/
     .karma-icons
       - @user.karma.times do
         = user_karma_symbol
