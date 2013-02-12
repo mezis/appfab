@@ -2,8 +2,8 @@
 
 .row
   .span9
-    - @account.users.each do |user|
       = render user, name:true, avatar:true, big:true
+    - @account.users.by_first_name.each do |user|
 
   .span3
     %h3= _("Team %{team_name}") % { team_name:@account.name }
