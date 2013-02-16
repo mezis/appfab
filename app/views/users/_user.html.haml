@@ -13,7 +13,7 @@
 
   options = { id: "user#{user.id}" }
   if show_tooltip
-    options.merge! title: user_tooltip(user), :'data-placement' => 'right'
+    options.merge! title: user_tooltip(user), :'data-placement' => 'bottom'
   end
 
   if classes = local_assigns[:classes]

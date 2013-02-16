@@ -64,9 +64,11 @@
   .people
     float: left
     padding: 0
-    position: relative
-    .author, .others, .user
-      float: left
+    position:   relative
+    overflow:   hidden
+    text-align: left
+    > *
+      display:  inline-block
     .avatar
       height: $banner_height
       width:  $banner_height

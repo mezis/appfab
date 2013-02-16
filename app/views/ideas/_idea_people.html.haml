@@ -1,7 +1,5 @@
-.people
-  .author
-    = render idea.author, format: :avatar
-  .others
-    - idea.participants.each do |user|
-      - next if user == idea.author
-      = render user, format: :avatar
+.people<
+  = render idea.author, format: :avatar
+  - idea.participants.each do |user|
+    - next if user == idea.author
+    = render user, format: :avatar
