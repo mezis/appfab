@@ -8,11 +8,11 @@
           %i.icon-remove
 
         - if @idea.submitted?
-          %h4= _('Awesome! Your idea was sumbitted.')
+          %h4= _('Awesome! Your idea was submitted.')
           %p= _('As it is the most recently active story, it now appears at the top the the discussion list.')
           %p= _('This means your team should now start discussing it! Take part in the discussion to perfect your idea. Once it is correctly formatted and documented, a product manager and an architect should vet it, and the voting will start!')
         - elsif @idea.draft?
-          %h4= _('Neat! Your just created a draft idea.')
+          %h4= _('Neat! You just created a draft idea.')
           %p= _('It will no be visible to others; we have bookmarked it for you so you can find it again by going to the "followed" angle.')
           %p= _('Once you\'re done preparing it, just edit it again and press "Submit idea".')
         - else
