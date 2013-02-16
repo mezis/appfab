@@ -1,2 +1,31 @@
+@import compass
+@import application/mixins
+@import application/variables
+
 .alert-block * + p
   margin-top: 5px
+
+.flash-banner
+  =phone-layout
+    +border-radius(0)
+    padding:        1ex $base_margin
+    margin-left:   -$base_margin
+    margin-right:  -$base_margin
+    border-left:    none
+    border-right:   none
+
+    
+  padding: 1ex 0
+
+  +respond-to(phone)
+    +phone-layout
+  +respond-to(tablet)
+    +phone-layout
+
+  .close
+    font-size: medium
+    top:       0
+    right:     0
+
+
+

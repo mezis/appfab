@@ -1,9 +1,9 @@
 - title @idea.title, show_title: false
 
 - if @just_created
-  .row
-    .span12
-      %div.alert.alert-block.alert-success
+  - content_for :after_flashes do
+    .flash.flash-banner.alert.alert-block.alert-success
+      .container
         %button.close{ :'data-dismiss' => 'alert' }<
           %i.icon-remove
 
@@ -19,9 +19,9 @@
           - raise RuntimeError.new('bad idea state')
 
 - if @idea.can_vote»? && can?(:create, @idea.votes.build)
-  .row
-    .span12
-      %div.alert.alert-block
+  - content_for :after_flashes do
+    .flash.flash-banner.alert.alert-block.alert-success
+      .container
         %button.close{ :'data-dismiss' => 'alert' }<
           %i.icon-remove
         %h4= _('Time to vote!')

@@ -18,6 +18,7 @@
     = yield :after_header
     = render 'acting_as_user' if acting_real_user
     = render 'flashes' if flash.any?
+    = yield :after_flashes
     .container{ id: body_id }
       - if show_title?
         .row
