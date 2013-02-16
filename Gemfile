@@ -67,7 +67,6 @@ gem 'will_paginate'
 gem 'sentry-raven'
 
 # coffeescript in Haml
-gem 'coffee-filter'
 
 # Gems used only for assets and not required
 # in production environments by default.
