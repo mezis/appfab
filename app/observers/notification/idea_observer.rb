@@ -3,6 +3,7 @@ class Notification::IdeaObserver < ActiveRecord::Observer
   observe :idea
 
   def after_create(record)
+    return unless record.submitted? 
     record.account.users.playing(:product_manager, :architect).each do |user|
       Notification::NewIdea.create! subject:record, recipient:user
     end
@@ -24,8 +25,9 @@ class Notification::IdeaObserver < ActiveRecord::Observer
   private
 
   StateChangeNotifications = {
-    :vetted => Notification::Idea::Vetted,
-    :picked => Notification::Idea::Picked,
-    :live   => Notification::Idea::Live
+    :submitted => Notification::NewIdea,
+    :vetted    => Notification::Idea::Vetted,
+    :picked    => Notification::Idea::Picked,
+    :live      => Notification::Idea::Live
   }
 end
