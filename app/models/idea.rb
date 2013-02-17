@@ -60,6 +60,10 @@ class Idea < ActiveRecord::Base
     sized? and [design_size, development_size].max
   end
 
+  def backed_by?(user)
+    backers.value_of(:id).include?(user.id)
+  end
+
 
   # Search angles
   
