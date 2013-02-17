@@ -9,8 +9,8 @@
   muted_details = local_assigns.fetch(:muted,       false)
 
 .idea_container
-  - classes = [idea.state_name, 'with-header-wizard']
-  .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.join(' ') }
+  - classes = [idea.state_name, 'with-header-wizard', idea_category_class(idea)]
+  .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.compact.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
       .content{ class: (muted_details && 'mutable') }

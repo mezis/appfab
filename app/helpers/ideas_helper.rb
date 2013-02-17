@@ -195,5 +195,9 @@ module IdeasHelper
       _("Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra karma.")
     end
   end
+
+  def idea_category_class(idea)
+    account_category_class(idea.account, idea.category)
+  end
 end
 

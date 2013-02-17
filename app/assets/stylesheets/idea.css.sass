@@ -1,5 +1,6 @@
 @import application/variables
 @import application/mixins
+@import application/components/cards
 @import compass
 @import compass/css3/images
 
@@ -15,7 +16,7 @@
   &:first-child
     margin-top: 0
 
-  +appfab-box
+  @extend .af-card
 
   .body
     padding:          $section_padding

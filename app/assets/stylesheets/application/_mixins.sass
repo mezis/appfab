@@ -14,14 +14,13 @@
   left:        $x
   top:         $x
 
-=appfab-box
-  +background-image(linear-gradient(left top, lighten($light_gray, 50%), $light_gray))
-  +box-shadow($medium_gray 0px 2px 5px)
-
 =single-line
   overflow:         hidden
   white-space:      nowrap
   text-overflow:    ellipsis
+
+=gradient-box($color)
+  +background-image(linear-gradient(left top, lighten($color, 50%), $color))
 
 
 // media can be one of: phone, tablet, desktop, wide

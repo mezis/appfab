@@ -2,8 +2,8 @@
 -# - idea (Idea)
 
 .idea_container
-  - classes = [idea.state_name, 'with-header-wizard']
-  .idea.idea-mini{ id: "idea#{idea.id}", class: classes.join(' ') }
+  - classes = [idea.state_name, idea_category_class(idea)]
+  .idea.idea-mini{ id: "idea#{idea.id}", class: classes.compact.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
     .body

@@ -26,6 +26,7 @@
               - is_current = (@category == category)
               %li{ class: (is_current && 'disabled')}
                 = can_link_to ideas_path(params.merge(category:category)), if:!is_current do
+                  %span{ class: "af-category-label #{account_category_class(current_account, category)}"}
                   = account_category_title(category)
 
       %ul.nav.pull-left
