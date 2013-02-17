@@ -31,6 +31,8 @@ class Idea < ActiveRecord::Base
 
   default_values rating: 0
 
+  before_save :update_active_at
+
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
   scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
@@ -141,17 +143,14 @@ class Idea < ActiveRecord::Base
 
   # called from subresources (comments, vettings, votes)
   def ping!
-    update_attributes! active_at: Time.now
+    self.class.where(id:id).update_all(active_at:Time.current)
   end
 
 
-  private
+  protected
 
-
-  before_save do |record|
-    unless record.updated_at.nil?
-      record.active_at = record.updated_at if record.active_at.nil? || record.updated_at > record.active_at
-    end
+  def update_active_at
+    return unless changes.any?
+    self.active_at = Time.current
   end
-
-  end
+end
