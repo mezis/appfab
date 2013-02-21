@@ -4,8 +4,8 @@ ruby '1.9.2'
 gem 'rails'
 
 # database
-gem 'mysql2',  :group => :development
-gem 'pg',      :group => :production
+gem 'mysql2',  group: :development
+gem 'pg',      group: :production
 
 # authentication/authorisation
 gem 'devise'
@@ -21,8 +21,8 @@ gem 'memcache-client'
 
 # i18n
 gem 'gettext_i18n_rails'
-gem 'gettext',     :require => false, :group => :development
-gem 'ruby_parser', :require => false, :group => :development
+gem 'gettext',     require:false, group: :development
+gem 'ruby_parser', require:false, group: :development
 
 # centralized configuration
 gem 'configatron'
@@ -35,7 +35,7 @@ gem 'andand'
 gem 'valium'
 
 # activerecord extensions
-gem 'state_machine', :require => false
+gem 'state_machine', require:false
 gem 'default_value_for'
 
 # attached files & image manipulation
@@ -43,13 +43,13 @@ gem 'dragonfly'
 gem 'fineuploader-rails'
 
 # caching, at the Rack level
-gem 'rack-cache', :require => 'rack/cache'
+gem 'rack-cache', require:'rack/cache'
 
 # user avatars
-gem 'gravtastic', :require => false
+gem 'gravtastic', require:false
 
 # monitoring
-gem 'newrelic_rpm', :group => :production
+gem 'newrelic_rpm', group: :production
 
 # styled user input (markdown)
 gem 'redcarpet'
@@ -88,38 +88,39 @@ end
 
 group :development do
   # better generators
-  gem 'nifty-generators', :require => false
+  gem 'nifty-generators',        require:false
 
   # debugging
-  gem 'pry',              :require => false
-  gem 'pry-nav',          :require => false
-  gem 'pry-doc',          :require => false
+  gem 'pry',                     require:false
+  gem 'pry-nav',                 require:false
+  gem 'pry-doc',                 require:false
   gem 'pry-rails'
-  gem 'ruby-prof',        :require => false
+  gem 'ruby-prof',               require:false
 
   # tdd
-  gem 'rspec-rails',      :require => false
-  gem 'cucumber-rails',   :require => false
-  gem 'capybara-webkit',  :require => false
-  gem 'machinist',        :require => false
-  gem 'database_cleaner', :require => false
-  gem 'faker',            :require => false
-  gem 'launchy',          :require => false # for capybara's save_and_open_page
+  gem 'rspec',                   require:false
+  gem 'rspec-rails',             require:false
+  gem 'cucumber-rails',          require:false
+  gem 'capybara-webkit',         require:false
+  gem 'machinist',               require:false
+  gem 'database_cleaner',        require:false
+  gem 'faker',                   require:false
+  gem 'launchy',                 require:false # for capybara's save_and_open_page
 
   # automated testing
-  gem 'guard',            :require => false
-  gem 'guard-rspec',      :require => false
-  gem 'guard-cucumber',   :require => false
-  gem 'guard-rails',      :require => false
-  gem 'guard-bundler',    :require => false
-  gem 'guard-migrate',    :require => false
-  gem 'rb-inotify',       :require => false
-  gem 'rb-fsevent',       :require => false
-  gem 'rb-fchange',       :require => false
-  gem 'terminal-notifier-guard', :require => false
+  gem 'guard',                   require:false
+  gem 'guard-rspec',             require:false
+  gem 'guard-cucumber',          require:false
+  gem 'guard-rails',             require:false
+  gem 'guard-bundler',           require:false
+  gem 'guard-migrate',           require:false
+  gem 'rb-inotify',              require:false
+  gem 'rb-fsevent',              require:false
+  gem 'rb-fchange',              require:false
+  gem 'terminal-notifier-guard', require:false
 
   # heroku interaction
-  gem 'taps',             :require => false
+  gem 'taps',                    require:false
 
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
