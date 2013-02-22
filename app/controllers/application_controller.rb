@@ -40,12 +40,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_account
 
   def current_account=(account)
-    if @current_account != account
+    if current_account != account
       flash[:account_switch] = _('You just switched to viewing the "%{name}" team') % { name:account.name }
     end
     @current_account = nil
     @current_user    = nil
     session[:account_id] = account.id
+    return current_account
   end
 
 
