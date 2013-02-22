@@ -48,9 +48,11 @@ class IdeasController < ApplicationController
   end
 
   def show
+    @idea = find_idea(params[:id])
+    self.current_account = @idea.account
+
     @just_created = flash[:just_created]
     flash.delete(:just_created)
-    @idea = current_account.ideas.find(params[:id])
   end
 
   def new
@@ -69,11 +71,11 @@ class IdeasController < ApplicationController
   end
 
   def edit
-    @idea = current_account.ideas.find(params[:id])
+    @idea = find_idea(params[:id])
   end
 
   def update
-    @idea = current_account.ideas.find(params[:id])
+    @idea = find_idea(params[:id])
 
     # specifics on state changes
     if state = params[:idea].andand[:state]
@@ -105,6 +107,12 @@ class IdeasController < ApplicationController
 
 
   private
+
+  def find_idea(id)
+    idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
+    self.current_account = idea.account
+    return idea
+  end
 
   def cleanup_session
     session.delete :ideas_angle  unless session[:ideas_angle].kind_of?(String)
