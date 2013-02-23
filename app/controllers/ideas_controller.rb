@@ -51,8 +51,7 @@ class IdeasController < ApplicationController
     @idea = find_idea(params[:id])
     self.current_account = @idea.account
 
-    @just_created = flash[:just_created]
-    flash.delete(:just_created)
+    @just_submitted = session.delete(:just_submitted)
   end
 
   def new
@@ -63,7 +62,7 @@ class IdeasController < ApplicationController
     @idea = current_user.ideas.new(params[:idea])
     @idea.account = current_account
     if @idea.save
-      flash[:just_created] = true
+      session[:just_submitted] = true
       redirect_to @idea
     else
       render :action => 'new'
@@ -84,9 +83,9 @@ class IdeasController < ApplicationController
         @idea.product_manager = current_user
       end
 
-      # if this is a draft promoted to submitted, flash :just_created
-      if state == Idea.state_value(:submitted)
-        flash[:just_created] = true
+      if @idea.draft? && state == Idea.state_value(:submitted)
+        # this is a draft promoted to submitted
+        session[:just_submitted] = true
       end
     end
 
@@ -94,7 +93,7 @@ class IdeasController < ApplicationController
       current_user.bookmarked_ideas.add!(@idea)
       redirect_to @idea, notice:_("Successfully updated idea.")
     else
-      flash.discard
+      session.delete(:just_submitted)
       render :action => 'edit'
     end
   end
