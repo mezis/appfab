@@ -2,14 +2,14 @@ module PipelineHelper
 
   def pipeline_render(text)
     hash = Digest::SHA1.hexdigest(text)
-    Rails.cache.fetch("pipeline_render/#{CACHE_VERSION}/#{hash}") do
+    Rails.cache.fetch("#{__method__}/v#{CACHE_VERSION}/#{hash}") do
       markdown.render(text)
     end
   end
 
   private
 
-  CACHE_VERSION = 3
+  CACHE_VERSION = 1
 
   PARSER_OPTIONS = {
     no_intra_emphasis:    true,
