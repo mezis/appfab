@@ -114,9 +114,14 @@ class IdeasController < ApplicationController
   end
 
   def cleanup_session
-    session.delete :ideas_angle  unless session[:ideas_angle].kind_of?(String)
-    session.delete :ideas_order  unless session[:ideas_order].kind_of?(Hash)
-    session.delete :ideas_filter unless session[:ideas_filter].kind_of?(Hash)
+    {
+      ideas_angle:  String,
+      ideas_order:  Hash,
+      ideas_filter: Hash
+    }.each_pair do |session_key, type|
+      next if session[session_key].kind_of?(type)
+      session.delete(session_key)
+    end
   end
 
   def set_angle_from_params
