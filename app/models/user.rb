@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   validates_presence_of :login
   validates_presence_of :account
   validates_presence_of :karma
+  validates_uniqueness_of :account_id, :scope => :login_id
 
   default_values karma: configatron.app_fab.karma.initial,
                  voting_power: 1
