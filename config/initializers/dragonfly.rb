@@ -10,13 +10,23 @@ Dragonfly[:files].tap do |dragonfly_app|
   end
 end
 
+memcached_url = case Rails.env
+when 'development', 'test'
+  'memcached://localhost:11211/rack-cache'
+else
+  "memcached://%<user>s:%<password>s@%<host>s:%<port>s/rack-cache" % {
+    host:     ENV['MEMCACHIER_SERVERS'].split(',').first,
+    user:     ENV['MEMCACHIER_USERNAME'],
+    password: ENV['MEMCACHIER_PASSWORD'],
+    port:     11211
+  }
+end
 
 AppFab::Application.config.middleware.insert 0, 'Rack::Cache', {
-  # :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
-  # :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
+  :metastore   => memcached_url,
+  :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body"),
   :verbose     => false,
-} # unless Rails.env.production?
-  # uncomment the 'unless' with Rails3 ?
+}
 
 AppFab::Application.config.middleware.insert_after 'Rack::Cache', 
   'Dragonfly::Middleware', :files
