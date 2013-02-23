@@ -75,5 +75,8 @@ module AppFab
     # avoid issues when deploying to heroku
     # https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar#troubleshooting
     config.assets.initialize_on_precompile = false
+
+    # backing store for page/action/fragment caching
+    config.cache_store = :dalli_store
   end
 end

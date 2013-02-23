@@ -76,6 +76,7 @@ GEM
       capybara (>= 1.1.2)
       cucumber (>= 1.1.8)
       nokogiri (>= 1.5.0)
+    dalli (2.6.2)
     database_cleaner (0.9.1)
     default_value_for (2.0.1)
     devise (2.2.3)
@@ -159,7 +160,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    memcache-client (1.8.5)
+    memcachier (0.0.2)
     method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.6.1)
@@ -324,6 +325,7 @@ DEPENDENCIES
   compass-rails
   configatron
   cucumber-rails
+  dalli
   database_cleaner
   default_value_for
   devise
@@ -344,7 +346,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   machinist
-  memcache-client
+  memcachier
   mysql2
   newrelic_rpm
   nifty-generators

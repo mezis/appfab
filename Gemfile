@@ -17,7 +17,8 @@ gem 'cancan'
 gem 'haml-rails'
 
 # caching
-gem 'memcache-client'
+gem 'dalli'
+gem 'memcachier'
 
 # i18n
 gem 'gettext_i18n_rails'
