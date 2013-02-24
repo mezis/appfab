@@ -3,6 +3,6 @@
 -if @ideas.empty?
   .alert.alert-block
     %h4= _('Sorry! I\'m afraid there are no %{qualifier} ideas %{filter} %{category} at the moment.') % { qualifier: @angle, filter: ideas_filter_qualifier(@filter), category: ideas_category_qualifier(@category) }
-    %p= _('Perhaps you could %{submit_link} a new one?').html_safe % { submit_link: link_to(_('sumbit'), new_idea_path)}
+    %p= _('Perhaps you could %{submit_link} a new one?').html_safe % { submit_link: link_to(_('submit'), new_idea_path)}
     - if Idea.discussable_by(current_user).any?
       %p= _('Or you could %{discuss_link} ideas with others?').html_safe % { discuss_link: link_to(_('discuss'), ideas_path(angle: 'discussable'))}
