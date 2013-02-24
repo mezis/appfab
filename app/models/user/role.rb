@@ -27,6 +27,7 @@ class User::Role < ActiveRecord::Base
         return if plays?(role_name)
         self.roles.create!(name: role_name)
       end
+      @cached_roles = nil
       return self
     end
 
@@ -34,7 +35,13 @@ class User::Role < ActiveRecord::Base
       role_names = role_names.map { |name| name.kind_of?(String) ? name.to_sym : name }
       (role_names - Names).empty? or
         raise ArgumentError.new("Unknown roles in arguments")
-      return self.roles.where(name: role_names).first
+      return cached_roles.find { |role| role_names.include?(role.name.to_sym) }
+    end
+
+    protected
+
+    def cached_roles
+      @cached_roles ||= self.roles.all
     end
   end
 
