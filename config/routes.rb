@@ -2,6 +2,7 @@
 AppFab::Application.routes.draw do
 
   get "welcome/index"
+  get 'welcome/fail'
 
   resources :notifications
   resources :accounts

@@ -5,6 +5,10 @@ class WelcomeController < ApplicationController
   def index
   end
 
+  def fail
+    raise RuntimeError.new("failed on purpose with: #{params.inspect}")
+  end
+
   def static_page
     unless STATIC_PAGES.include? params[:page]
       render_error_page :not_found, message:_("We don't know about the page you're trying to access.")
