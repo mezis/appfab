@@ -11,6 +11,7 @@ class Comment < ActiveRecord::Base
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_one    :attachment, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   include Notification::Base::CanBeSubject  
+  include Traits::RecentCreation  
 
   default_values rating: 0
 
@@ -19,7 +20,6 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :rating
 
-  scope :recently_updated, lambda { where('updated_at > ?', 15.minutes.ago) }
   scope :by_created_at, order:'created_at DESC'
 
   after_create { |record| record.idea.andand.ping! }

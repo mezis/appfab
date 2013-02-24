@@ -6,6 +6,7 @@ class Vote < ActiveRecord::Base
   belongs_to :user
   belongs_to :subject, :polymorphic => true
   include Notification::Base::CanBeSubject  
+  include Traits::RecentCreation  
 
   validates_presence_of :user
   validates_presence_of :subject
@@ -18,19 +19,17 @@ class Vote < ActiveRecord::Base
   scope :by_user,   lambda { |user| where(user_id:user.id) }
   scope :upvote,    where(up:true)
   scope :downvote,  where(up:false)
-  scope :recently_created, lambda { where('created_at > ?', 15.minutes.ago) }
 
   after_create  :notify_idea
   after_destroy :notify_idea
 
   def up?
-    self.up
+    !!self.up
   end
 
   def down?
     !self.up
   end
-
 
   private
 

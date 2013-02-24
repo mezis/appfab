@@ -5,6 +5,7 @@ class Vetting < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea
   include Notification::Base::CanBeSubject  
+  include Traits::RecentCreation  
 
   validates_presence_of :user
   validates_presence_of :idea
@@ -14,7 +15,6 @@ class Vetting < ActiveRecord::Base
   validate :idea_must_be_sized
 
   scope :idea_is, lambda { |idea| where(idea_id: idea.id) }
-  scope :recently_created, lambda { where('created_at > ?', 15.minutes.ago) }
 
   after_create { |record| record.idea.andand.vet» }
   after_create { |record| record.idea.andand.ping! }
