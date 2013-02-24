@@ -1,12 +1,12 @@
 require 'lazy_records/cache'
 
 class LazyRecords::Collection
-  attr_reader :cache, :ids
+  attr_reader :ids, :model
 
   delegate :length, :size, :count, to: :ids
 
   def initialize(model, options={})
-    @cache = LazyRecords.cache_for(model)
+    @model = model
     @ids   = options[:ids]
     cache.may_need ids, options.slice(:includes)
   end
@@ -25,6 +25,12 @@ class LazyRecords::Collection
     end
   end
 
+  def all
+    map { |x| x }
+  end
+
+  alias_method :to_a, :all
+
 
   private
 
@@ -36,5 +42,9 @@ class LazyRecords::Collection
 
   def record_for(id)
     cache.get(id)
+  end
+
+  def cache
+    LazyRecords.cache_for(model)
   end
 end

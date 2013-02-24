@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   include Notification::Base::CanBeSubject
   include Notification::Base::Recipient
   include User::Bookmark::UserMethods
+  include LazyRecords::Model
 
   validates_presence_of :login
   validates_presence_of :account
@@ -51,6 +52,4 @@ class User < ActiveRecord::Base
       self.save!
     end
   end
-
-
 end
