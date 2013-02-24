@@ -152,6 +152,8 @@ GEM
     launchy (2.2.0)
       addressable (~> 2.3)
     levenshtein (0.2.2)
+    license_finder (0.7.3)
+      bundler
     listen (0.7.2)
     locale (2.0.8)
     lumberjack (1.0.2)
@@ -345,6 +347,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   launchy
+  license_finder
   machinist
   memcachier
   mysql2

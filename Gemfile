@@ -125,5 +125,7 @@ group :development do
 
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
+
+  gem 'license_finder'
 end
 
