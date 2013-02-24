@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'lazy_records'
 
 class Idea < ActiveRecord::Base
   attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
@@ -14,6 +15,7 @@ class Idea < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
+  include LazyRecords::Model
 
   has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
@@ -40,15 +42,16 @@ class Idea < ActiveRecord::Base
   # Other helpers
 
   def participants
-    ids = Rails.cache.fetch("m/idea/#{id}/#{updated_at.to_i}/participants") do
+    ids = Rails.cache.fetch("#{self.class.name}/#{__method__}/#{id}/#{active_at.to_i}") do
       [
+        self.author.id,
         self.votes.value_of(:user_id),
         self.vettings.value_of(:user_id),
-        self.comments.value_of(:author_id),
-        self.author.id
+        self.comments.value_of(:author_id)
       ].flatten.uniq
-  end
-    ids.map { |id| User.find(id) }
+    end
+
+    lazy_collection_of(User, ids:ids, includes:[:login])
   end
 
 

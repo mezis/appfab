@@ -44,6 +44,9 @@ class IdeasController < ApplicationController
     elsif @category != 'all'
       @ideas = @ideas.where(category: @category)
     end
+
+    # eager-load participants
+    @ideas.map(&:participants)
   end
 
   def show

@@ -1,8 +1,11 @@
 # encoding: UTF-8
+require 'lazy_records'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
   include Traits::RedirectToHttps
+  include LazyRecords::Flusher
 
   before_filter :set_text_domain
 
