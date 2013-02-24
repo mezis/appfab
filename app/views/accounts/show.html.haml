@@ -2,7 +2,7 @@
 
 .row
   .span9
-    - @account.users.by_first_name.each do |user|
+    - @account.users.sort_by(&:first_name).each do |user|
       = render user, name:true, avatar:512, tooltip:false, classes:'user-large pull-left pull-left-spaced'
     .clearfix
   .span3
