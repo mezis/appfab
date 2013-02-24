@@ -35,7 +35,6 @@ class IdeasController < ApplicationController
     @view     = set_view_from_params
 
     @ideas = current_account.ideas.
-      includes(:vettings).
       send(:"#{@angle}_by", current_user).
       send(:"by_#{@order}")
     @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter == 'all'
