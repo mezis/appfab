@@ -123,11 +123,6 @@ class Idea < ActiveRecord::Base
     order('ideas.created_at DESC')
   end
 
-  def self.by_size
-    order('(ideas.development_size + ideas.design_size)')
-  end
-
-
 
   # Search filters
 
