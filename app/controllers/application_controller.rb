@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
 
 
   def acting_real_user
+    return unless session[:real_user_id]
     real_user = User.find_by_id(session[:real_user_id])
 
     if real_user == current_user
