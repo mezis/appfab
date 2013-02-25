@@ -9,7 +9,7 @@ entirety below in this same document (the "Original Licence"), and with the
 following amendments (the "Provisions").
 
 
-----------------------------------------------------------------------------
+
 
 ## Provisions to the AGPL v3
 
@@ -62,7 +62,7 @@ This is to be understood as a binding contract, effective as soon as your
 or transmitted to the Author.
 
 
-----------------------------------------------------------------------------
+
 
 # GNU AFFERO GENERAL PUBLIC LICENSE
 
