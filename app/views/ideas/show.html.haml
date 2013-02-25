@@ -26,7 +26,7 @@
           %i.icon-remove
         %h4= _('Time to vote!')
         %p= _('Please consider your decision to vote for an idea carefully.')
-        %p= _(' You can only back so many ideas , as each vote will cost you %{count} %{karma}.').html_safe % { count: -configatron.app_fab.karma.vote, karma:user_karma_symbol }
+        %p= _('You can only back so many ideas, as each vote will cost you %{count} %{karma}.').html_safe % { count: -configatron.app_fab.karma.vote, karma:user_karma_symbol }
         %p= _('You can withdraw your vote within 15 minutes of casting it if you\'re having second thoughts, but after that point, it will be final!')
 
 
