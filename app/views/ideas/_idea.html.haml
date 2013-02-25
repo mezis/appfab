@@ -15,7 +15,7 @@
       = render 'idea_rating', idea:idea
       .content{ class: (muted_details && 'mutable') }
         .category.muted.pull-left
-          = idea.category
+          = idea.category || _('No category')
         .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
           = idea_status(idea.state_name)
         - if idea.sized?
