@@ -22,3 +22,13 @@ Its source code is made available to the public under a modified version of the 
 If you plan to contribute to AppFab, please have a read at LICENCE.md in this repository.
 
 This licencing scheme is meant to enable AppFab to remain open source without risking facing any legal challenge for contributors (or their employers), and enabling the author to provide an affordable hosted version of the application.
+
+### Trademark
+
+While neither "AppFab" text mark nor the appfab logo (boldface black letter
+"a" on white background) are currently registered in any country, the author
+hereby claims both in the context of NICE categories 9; 38; 41; and 42.
+
+If trademarks mean nothing to you, this is intended to protect the name
+"AppFab" and set precedent to avoid trademark squatting and bullying from
+trademark trolls.
