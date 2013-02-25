@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-19 12:14+0000\n"
+"POT-Creation-Date: 2013-02-25 00:16+0000\n"
 "PO-Revision-Date: 2012-10-30 13:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+msgid "%{time} ago"
+msgstr ""
+
+msgid "%{user} commented on \"%{idea_title}\" (%{idea_link})"
+msgstr ""
+
+msgid "%{user} submitted a new idea \"%{idea_title}\" (%{idea_link})"
+msgstr ""
+
+msgid "Act as user"
+msgstr ""
+
+msgid "All categories"
+msgstr ""
+
+msgid "All ideas"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Architects and product managers then estimate the effort, and if the idea is properly formatted, vet it."
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "As it is the most recently active story, it now appears at the top the the discussion list."
+msgstr ""
+
+msgid "As users contribute, they will gain %{karma} points... or lose them if they act as trolls."
+msgstr ""
+
+msgid "Attach a file"
+msgstr ""
+
+msgid "Awesome! This idea has been signed off, and is ready to go live. It's just a matter of running regression tests and planning a release now, almost there!"
+msgstr ""
+
+msgid "Awesome! Your idea was submitted."
+msgstr ""
+
+msgid "Backed by you"
+msgstr ""
+
 msgid "Bookmark successfuly added."
 msgstr ""
 
+msgid "Bookmark this idea"
+msgstr ""
+
+msgid "Build"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel your downvote"
+msgstr ""
+
+msgid "Cancel your upvote"
+msgstr ""
+
+msgid "Cancel your vetting"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Commented by you"
+msgstr ""
+
+msgid "Create a team"
+msgstr ""
+
+msgid "Delete this comment"
+msgstr ""
+
+msgid "Deliver"
+msgstr ""
+
+msgid "Destroy"
+msgstr ""
+
+msgid "Downvote this comment"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit %{user}"
+msgstr ""
+
+msgid "Edit profile for %{user}"
+msgstr ""
+
+msgid "Edit team"
+msgstr ""
+
+msgid "Ever been to the pub with your team? They're frustrated because they know what the users want. They're bursting with ideas for new features and know which bugs are really painful... but lack the avenue to express themselves."
+msgstr ""
+
+msgid "Everyone gets a say. All team members can submit their ideas, and all team memebrs can discuss each idea until it is explicit and understandable."
+msgstr ""
+
 msgid "Failed to add bookmark."
+msgstr ""
+
+msgid "Failed to create team."
 msgstr ""
 
 msgid "Failed to create vetting."
@@ -39,13 +144,91 @@ msgstr ""
 msgid "Failed to update comment."
 msgstr ""
 
-msgid "Failed to update notification"
+msgid "Failed to update notification."
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Gather brilliant ideas"
+msgstr ""
+
+msgid "Get it done"
+msgstr ""
+
+msgid "Great! Nothing to see here."
+msgstr ""
+
+msgid "Great! This idea has received more than the minimum votes. Assuming it is or becomes one of the top rated ideas, a product team will pick it up and start working on it."
+msgstr ""
+
+msgid "Has %{count} %{karma_symbol}"
+msgstr ""
+
+msgid "Has an unread notification"
+msgid_plural "Has %{count} unread notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Has submitted an idea"
+msgid_plural "Has submitted %{count} ideas"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Has vetted one idea"
+msgid_plural "Has vetted %{count} ideas"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Has Ã%{count} voting power."
+msgstr ""
+
+msgid "Here's a digest of the most recent notifications you missed..."
+msgstr ""
+
+msgid "Hey!"
+msgstr ""
+
+msgid "Hi there %{user},"
+msgstr ""
+
+msgid "How are we going to measure that your solution was successful? Mention it here. This will typically be business-centric, quantitative, measurable metrics that are tied to your problem and should be positively affected by your envisionned solution."
+msgstr ""
+
+msgid "How would you suggest to solve the issue above? Try your best to be SMART here: address your specific problem, show that this solution is realistic and can be achieved within your team constraints. If this is pie-in-the-sky, again, people will drop. Make sure you attach any relevant data and diagrams, as a napkin sketch is almost mandatory here. You'll have a chance to do so on the next page."
+msgstr ""
+
+msgid "Huh?"
+msgstr ""
+
+msgid "I'm afraid you have no notifications yet."
+msgstr ""
+
+msgid "Idea \"%{idea_title}\" (%{idea_link}) is live!"
+msgstr ""
+
+msgid "Idea \"%{idea_title}\" (%{idea_link}) is now vetted, users can start voting for it."
+msgstr ""
+
+msgid "Idea \"%{idea_title}\" (%{idea_link}) was backed by %{user}"
+msgstr ""
+
+msgid "Idea \"%{idea_title}\" (%{idea_link}) was just picked by %{product_manager}"
+msgstr ""
+
+msgid "Idea \"%{idea_title}\" (%{idea_link}) was vetted by %{user}"
 msgstr ""
 
 msgid "Idea lacks design sizing"
 msgstr ""
 
 msgid "Idea lacks development sizing"
+msgstr ""
+
+msgid "Idea not sized"
+msgstr ""
+
+msgid "Idea sized"
 msgstr ""
 
 msgid "Idea size|Design size"
@@ -63,6 +246,9 @@ msgstr ""
 msgid "Idea state|designed"
 msgstr ""
 
+msgid "Idea state|draft"
+msgstr ""
+
 msgid "Idea state|implemented"
 msgstr ""
 
@@ -72,7 +258,7 @@ msgstr ""
 msgid "Idea state|picked"
 msgstr ""
 
-msgid "Idea state|signed_off"
+msgid "Idea state|signed off"
 msgstr ""
 
 msgid "Idea state|submitted"
@@ -84,10 +270,16 @@ msgstr ""
 msgid "Idea state|voted"
 msgstr ""
 
+msgid "Ideas"
+msgstr ""
+
 msgid "Ideas State|approved"
 msgstr ""
 
 msgid "Ideas State|designed"
+msgstr ""
+
+msgid "Ideas State|draft"
 msgstr ""
 
 msgid "Ideas State|implemented"
@@ -111,6 +303,9 @@ msgstr ""
 msgid "Ideas State|voted"
 msgstr ""
 
+msgid "Ideas have one (mandatory) category. This typically designates the main area the idea applies to, or the main category of users which will be affected, should the idea be completed."
+msgstr ""
+
 msgid "Idea|Bug"
 msgstr ""
 
@@ -120,13 +315,234 @@ msgstr ""
 msgid "Idea|Feature"
 msgstr ""
 
+msgid "Is a backer of one idea"
+msgid_plural "Is a backer of %{count} ideas"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "It will no be visible to others; we have bookmarked it for you so you can find it again by going to the \"followed\" angle."
+msgstr ""
+
+msgid "Let priorities emerge"
+msgstr ""
+
+msgid "Let's get cracking"
+msgstr ""
+
+msgid "List team members"
+msgstr ""
+
+msgid "Mark all as read"
+msgstr ""
+
+msgid "Mark as designed"
+msgstr ""
+
+msgid "Mark as implemented"
+msgstr ""
+
+msgid "Metrics:"
+msgstr ""
+
+msgid "More..."
+msgstr ""
+
+msgid "Neat! You just created a draft idea."
+msgstr ""
+
+msgid "Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead."
+msgstr ""
+
+msgid "New product team"
+msgstr ""
+
+msgid "No category"
+msgstr ""
+
 msgid "Not enough design capacity"
 msgstr ""
 
 msgid "Not enough development capacity"
 msgstr ""
 
+msgid "Notifications"
+msgstr ""
+
+msgid "Notifications for team %{name} at %{appname}"
+msgstr ""
+
+msgid "Now forget about them. Your staff will vote on what is actually important, and priorities will emerge."
+msgstr ""
+
+msgid "Oh noes!"
+msgstr ""
+
+msgid "Once an idea is vetted, the whole team gets to vote: good ideas will bubble up rapidly."
+msgstr ""
+
+msgid "Once you're done preparing it, just edit it again and press \"Submit idea\"."
+msgstr ""
+
+msgid "Oops, sorry, we didn't quite get that."
+msgstr ""
+
+msgid "Oops, we could not find the user you're trying to act as."
+msgstr ""
+
+msgid "Oops, you're not a member of that account."
+msgstr ""
+
+msgid "Oops, you're not owner of that account."
+msgstr ""
+
+msgid "Or you could %{discuss_link} ideas with others?"
+msgstr ""
+
+msgid "Perhaps it's time to %{discuss_link} ideas with others?"
+msgstr ""
+
+msgid "Perhaps you could %{submit_link} a new one?"
+msgstr ""
+
+msgid "Pick"
+msgstr ""
+
+msgid "Pick a category"
+msgstr ""
+
+msgid "Pick this idea"
+msgstr ""
+
+msgid "Please consider your decision to vote for an idea carefully."
+msgstr ""
+
+msgid "Post comment"
+msgstr ""
+
+msgid "Product manager:"
+msgstr ""
+
+msgid "Release notes"
+msgstr ""
+
+msgid "Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?"
+msgstr ""
+
+msgid "Remove bookmark"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Roles"
+msgstr ""
+
+msgid "Save as draft"
+msgstr ""
+
+msgid "Saving..."
+msgstr ""
+
+msgid "See that line above? That's the lifecycle of your ideas. Now it's up to your to push them forward."
+msgstr ""
+
+msgid "See you soon on %{appname}!"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Show unread"
+msgstr ""
+
+msgid "Sign Off"
+msgstr ""
+
+msgid "Sign in with your Google account"
+msgstr ""
+
+msgid "Sign off"
+msgstr ""
+
+msgid "So throw that old \"ideas box\" awayâbe it an online form or a real-world box. Time to let the team pitch their ideas and defend them."
+msgstr ""
+
+msgid "Solution:"
+msgstr ""
+
+msgid "Some caveat apply, of course! You can make your product team a democracy by giving everyone's vote the same weight, or increase that weight for stakeholders."
+msgstr ""
+
+msgid "Sorry! I'm afraid there are no %{qualifier} ideas %{filter} %{category} at the moment."
+msgstr ""
+
+msgid "Sorry, but we can't let you access that page."
+msgstr ""
+
+msgid "Sorry, only a benevolent dictator can approve an idea design."
+msgstr ""
+
+msgid "Sorry, only a benevolent dictator can sign off a staged idea."
+msgstr ""
+
+msgid "Sorry, only an idea's product manager can mark it as delivered."
+msgstr ""
+
+msgid "Sorry, only an idea's product manager can mark it as designed."
+msgstr ""
+
+msgid "Sorry, only an idea's product manager can mark it as implemented."
+msgstr ""
+
 msgid "Sorry, something went wrong while logging you in."
+msgstr ""
+
+msgid "Sorry, we could get that page for you."
+msgstr ""
+
+msgid "Sorry, we didn't quite find what you were looking for"
+msgstr ""
+
+msgid "Sorry, you cannot act as a user when already assuming another user's identity."
+msgstr ""
+
+msgid "Sorry, you cannot switch accounts when assuming another user's identity."
+msgstr ""
+
+msgid "Sorry, you may not %{verb} this %{object}."
+msgstr ""
+
+msgid "Sorry, you may not create a %{class}."
+msgstr ""
+
+msgid "Sorry, you may not vote for this %{object}."
+msgstr ""
+
+msgid "Sort by activity"
+msgstr ""
+
+msgid "Sort by creation"
+msgstr ""
+
+msgid "Sort by progress"
+msgstr ""
+
+msgid "Sort by rating"
+msgstr ""
+
+msgid "Sort by size"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Submit idea"
+msgstr ""
+
+msgid "Submit your idea"
+msgstr ""
+
+msgid "Successfully created team! Time to start inviting people."
 msgstr ""
 
 msgid "Successfully created user role."
@@ -144,6 +560,9 @@ msgstr ""
 msgid "Successfully destroyed notification."
 msgstr ""
 
+msgid "Successfully destroyed team %{name}."
+msgstr ""
+
 msgid "Successfully destroyed vetting."
 msgstr ""
 
@@ -153,13 +572,25 @@ msgstr ""
 msgid "Successfully removed bookmark."
 msgstr ""
 
-msgid "Successfully submitted idea."
-msgstr ""
-
 msgid "Successfully updated comment."
 msgstr ""
 
+msgid "Successfully updated idea."
+msgstr ""
+
 msgid "Successfully updated notification."
+msgstr ""
+
+msgid "Successfully updated team %{name}."
+msgstr ""
+
+msgid "Summary cannot be empty in any locale"
+msgstr ""
+
+msgid "Summary must be provided in all locales"
+msgstr ""
+
+msgid "Switch to another team:"
 msgstr ""
 
 msgid "T-shirt size|Extra-small"
@@ -186,7 +617,193 @@ msgstr ""
 msgid "T-shirt size|XS"
 msgstr ""
 
+msgid "Take part in the discussion, type your comments here!"
+msgstr ""
+
+msgid "Team %{team_name}"
+msgstr ""
+
+msgid "The app that helps product teams build fantastic apps."
+msgstr ""
+
+msgid "The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter."
+msgstr ""
+
+msgid "There currently are %{count} users in this team."
+msgstr ""
+
+msgid "These mechanics make sure that the proverbial needle will emerge from your team's barrage of ideas."
+msgstr ""
+
+msgid "They have a total of %{count} %{karma_symbol}."
+msgstr ""
+
+msgid "Things have been happening in team %{name}."
+msgstr ""
+
+msgid "This angle is only visible to product managers. Consider it your backlog of ideas to work on. It shows ideas that have received enough votes for you to consider them as worth working on."
+msgstr ""
+
+msgid "This angle is only visible to the benevolent dictator. It lists the ideas a product manager has marked as completed and awaits your sign off for release. See the idea details, or speak to your product manager to figure out where it was staged."
+msgstr ""
+
+msgid "This angle is only visible to the benevolent dictator. It lists the ideas that have been picked by a product manager and have been designed; this means you should take a looks at their description and roadmap, their wireframes, and possibly preliminary designs, so product teams can start actually working on them."
+msgstr ""
+
+msgid "This angle lists ideas actively worked on: being designed by a product manager, implemented by a product team, or ready signed off and ready for release. It is the product team's working set."
+msgstr ""
+
+msgid "This angle lists the ides you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card."
+msgstr ""
+
+msgid "This idea has been designed and approved. The product team that picked it up is working its magic (which might involve writing code) to implement it."
+msgstr ""
+
+msgid "This idea has been designed by a product team: at this point they know almost exactly what to do, and have a good idea of the roadmap and time to first release. It is waiting for an approval by the 'benevolent dictator'."
+msgstr ""
+
+msgid "This idea has been picked by a product manager. This is the design phase: development has not started yet, but the product team is planning to. The outcome may be a detailed roadmap, an identified 'minimum viable product' line, and a set of wireframes for instance. Oh, and everyone who backed it got a bit of extra karma."
+msgstr ""
+
+msgid "This idea has been picked, designed, implemented, and fully tested. It should be demo-able in a staging environment, and is just waiting for the 'benevolent dictator' to sign it off before release."
+msgstr ""
+
+msgid "This idea has been vetted by a product manager and an architect, but has not received enough votes yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} for an idea to proceed."
+msgstr ""
+
+msgid "This idea is a draft: only you can see it in lists of ideas, although other users can view it if you give the a link. You can edit it until it's ready for submission."
+msgstr ""
+
+msgid "This idea was submitted, but is not vetted yet. It needs to be looked at by both a product manager and an architect, each of whom will estimate the effort involved and vet it. They also can just comment on it and ask you to provide more details, give it a better title, or elaborate on the problem statement for instance: only specific, precise ideas can be sized properly."
+msgstr ""
+
+msgid "This is where you state the problem your idea aims to solve. It will be displayed after the title in the index of idea, so keep in mind it's core to how others will discover and consider your idea (or will ignore it). Make this about specific users, use cases, and data-backed facts. If the problem you are trying to solve is not obvious after reading this, your team will not go any further."
+msgstr ""
+
+msgid "This is your pitch. Keep it short and to the point, and bear in mind that many users will not continue with the details if your title is not appealing."
+msgstr ""
+
+msgid "This lets you know at all times what's effectively being worked on, and what the current status is."
+msgstr ""
+
+msgid "This list show ideas currently open for discussion, regardless of their current status. Use the dropdowns to filter or sort them, or switch to another angle."
+msgstr ""
+
+msgid "This list show the ideas that need to be **vetted** before the can vote for them. This means that those ideas have not yet been looked at by a product manager or by an architect, or that their description is not precise enough yet for them to be properly sized."
+msgstr ""
+
+msgid "This means your team should now start discussing it! Take part in the discussion to perfect your idea. Once it is correctly formatted and documented, a product manager and an architect should vet it, and the voting will start!"
+msgstr ""
+
+msgid "Time to vote!"
+msgstr ""
+
+msgid "Time to vote! This is the list of ideas that have been vetted and the team members can cast their vote on."
+msgstr ""
+
+msgid "To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea."
+msgstr ""
+
 msgid "Tooltip|%{user} currently has %{points} %{karma}."
+msgstr ""
+
+msgid "Tooltip|An architect and a product manager have sized the idea as a %{size} effort."
+msgstr ""
+
+msgid "Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}."
+msgstr ""
+
+msgid "Tooltip|By pressing this you cancel your backing of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled your vote!"
+msgstr ""
+
+msgid "Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}."
+msgstr ""
+
+msgid "Tooltip|Click this to approve the idea as designed. If you don't approve it (yet), feel free to leave a comment accordingly!"
+msgstr ""
+
+msgid "Tooltip|Click to give this idea a %{size} %{size_type}"
+msgstr ""
+
+msgid "Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.<br/>Make sure you've attached design files!"
+msgstr ""
+
+msgid "Tooltip|Clicking this idea marks it as live."
+msgstr ""
+
+msgid "Tooltip|Clicking this idea signs it off for delivery."
+msgstr ""
+
+msgid "Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes."
+msgstr ""
+
+msgid "Tooltip|Delete Idea"
+msgstr ""
+
+msgid "Tooltip|Drop one or more file here to attach them, or click the button."
+msgstr ""
+
+msgid "Tooltip|Edit Idea"
+msgstr ""
+
+msgid "Tooltip|Expand Idea"
+msgstr ""
+
+msgid "Tooltip|Follow this link to submit a new idea"
+msgstr ""
+
+msgid "Tooltip|Mark as read"
+msgstr ""
+
+msgid "Tooltip|Mark as unread"
+msgstr ""
+
+msgid "Tooltip|Only architects and product managers can vet ideas."
+msgstr ""
+
+msgid "Tooltip|Picking an idea means you and your product team will start investigating and designing it."
+msgstr ""
+
+msgid "Tooltip|Show comments"
+msgstr ""
+
+msgid "Tooltip|Show designed stories ready to be approved"
+msgstr ""
+
+msgid "Tooltip|Show ideas in board view"
+msgstr ""
+
+msgid "Tooltip|Show ideas in card view"
+msgstr ""
+
+msgid "Tooltip|Show implemented stories ready to be signed off"
+msgstr ""
+
+msgid "Tooltip|Show stories being worked on"
+msgstr ""
+
+msgid "Tooltip|Show stories currently being discussed"
+msgstr ""
+
+msgid "Tooltip|Show stories open for votes"
+msgstr ""
+
+msgid "Tooltip|Show stories you are following"
+msgstr ""
+
+msgid "Tooltip|Show stories you can pick"
+msgstr ""
+
+msgid "Tooltip|Show stories you can vet"
+msgstr ""
+
+msgid "Tooltip|Sign out"
+msgstr ""
+
+msgid "Tooltip|The current progress on this idea"
+msgstr ""
+
+msgid "Tooltip|The idea need to be sized by an architect and a product manager before you can vet it."
 msgstr ""
 
 msgid "Tooltip|They are %{roles}."
@@ -201,13 +818,55 @@ msgstr ""
 msgid "Tooltip|This idea cannot be marked as %{state} yet."
 msgstr ""
 
+msgid "Tooltip|This idea cannot be vetoed."
+msgstr ""
+
 msgid "Tooltip|This idea cannot be vetted yet."
+msgstr ""
+
+msgid "Tooltip|This idea currently has a %{size} %{size_type}"
 msgstr ""
 
 msgid "Tooltip|This idea has already been %{state}."
 msgstr ""
 
 msgid "Tooltip|This idea has already been vetted."
+msgstr ""
+
+msgid "Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the \"karma\" points you can spend to vote on ideas. Gain more points as you participate!"
+msgstr ""
+
+msgid "Tooltip|Veto this idea. Use with caution and please leave a comment mentionning why you're vetoing this idea.<br/>Note that all votes and vettings will be destroyed, and %{karma_icon} readjusted accordingly."
+msgstr ""
+
+msgid "Tooltip|Voting for this idea means that you believe it will be impactful. Voting costs %{points} %{karma_icon}."
+msgstr ""
+
+msgid "Tooltip|Your number of unread notifications. Click to view them"
+msgstr ""
+
+msgid "Type something..."
+msgstr ""
+
+msgid "Uh-oh..."
+msgstr ""
+
+msgid "Unfiltered"
+msgstr ""
+
+msgid "Unspecified"
+msgstr ""
+
+msgid "Update draft"
+msgstr ""
+
+msgid "Update idea"
+msgstr ""
+
+msgid "Upvote this comment"
+msgstr ""
+
+msgid "User %{user} has just joined your account!"
 msgstr ""
 
 msgid "User role|Account owner"
@@ -228,16 +887,103 @@ msgstr ""
 msgid "User role|Product manager"
 msgstr ""
 
+msgid "Vet"
+msgstr ""
+
+msgid "Vet this idea"
+msgstr ""
+
+msgid "Veto"
+msgstr ""
+
+msgid "Vetted by you"
+msgstr ""
+
+msgid "View all users"
+msgstr ""
+
+msgid "Vote"
+msgstr ""
+
 msgid "Vote cast successfully!"
+msgstr ""
+
+msgid "Vote for this"
 msgstr ""
 
 msgid "Vote withdrawn."
 msgstr ""
 
+msgid "Was last seen on %{app_name} %{time_ago} ago"
+msgstr ""
+
+msgid "We don't know about the page you're trying to access."
+msgstr ""
+
+msgid "We stick to one of the core tenets of Kanban: built-in rate limiting. Only a limited \"volume\" of ideas can be in a given stage at any time, as your team members can only work on so many things in parallel."
+msgstr ""
+
+msgid "We've marked these notifications as read for you, so we won't bug you again."
+msgstr ""
+
+msgid "Welcome back to team %{name}, %{user}!"
+msgstr ""
+
 msgid "Welcome, %{user}!"
 msgstr ""
 
-msgid "in the %{category} category"
+msgid "Withdraw your vote"
+msgstr ""
+
+msgid "Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra karma."
+msgstr ""
+
+msgid "You are currently acting as %{user}. Please be careful, and %{click_here} to become %{real_user} again."
+msgstr ""
+
+msgid "You are not attached to an account, so there are no other users to display!"
+msgstr ""
+
+msgid "You can ask your account owner for an invite... and in the meantime why not create a team of your own!"
+msgstr ""
+
+msgid "You can only back so many ideas, as each vote will cost you %{count} %{karma}."
+msgstr ""
+
+msgid "You can withdraw your vote within 15 minutes of casting it if you're having second thoughts, but after that point, it will be final!"
+msgstr ""
+
+msgid "You have no unread notifications."
+msgstr ""
+
+msgid "You just switched to viewing the \"%{name}\" team"
+msgstr ""
+
+msgid "You need to be attached to an account before you can access most of %{appfab}."
+msgstr ""
+
+msgid "You're not part of a team yet!"
+msgstr ""
+
+msgid "Your comment on \"%{idea_title}\" (%{idea_link}) was %{upvoted_or_downvoted}"
+msgstr ""
+
+msgid "Your ideas"
+msgstr ""
+
+msgid "click here"
+msgstr ""
+
+msgid "discuss"
+msgstr ""
+
+msgid "downvoted"
+msgstr ""
+
+msgid "in the \"%{category}\" category"
+msgstr ""
+
+msgid "submit"
 msgstr ""
 
 msgid "that you authored"
@@ -250,6 +996,9 @@ msgid "that you commented"
 msgstr ""
 
 msgid "that you vetted"
+msgstr ""
+
+msgid "upvoted"
 msgstr ""
 
 msgid "without a category"
