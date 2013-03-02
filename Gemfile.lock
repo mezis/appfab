@@ -97,7 +97,7 @@ GEM
       multipart-post (~> 1.1)
     fast_gettext (0.7.0)
     ffi (1.4.0)
-    fineuploader-rails (3.0)
+    fineuploader-rails (3.3)
       actionpack (>= 3.1)
       railties (>= 3.1)
     font-awesome-sass-rails (3.0.2.2)
