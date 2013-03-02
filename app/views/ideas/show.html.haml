@@ -36,6 +36,7 @@
 
     #attachments
       = render @idea.attachments
+
     #comments
       = render 'comments/form', comment: Comment.new(idea: @idea)
       = render @idea.comments.by_created_at

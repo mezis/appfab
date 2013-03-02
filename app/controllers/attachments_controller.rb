@@ -16,16 +16,25 @@ class AttachmentsController < ApplicationController
     @attachment.uploader  = current_user
 
     if @attachment.save
-      render json: { success: true }, status: :ok
+      respond_to do |format|
+        format.json { render json: { success: true, id:@attachment.id }, status: :ok }
+      end
     else
-      render json: { success: false }, status: 400
+      respond_to do |format|
+        format.json { render json: { success: false }, status: :bad_request }
+      end
     end
   end
 
   def destroy
     @attachment = @idea.attachments.find(params[:id])
     @attachment.destroy
-    redirect_to @idea, :notice => _("Successfully destroyed attachment.")
+
+    flash[:notice] = _("Successfully destroyed attachment.")
+    respond_to do |format|
+      format.html { redirect_to @idea }
+      format.js
+    end
   end
 
   private

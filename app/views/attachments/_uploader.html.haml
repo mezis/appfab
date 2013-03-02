@@ -21,31 +21,33 @@
       %span.qq-upload-status-text
 
   #uploader{ :title => s_('Tooltip|Drop one or more file here to attach them, or click the button.'), 'data-placement' => :left }
-  :javascript
-    $(document).ready(function () {
-      uploader = new qq.FineUploader({
-        element: document.getElementById('uploader'),
-        request: {
-          endpoint: '#{idea_attachments_path(idea)}',
-          customHeaders: {
+  :coffeescript
+    $(document).ready(() ->
+      uploader = new qq.FineUploader(
+        element: document.getElementById('uploader')
+        request:
+          endpoint: '#{idea_attachments_path(idea)}'
+          customHeaders:
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          },
-          forceMultipart: true,
+          forceMultipart: true
           inputName: 'attachment[file]'
-        },
-        classes: {
-          success: 'alert alert-success',
+        classes:
+          success: 'alert alert-success'
           fail: 'alert alert-error'
-        },
-        template: '#{j uploader_tempate}',
-        fileTemplate: '#{j file_template}',
-        validation: {
-          allowedExtensions: ['jpg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt'],
+        template: '#{j uploader_tempate}'
+        fileTemplate: '#{j file_template}'
+        validation:
+          allowedExtensions: ['jpg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt']
           sizeLimit: #{5 * (1<<20)}
-        },
         debug: true
-      });
-    });
+        callbacks:
+          onComplete: (id, name, data) ->
+            $('#attachments').load('#{idea_path(idea, part:'attachments')}')
+            if data.success
+              $('#uploader .qq-upload-list').eq(id).fadeOut()
+
+      )
+    )
 - else
   .btn.btn-block.disabled{ title:not_authorized_message(:update, idea) }
     %i.icon-upload
