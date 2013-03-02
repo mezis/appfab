@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   include Traits::RedirectToHttps
+  include Traits::RenderUjs
   include LazyRecords::Flusher
 
   before_filter :set_text_domain

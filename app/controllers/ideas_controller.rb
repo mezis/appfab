@@ -58,7 +58,7 @@ class IdeasController < ApplicationController
     if request.xhr?
       case params['part']
       when 'attachments'
-        render partial:'ujs', locals:{ content:@idea.attachments }
+        render_ujs @idea.attachments
       else
         render nothing:true, status:400
       end
