@@ -16,7 +16,7 @@ $(document).ready () ->
 
 # Fixes Bootstrap dropdownmenus on iOS
 
-$(document).ready () ->
+$.unobtrusive () ->
   $('.dropdown-menu').on('touchstart.dropdown.data-api', (e) ->
     e.stopPropagation()
   )
@@ -29,7 +29,6 @@ $(document).ready () ->
 # Fixes data-dismiss
 
 $.unobtrusive () ->
-  $('[data-dismiss]').on('click', () ->
+  $('[data-dismiss]').on 'click', () ->
     selector = '.' + $(this).data('dismiss')
     $(this).closest(selector).fadeOut('fast')
-  )
