@@ -24,7 +24,7 @@ class Ability
     if user.plays?(:product_manager, :architect)
       can :size,     Idea
       can :create,   Vetting
-      can :destroy,  Vetting, do |r|
+      can :destroy,  Vetting do |r|
         r.user_id == user.id && r.recently_created?
       end
     end
