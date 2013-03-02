@@ -3,6 +3,8 @@ ruby '1.9.2'
 
 gem 'rails'
 
+gem 'thin'
+
 # database
 gem 'mysql2',  group: :development
 gem 'pg',      group: :production
