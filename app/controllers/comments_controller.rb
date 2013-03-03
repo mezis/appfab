@@ -31,14 +31,13 @@ class CommentsController < ApplicationController
       case params['part']
       when 'attachments'
         render_ujs @comment.attachments, title:false, classes:'pull-right'
-      else
-        render nothing:true, status:400
       end
       return
     end
 
     respond_to do |format|
       format.html { redirect_to @comment.idea, anchor:dom_id(@comment) }
+      format.js
     end
   end
 

@@ -14,13 +14,20 @@ class VotesController < ApplicationController
       flash[:error] = _("Failed to create vote.")
     end
 
-    redirect_to @return_to
+    respond_to do |format|
+      format.html { redirect_to @return_to }
+      format.js   { redirect_to @subject }
+    end
   end
 
   def destroy
     @vote = @subject.votes.find(params[:id])
     @vote.destroy
-    redirect_to @return_to, :notice => _("Vote withdrawn.")
+
+    respond_to do |format|
+      format.html { redirect_to @return_to, :notice => _("Vote withdrawn.") }
+      format.js   { redirect_to @subject }
+    end
   end
 
   private
