@@ -12,10 +12,12 @@ AppFab::Application.routes.draw do
     resources :attachments, only: [:create, :destroy, :show]
   end
 
-  resources :comments, only: [:create, :update, :destroy] do
+  resources :comments do
     resources :votes, only: [:create, :destroy]
     resources :attachments, only: [:create, :destroy, :show]
   end
+
+  resources :attachments, only: [:destroy, :show]
 
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resources :roles, only: [:create, :destroy], controller: :user_roles

@@ -3,14 +3,14 @@ class AttachmentsController < ApplicationController
   before_filter :load_owner
 
   def show
-    @attachment = @owner.attachments.find(params[:id])
+    @attachment = @scope.find(params[:id])
   end
 
   def create
     Rails.logger.info params.inspect
     redirect_to @owner and return unless request.xhr?
 
-    @attachment = @owner.attachments.new
+    @attachment = @scope.new
     @attachment.file      = get_uploaded_file
     @attachment.name      = get_uploaded_file.andand.original_filename
     @attachment.mime_type = get_uploaded_file.andand.content_type
@@ -28,7 +28,7 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    @attachment = @owner.attachments.find(params[:id])
+    @attachment = @scope.find(params[:id])
     @attachment.destroy
 
     flash[:notice] = _("Successfully destroyed attachment.")
@@ -42,9 +42,11 @@ class AttachmentsController < ApplicationController
 
   def load_owner
     if params[:idea_id]
-      @owner = Idea.find(params[:idea_id])
+      @scope = Idea.find(params[:idea_id]).attachments
     elsif params[:comment_id]
-      @owner = Comment.find(params[:comment_id])
+      @scope = Comment.find(params[:comment_id]).attachments
+    else
+      @scope = Attachment
     end
   end
 

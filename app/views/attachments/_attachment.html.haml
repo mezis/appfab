@@ -19,5 +19,5 @@
       %i.icon-file
   .name
     = attachment.name
-  = link_to idea_attachment_path(attachment.owner, attachment), method: :delete, remote:true do
+  = link_to attachment, method: :delete, remote:true do
     %i.icon-trash

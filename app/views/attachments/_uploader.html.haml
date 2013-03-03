@@ -1,8 +1,10 @@
 -# Pass me an +owner+ (Idea or Comment)
 -# Options: +format+, one of 'big' (Default) or 'small' (Link only, no listing)
+-# +drop_area+ a selector (mandatory).
 :ruby
-  owner  = local_assigns.fetch(:owner)
-  format = local_assigns.fetch(:format, 'big')
+  owner     = local_assigns.fetch(:owner)
+  format    = local_assigns.fetch(:format, 'big')
+  drop_area = local_assigns.fetch(:drop_area, nil)
 
   case owner
   when Idea
@@ -12,7 +14,7 @@
   when Comment
     upload_endpoint  = comment_attachments_path(owner)
     refresh_endpoint = comment_path(owner, part:'attachments')
-    refresh_target   = "##{dom_id owner}.attachments"
+    refresh_target   = "##{dom_id owner} .attachments"
   else
     raise ArgumentError.new(owner)
   end
@@ -25,7 +27,7 @@
       .qq-uploader<
         .btn.btn-block.qq-upload-button>
           .drop-area.qq-upload-drop-area<>
-          %i.icon-paperclip
+          %i.icon-upload
           = _('Attach a file')
         .qq-drop-processing<>
           .qq-drop-processing-spinner<>
@@ -33,12 +35,12 @@
   - elsif format == 'small'
     - uploader_tempate = capture do
       .qq-uploader<
-        %a.qq-upload-button>
-          .drop-area.qq-upload-drop-area.hidden<>
-          %i.icon-paperclip
+        .qq-upload-button>
+          .drop-area.qq-upload-drop-area<>
+          %i.icon-upload
         .qq-drop-processing<>
           .qq-drop-processing-spinner<>
-        .qq-upload-list.hidden<>
+        .qq-upload-list<>
   - file_template = capture do
     %li.alert<
       .qq-progress-bar<>
@@ -61,6 +63,10 @@
           fail:             'alert alert-error'
         template:           '#{j uploader_tempate}'
         fileTemplate:       '#{j file_template}'
+        dragAndDrop:
+          extraDropzones:   $('#{drop_area}')
+          hideDropzones:    false
+          disableDefaultDropzone: #{!drop_area}
         request:
           endpoint:         '#{upload_endpoint}'
           customHeaders:

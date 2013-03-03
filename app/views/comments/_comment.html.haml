@@ -15,12 +15,14 @@
   %ul.actions
     %li.time_ago
       = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
+    %li
+      = render 'attachments/uploader', owner:comment, format:'small', drop_area:"##{dom_id comment} .bubble"
     - if !can?(:vote, comment)
       %li
         %a.disabled
           %i.icon-thumbs-up
       %li
-        %a.disabled
+        %a
           %i.icon-thumbs-down
     - elsif current_user_vote && current_user_vote.up
       %li
@@ -46,3 +48,6 @@
     %li
       = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment') do
         %i.icon-trash
+
+  .attachments
+    = render comment.attachments
