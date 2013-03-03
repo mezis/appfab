@@ -14,7 +14,7 @@ When /^I delete the comment$/ do
   comment = Mentions[Comment]
   idea = comment.idea
   visit "/ideas/#{idea.id}"
-  find("#comment#{comment.id} a.delete").click
+  find("#comment_#{comment.id} a.delete").click
 end
 
 When /^a comment "(.*?)" by "(.*?)"$/ do |body, first_name|
@@ -29,7 +29,7 @@ When /^I (upvote|downvote) the comment$/ do |direction|
   idea = comment.idea
 
   visit "/ideas/#{idea.id}"
-  page.find("#comment#{comment.id} a.#{direction}").click
+  page.find("#comment_#{comment.id} a.#{direction}").click
 end
 
 Then /^the comment should be (upvoted|downvoted)$/ do |direction|
@@ -37,7 +37,7 @@ Then /^the comment should be (upvoted|downvoted)$/ do |direction|
   idea = comment.idea
 
   visit "/ideas/#{idea.id}"
-  page.should have_selector "#comment#{comment.id}.#{direction}"
+  page.should have_selector "#comment_#{comment.id}.#{direction}"
 end
 
 
@@ -47,7 +47,7 @@ Then /^I can delete the comment$/ do
   comment = Mentions[Comment]
   idea = comment.idea
   visit "/ideas/#{idea.id}"
-  page.should have_selector("#comment#{comment.id} a.delete")
+  page.should have_selector("#comment_#{comment.id} a.delete")
 end
 
 Then /^the idea should have no comments$/ do

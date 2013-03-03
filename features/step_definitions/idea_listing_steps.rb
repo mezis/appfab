@@ -7,5 +7,5 @@ Then /^the idea should( not)? be listed in category "(.*?)"$/ do |negate, catego
   within first(".filter-category") do
     click_on category
   end
-  page.send (negate ? :should_not : :should), have_selector("#idea#{idea.id}")
+  page.send (negate ? :should_not : :should), have_selector("#idea_#{idea.id}")
 end
