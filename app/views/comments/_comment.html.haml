@@ -7,7 +7,7 @@
   else
     'neutral'
   end
-.comment.with_bubbles{ id: "comment#{comment.id}", class: comment_class }
+.with_bubbles[comment]{ class: comment_class }
   = render comment.author, format: :avatar
   .bubble.left
     %span.tail
@@ -44,5 +44,5 @@
         = link_to comment_votes_path(comment, vote: { up:false }), method: :post, class: 'downvote', title:_('Downvote this comment') do
           %i.icon-thumbs-down
     %li
-      = can_link_to comment_path(comment), auth:[:destroy, comment], confirm: _('Are you sure?'), method: :delete, class: 'delete', title:_('Delete this comment') do
+      = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment') do
         %i.icon-trash
