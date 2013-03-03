@@ -10,7 +10,7 @@
 
 .idea_container
   - classes = [idea.state_name, 'with-header-wizard', idea_category_class(idea)]
-  .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.compact.join(' ') }
+  .idea.idea-maxi{ id:dom_id(idea), class: classes.compact.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
       .content{ class: (muted_details && 'mutable') }

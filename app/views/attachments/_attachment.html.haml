@@ -3,22 +3,20 @@
   size = 64
   large = 180
   is_image = attachment.mime_type =~ /^image/
-  image_small = if is_image
-    attachment.file.thumb("#{size}x#{size}#").jpg.url
-  else
-    path_to_image('generic-file')
-  end
-  image_large = is_image ? attachment.file.thumb("#{large}x#{large}#").jpg.url : nil
 
-- attachment_title = capture do
-  .attachment-tooltip
-    = attachment.name
-    = "(%s)" % [ number_to_human_size(attachment.size) ]
-- escaped_attachment_title = attachment_title.gsub(/\n+/, ' ')
+  image_small = is_image &&
+    attachment.file.thumb("#{size}x#{size}#").jpg.url
+  image_large = is_image &&
+    attachment.file.thumb("#{large}x#{large}#").jpg.url
+
+  attachment_title = "%s (%s)" % [ attachment.name, number_to_human_size(attachment.size) ]
 
 %div[attachment]
-  = link_to attachment.file.url, target:'_blank', style:"background-image:url('#{image_small}')", class: 'thumb', title: escaped_attachment_title do
-    &nbsp;
+  = link_to attachment.file.url, target:'_blank', style:(image_small && "background-image:url('#{image_small}')"), class: 'thumb', title:attachment_title do
+    - if is_image
+      &nbsp;
+    - else
+      %i.icon-file
   .name
     = attachment.name
   = link_to idea_attachment_path(attachment.owner, attachment), method: :delete, remote:true do

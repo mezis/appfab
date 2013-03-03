@@ -1,14 +1,44 @@
--# Pass me an +idea+
-- if can?(:update, idea)
-  - uploader_tempate = capture do
-    .qq-uploader<
-      .btn.btn-block.qq-upload-button>
-        .drop-area.qq-upload-drop-area<>
-        %i.icon-upload
-        = _('Attach a file')
-      .qq-drop-processing<>
-        .qq-drop-processing-spinner<>
-      %ul.qq-upload-list<>
+-# Pass me an +owner+ (Idea or Comment)
+-# Options: +format+, one of 'big' (Default) or 'small' (Link only, no listing)
+:ruby
+  owner  = local_assigns.fetch(:owner)
+  format = local_assigns.fetch(:format, 'big')
+
+  case owner
+  when Idea
+    upload_endpoint  = idea_attachments_path(owner)
+    refresh_endpoint = idea_path(owner, part:'attachments')
+    refresh_target   = "#idea_attachments"
+  when Comment
+    upload_endpoint  = comment_attachments_path(owner)
+    refresh_endpoint = comment_path(owner, part:'attachments')
+    refresh_target   = "##{dom_id owner}.attachments"
+  else
+    raise ArgumentError.new(owner)
+  end
+
+  uploader_id = "uploader_#{SecureRandom.hex(4)}"
+
+- if can?(:update, owner)
+  - if format == 'big'
+    - uploader_tempate = capture do
+      .qq-uploader<
+        .btn.btn-block.qq-upload-button>
+          .drop-area.qq-upload-drop-area<>
+          %i.icon-paperclip
+          = _('Attach a file')
+        .qq-drop-processing<>
+          .qq-drop-processing-spinner<>
+        %ul.qq-upload-list<>
+  - elsif format == 'small'
+    - uploader_tempate = capture do
+      .qq-uploader<
+        %a.qq-upload-button>
+          .drop-area.qq-upload-drop-area.hidden<>
+          %i.icon-paperclip
+        .qq-drop-processing<>
+          .qq-drop-processing-spinner<>
+        .qq-upload-list.hidden<>
   - file_template = capture do
     %li.alert<
       .qq-progress-bar<>
@@ -20,35 +50,41 @@
       %a.qq-upload-retry{ href: '#' }= _('Retry')
       %span.qq-upload-status-text
 
-  #uploader{ :title => s_('Tooltip|Drop one or more file here to attach them, or click the button.'), 'data-placement' => :left }
+  .af-uploader{ id:uploader_id }
   :coffeescript
     $(document).ready(() ->
       uploader = new qq.FineUploader(
-        element: document.getElementById('uploader')
+        debug:              true
+        element:            document.getElementById('#{uploader_id}')
+        classes:
+          success:          'alert alert-success'
+          fail:             'alert alert-error'
+        template:           '#{j uploader_tempate}'
+        fileTemplate:       '#{j file_template}'
         request:
-          endpoint: '#{idea_attachments_path(idea)}'
+          endpoint:         '#{upload_endpoint}'
           customHeaders:
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-          forceMultipart: true
-          inputName: 'attachment[file]'
-        classes:
-          success: 'alert alert-success'
-          fail: 'alert alert-error'
-        template: '#{j uploader_tempate}'
-        fileTemplate: '#{j file_template}'
+          forceMultipart:   true
+          inputName:        'attachment[file]'
         validation:
           allowedExtensions: ['jpg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt']
-          sizeLimit: #{5 * (1<<20)}
-        debug: true
+          sizeLimit:         #{5 * (1<<20)}
         callbacks:
           onComplete: (id, name, data) ->
-            $('#attachments').load('#{idea_path(idea, part:'attachments')}')
+            #debugger
+            $('#{refresh_target}').load('#{refresh_endpoint}')
             if data.success
-              $('#uploader .qq-upload-list').eq(id).fadeOut()
+              $('##{uploader_id} .qq-upload-list').eq(id).fadeOut()
 
       )
     )
 - else
-  .btn.btn-block.disabled{ title:not_authorized_message(:update, idea) }
-    %i.icon-upload
-    = _('Attach a file')
+  - case format 
+  - when 'big'
+    .btn.btn-block.disabled{ title:not_authorized_message(:update, owner) }
+      %i.icon-upload
+      = _('Attach a file')
+  - when 'small'
+    %a.disabled{ title:not_authorized_message(:update, owner) }
+      %i.icon-paperclip
