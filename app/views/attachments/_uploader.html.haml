@@ -17,15 +17,14 @@
     raise ArgumentError.new(owner)
   end
 
-  drop_area = local_assigns.fetch(:drop_area, nil)
   uploader_id = "uploader_#{SecureRandom.hex(4)}"
 
-- if can?(:update, owner)
+- if can?(:create, owner.attachments.new)
   - if format == 'big'
     - uploader_tempate = capture do
       .qq-uploader<
         .btn.btn-block.qq-upload-button>
-          .drop-area.qq-upload-drop-area<>
+          .af-drop-area.qq-upload-drop-area<>
           %i.icon-upload
           = _('Attach a file')
         .qq-drop-processing<>
@@ -35,7 +34,7 @@
     - uploader_tempate = capture do
       .qq-uploader<
         %a.qq-upload-button>
-          .drop-area.qq-upload-drop-area<>
+          .af-drop-area.qq-upload-drop-area<>
           %i.icon-upload
         .qq-drop-processing<>
           .qq-drop-processing-spinner<>
@@ -63,7 +62,7 @@
         template:           '#{j uploader_tempate}'
         fileTemplate:       '#{j file_template}'
         dragAndDrop:
-          extraDropzones:   $('##{dom_id owner} .drop-area')
+          extraDropzones:   $('##{dom_id owner} .af-drop-area')
         request:
           endpoint:         '#{upload_endpoint}'
           customHeaders:

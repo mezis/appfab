@@ -42,7 +42,7 @@
       = render @idea.comments.by_created_at
   .span3
     = render 'action', idea: @idea
-    = render 'attachments/uploader', owner: @idea, drop_area:"##{dom_id @idea}"
+    = render 'attachments/uploader', owner: @idea
 
     %hr/
     .ht-with-margin-icon.muted

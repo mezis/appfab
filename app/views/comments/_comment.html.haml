@@ -10,9 +10,9 @@
 .with_bubbles[comment]{ class: comment_class }
   = render comment.author, format: :avatar
   - if can?(:update, comment)
-    .af-overlay.drop-area
-  .bubble.left
-    %span.tail
+    .af-drop-area
+  .bubble.left.af-drop-hilite
+    %span.tail.af-drop-hilite-before
     .body.clearfix
       .attachments
         = render comment.attachments, title:false, classes:'pull-right'
