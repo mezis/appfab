@@ -9,20 +9,25 @@
   end
 .with_bubbles[comment]{ class: comment_class }
   = render comment.author, format: :avatar
+  - if can?(:update, comment)
+    .af-overlay.drop-area
   .bubble.left
     %span.tail
-    .body.markdown!= pipeline_render comment.body
+    .body.clearfix
+      .attachments
+        = render comment.attachments, title:false, classes:'pull-right'
+      .markdown!= pipeline_render comment.body
   %ul.actions
     %li.time_ago
       = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
     %li
-      = render 'attachments/uploader', owner:comment, format:'small', drop_area:"##{dom_id comment} .bubble"
+      = render 'attachments/uploader', owner:comment, format:'small', drop_area:"##{dom_id comment} .drop-area"
     - if !can?(:vote, comment)
       %li
         %a.disabled
           %i.icon-thumbs-up
       %li
-        %a
+        %a.disabled
           %i.icon-thumbs-down
     - elsif current_user_vote && current_user_vote.up
       %li
@@ -49,5 +54,3 @@
       = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment') do
         %i.icon-trash
 
-  .attachments
-    = render comment.attachments

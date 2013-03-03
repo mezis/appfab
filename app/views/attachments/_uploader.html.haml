@@ -1,10 +1,8 @@
 -# Pass me an +owner+ (Idea or Comment)
 -# Options: +format+, one of 'big' (Default) or 'small' (Link only, no listing)
--# +drop_area+ a selector (mandatory).
 :ruby
   owner     = local_assigns.fetch(:owner)
   format    = local_assigns.fetch(:format, 'big')
-  drop_area = local_assigns.fetch(:drop_area, nil)
 
   case owner
   when Idea
@@ -19,6 +17,7 @@
     raise ArgumentError.new(owner)
   end
 
+  drop_area = local_assigns.fetch(:drop_area, nil)
   uploader_id = "uploader_#{SecureRandom.hex(4)}"
 
 - if can?(:update, owner)
@@ -35,7 +34,7 @@
   - elsif format == 'small'
     - uploader_tempate = capture do
       .qq-uploader<
-        .qq-upload-button>
+        %a.qq-upload-button>
           .drop-area.qq-upload-drop-area<>
           %i.icon-upload
         .qq-drop-processing<>
@@ -64,9 +63,7 @@
         template:           '#{j uploader_tempate}'
         fileTemplate:       '#{j file_template}'
         dragAndDrop:
-          extraDropzones:   $('#{drop_area}')
-          hideDropzones:    false
-          disableDefaultDropzone: #{!drop_area}
+          extraDropzones:   $('##{dom_id owner} .drop-area')
         request:
           endpoint:         '#{upload_endpoint}'
           customHeaders:
@@ -78,7 +75,6 @@
           sizeLimit:         #{5 * (1<<20)}
         callbacks:
           onComplete: (id, name, data) ->
-            #debugger
             $('#{refresh_target}').load('#{refresh_endpoint}')
             if data.success
               $('##{uploader_id} .qq-upload-list').eq(id).fadeOut()
@@ -93,4 +89,4 @@
       = _('Attach a file')
   - when 'small'
     %a.disabled{ title:not_authorized_message(:update, owner) }
-      %i.icon-paperclip
+      %i.icon-upload

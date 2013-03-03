@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
     if request.xhr?
       case params['part']
       when 'attachments'
-        render_ujs @comment.attachments
+        render_ujs @comment.attachments, title:false, classes:'pull-right'
       else
         render nothing:true, status:400
       end
