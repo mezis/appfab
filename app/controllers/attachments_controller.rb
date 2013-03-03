@@ -33,7 +33,7 @@ class AttachmentsController < ApplicationController
 
     flash[:notice] = _("Successfully destroyed attachment.")
     respond_to do |format|
-      format.html { redirect_to @owner }
+      format.html { redirect_to(@owner || ideas_path) }
       format.js
     end
   end
@@ -42,9 +42,11 @@ class AttachmentsController < ApplicationController
 
   def load_owner
     if params[:idea_id]
-      @scope = Idea.find(params[:idea_id]).attachments
+      @owner = Idea.find(params[:idea_id])
+      @scope = @owner.attachments
     elsif params[:comment_id]
-      @scope = Comment.find(params[:comment_id]).attachments
+      @owner = Comment.find(params[:comment_id])
+      @scope = @owner.attachments
     else
       @scope = Attachment
     end
