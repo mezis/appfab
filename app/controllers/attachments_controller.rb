@@ -1,15 +1,16 @@
 class AttachmentsController < ApplicationController
   before_filter :authenticate_login!
-  before_filter :load_idea
+  before_filter :load_owner
 
   def show
-    @attachment = @idea.attachments.find(params[:id])
+    @attachment = @owner.attachments.find(params[:id])
   end
 
   def create
-    redirect_to @idea and return unless request.xhr?
+    Rails.logger.info params.inspect
+    redirect_to @owner and return unless request.xhr?
 
-    @attachment = @idea.attachments.new
+    @attachment = @owner.attachments.new
     @attachment.file      = get_uploaded_file
     @attachment.name      = get_uploaded_file.andand.original_filename
     @attachment.mime_type = get_uploaded_file.andand.content_type
@@ -27,20 +28,24 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    @attachment = @idea.attachments.find(params[:id])
+    @attachment = @owner.attachments.find(params[:id])
     @attachment.destroy
 
     flash[:notice] = _("Successfully destroyed attachment.")
     respond_to do |format|
-      format.html { redirect_to @idea }
+      format.html { redirect_to @owner }
       format.js
     end
   end
 
   private
 
-  def load_idea
-    @idea = Idea.find(params[:idea_id])
+  def load_owner
+    if params[:idea_id]
+      @owner = Idea.find(params[:idea_id])
+    elsif params[:comment_id]
+      @owner = Comment.find(params[:comment_id])
+    end
   end
 
   def get_uploaded_file

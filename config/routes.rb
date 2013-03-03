@@ -14,6 +14,7 @@ AppFab::Application.routes.draw do
 
   resources :comments, only: [:create, :update, :destroy] do
     resources :votes, only: [:create, :destroy]
+    resources :attachments, only: [:create, :destroy, :show]
   end
 
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
