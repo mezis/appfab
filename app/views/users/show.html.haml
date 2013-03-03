@@ -1,5 +1,3 @@
-:ruby
-  last_seen_at = @user.login.current_sign_in_at || @user.login.last_sign_in_at
 - title @user.first_name, show_title:false
 
 .row
@@ -15,8 +13,8 @@
       .roles= user_roles_sentence(@user)
 
     %ul
-      - if last_seen_at
-        %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(last_seen_at) }
+      - if @user.last_seen_at
+        %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(@user.last_seen_at) }
       %li= _('Has %{count} %{karma_symbol}').html_safe % { count:@user.karma, karma_symbol:user_karma_symbol }
       %li= _('Has ×%{count} voting power.') % { count:@user.voting_power }
       - if count = @user.ideas.count and count > 0
