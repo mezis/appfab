@@ -107,6 +107,7 @@ group :development do
   gem 'database_cleaner',        require:false
   gem 'faker',                   require:false
   gem 'launchy',                 require:false # for capybara's save_and_open_page
+  gem 'timecop'
 
   # automated testing
   gem 'guard',                   require:false
