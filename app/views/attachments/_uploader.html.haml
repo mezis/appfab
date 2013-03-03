@@ -77,7 +77,7 @@
           onComplete: (id, name, data) ->
             $('#{refresh_target}').load('#{refresh_endpoint}')
             if data.success
-              $('##{uploader_id} .qq-upload-list').eq(id).fadeOut()
+              $('##{uploader_id} .qq-upload-list li').eq(id).fadeOut()
 
       )
     )
