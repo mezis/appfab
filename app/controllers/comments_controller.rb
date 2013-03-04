@@ -12,10 +12,32 @@ class CommentsController < ApplicationController
       flash[:error] = _("Failed to post comment.")
     end
 
-    if @comment.idea
-      redirect_to @comment.idea, anchor: 'comments'
-    else
-      redirect_to ideas_path
+    respond_to do |format|
+      format.html do
+        if @comment.idea
+          redirect_to @comment.idea, anchor:dom_id(@comment)
+        else
+          redirect_to ideas_path
+        end
+      end
+      format.js
+    end
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
+
+    if request.xhr?
+      case params['part']
+      when 'attachments'
+        render_ujs @comment.attachments, title:false, classes:'pull-right'
+      end
+      return
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @comment.idea, anchor:dom_id(@comment) }
+      format.js
     end
   end
 
@@ -33,6 +55,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:success] = _("Successfully destroyed comment.")
-    redirect_to @comment.idea, anchor: 'comments'
+
+    respond_to do |format|
+      format.html { redirect_to @comment.idea, anchor:'comments' }
+      format.js
+    end
   end
 end

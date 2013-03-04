@@ -6,6 +6,8 @@ class Attachment < ActiveRecord::Base
 
   file_accessor :file
 
+  delegate :format, to: :file
+
   validates_presence_of :owner
   validates_presence_of :uploader
   validates_presence_of :file

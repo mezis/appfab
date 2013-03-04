@@ -8,12 +8,13 @@
   title_link    = local_assigns.fetch(:title_link,  false)
   muted_details = local_assigns.fetch(:muted,       false)
 
-.idea_container
-  - classes = [idea.state_name, 'with-header-wizard', idea_category_class(idea)]
-  .idea.idea-maxi{ id: "idea#{idea.id}", class: classes.compact.join(' ') }
+.idea_container{ id:dom_id(idea) }
+  - classes = [idea.state_name, 'with-header-wizard', (muted_details && 'af-mutable-content')]
+  .af-drop-area
+  .idea.idea-maxi.af-drop-hilite{ class: classes.compact.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
-      .content{ class: (muted_details && 'mutable') }
+      .content.af-mutable
         .category.muted.pull-left
           = idea.category || _('No category')
         .state.muted.pull-right{ title: s_('Tooltip|The current progress on this idea') }<
@@ -52,7 +53,7 @@
     .meta.bottom
       = render 'idea_people', idea:idea
 
-      .actions{ class: (muted_details && 'mutable') }
+      .actions.af-mutable
         %ul
           %li
             = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do

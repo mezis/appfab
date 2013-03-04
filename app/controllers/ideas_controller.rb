@@ -54,6 +54,15 @@ class IdeasController < ApplicationController
     self.current_account = @idea.account
 
     @just_submitted = session.delete(:just_submitted)
+
+    if request.xhr?
+      case params['part']
+      when 'attachments'
+        render_ujs @idea.attachments
+      else
+        render nothing:true, status:400
+      end
+    end
   end
 
   def new

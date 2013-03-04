@@ -1,0 +1,10 @@
+@import compass/css3
+
+// transparent blocks that opacify on ancestor hover
+.af-mutable-content
+  .af-mutable
+    +transition-property(opacity)
+    +transition-duration(250ms)
+    +opacity(0.00)
+  &:hover .af-mutable
+    +opacity(1.00)

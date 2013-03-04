@@ -34,14 +34,15 @@
   .span9
     = render 'idea', idea: @idea, collapsed: false, status: :header
 
-    #attachments
+    #idea_attachments
       = render @idea.attachments
+
     #comments
       = render 'comments/form', comment: Comment.new(idea: @idea)
       = render @idea.comments.by_created_at
   .span3
     = render 'action', idea: @idea
-    = render 'attachments/uploader', idea: @idea
+    = render 'attachments/uploader', owner: @idea
 
     %hr/
     .ht-with-margin-icon.muted

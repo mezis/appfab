@@ -4,9 +4,10 @@ class Comment < ActiveRecord::Base
   attr_accessible :idea_id, :parent_id
 
   belongs_to :idea
-  belongs_to :author,   :class_name => 'User'
+  belongs_to :author, :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
-  has_one    :attachment, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+  has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+
   include Notification::Base::CanBeSubject  
   include Traits::RecentCreation  
 

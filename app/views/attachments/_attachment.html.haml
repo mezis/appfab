@@ -1,23 +1,27 @@
 -# Pass me an +attachment+
+-# Options +title+ (boolean), +classes+ (extra CSS classes)
 :ruby
+  extra_classes = local_assigns.fetch(:classes, 'pull-left')
+  show_title    = local_assigns.fetch(:title,   true)
   size = 64
   large = 180
   is_image = attachment.mime_type =~ /^image/
+
   image_small = is_image && attachment.file.thumb("#{size}x#{size}#").jpg.url
   image_large = is_image && attachment.file.thumb("#{large}x#{large}#").jpg.url
-- attachment_title = capture do
-  .attachment-tooltip
-    = attachment.name
-    = "(%s)" % [ number_to_human_size(attachment.size) ]
-  - if image_large
-    .attachment-thumb{ style:"background-image:url('#{image_large}')" }
-      &nbsp;
-- escaped_attachment_title = attachment_title.gsub(/\n+/, ' ')
 
-.attachment{ id: "attachment#{attachment.id}" }
-  = link_to attachment.file.url, target:'_blank', style:(image_small && "background-image:url('#{image_small}')"), class: 'thumb', title: escaped_attachment_title do
-    &nbsp;
-  .name
-    = attachment.name
-  = link_to idea_attachment_path(attachment.owner, attachment), method: :delete do
-    %i.icon-trash
+  attachment_title = "%s (%s)" % [ attachment.name, number_to_human_size(attachment.size) ]
+
+.af-mutable-content[attachment]{ class:extra_classes }
+  = link_to attachment.file.url, target:'_blank', style:(image_small && "background-image:url('#{image_small}')"), class: 'thumb', title:attachment_title do
+    - if is_image
+      &nbsp;
+    - else
+      %i.icon-file
+      = attachment.name.gsub(/.*\./,'').upcase
+  - if show_title
+    .name
+      = attachment.name.gsub(/(.*)\..*/,'\1')
+  - if can?(:destroy, attachment)
+    = link_to attachment, method: :delete, remote:true, class:'af-corner-link af-mutable' do
+      %i.icon-trash
