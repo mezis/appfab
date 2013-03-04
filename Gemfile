@@ -69,13 +69,13 @@ gem 'will_paginate'
 # exception reporting
 gem 'sentry-raven'
 
-# coffeescript in Haml
+# coffeescript JS views
+gem 'coffee-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'coffee-rails'
 
   # styling
   gem 'compass-rails'

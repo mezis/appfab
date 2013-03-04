@@ -14,11 +14,10 @@ memcached_url = case Rails.env
 when 'development', 'test'
   'memcached://localhost:11211/rack-cache'
 else
-  "memcached://%<user>s:%<password>s@%<host>s:%<port>s/rack-cache" % {
+  "memcached://%<user>s:%<password>s@%<host>s/rack-cache" % {
     host:     ENV['MEMCACHIER_SERVERS'].split(',').first,
     user:     ENV['MEMCACHIER_USERNAME'],
-    password: ENV['MEMCACHIER_PASSWORD'],
-    port:     11211
+    password: ENV['MEMCACHIER_PASSWORD']
   }
 end
 
