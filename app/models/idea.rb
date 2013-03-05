@@ -9,7 +9,6 @@ class Idea < ActiveRecord::Base
   has_many   :vettings, :dependent => :destroy
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_many   :comments, :dependent => :destroy
-  has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
