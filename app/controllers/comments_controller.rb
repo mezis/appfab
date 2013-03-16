@@ -20,7 +20,11 @@ class CommentsController < ApplicationController
           redirect_to ideas_path
         end
       end
-      format.js
+      format.js do
+        unless @comment.id # not saved
+          render nothing:true, status: :bad_request
+        end
+      end
     end
   end
 
