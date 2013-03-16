@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   include Traits::RedirectToHttps
   include Traits::RenderUjs
+  include Traits::FlashesInHeaders
   include LazyRecords::Flusher
 
   before_filter :set_text_domain

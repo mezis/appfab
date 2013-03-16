@@ -1,7 +1,7 @@
 - title @idea.title, show_title: false
 
 - if @just_submitted
-  - content_for :after_flashes do
+  - content_for :extra_flashes do
     .flash.flash-banner.alert.alert-block.alert-success
       .container
         %button.close{ :'data-dismiss' => 'alert' }<
@@ -19,7 +19,7 @@
           - raise RuntimeError.new('bad idea state')
 
 - if @idea.can_vote»? && can?(:create, @idea.votes.build) && !@idea.backed_by?(current_user)
-  - content_for :after_flashes do
+  - content_for :extra_flashes do
     .flash.flash-banner.alert.alert-block.alert-success
       .container
         %button.close{ :'data-dismiss' => 'alert' }<
