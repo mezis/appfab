@@ -1,15 +1,5 @@
-class Notification::Mailer < ActionMailer::Base
-  default from: '"AppFab" <noreply@dec0de.me>'
+class Notification::Mailer < ApplicationMailer
   layout 'email'
-  helper :users, :user_roles, :application
-
-  # all paths need to be turned into URLs of course inside an email.
-  # neat trick:
-  helper do
-    def polymorphic_path(*args)
-      polymorphic_url(*args)
-    end
-  end
 
   def digest(user, notifications)
     @user = user
