@@ -1,5 +1,5 @@
 module LazyRecords
-  VERSION = '0.0.1'
+  VERSION = '0.0.1' unless defined?(self::VERSION)
 
   require 'lazy_records/base'
   require 'lazy_records/cache'
