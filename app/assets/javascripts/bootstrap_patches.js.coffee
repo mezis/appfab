@@ -31,4 +31,6 @@ $.unobtrusive () ->
 $.unobtrusive () ->
   $('[data-dismiss]').on 'click', () ->
     selector = '.' + $(this).data('dismiss')
-    $(this).closest(selector).fadeOut('fast')
+    target = $(this).closest(selector)
+    target.fadeOut 'fast', () ->
+      $(this).remove()
