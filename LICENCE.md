@@ -1,14 +1,11 @@
 # AppFab Licence
 
-AppFab is Copyright © 2012-2013 Julien T. Letessier
-<julien.letessier@gmail.com> (the "Author")
+AppFab is Copyright © 2012-2013 HouseTrip Ltd <jtl@housetrip.com> (the "Author").
 
 You are hereby granted permission to use AppFab (the "Program") under the
 terms GNU Affero General Public Licence, version 3, as copied in its
 entirety below in this same document (the "Original Licence"), and with the
 following amendments (the "Provisions").
-
-
 
 
 ## Provisions to the AGPL v3
@@ -19,23 +16,6 @@ shall be understood to superseed the Original Licence.
 Any terms in quotes are to be understood as per the Original Licence.
 
 
-### Executing and Performing
-
-You may run, execute or perform "covered works", including the Program, for
-private or internal company use.
-
-You may not, however, run, execute or perform "covered works", including the
-Program, for the benefit others.
-
-For example, if you are a company, you may run, execute or perform "covered
-works" for the benefit of the company's employees, but you may not do so for
-the benefit of customers, investors, or suppliers. If you are an individual,
-you may run, execute or perform "covered works" only for your own benefit.
-
-This applies even in the case where you run, execute, or perform "covered
-works" for free.
-
-
 ### Contributing
 
 If you "modify" the Program, you must provide your "modified version" to the
@@ -43,25 +23,9 @@ Author, in digital form, either as a "Pull Request" on the GitHub platform,
 or as a "diff" digital file representing differences between the Progam and
 your "modified version".
 
-By doing so you accept that, should the Author decide to amend the Program
-with your "modified version", you would irrevocably abandon all claims to
-copyright on your "modified version", and effectively transfer copyright of
-your "modified version" to the Author, under the terms of this Licence.
-
-Note that if you are an employee or otherwise subject to a contract that
-strips you of copyright to your "modified version", the above applies to
-your employer, or whichever third party holds copyright to your work. It is
-your responsibility to make sure this third party, if any, has been made
-aware of the Licence, and accepted the transfer of copyright.
-
-As a counterpart, the Author may not further restrict your rights to execute
-and perform the Program, your "modified version", or any "covered works".
-
-This is to be understood as a binding contract, effective as soon as your
-"modified version" has either been made public as per the Original Licence,
-or transmitted to the Author.
-
-
+As a provision to the original terms of the AGPL, you accept that your
+modifications must be provided as a Pull Request to the original code
+repository at http://github.com/mezis/appfab.
 
 
 # GNU AFFERO GENERAL PUBLIC LICENSE
