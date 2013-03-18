@@ -23,5 +23,5 @@
     .name
       = attachment.name.gsub(/(.*)\..*/,'\1')
   - if can?(:destroy, attachment)
-    = link_to attachment, method: :delete, remote:true, class:'af-corner-link af-mutable' do
+    = link_to attachment, method: :delete, remote:true, class:'af-corner-link af-mutable', confirm:_('Are you sure?') do
       %i.icon-trash
