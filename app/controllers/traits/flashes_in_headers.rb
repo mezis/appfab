@@ -12,7 +12,7 @@ module Traits::FlashesInHeaders
 
     # FIXME: disabled, as render_to_string causes the "main" view not to be sent to the client.
     # Should use the "standalone" controller from the Pusher branch once it's in master.
-    # response.headers['X-Flash-Data'] = render_to_string(partial:'flashes').gsub("\n"," ")
+    response.headers['X-Flash-Data'] = side_render(partial:'application/flashes', locals:{ flash:flash }).gsub("\n"," ")
     flash.discard  # don't want the flash to appear when you reload page
     return true
   end

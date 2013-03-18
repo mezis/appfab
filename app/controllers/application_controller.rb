@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include Traits::RenderUjs
   include Traits::FlashesInHeaders
   include LazyRecords::Flusher
+  include SideRenderer::Controller
 
   before_filter :set_text_domain
 
