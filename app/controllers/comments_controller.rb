@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class CommentsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
 
   def create
     @comment = Comment.new(params[:comment])

@@ -58,6 +58,10 @@ When /^I (design|development)-size the idea as "(\w+)"$/ do |size_type, size|
   find(".#{size_type}_size a", text:size).click
 end
 
+When /^I visit the idea$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+end
 
 When /^I vet the idea$/ do
   idea = Mentions[Idea]
@@ -152,3 +156,10 @@ Then /^the idea category should be "(.*?)"$/ do |category|
   visit "/ideas/#{idea.id}"
   find('.idea .category').should have_content(category)
 end
+
+Then /^I should be on the idea page$/ do
+  idea = Mentions[Idea]
+  path = "/ideas/#{idea.id}"
+  page.current_path.should == path
+end
+

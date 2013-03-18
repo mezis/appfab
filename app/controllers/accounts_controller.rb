@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class AccountsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
 
   def index
     redirect_to root_path
