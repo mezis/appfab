@@ -10,7 +10,5 @@ else
 
 $(comment_selector).eq(0).flash
   start:'af-pop'
-#  after: () ->
-#    $(comment_selector).eq(0).remove()
 
 $(comment_selector).activateUnobtrusiveJavascript()
