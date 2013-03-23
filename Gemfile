@@ -3,7 +3,7 @@ ruby '2.0.0'
 
 gem 'rails'
 
-gem 'thin'
+gem 'unicorn'
 
 # database
 gem 'mysql2',  group: :development
@@ -52,7 +52,7 @@ gem 'rack-cache', require:'rack/cache'
 gem 'gravtastic', require:false
 
 # monitoring
-gem 'newrelic_rpm', group: :production
+gem 'newrelic_rpm'
 
 # styled user input (markdown)
 gem 'redcarpet'
