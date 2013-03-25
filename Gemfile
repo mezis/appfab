@@ -39,7 +39,7 @@ gem 'valium'
 
 # activerecord extensions
 gem 'state_machine', require:false
-gem 'default_value_for', git:'git://github.com/FooBarWidget/default_value_for.git'
+gem 'default_value_for'
 
 # attached files & image manipulation
 gem 'dragonfly'
