@@ -70,7 +70,7 @@
           forceMultipart:   true
           inputName:        'attachment[file]'
         validation:
-          allowedExtensions: ['jpg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt']
+          allowedExtensions: ['jpg', 'jpeg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt']
           sizeLimit:         #{5 * (1<<20)}
         callbacks:
           onComplete: (id, name, data) ->
