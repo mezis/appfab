@@ -22,7 +22,9 @@ describe AttachmentsController do
 
   it "create action should render JSON when model is valid" do
     xhr :post, :create, idea_id: idea.id, format: :json, attachment: { file: file }
-    response.body.should == %({"success":true})
+    result = JSON.parse(response.body)
+    result['success'].should be_true
+    result['id'].should be_a_kind_of(Integer)
   end
 
   it "destroy action should destroy model and redirect to idea" do

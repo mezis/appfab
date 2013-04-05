@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class NotificationsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
 
   ValidAngles = %w(unread all)
   DefaultAngle = ValidAngles.first

@@ -1,0 +1,7 @@
+#rendered_with_ujs
+  = render content, options
+  :coffeescript
+    $('#rendered_with_ujs').each ->
+      children = $(this).children()
+      $(this).replaceWith(children)
+      $(children).activateUnobtrusiveJavascript()

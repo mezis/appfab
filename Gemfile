@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
-ruby '1.9.2'
+ruby '2.0.0'
 
 gem 'rails'
+
+gem 'unicorn'
 
 # database
 gem 'mysql2',  group: :development
@@ -50,7 +52,7 @@ gem 'rack-cache', require:'rack/cache'
 gem 'gravtastic', require:false
 
 # monitoring
-gem 'newrelic_rpm', group: :production
+gem 'newrelic_rpm'
 
 # styled user input (markdown)
 gem 'redcarpet'
@@ -77,7 +79,7 @@ group :assets do
 
   # styling
   gem 'compass-rails'
-  gem 'bootstrap-sass', '~> 2.1.1.0'
+  gem 'bootstrap-sass'
   gem 'font-awesome-sass-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

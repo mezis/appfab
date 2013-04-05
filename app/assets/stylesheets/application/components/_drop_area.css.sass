@@ -1,0 +1,29 @@
+// areas that can be highlighted during drag-and-drop operations
+@import compass
+@import application/variables
+@import application/mixins
+
+.af-overlay
+  +absolute(0, 0)
+  +square(100%)
+  z-index: 2
+
+.af-drop-area
+  $drop-color:     lighten($major_color, 20%)
+  $pre-drop-color: rgba($drop-color, 0.5)
+
+  @extend .af-overlay
+
+  +box-shadow($pre-drop-color 0 0 10px 5px)
+  background-color: $pre-drop-color
+  display:          none
+
+  &.qq-upload-drop-area-active
+    +box-shadow(none)  
+    background-color: inherit
+    & ~ .af-drop-hilite,
+    & ~ * .af-drop-hilite,
+    & ~ * .af-drop-hilite-before::before,
+    & ~ * .af-drop-hilite-after::after
+      background-color: $drop-color
+      background-image: none

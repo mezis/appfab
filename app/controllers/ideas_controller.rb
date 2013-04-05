@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class IdeasController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
+
   before_filter :require_account!
   before_filter :cleanup_session
   before_filter :map_state_names, only:[:create, :update]
@@ -54,6 +55,15 @@ class IdeasController < ApplicationController
     self.current_account = @idea.account
 
     @just_submitted = session.delete(:just_submitted)
+
+    if request.xhr?
+      case params['part']
+      when 'attachments'
+        render_ujs @idea.attachments
+      else
+        render nothing:true, status:400
+      end
+    end
   end
 
   def new

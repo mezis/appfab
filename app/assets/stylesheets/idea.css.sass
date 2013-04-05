@@ -37,9 +37,8 @@
       +box-sizing(border-box)
       padding: 0 $section_padding
 
-    .state, .sizing
+    &.top
       font-size: smaller
-      padding:   0 1ex
 
   .rating
     $badge_size:  36px
@@ -63,16 +62,17 @@
         font-size:    small
 
   .people
-    float: left
-    padding: 0
-    position:   relative
-    overflow:   hidden
-    text-align: left
+    float:        left
+    padding:      0
+    position:     relative
+    overflow:     hidden
+    text-align:   left
+    white-space:  nowrap
     > *
-      display:  inline-block
+      display:      inline-block
     .avatar
-      height: $banner_height
-      width:  $banner_height
+      height:       $banner_height
+      width:        $banner_height
 
   .actions
     li
@@ -81,16 +81,6 @@
       &.separator:before
         color: gray
         content: "|"
-
-// mute-able blocks on idea cards
-.idea
-  .mutable
-    +transition-property(opacity)
-    +transition-duration(150ms)
-    +opacity(0.05)
-  &:hover .mutable
-    +opacity(1.00)
-
 
 // maxi-format idea specifics
 .idea.idea-maxi

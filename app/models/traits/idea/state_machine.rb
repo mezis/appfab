@@ -2,6 +2,8 @@
 require 'state_machine'
 
 module Traits::Idea::StateMachine
+  extend ActiveSupport::Concern
+
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
   StatesForWizard = [
@@ -17,10 +19,9 @@ module Traits::Idea::StateMachine
     N_('Ideas State|live')
   ]
 
-  def self.included(klass)
-    klass.class_eval { attr_accessible :state }
-    klass.send :extend, ClassMethods
-    klass.send :setup_state_machine
+  included do
+    attr_accessible :state
+    setup_state_machine
   end
 
   def all_states

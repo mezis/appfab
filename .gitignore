@@ -33,4 +33,8 @@ push_*.dat
 # Finder turds
 .DS_Store
 
+# RBenv
 .rbenv-version
+
+# Script turds
+nohup.out

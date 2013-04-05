@@ -4,7 +4,7 @@
 -# tooltip  (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(resource:User, id:user.id, v:2, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip]]) do
+= cached_fragment(resource:User, id:user.id, v:4, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip]]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
@@ -15,7 +15,7 @@
 
     options = { id: "user#{user.id}" }
     if show_tooltip
-      options.merge! title: user_tooltip(user), :'data-placement' => 'bottom'
+      options.merge! title: user_tooltip(user), :'data-placement' => 'bottom', :'data-container' => '.container'
     end
 
     if classes = local_assigns[:classes]

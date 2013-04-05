@@ -4,9 +4,10 @@ class Comment < ActiveRecord::Base
   attr_accessible :idea_id, :parent_id
 
   belongs_to :idea
-  belongs_to :author,   :class_name => 'User'
+  belongs_to :author, :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
-  has_one    :attachment, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+  has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
+
   include Notification::Base::CanBeSubject  
   include Traits::RecentCreation  
 
@@ -14,7 +15,7 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :author
   validates_presence_of :idea
-  validates_presence_of :body
+  validates_presence_of :body, message:_('Blank comments are not permitted.')
   validates_presence_of :rating
 
   scope :by_created_at, order:'created_at DESC'
