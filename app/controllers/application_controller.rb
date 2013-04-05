@@ -30,7 +30,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil unless current_login && current_account
-    @current_user ||= current_account.users.find_by_login_id(current_login.id)
+    @current_user ||= current_account.users.find_by_login_id(current_login.id).tap do |user|
+      user.last_seen_at = Time.current unless acting_as_user?
+    end
   end
   helper_method :current_user
 
@@ -61,6 +63,9 @@ class ApplicationController < ActionController::Base
     render_error_page :missing_account
   end
 
+  def acting_as_user?
+    !!session[:real_user_id]
+  end
 
   def acting_real_user
     return unless session[:real_user_id]
