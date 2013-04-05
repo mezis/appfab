@@ -3,14 +3,14 @@
 # This module should be included in all views globally,
 # to do so you may need to add this line to your ApplicationController
 #   helper :layout
-module LayoutHelper
+module LayoutsHelper
   def page_title
     saved_title = content_for(:title)
     saved_title.blank? ? configatron.app_name : "#{saved_title} - #{configatron.app_name}"
   end
 
   def title(page_title, options = {})
-    content_for(:title) { h(page_title.to_s) }
+    content_for(:title) { strip_tags(page_title.to_s) }
     @show_title = options.fetch(:show_title, true)
   end
 
