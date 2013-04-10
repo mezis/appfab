@@ -2,6 +2,8 @@
 require 'gravtastic'
 
 class Login < ActiveRecord::Base
+  include Traits::HasAvatar
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -9,9 +11,6 @@ class Login < ActiveRecord::Base
     :rememberable, 
     :trackable, :validatable,
     :omniauthable, :token_authenticatable
-
-  include Gravtastic
-  has_gravatar :email, size: 80, filetype: :jpg, default: :identicon
 
   has_many :users
   has_many :accounts, through: :users
