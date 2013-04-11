@@ -1,0 +1,2 @@
+.idea-history.ht-separator-text
+  %p= _('Idea status changed to %{status} (%{time} ago)') % { status:Idea.state_name(state_change.new_state), time:time_ago_in_words(state_change.created_at) }

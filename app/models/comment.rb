@@ -10,6 +10,7 @@ class Comment < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject  
   include Traits::RecentCreation  
+  include Idea::History::Comment::IsSubject
 
   default_values rating: 0
 
