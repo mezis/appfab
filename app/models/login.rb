@@ -23,6 +23,8 @@ class Login < ActiveRecord::Base
 
   after_save :adopt_account
 
+  serialize :auth_provider_data
+
   def self.find_or_create_from_auth_hash!(auth_hash)
     Rails.logger.debug("Auth hash: #{auth_hash.inspect}")
     if auth_hash[:provider] == 'developer'
@@ -56,6 +58,10 @@ class Login < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def auth_provider_data
+    super || (self.auth_provider_data = {})
   end
 
 
