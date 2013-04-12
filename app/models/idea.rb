@@ -15,6 +15,9 @@ class Idea < ActiveRecord::Base
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
   include LazyRecords::Model
+  include Idea::History::Base::HasHistory
+  include Idea::History::Creation::Recorder
+  include Idea::History::StateChange::Recorder
 
   has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
