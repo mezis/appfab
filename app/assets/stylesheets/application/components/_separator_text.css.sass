@@ -1,0 +1,23 @@
+@import compass
+
+.ht-separator-text
+  +opacity(0.3)
+  position:   relative
+  display:    table
+  width:      100%
+
+  &:before, &:after, & > p
+    display: table-cell
+
+  &:before, &:after
+    content:           "\00a0"
+    width:             50%
+    height: 1px
+    border-top:        1px solid black
+    position:          relative
+    top:               0.8em
+  p
+    margin:            0
+    padding:           0 1ex
+    font-size:         smaller
+    white-space:       nowrap

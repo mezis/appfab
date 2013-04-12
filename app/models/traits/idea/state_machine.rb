@@ -71,6 +71,10 @@ module Traits::Idea::StateMachine
       self.state_machine.states[state_name].value
     end
 
+    def state_name(state_value)
+      self.state_machine.states.find { |state| state.value == state_value }.name
+    end
+
     private
 
     def setup_state_machine
@@ -85,6 +89,10 @@ module Traits::Idea::StateMachine
         state :implemented,  value: 6
         state :signed_off,   value: 7
         state :live,         value: 8
+
+        event :submit» do
+          transition :draft => :submitted
+        end
 
         event :vet» do
           transition :submitted => :vetted, :if => :enough_vettings?

@@ -39,7 +39,7 @@
 
     #comments
       = render 'comments/form', comment: Comment.new(idea: @idea)
-      = render @idea.comments.by_created_at
+      = render @idea.histories.by_created_at.includes(:subject)
   .span3
     = render 'action', idea: @idea
     = render 'attachments/uploader', owner: @idea
