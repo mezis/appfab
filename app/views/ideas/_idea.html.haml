@@ -41,14 +41,14 @@
         .product_manager
           %strong= _('Product manager:')
           = render idea.product_manager, avatar:false, classes:'user-inline'
-      .markdown
-        != pipeline_render idea.problem
+      .markdown.problem
+        != pipeline_render idea.problem, summarize:collapsed
 
       - unless collapsed
-        .markdown
+        .markdown.solution
           %strong= _('Solution:')
           != pipeline_render idea.solution
-        .markdown
+        .markdown.metrics
           %strong= _('Metrics:')
           != pipeline_render idea.metrics
 

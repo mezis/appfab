@@ -46,6 +46,5 @@ describe "ideas/index.html.haml" do
         subject.should =~ /foobar/
       end
     end
-
   end
 end
