@@ -12,12 +12,12 @@ describe Vetting do
 
   context 'given anunsized idea' do
     before do
-      @idea = Idea.make!
+      @idea = Idea.make!(:submitted)
     end
 
-    it 'cannot be created' do
+    it 'can be created' do
       @user = User.make!.plays!(:product_manager)
-      @user.vettings.build(idea: @idea).should_not be_valid
+      @user.vettings.build(idea: @idea).should be_valid
     end
   end
 
