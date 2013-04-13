@@ -1,8 +1,9 @@
 module PipelineHelper
 
-  def pipeline_render(text)
+  def pipeline_render(text, summarize:false)
     hash = Digest::SHA1.hexdigest(text)
-    Rails.cache.fetch("#{__method__}/v#{CACHE_VERSION}/#{hash}") do
+    Rails.cache.fetch("#{__method__}/v#{CACHE_VERSION}/#{hash}/summarize:#{summarize}") do
+      text = text.gsub(/(\r?\n){2}.*/m, '') if summarize
       markdown.render(text)
     end
   end
