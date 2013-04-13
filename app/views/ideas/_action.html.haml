@@ -37,14 +37,9 @@
           = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-check
             = _('Cancel your vetting')
-      - elsif idea.sized?
-        %li
-          = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
-            %i.icon-check
-            = _('Vet this idea')
       - else
         %li
-          %a.btn.btn-block.disabled{ title: s_('Tooltip|The idea need to be sized by an architect and a product manager before you can vet it.'), :'data-placement' => placement }
+          = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-check
             = _('Vet this idea')
     - else
