@@ -42,6 +42,7 @@
           %strong= _('Product manager:')
           = render idea.product_manager, avatar:false, classes:'user-inline'
       .markdown.problem
+        %p= "collapsed: #{collapsed}"
         != pipeline_render idea.problem, summarize:collapsed
 
       - unless collapsed
