@@ -20,12 +20,26 @@ describe Idea do
     Account.last.ideas.should include(@idea)
   end
 
-  it 'becomes "vetted" when vetted twice' do
-    @idea = Idea.make!(:sized)
-    Vetting.make!(idea: @idea)
-    @idea.reload.vetted?.should be_false
-    Vetting.make!(idea: @idea, user: User.make!)
-    @idea.reload.vetted?.should be_true
+  context 'given a submitted idea' do
+    before do
+      @idea = Idea.make!(:submitted)
+    end
+
+    it 'does not become vetted when just sized' do
+      @idea.update_attributes! design_size:1, development_size:1
+      @idea.reload.should_not be_vetted
+    end
+
+    it 'does not become vetted when just vetted twice' do
+      2.times { Vetting.make!(idea: @idea, user: User.make!) }
+      @idea.reload.should_not be_vetted
+    end
+
+    it 'becomes "vetted" when sized and vetted twice' do
+      2.times { Vetting.make!(idea: @idea, user: User.make!) }
+      @idea.update_attributes! design_size:1, development_size:1
+      @idea.reload.should be_vetted
+    end
   end
 
   it 'cannot be picked if the manager is at design capacity' do
