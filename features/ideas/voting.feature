@@ -17,7 +17,7 @@ Feature: Voting for ideas
 
   Scenario: Voting for idea
     When I endorse the idea
-    Then the idea should be voted
+    Then the idea should be endorsed
     And the idea should be in angle "votable"
 
   Scenario: Removing a vote
