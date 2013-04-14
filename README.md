@@ -1,6 +1,6 @@
 # AppFab
 
-[![Build Status](https://travis-ci.org/mezis/appfab.png)](https://travis-ci.org/mezis/appfab)
+[![Build Status](https://travis-ci.org/mezis/appfab.png?branch=master)](https://travis-ci.org/mezis/appfab)
 [![Code Climate](https://codeclimate.com/github/mezis/appfab.png)](https://codeclimate.com/github/mezis/appfab)
 [![Dependency Status](https://gemnasium.com/mezis/appfab.png)](https://gemnasium.com/mezis/appfab)
 
