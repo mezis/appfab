@@ -6,7 +6,6 @@ Feature: Drafting ideas
   Background:
     Given a user named "Ursula"
       And I sign in as "Ursula"
-      # And a submitted idea "Put your boots on!"
 
   @javascript
   Scenario: Create as draft
