@@ -25,6 +25,10 @@ class LazyRecords::Collection
     end
   end
 
+  def take(count)
+    cache.get @ids.take(count)
+  end
+
   def all
     map { |x| x }
   end
