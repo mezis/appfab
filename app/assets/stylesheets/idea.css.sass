@@ -68,11 +68,13 @@
     overflow:     hidden
     text-align:   left
     white-space:  nowrap
-    > *
-      display:      inline-block
+
+    +height($banner_height)
+
+    .user
+      float:      left
     .avatar
-      height:       $banner_height
-      width:        $banner_height
+      +square($banner_height)
 
   .actions
     li
