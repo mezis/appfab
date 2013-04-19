@@ -1,0 +1,82 @@
+@import application/variables
+@import application/mixins
+@import compass
+
+$text_color:  #333
+$font_size:   14px
+
+// reset
+
+.email
+  padding:     $section_padding
+  color:       $text_color
+  font-family: Helvetica, Arial, sans-serif
+  font-size:   $font_size
+  line-height: ($font_size * 1.33)
+  p, li, div
+    color:       $text_color
+  a
+    color:       $major_color
+
+// components
+
+.well
+  background-color: $background_lite
+  padding:          $section_padding
+
+.first
+  margin-top:       0
+.last
+  margin-bottom:    0
+
+.pull-right
+  float:            right
+  margin-left:      1em
+.pull-left
+  float:            left
+  margin-right:     1em
+.align-right
+  text-align:       right
+.ago
+  white-space:      nowrap
+
+.muted
+  +opacity(0.4)
+
+.title
+  font-size:    $font_size * 1.66
+  line-height:  $font_size * 1.33 * 1.66
+
+.clearfix
+  clear: both
+  +clearfix
+
+ul.block-list
+  list-style-type:    none
+  padding:            0
+  li
+    display:          block
+    padding:          $section_padding
+    margin:           0
+    background-color: $background_lite
+    &.even
+      background-color: lighten($background_lite, 3)
+
+// parts
+
+.footer
+  $image_height:     32px
+
+  p
+    height:            $image_height
+    line-height:       $image_height
+    color:             $text_color
+    margin:            0
+
+  *
+    text-decoration:   none
+
+  img
+    +square($image_height)
+    margin-right:    $section_padding
+
