@@ -41,6 +41,11 @@ close-via-commit- message) in your pull request,
 
 and be prepared to discuss your solution!
 
+If your pull request addresses an issue, and the issue is already assigned
+to a milestone, please branch then request it against that milestone's
+branch (e.g. `milestone/1/racoon-mario`) instead of against the master
+branch.
+
 ### Licence
 
 AppFab is free software, copyright (c) HouseTrip Ltd.
