@@ -9,11 +9,11 @@ module Traits::RecentCreation
   end
 
   def recently_created?
-    created_at > RECENT_CREATION_DELAY.ago
+    created_at.andand > RECENT_CREATION_DELAY.ago
   end
 
   def recently_updated?
-    updated_at > RECENT_CREATION_DELAY.ago
+    updated_at.andand > RECENT_CREATION_DELAY.ago
   end
 
 end
