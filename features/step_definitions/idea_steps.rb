@@ -26,7 +26,7 @@ end
  
 # actions
 
-When /^I submit an? (idea|draft) "(.*)"?$/ do |idea_or_draft, title|
+When /^I submit an? (idea|draft) "(.*)"$/ do |idea_or_draft, title|
   idea = Idea.make(title:title).destroy
 
   visit '/ideas/new'
@@ -108,7 +108,7 @@ end
 Then /^the idea should (not )?be in angle "(.*)"$/ do |negate, angle|
   idea = Mentions[Idea]
   visit "/ideas?angle=#{angle}"
-  page.send(negate ? :should_not : :should, have_content(idea.title))
+  page.html.send(negate ? :should_not : :should, include(idea.title))
 end
 
 Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|

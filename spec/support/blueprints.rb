@@ -100,6 +100,11 @@ Notification::Base.blueprint do
   subject    { Idea.last || Idea.make! }
 end
 
+Notification::NewIdea.blueprint do
+  recipient  { User.last || User.make! }
+  subject    { Idea.last || Idea.make! }
+end
+
 
 Vote.blueprint do
   user       { User.last || User.make! }
