@@ -13,8 +13,9 @@
     = yield(:head)
 
   %body
-    = render 'header'
-    = yield :after_header
+    #header
+      = render 'header'
+      = yield :after_header
     #flashes
       = render 'acting_as_user' if acting_real_user
       = render 'flashes' if flash.any?
