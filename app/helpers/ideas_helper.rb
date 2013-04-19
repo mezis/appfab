@@ -152,7 +152,7 @@ module IdeasHelper
     when 'approvable'  then _('This angle is only visible to the benevolent dictator. It lists the ideas that have been picked by a product manager and have been designed; this means you should take a looks at their description and roadmap, their wireframes, and possibly preliminary designs, so product teams can start actually working on them.')
     when 'buildable'   then _('This angle lists ideas actively worked on: being designed by a product manager, implemented by a product team, or ready signed off and ready for release. It is the product team\'s working set.')
     when 'signoffable' then _('This angle is only visible to the benevolent dictator. It lists the ideas a product manager has marked as completed and awaits your sign off for release. See the idea details, or speak to your product manager to figure out where it was staged.')
-    when 'followed'    then _('This angle lists the ides you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
+    when 'followed'    then _('This angle lists the ideas you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
     end
 
     pipeline_render text
