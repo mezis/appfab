@@ -1,4 +1,4 @@
-.navbar.navbar-fixed-top.navbar-inverse#header
+.navbar.navbar-fixed-top.navbar-inverse#main-navbar
   .navbar-inner
     .container
       %a.brand{href: root_path}<
@@ -22,8 +22,8 @@
               %span= _('Vet')
         - if can?(:create, Vote)
           = content_tag_with_path_checking(:li, angle: 'votable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
-              %i.icon-envelope
+            %a{href: path, title: s_('Tooltip|Show stories open for endorsements'), :'data-placement' => 'bottom'}
+              %i.icon-thumbs-up
               = header_angle_counter('votable')
               %span= _('Vote')
         - if can?(:pick, Idea)

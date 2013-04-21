@@ -7,14 +7,16 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %link{rel:'icon', type:'image/png', href:'/appfab-favicon.png'}/
     %link{rel:'apple-touch-icon', type:'image/png', href:'/appfab-touch-icon.png'}/
-    = stylesheet_link_tag    :application
+    = stylesheet_link_tag :application
+    = page_stylesheet_tag
     = javascript_include_tag :application
     = csrf_meta_tag
     = yield(:head)
 
   %body
-    = render 'header'
-    = yield :after_header
+    #header
+      = render 'header'
+      = yield :after_header
     #flashes
       = render 'acting_as_user' if acting_real_user
       = render 'flashes' if flash.any?

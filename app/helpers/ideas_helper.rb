@@ -46,7 +46,7 @@ module IdeasHelper
     when :draft       then s_('Idea state|draft')
     when :submitted   then s_('Idea state|submitted')    
     when :vetted      then s_('Idea state|vetted')
-    when :voted       then s_('Idea state|voted')
+    when :voted       then s_('Idea state|endorsed')
     when :picked      then s_('Idea state|picked')    
     when :designed    then s_('Idea state|designed')      
     when :approved    then s_('Idea state|approved')      
@@ -102,7 +102,7 @@ module IdeasHelper
       when :vetted
         s_('Tooltip|This idea cannot be vetted yet.')
       when :voted
-        s_('Tooltip|This idea cannot be backed yet.')
+        s_('Tooltip|This idea cannot be endorsed yet.')
       else
         s_('Tooltip|This idea cannot be marked as %{state} yet.') % { :state => idea_status(state) }
       end
@@ -111,7 +111,7 @@ module IdeasHelper
       when :vetted
         s_('Tooltip|This idea has already been vetted.')
       when :voted
-        s_('Tooltip|This idea cannot be backed anymore.')
+        s_('Tooltip|This idea cannot be endorsed anymore.')
       else
         s_('Tooltip|This idea has already been %{state}.') % { :state => idea_status(state) }
       end
@@ -146,13 +146,13 @@ module IdeasHelper
   def ideas_copy_for_angle(angle)
     text = case angle
     when 'discussable' then _('This list show ideas currently open for discussion, regardless of their current status. Use the dropdowns to filter or sort them, or switch to another angle.')
-    when 'vettable'    then _('This list show the ideas that need to be **vetted** before the can vote for them. This means that those ideas have not yet been looked at by a product manager or by an architect, or that their description is not precise enough yet for them to be properly sized.')
-    when 'votable'     then _('Time to vote! This is the list of ideas that have been vetted and the team members can cast their vote on.')
-    when 'pickable'    then _('This angle is only visible to product managers. Consider it your backlog of ideas to work on. It shows ideas that have received enough votes for you to consider them as worth working on.')
+    when 'vettable'    then _('This list show the ideas that need to be **vetted** before users can endorse them. This means that those ideas have not yet been looked at by a product manager or by an architect, or that their description is not precise enough yet for them to be properly sized.')
+    when 'votable'     then _('Time to back ideas! This is the list of ideas that have been vetted and the team members spend %{karma} to endorse them.') % { karma:user_karma_symbol }
+    when 'pickable'    then _('This angle is only visible to product managers. Consider it your backlog of ideas to work on. It shows ideas that have received enough endorsements for you to consider them as worth working on.')
     when 'approvable'  then _('This angle is only visible to the benevolent dictator. It lists the ideas that have been picked by a product manager and have been designed; this means you should take a looks at their description and roadmap, their wireframes, and possibly preliminary designs, so product teams can start actually working on them.')
     when 'buildable'   then _('This angle lists ideas actively worked on: being designed by a product manager, implemented by a product team, or ready signed off and ready for release. It is the product team\'s working set.')
     when 'signoffable' then _('This angle is only visible to the benevolent dictator. It lists the ideas a product manager has marked as completed and awaits your sign off for release. See the idea details, or speak to your product manager to figure out where it was staged.')
-    when 'followed'    then _('This angle lists the ides you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
+    when 'followed'    then _('This angle lists the ideas you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
     end
 
     pipeline_render text
@@ -178,11 +178,11 @@ module IdeasHelper
     when :submitted
       _("This idea was submitted, but is not vetted yet. It needs to be looked at by both a product manager and an architect, each of whom will estimate the effort involved and vet it. They also can just comment on it and ask you to provide more details, give it a better title, or elaborate on the problem statement for instance: only specific, precise ideas can be sized properly.")
     when :vetted
-      _("This idea has been vetted by a product manager and an architect, but has not received enough votes yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} for an idea to proceed.") % { minimum_votes:configatron.app_fab.votes_needed }
+      _("This idea has been vetted by a product manager and an architect, but has not received enough endorsements yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} endorsements for an idea to proceed.") % { minimum_votes:configatron.app_fab.votes_needed }
     when :voted
-      _("Great! This idea has received more than the minimum votes. Assuming it is or becomes one of the top rated ideas, a product team will pick it up and start working on it.")
+      _("Great! This idea has received more than the minimum endorsements. Assuming it is or becomes one of the top rated ideas, a product team will pick it up and start working on it.")
     when :picked
-      _("This idea has been picked by a product manager. This is the design phase: development has not started yet, but the product team is planning to. The outcome may be a detailed roadmap, an identified 'minimum viable product' line, and a set of wireframes for instance. Oh, and everyone who backed it got a bit of extra karma.")
+      _("This idea has been picked by a product manager. This is the design phase: development has not started yet, but the product team is planning to. The outcome may be a detailed roadmap, an identified 'minimum viable product' line, and a set of wireframes for instance. Oh, and everyone who backed it got a bit of extra %{karma}.") % { karma:user_karma_symbol }
     when :designed
       _("This idea has been designed by a product team: at this point they know almost exactly what to do, and have a good idea of the roadmap and time to first release. It is waiting for an approval by the 'benevolent dictator'.")
     when :approved
@@ -192,7 +192,7 @@ module IdeasHelper
     when :signed_off
       _("Awesome! This idea has been signed off, and is ready to go live. It's just a matter of running regression tests and planning a release now, almost there!")
     when :live
-      _("Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra karma.")
+      _("Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra %{karma}.") % { karma:user_karma_symbol }
     end
   end
 

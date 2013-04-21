@@ -35,6 +35,12 @@ AppFab::Application.routes.draw do
 
   match 'page/:page' => 'welcome#static_page', :as => :static_page
 
+  namespace :admin do
+    unless Rails.env.production?
+      resources :email_previews, only:[:index]
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

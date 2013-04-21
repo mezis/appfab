@@ -26,7 +26,7 @@ end
  
 # actions
 
-When /^I submit an? (idea|draft) "(.*)"?$/ do |idea_or_draft, title|
+When /^I submit an? (idea|draft) "(.*)"$/ do |idea_or_draft, title|
   idea = Idea.make(title:title).destroy
 
   visit '/ideas/new'
@@ -75,16 +75,16 @@ When /^I unvet the idea$/ do
   click_on "Cancel your vetting"
 end
 
-When /^I vote for the idea$/ do
+When /^I endorse the idea$/ do
   idea = Mentions[Idea]
   visit "/ideas/#{idea.id}"
-  click_on "Vote for this"
+  click_on "Endorse this"
 end
 
-When /^I cancel my vote for the idea$/ do
+When /^I cancel my endorse the idea$/ do
   idea = Mentions[Idea]
   visit "/ideas/#{idea.id}"
-  click_on "Withdraw your vote"
+  click_on "Withdraw endorsement"
 end
 
 When /^I approve the idea$/ do
@@ -108,7 +108,7 @@ end
 Then /^the idea should (not )?be in angle "(.*)"$/ do |negate, angle|
   idea = Mentions[Idea]
   visit "/ideas?angle=#{angle}"
-  page.send(negate ? :should_not : :should, have_content(idea.title))
+  page.html.send(negate ? :should_not : :should, include(idea.title))
 end
 
 Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|
@@ -119,8 +119,8 @@ Then /^I (can|cannot) (.*) the idea?$/ do |negate, action_name|
   when 'size'               then have_selector('a[href]', text: 'XL')
   when 'unvet'              then have_selector('a[href]', text: 'Cancel your vetting')
   when 'vet'                then have_selector('a[href]', text: 'Vet this idea')
-  when 'vote for'           then have_selector('a[href]', text: 'Vote for this')
-  when 'remove my vote for' then have_selector('a[href]', text: 'Withdraw your vote')
+  when 'endorse'            then have_selector('a[href]', text: 'Endorse this')
+  when 'remove my endorsement for' then have_selector('a[href]', text: 'Withdraw endorsement')
   when 'approve'            then have_selector('a[href]', text: 'Approve')
   else
     raise NotImplementedError
