@@ -8,7 +8,6 @@ module AuthorizationHelper
     when :create, :new
       _('Sorry, you may not create %{class}.') % { class: _(object.name.downcase.pluralize) }
     else
-      require 'pry' ; require 'pry-nav' ; binding.pry
       raise ArgumentError
     end
   end
