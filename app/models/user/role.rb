@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class User::Role < ActiveRecord::Base
-  Names = [:product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
+  Names = [:submitter, :product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
 
   attr_accessible :user, :name, :user_id
 
