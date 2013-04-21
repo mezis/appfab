@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class User::Role < ActiveRecord::Base
-  Names = [:product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
+  Names = [:submitter, :product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
 
   attr_accessible :user, :name, :user_id
 
@@ -22,10 +22,12 @@ class User::Role < ActiveRecord::Base
       end
     end
 
-    def plays!(role_name)
+    def plays!(*role_names)
       self.roles.transaction do
-        return if plays?(role_name)
-        self.roles.create!(name: role_name)
+        role_names.uniq.each do |role_name|
+          next if plays?(role_name)
+          self.roles.create!(name: role_name)
+        end
       end
       @cached_roles = nil
       return self

@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
     @current_user    = nil
   end
 
+  def redirect_back_or_to(path)
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to path
+  end
+
   private
 
   def set_text_domain
