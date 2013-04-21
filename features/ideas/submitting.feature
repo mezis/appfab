@@ -4,7 +4,7 @@ Feature: Sumitting ideas
   I want to submit new ideas
 
   Background:
-    Given a user named "Ursula"
+    Given a submitter named "Ursula"
       And I sign in as "Ursula"
 
   Scenario: Normal submission

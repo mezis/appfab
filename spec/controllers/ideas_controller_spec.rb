@@ -35,13 +35,20 @@ describe IdeasController do
 
   describe '#new' do
     it "renders new template" do
+      @current_user.plays! :submitter
       get :new
       response.should render_template(:new)
+    end
+
+    it 'redirects if not submitter' do
+      get :new
+      response.status.should == 302
     end
   end
 
   describe '#create' do
     it "renders new template when model is invalid" do
+      @current_user.plays! :submitter
       Idea.any_instance.stub(:valid? => false)
       post :create
       response.should render_template(:new)
