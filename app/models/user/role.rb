@@ -22,10 +22,12 @@ class User::Role < ActiveRecord::Base
       end
     end
 
-    def plays!(role_name)
+    def plays!(*role_names)
       self.roles.transaction do
-        return if plays?(role_name)
-        self.roles.create!(name: role_name)
+        role_names.uniq.each do |role_name|
+          next if plays?(role_name)
+          self.roles.create!(name: role_name)
+        end
       end
       @cached_roles = nil
       return self
