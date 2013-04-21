@@ -10,7 +10,7 @@ module Traits::Idea::StateMachine
     N_('Ideas State|draft'),
     N_('Ideas State|submitted'),
     N_('Ideas State|vetted'),
-    N_('Ideas State|voted'),
+    N_('Ideas State|endorsed'),
     N_('Ideas State|picked'),
     N_('Ideas State|designed'),
     N_('Ideas State|approved'),

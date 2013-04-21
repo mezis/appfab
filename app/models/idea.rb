@@ -146,7 +146,7 @@ class Idea < ActiveRecord::Base
 
   # called from subresources (comments, vettings, votes)
   def ping!
-    self.class.where(id:id).update_all(active_at:Time.current)
+    update_column :active_at, Time.current
   end
 
 
