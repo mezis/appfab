@@ -100,8 +100,3 @@
           %li.sign-out
             = link_to destroy_login_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
               %i.icon-eject<>
-  #flashes.af-show-first-only
-    = render 'flashes' if flash.any?
-    = yield :extra_flashes
-    = render 'needs_avatar' if current_login
-    = render 'acting_as_user' if acting_real_user
