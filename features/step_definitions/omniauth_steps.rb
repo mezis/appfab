@@ -49,7 +49,7 @@ end
 
 Given /^I sign in with Google$/ do
   visit '/session/sign_in'
-  click_link 'Sign in with Google Oauth2'
+  click_link 'Sign in with Google'
 end
 
 

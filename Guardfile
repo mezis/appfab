@@ -14,13 +14,6 @@ group :migrate do
   end
 end
 
-group :rails do
-  guard :rails, force_run:true, server:'thin' do
-    watch('Gemfile.lock')
-    watch(%r{^(config|lib)/.*})
-  end
-end
-
 group :rspec do
   guard :rspec do
     watch(%r{^spec/.+_spec\.rb$})

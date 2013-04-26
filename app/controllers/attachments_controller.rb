@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
   before_filter :load_owner
 
   def show

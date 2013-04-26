@@ -51,6 +51,6 @@
         = link_to comment_votes_path(comment, vote: { up:false }), remote:true, method: :post, class: 'downvote', title:_('Downvote this comment') do
           %i.icon-thumbs-down
     %li
-      = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment') do
+      = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment'), confirm:_('Are you sure?') do
         %i.icon-trash
 

@@ -2,6 +2,8 @@
 require 'gravtastic'
 
 class Login < ActiveRecord::Base
+  include Traits::HasAvatar
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -9,9 +11,6 @@ class Login < ActiveRecord::Base
     :rememberable, 
     :trackable, :validatable,
     :omniauthable, :token_authenticatable
-
-  include Gravtastic
-  has_gravatar :email, size: 80, filetype: :jpg, default: :identicon
 
   has_many :users
   has_many :accounts, through: :users
@@ -23,6 +22,8 @@ class Login < ActiveRecord::Base
   validates_presence_of :first_name
 
   after_save :adopt_account
+
+  serialize :auth_provider_data
 
   def self.find_or_create_from_auth_hash!(auth_hash)
     Rails.logger.debug("Auth hash: #{auth_hash.inspect}")
@@ -57,6 +58,10 @@ class Login < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def auth_provider_data
+    super || (self.auth_provider_data = {})
   end
 
 

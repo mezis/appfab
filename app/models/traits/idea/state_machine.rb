@@ -22,14 +22,15 @@ module Traits::Idea::StateMachine
   included do
     attr_accessible :state
     setup_state_machine
+    after_update :try_to_vet!
   end
 
   def all_states
     @@all_states ||= self.class.state_machine.states.map(&:name)
   end
 
-  def enough_vettings?
-    (vettings.count >= configatron.app_fab.vettings_needed)
+  def can_become_vetted?
+    design_size && development_size && (vettings.count >= configatron.app_fab.vettings_needed)
   end
 
 
@@ -64,11 +65,20 @@ module Traits::Idea::StateMachine
     all_states.index(self.state_name) < all_states.index(state)
   end
 
+  def try_to_vet!
+    return unless submitted? && can_become_vetted?
+    vet»
+  end
+
 
   module ClassMethods
     def state_value(state_name)
       state_name = state_name.to_sym if state_name.kind_of?(String)
       self.state_machine.states[state_name].value
+    end
+
+    def state_name(state_value)
+      self.state_machine.states.find { |state| state.value == state_value }.name
     end
 
     private
@@ -86,8 +96,12 @@ module Traits::Idea::StateMachine
         state :signed_off,   value: 7
         state :live,         value: 8
 
+        event :submit» do
+          transition :draft => :submitted
+        end
+
         event :vet» do
-          transition :submitted => :vetted, :if => :enough_vettings?
+          transition :submitted => :vetted, :if => :can_become_vetted?
           transition :submitted => same
         end
 

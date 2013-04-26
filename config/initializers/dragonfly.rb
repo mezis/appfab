@@ -11,8 +11,10 @@ Dragonfly[:files].tap do |dragonfly_app|
 end
 
 memcached_url = case Rails.env
-when 'development', 'test'
-  'memcached://localhost:11211/rack-cache'
+when 'development'
+  'memcached://127.0.0.1:11211/rack-cache'
+when 'test'
+  'heap:/'
 else
   "memcached://%<user>s:%<password>s@%<host>s/rack-cache" % {
     host:     ENV['MEMCACHIER_SERVERS'].split(',').first,

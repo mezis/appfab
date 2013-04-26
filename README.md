@@ -1,5 +1,6 @@
 # AppFab
 
+[![Build Status](https://travis-ci.org/mezis/appfab.png?branch=master)](https://travis-ci.org/mezis/appfab)
 [![Code Climate](https://codeclimate.com/github/mezis/appfab.png)](https://codeclimate.com/github/mezis/appfab)
 [![Dependency Status](https://gemnasium.com/mezis/appfab.png)](https://gemnasium.com/mezis/appfab)
 
@@ -39,6 +40,11 @@ close-via-commit- message) in your pull request,
 - when in doubt, consult the [Guide](https://github.com/styleguide/ruby).
 
 and be prepared to discuss your solution!
+
+If your pull request addresses an issue, and the issue is already assigned
+to a milestone, please branch then request it against that milestone's
+branch (e.g. `milestone/1/racoon-mario`) instead of against the master
+branch.
 
 ### Licence
 

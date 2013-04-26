@@ -10,12 +10,13 @@ class Comment < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject  
   include Traits::RecentCreation  
+  include Idea::History::Comment::IsSubject
 
   default_values rating: 0
 
   validates_presence_of :author
   validates_presence_of :idea
-  validates_presence_of :body
+  validates_presence_of :body, message:_('Blank comments are not permitted.')
   validates_presence_of :rating
 
   scope :by_created_at, order:'created_at DESC'

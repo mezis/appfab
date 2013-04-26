@@ -1,6 +1,7 @@
 # encoding: UTF-8
 class UserRolesController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
+
   before_filter :load_user
 
   def create

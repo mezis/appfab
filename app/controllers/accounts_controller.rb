@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class AccountsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
 
   def index
     redirect_to root_path
@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
       Account.transaction do
         @account = Account.new(params[:account])
         @account.save!
-        @account.users.create!(login:current_login).plays!(:account_owner)
+        @account.users.create!(login:current_login).plays!(:account_owner, :submitter)
       end
 
       session[:account_id] = @account.id

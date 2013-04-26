@@ -1,0 +1,16 @@
+:ruby
+  provider_names = { :github => 'Github', :developer => 'Developer', :google_oauth2 => 'Google' }
+
+- title _('Not authorized'), show_title:false
+
+.row
+  .span2
+  .span8
+    %h3
+      %i.icon-lock
+      = _("Looks like you need to be authenticated to view this page.")
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to omniauth_authorize_path(resource_name, provider), class:'btn btn-primary' do
+        = _("Sign in with %{provider}") % { provider:provider_names[provider] }
+        %i.icon-caret-right
+  .span2

@@ -8,8 +8,6 @@ describe CommentsController do
 
   describe "#create" do
     context "when model is invalid" do
-      before { Comment.any_instance.stub(:valid? => false) }
-
       context '(html)' do
         let(:perform) { post :create }
 
@@ -25,11 +23,11 @@ describe CommentsController do
       end
 
       context '(js)' do
-        let(:perform) { xhr :post, :create }
+        let(:perform) { xhr :post, :create, comment:{ idea_id:Idea.make!.id, body:'' } }
 
-        it "errors bad request" do
+        it "mentions the error" do
           perform
-          response.status.should == 400
+          response.body.should =~ /Blank comments are not permitted/
         end
       end
     end

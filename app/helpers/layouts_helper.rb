@@ -3,14 +3,14 @@
 # This module should be included in all views globally,
 # to do so you may need to add this line to your ApplicationController
 #   helper :layout
-module LayoutHelper
+module LayoutsHelper
   def page_title
     saved_title = content_for(:title)
     saved_title.blank? ? configatron.app_name : "#{saved_title} - #{configatron.app_name}"
   end
 
   def title(page_title, options = {})
-    content_for(:title) { h(page_title.to_s) }
+    content_for(:title) { strip_tags(page_title.to_s) }
     @show_title = options.fetch(:show_title, true)
   end
 
@@ -28,5 +28,16 @@ module LayoutHelper
 
   def body_id
     "#{params[:controller]}-#{params[:action]}".gsub(/\W/, '-').gsub(/--+/,'-')
+  end
+
+  def page_stylesheet_tag
+    controller = params[:controller]
+    @page_stylesheet_tags ||= {}
+    @page_stylesheet_tags[controller] ||= begin
+      css_path = Pathname.pwd.
+        join('app/assets/stylesheets/pages').
+        join("#{controller}.css.sass")
+      css_path.exist? ? stylesheet_link_tag("pages/#{controller}") : ''
+    end
   end
 end

@@ -1,13 +1,14 @@
-.navbar.navbar-fixed-top.navbar-inverse#header
+.navbar.navbar-fixed-top.navbar-inverse#main-navbar
   .navbar-inner
     .container
       %a.brand{href: root_path}<
         %span= configatron.app_name
       %ul.nav
-        = content_tag_with_path_checking(:li, action: 'new') do |path|
-          %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
-            %i.icon-edit
-            %span= _('Submit')
+        - if can?(:create, Idea)
+          = content_tag_with_path_checking(:li, action: 'new') do |path|
+            %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
+              %i.icon-edit
+              %span= _('Submit')
         = content_tag_with_path_checking(:li, angle: 'discussable') do |path|
           %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
             = header_angle_counter('discussable')
@@ -21,8 +22,8 @@
               %span= _('Vet')
         - if can?(:create, Vote)
           = content_tag_with_path_checking(:li, angle: 'votable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories open for votes'), :'data-placement' => 'bottom'}
-              %i.icon-envelope
+            %a{href: path, title: s_('Tooltip|Show stories open for endorsements'), :'data-placement' => 'bottom'}
+              %i.icon-thumbs-up
               = header_angle_counter('votable')
               %span= _('Vote')
         - if can?(:pick, Idea)
@@ -102,4 +103,5 @@
   #flashes.af-show-first-only
     = render 'flashes' if flash.any?
     = yield :extra_flashes
+    = render 'needs_avatar' if current_login
     = render 'acting_as_user' if acting_real_user

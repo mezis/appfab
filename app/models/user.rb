@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   include Notification::Base::Recipient
   include User::Bookmark::UserMethods
   include LazyRecords::Model
+  include Traits::LastSeenAt
 
   validates_presence_of :login
   validates_presence_of :account

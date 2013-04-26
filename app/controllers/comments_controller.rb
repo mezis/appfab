@@ -1,32 +1,31 @@
 # encoding: UTF-8
 class CommentsController < ApplicationController
-  before_filter :authenticate_login!
+  include Traits::RequiresLogin
 
   def create
     @comment = Comment.new(params[:comment])
     @comment.author = current_user
 
-    if @comment.save
-      flash[:success] = _("Successfully posted comment.")
-    else
-      flash[:error] = _("Failed to post comment.")
-    end
-
+    success = @comment.save
+      
     respond_to do |format|
       format.html do
+        if success
+          flash[:success] = _("Successfully posted comment.")
+        else
+          flash[:error] = _("Failed to post comment.")
+        end
+
         if @comment.idea
           redirect_to @comment.idea, anchor:dom_id(@comment)
         else
           redirect_to ideas_path
         end
       end
-      format.js do
-        unless @comment.id # not saved
-          render nothing:true, status: :bad_request
-        end
-      end
+      format.js
     end
   end
+
 
   def show
     @comment = Comment.find(params[:id])
@@ -45,6 +44,7 @@ class CommentsController < ApplicationController
     end
   end
 
+
   def update
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
@@ -55,13 +55,16 @@ class CommentsController < ApplicationController
     redirect_to @comment.idea, anchor: 'comments'
   end
 
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    flash[:success] = _("Successfully destroyed comment.")
 
     respond_to do |format|
-      format.html { redirect_to @comment.idea, anchor:'comments' }
+      format.html do
+        flash[:success] = _("Successfully destroyed comment.")
+        redirect_to @comment.idea, anchor:'comments'
+      end
       format.js
     end
   end

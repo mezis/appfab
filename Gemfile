@@ -3,7 +3,7 @@ ruby '2.0.0'
 
 gem 'rails'
 
-gem 'thin'
+gem 'unicorn'
 
 # database
 gem 'mysql2',  group: :development
@@ -39,7 +39,7 @@ gem 'valium'
 
 # activerecord extensions
 gem 'state_machine', require:false
-gem 'default_value_for', git:'git://github.com/FooBarWidget/default_value_for.git'
+gem 'default_value_for'
 
 # attached files & image manipulation
 gem 'dragonfly'
@@ -52,7 +52,7 @@ gem 'rack-cache', require:'rack/cache'
 gem 'gravtastic', require:false
 
 # monitoring
-gem 'newrelic_rpm', group: :production
+gem 'newrelic_rpm'
 
 # styled user input (markdown)
 gem 'redcarpet'
@@ -109,6 +109,7 @@ group :development do
   gem 'database_cleaner',        require:false
   gem 'faker',                   require:false
   gem 'launchy',                 require:false # for capybara's save_and_open_page
+  gem 'timecop'
 
   # automated testing
   gem 'guard',                   require:false
@@ -128,6 +129,6 @@ group :development do
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
-  gem 'license_finder'
+  gem 'license_finder',          require:false
 end
 

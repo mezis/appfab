@@ -8,14 +8,16 @@ class Idea < ActiveRecord::Base
   belongs_to :account
   has_many   :vettings, :dependent => :destroy
   has_many   :votes, :as => :subject, :dependent => :destroy
-  has_many   :comments
-  has_many   :toplevel_comments, :class_name => 'Comment', :as => :parent
+  has_many   :comments, :dependent => :destroy
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
   include LazyRecords::Model
+  include Idea::History::Base::HasHistory
+  include Idea::History::Creation::Recorder
+  include Idea::History::StateChange::Recorder
 
   has_many   :commenters, :class_name => 'User', :through => :comments, :source => :author
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user

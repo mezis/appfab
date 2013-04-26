@@ -16,32 +16,32 @@ Feature: Voting for ideas
     Then the idea should be in angle "votable"
 
   Scenario: Voting for idea
-    When I vote for the idea
-    Then the idea should be voted
+    When I endorse the idea
+    Then the idea should be endorsed
     And the idea should be in angle "votable"
 
   Scenario: Removing a vote
-    When I vote for the idea
-    And I cancel my vote for the idea
+    When I endorse the idea
+    And I cancel my endorse the idea
     
     Then the idea should be vetted
     And the idea should be in angle "votable"
 
   Scenario: The idea becomes pickable
-    When I vote for the idea
+    When I endorse the idea
 
     Given a product manager named "Patrick"
     And I sign in as "Patrick"
     Then the idea should be in angle "pickable"
 
   Scenario: No double votes
-    When I vote for the idea
-    Then I cannot vote for the idea
+    When I endorse the idea
+    Then I cannot endorse the idea
 
   Scenario: No double un-voting
-    When I vote for the idea
-    And I cancel my vote for the idea
-    Then I cannot remove my vote for the idea
+    When I endorse the idea
+    And I cancel my endorse the idea
+    Then I cannot remove my endorsement for the idea
 
 
 

@@ -1,29 +1,27 @@
 .email.notification-digest
-  .container
-    .row
-      .span12
-        .well.well-small.header
-          %p
-            %strong= _('Hi there %{user},') % { user:@user.login.first_name }
+  .well
+    .title= user_random_greeting(@user)
 
-          %p
-            = _('Things have been happening in team %{name}.') % { name:@user.account.name }
-            %br/
-            = _('Here\'s a digest of the most recent notifications you missed...')
-          %p.last= _('See you soon on %{appname}!').html_safe % { appname:link_to(configatron.app_name, root_url)  }
+    %p
+      = _('Things have been happening in team %{name}.') % { name:@user.account.name }
+      %br/
+      = _('Here\'s a digest of the most recent notifications you missed...')
+    %p= _('See you soon on %{appname}!').html_safe % { appname:link_to(configatron.app_name, root_url)  }
 
-        %ul
-          - @notifications.each do |notification|
-            %li<
-              .ago.pull-right
-                = _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
-              = render notification.class.name.underscore, notification: notification
+  %ul.block-list
+    - @notifications.each_with_index do |notification, index|
+      %li{ class: cycle('even', 'odd') }<
+        .ago.muted.pull-right
+          = _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
+        = render notification.class.name.underscore, notification: notification
 
-        %p.muted<
-          = _("We've marked these notifications as read for you, so we won't bug you again.")
+  %p.muted<
+    = _("We've marked these notifications as read for you, so we won't bug you again.")
 
-        .well.well-small.footer
-          = link_to root_url do
-            %img{ src:"#{root_url}appfab-favicon.png"}
-          = "#{configatron.app_name}."
-          = _('The app that helps product teams build fantastic apps.')
+  .well.footer
+    = link_to root_url do
+      %img.pull-left.muted{ src:"#{root_url}appfab-favicon.png"}/
+      %p.align-right.muted
+        = "#{configatron.app_name}."
+        = _('The app that helps product teams build fantastic apps.')
+      .clearfix
