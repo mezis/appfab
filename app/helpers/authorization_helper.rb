@@ -8,8 +8,8 @@ module AuthorizationHelper
         _('Sorry, you may not endorse this %{object}.') :
         _('Sorry, you may not vote for this %{object}.')
       ) % { object: _(object.class.name.downcase) }
-    when :create
-      _('Sorry, you may not create a %{class}.') % { class: _(object.name.downcase) }
+    when :create, :new
+      _('Sorry, you may not create %{class}.') % { class: _(object.name.downcase.pluralize) }
     else
       raise ArgumentError
     end

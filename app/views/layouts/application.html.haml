@@ -17,11 +17,11 @@
     #header
       = render 'header'
       = yield :after_header
-    #flashes
-      = render 'acting_as_user' if acting_real_user
-      = render 'flashes' if flash.any?
-      = render 'needs_avatar' if current_login
-      = yield :extra_flashes
+      #flashes
+        = render 'acting_as_user' if acting_real_user
+        = render 'flashes' if flash.any?
+        = render 'needs_avatar' if current_login
+        = yield :extra_flashes
     .container{ id: body_id }
       - if show_title?
         .row
