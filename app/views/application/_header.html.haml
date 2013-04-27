@@ -25,7 +25,7 @@
             %a{href: path, title: s_('Tooltip|Show stories open for endorsements'), :'data-placement' => 'bottom'}
               %i.icon-thumbs-up
               = header_angle_counter('votable')
-              %span= _('Vote')
+              %span= _('Endorse')
         - if can?(:pick, Idea)
           = content_tag_with_path_checking(:li, angle: 'pickable') do |path|
             %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
