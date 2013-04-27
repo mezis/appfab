@@ -3,13 +3,16 @@
 @import application/variables
 
 .with_bubbles
-  $shadow_radius: 6px
-  $nose_size:     10px
-  $shadow:        0 1px $shadow_radius $light_gray
-  $border:        1px solid $medium_gray
+  $_background:    $wellBackground
+  $_borderColor:   $_background
+  // $_borderColor:   darken($_background, 5%)
+  $shadow_radius:  6px
+  $nose_size:      10px
+  $shadow:         $standard_box_shadow
+  $border:         1px solid $_borderColor
 
   .bubble
-    background-color: white
+    background-color: $_background
     border-radius:    5px
     border:           $border
     box-shadow:       $shadow
@@ -33,7 +36,7 @@
 
     &:before
       border:            $border
-      background-color:  white
+      background-color:  $_background
       box-shadow:        $shadow
       content:           "\00a0"
 

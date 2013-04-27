@@ -1,10 +1,13 @@
 @import compass
+@import application/variables
 
 .ht-separator-text
-  +opacity(0.3)
+  $_color: $color_solarized_base2
+
   position:   relative
   display:    table
   width:      100%
+  color:      $_color
 
   &:before, &:after, & > p
     display: table-cell
@@ -13,7 +16,7 @@
     content:           "\00a0"
     width:             50%
     height: 1px
-    border-top:        1px solid black
+    border-top:        1px solid $_color
     position:          relative
     top:               0.8em
   p

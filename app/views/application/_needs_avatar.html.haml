@@ -15,5 +15,7 @@
       data:
         s: 1
         d: 404
+    .success (data) ->
+      $('#needs-avatar').remove()
     .fail (data) ->
       $('#needs-avatar').slideDown()

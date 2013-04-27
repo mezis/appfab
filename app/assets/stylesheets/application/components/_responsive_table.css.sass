@@ -5,14 +5,15 @@
 // a column representing 1 state
 .af-rtable-column
   padding:    5px
-  border:     1px solid white
+  border:     1px solid $wellBackground
   // +border-radius(5px)
-  +box-shadow($medium_gray 1px 3px 3px inset)
+  // +box-shadow($medium_gray 1px 3px 3px inset)
+  // +box-shadow($standard_box_shadow inset)
 
   &:nth-child(2n)
-    background-color: $light_gray
+    background-color: $wellBackground
   &:nth-child(2n+1)
-    background-color: lighten($light_gray, 3.0)
+    background-color: lighten($wellBackground, 5%)
 
 +respond-to(wide)
   .af-rtable

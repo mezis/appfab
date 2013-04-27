@@ -32,7 +32,8 @@ $color_solarized_green:    #859900 //  2/2 green     64 #5f8700 60 -20  65 133 1
 // Semantic colors
 // $major_color:     #fa8037
 $major_color:     $color_solarized_yellow
-$progress_color:  rgba($color_solarized_base1, 0.5)
+$progress_color:  rgba($color_solarized_base2, 0.2)
+// $progress_color:  rgba($color_solarized_base1, 0.5)
 
 $color_success:   $color_solarized_green
 $color_warning:   $color_solarized_orange
@@ -46,6 +47,8 @@ $focus_color:     rgba($major_color, 0.6)
 // Text shadows
 $small_text_shadow:    rgba(black, .5) 0px  1px 2px
 $embossed_text_shadow: rgba(white, .5) 0px -1px 2px
+
+$standard_box_shadow:  transparentize($color_solarized_base2, 0.5) 0px 2px 3px
 
 // 
 // Bootstrap configuration
@@ -64,17 +67,18 @@ $gridGutterWidth768:  30px
 $gridColumnWidth768:  (768px - ($gridGutterWidth768 * 11))/12
 
 $baseBorderRadius:    2px
-$inputBorderRadius:   2px
+$borderRadiusSmall:   1px
+$borderRadiusLarge:   4px
+$inputBorderRadius:   $baseBorderRadius
 
 $navbarHeight:              40px
 $navbarBackground:          $color_solarized_base2
-$navbarBackgroundHighlight: $color_solarized_base3
+$navbarBackgroundHighlight: $color_solarized_base2
 $navbarText:                $color_solarized_base00
 $navbarLinkColor:           $color_solarized_base00
 $navbarLinkColorHover:      $color_solarized_yellow
-$navbarInverseBackground:          red
 $navbarInverseBackground:          $color_solarized_base03
-$navbarInverseBackgroundHighlight: $color_solarized_base02
+$navbarInverseBackgroundHighlight: $color_solarized_base03
 $navbarInverseText:                $color_solarized_base0
 $navbarInverseLinkColor:           $color_solarized_base0
 $navbarInverseLinkColorHover:      $color_solarized_yellow
@@ -82,17 +86,17 @@ $navbarInverseLinkColorHover:      $color_solarized_yellow
 $sansFontFamily:      Ubuntu, Helvetica, Helvetica, Arial, sans-serif
 $headingsFontFamily:  'Titillium Web', Helvetica, Arial, sans-serif
 
-$btnPrimaryBackground:          lighten($major_color, 10%)
+$btnPrimaryBackground:          lighten($major_color, 5%)
 $btnPrimaryBackgroundHighlight: $major_color
 
 $grayDark:               $textColor
-$btnBorder:              $color_solarized_base1
+$btnBorder:              $color_solarized_base2
 $btnBackground:          $color_solarized_base3
 $btnBackgroundHighlight: $color_solarized_base2
 
 $placeholderText: $color_solarized_base1
 $inputBackground: $color_solarized_base2
-$inputBorder:     $color_solarized_base1 
+$inputBorder:     $color_solarized_base2
 
 $formActionsBackground: $color_solarized_base1
 

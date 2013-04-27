@@ -3,8 +3,9 @@
 @import application/mixins
 
 .af-card
-  +gradient-box($light_gray)
-  +box-shadow($medium_gray 0px 2px 5px)
+  // +gradient-box($wellBackground)
+  background-color: $wellBackground
+  +box-shadow($standard_box_shadow)
   @extend .af-category-colored
 
 .af-category-label
@@ -19,6 +20,7 @@
   @for $total from 1 through 6
     @for $index from 1 through $total
       &.category-#{$index}-of-#{$total}
-        $color: hsl(255.0 * ($index - 1) / $total, 50%, 80%)
-        +gradient-box($color)
-
+        $color: hsl(255.0 * ($index - 1) / $total, 25%, 85%)
+        background-color: $color
+  &.no-category
+    background-color: hsl(0, 0%, 85%)
