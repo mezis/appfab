@@ -16,17 +16,13 @@
   .idea.idea-maxi.af-drop-hilite{ class: classes.compact.join(' ') }
     .meta.top
       = render 'idea_rating', idea:idea
-      .content.af-mutable
-        .category.muted.pull-left
-          = idea.category || _('No category')
-        .state.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|The current progress on this idea') }<
-          = idea_status(idea.state_name)
-        - if idea.sized?
-          .size.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|An architect and a product manager have sized the idea as a %{size} effort.') % { size: idea_size_human_long(idea.size) } }
-            - 1.upto idea.size do
-              %i.icon-circle
-            - (idea.size + 1).upto 4 do
-              %i.icon-circle-blank
+      .category.muted.pull-left.pull-left-spaced.af-mutable
+        = idea.category || _('No category')
+      .state.muted.pull-right.pull-right-spaced.af-mutable{ title: s_('Tooltip|The current progress on this idea'), :'data-container' => '.container' }<
+        = idea_status(idea.state_name)
+      - if idea.sized?
+        .size.muted.pull-right.pull-right-spaced.af-mutable{ title: s_('Tooltip|An architect and a product manager have sized this idea.'), :'data-container' => '.container' }
+          = idea_size_human_long(idea.size).downcase
 
     .body
       %h3.title
@@ -55,7 +51,7 @@
     .meta.bottom
       = render 'idea_people', idea:idea
 
-      .actions.af-mutable
+      .actions.af-mutable.pull-right
         %ul
           %li
             = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
