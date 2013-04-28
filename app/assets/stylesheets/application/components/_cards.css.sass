@@ -5,7 +5,8 @@
 .af-card
   +gradient-box($light_gray)
   +box-shadow($medium_gray 0px 2px 5px)
-  @extend .af-category-colored
+  .af-with_colored-cards &
+    @extend .af-category-colored
 
 .af-category-label
   +square(0.9em)
