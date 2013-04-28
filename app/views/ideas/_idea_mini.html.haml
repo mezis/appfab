@@ -3,7 +3,7 @@
 
 .idea_container
   - classes = [idea.state_name, idea_category_class(idea)]
-  .idea.idea-mini{ id: "idea#{idea.id}", class: classes.compact.join(' ') }
+  .idea.idea-mini{ id: "idea#{idea.id}", class:classes }
     .meta.top
       = render 'idea_rating', idea:idea
     .body

@@ -11,9 +11,9 @@
   show_category = local_assigns.fetch(:show_category, false)
 
 .idea_container{ id:dom_id(idea) }
-  - classes = [idea.state_name, 'with-header-wizard', (muted_details ? 'af-mutable-content' : nil), (show_category && idea_category_class(idea))]
+  - classes = [idea.state_name, 'with-header-wizard', (muted_details && 'af-mutable-content'), (show_category && idea_category_class(idea))]
   .af-drop-area
-  .idea.idea-maxi.af-drop-hilite{ class: classes.compact.join(' ') }
+  .idea.idea-maxi.af-drop-hilite{ class:classes }
     .meta.top
       = render 'idea_rating', idea:idea
       .content.af-mutable
