@@ -1,4 +1,4 @@
-.af-flash
+.af-flash#acting-as-user
   .container
     != _("You are currently acting as %{user}. Please be careful, and %{click_here} to become %{real_user} again.") % { user: current_user.login.first_name, real_user:acting_real_user.login.first_name, click_here: link_to(_('click here'), session_path(user_id:acting_real_user.id), method: :put) }
 
