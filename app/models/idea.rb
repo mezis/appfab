@@ -14,6 +14,7 @@ class Idea < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
+  include Traits::Idea::StarRating
   include LazyRecords::Model
   include Idea::History::Base::HasHistory
   include Idea::History::Creation::Recorder
