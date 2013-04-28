@@ -1,31 +1,33 @@
 @import application/variables
 @import application/mixins
 @import application/components/cards
+@import application/components/section
 @import compass
 @import compass/css3/images
 
-
+//
 // general idea styling -- used on all index pages and show pages
+//
+
+// container
 .idea_container
-  position: relative
+  @extend .af-section
+  position:      relative
+
+// idea block itself
 .idea
   $banner_height: 2em
-
-  padding: 0
-  margin:  $section_spacing 0
-  &:first-child
-    margin-top: 0
-
   @extend .af-card
 
   .body
-    padding:          $section_padding
+    padding: $section_padding
 
   .title
+    margin-top: 0
     a
+      text-decoration: none
       span
-        color:            $textColor
-      text-decoration:  none
+        color: $textColor
 
   .meta
     height:   $banner_height
@@ -72,7 +74,7 @@
     +height($banner_height)
 
     .user
-      float:      left
+      float: left
     .avatar
       +square($banner_height)
 
