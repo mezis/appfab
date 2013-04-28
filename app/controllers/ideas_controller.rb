@@ -10,17 +10,8 @@ class IdeasController < ApplicationController
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
 
-  ValidOrders  = %w(rating activity progress creation size)
-  DefaultOrder = {
-    'discussable' => 'activity',
-    'vettable'    => 'activity',
-    'votable'     => 'activity',
-    'pickable'    => 'rating',
-    'approvable'  => 'activity',
-    'buildable'   => 'progress',
-    'signoffable' => 'activity',
-    'followed'    => 'activity'
-  }
+  ValidOrders  = %w(impact activity progress creation size)
+  DefaultOrder = ValidOrders.first
 
   ValidFilters = %w(all authored commented vetted backed)
   DefaultFilter = ValidFilters.first
@@ -162,7 +153,7 @@ class IdeasController < ApplicationController
     session[:ideas_order][@angle] = begin
       (ValidOrders.include?(params[:order])                and params[:order]) || 
       (ValidOrders.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) || 
-      DefaultOrder[@angle]
+      DefaultOrder
     end
   end
 
