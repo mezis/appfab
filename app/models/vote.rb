@@ -4,7 +4,7 @@ class Vote < ActiveRecord::Base
   attr_accessible :subject, :user, :up
 
   belongs_to :user
-  belongs_to :subject, :polymorphic => true
+  belongs_to :subject, :polymorphic => true, :counter_cache => :votes_cache
   include Notification::Base::CanBeSubject  
   include Traits::RecentCreation  
 

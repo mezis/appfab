@@ -3,13 +3,17 @@
 - filters = capture do
   .navbar-inner
     .container
-      %ul.nav.pull-right
+      %ul.nav.pull-right.pull-right-spaced
         .btn-group
           - IdeasController::ValidViews.each do |view|
             - is_current = (@view == view)
             - classes = ['btn', is_current && 'active'].compact.join(' ')
             = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current, title:ideas_view_tooltip(view) do
               %i{ class:idea_view_icon(view) }
+
+      %ul.nav.pull-right.pull-right-spaced
+        .btn.active#toggle-colorize{ 'data-toggle' => 'button' }
+          %i.icon-tint
 
       %ul.nav.pull-left
         %li.dropdown
@@ -65,3 +69,8 @@
   != filters
 .navbar.navbar-fixed-top.hidden-desktop
   != filters
+
+:coffee
+  $.unobtrusive ->
+    $('#toggle-colorize').on 'click', () ->
+      $('.ideas-index').toggleClass('af-with_colored-cards')

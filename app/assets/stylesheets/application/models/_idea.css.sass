@@ -4,13 +4,12 @@
 @import compass
 @import compass/css3/images
 
+$idea_banner_height: 2em
 
 // general idea styling -- used on all index pages and show pages
 .idea_container
   position: relative
 .idea
-  $banner_height: 2em
-
   padding: 0
   margin:  $section_spacing 0
   &:first-child
@@ -24,42 +23,15 @@
   .title
     a
       span
-        color:            $textColor
-      text-decoration:  none
+        color: $textColor
+      text-decoration: none
 
   .meta
-    height:   $banner_height
     padding:  0
-    text-align: right
-
+    text-align: left
+    font-size: smaller
     > *
-      +height($banner_height)
-      +box-sizing(border-box)
       padding: 0 $section_padding
-
-    &.top
-      font-size: smaller
-
-  .rating
-    $badge_size:  36px
-    position: absolute
-    padding:  0
-    left:     -$badge_size/3
-    top:      -$badge_size/3
-    i
-      color:        $badge_color
-      +height($badge_size)
-      font-size:    $badge_size
-      position:     relative
-      .value
-        +height($badge_size)
-        position:     absolute
-        width:        100%
-        left:         0
-        top:          0
-        text-align:   center
-        color:        white
-        font-size:    small
 
   .people
     float:        left
@@ -69,12 +41,12 @@
     text-align:   left
     white-space:  nowrap
 
-    +height($banner_height)
+    +height($idea_banner_height)
 
     .user
       float:      left
     .avatar
-      +square($banner_height)
+      +square($idea_banner_height)
 
   .actions
     li
@@ -84,8 +56,17 @@
         color: gray
         content: "|"
 
+
+.idea-rating
+  position: relative
+
 // maxi-format idea specifics
-.idea.idea-maxi
+.idea-maxi
+  .meta
+    height:   $idea_banner_height
+    > *
+      +height($idea_banner_height)
+      +box-sizing(border-box)
   .title
     white-space:      nowrap
     text-overflow:    ellipsis
@@ -95,9 +76,9 @@
 
 
 // mini-format idea overrides
-.idea.idea-mini
+.idea-mini
   .meta.top
-    height: 1ex
+    height:      auto
   .body
     padding:     0.66ex
   .title

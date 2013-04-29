@@ -67,7 +67,7 @@ module IdeasHelper
 
   def idea_order_human(order)
     case order
-    when 'rating'   then _('Sort by rating')
+    when 'impact'   then _('Sort by impact')
     when 'activity' then _('Sort by activity')
     when 'progress' then _('Sort by progress')
     when 'creation' then _('Sort by creation')
