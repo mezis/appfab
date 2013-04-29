@@ -1,4 +1,7 @@
-- if idea.rating > 0
-  .rating<
-    %i.icon-certificate{ title: _('The current rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter.'), :'data-placement' => 'right' }
-      %span.value= idea.rating
+- if idea.star_rating
+  .idea-rating.pull-left.pull-left.spaced{ title: _('The current impact rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter, and divided by the estimated effort for this idea.'), :'data-placement' => 'right', :'data-container' => '.container' }<
+    - if idea.star_rating == 0
+      %i.icon-star-empty
+    - else
+      - idea.star_rating.times do
+        %i.icon-star
