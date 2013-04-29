@@ -6,6 +6,7 @@ class IdeasController < ApplicationController
   before_filter :cleanup_session
   before_filter :map_state_names, only:[:create, :update]
   before_filter :map_no_category, only:[:create, :update]
+  before_filter :can_create_idea, only:[:new, :create]
 
   ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
   DefaultAngle = ValidAngles.last
@@ -118,6 +119,7 @@ class IdeasController < ApplicationController
 
 
   private
+  include AuthorizationHelper
 
   def find_idea(id)
     idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
@@ -198,5 +200,11 @@ class IdeasController < ApplicationController
     return unless category = params[:idea].andand[:category]
     return unless category == 'none'
     params[:idea][:category] = nil
+  end
+
+  def can_create_idea
+    return if can?(:create, Idea)
+    flash[:error] = not_authorized_message(:create, Idea)
+    redirect_back_or_to ideas_path
   end
 end
