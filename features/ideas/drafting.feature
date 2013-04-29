@@ -4,7 +4,7 @@ Feature: Drafting ideas
   I want save ideas as drafts
 
   Background:
-    Given a user named "Ursula"
+    Given a submitter named "Ursula"
       And I sign in as "Ursula"
 
   @javascript

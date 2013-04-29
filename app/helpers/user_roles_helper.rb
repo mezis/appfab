@@ -10,6 +10,7 @@ module UserRolesHelper
     when :designer            then s_('User role|Designer')
     when :developer           then s_('User role|Developer')
     when :account_owner       then s_('User role|Account owner')
+    when :submitter           then s_('User role|Submitter')
     end
   end
 

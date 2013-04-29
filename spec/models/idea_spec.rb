@@ -37,7 +37,7 @@ describe Idea do
 
     it 'becomes "vetted" when sized and vetted twice' do
       2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.update_attributes! design_size:1, development_size:1
+      @idea.reload.update_attributes! design_size:1, development_size:1
       @idea.reload.should be_vetted
     end
   end

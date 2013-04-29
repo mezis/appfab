@@ -1,18 +1,20 @@
 # encoding: UTF-8
 class VotesController < ApplicationController
   include Traits::RequiresLogin
+  include VotesHelper
 
   before_filter :load_idea_or_comment
   before_filter :parse_up_param, only: [:create]
+
 
   def create
     @vote = @subject.votes.new(params[:vote])
     @vote.user = current_user
 
     if @vote.save
-      flash[:success] = _("Vote cast successfully!")
+      flash[:success] = votes_message(@vote, :ok)
     else
-      flash[:error] = _("Failed to create vote.")
+      flash[:error] = votes_message(@vote, :fail)
     end
 
     respond_to do |format|
@@ -26,7 +28,7 @@ class VotesController < ApplicationController
     @vote.destroy
 
     respond_to do |format|
-      format.html { redirect_to @return_to, :notice => _("Vote withdrawn.") }
+      format.html { redirect_to @return_to, :notice => votes_message(@vote, :cancel) }
       format.js   { redirect_to @subject }
     end
   end
