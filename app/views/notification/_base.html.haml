@@ -7,7 +7,7 @@
   %td.action
     - if notification.unread
       = can_link_to notification_path(notification, notification: { unread: false }), auth:[:update, notification], method: :put, remote:true, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
-        %i.icon-check
+        %i.icon-check-empty
     - else
       = can_link_to notification_path(notification, notification: { unread: true }), auth:[:update, notification], method: :put, remote:true, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
-        %i.icon-check-empty
+        %i.icon-check
