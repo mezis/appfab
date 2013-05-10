@@ -14,6 +14,7 @@ class Idea < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
+  include Traits::Idea::StarRating
   include LazyRecords::Model
   include Idea::History::Base::HasHistory
   include Idea::History::Creation::Recorder
@@ -108,8 +109,8 @@ class Idea < ActiveRecord::Base
   # Search orders
 
 
-  def self.by_rating
-    order('COALESCE(1000 * ideas.rating / (ideas.development_size + ideas.design_size), -1) DESC, ideas.active_at DESC')
+  def self.by_impact
+    order('COALESCE(ideas.impact_cache, -1) DESC, ideas.active_at DESC')
   end
 
   def self.by_activity

@@ -4,12 +4,12 @@
 .idea_container
   - classes = [idea.state_name, idea_category_class(idea)]
   .idea.idea-mini{ id: "idea#{idea.id}", class:classes }
-    .meta.top
+    .meta.top.clearfix
       = render 'idea_rating', idea:idea
     .body
       %h3.title
         = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
           %span= idea.title
 
-    .meta.bottom
+    .meta.bottom.clearfix
       = render 'idea_people', idea:idea, limit:3
