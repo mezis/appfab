@@ -36,20 +36,20 @@ describe CommentsController do
       let(:idea) { Idea.make! }
       let(:data) { { comment: { body:'hello', idea_id:idea.id } }  }
 
-      context '(html)' do
-        let(:perform) { post :create, data }
-
+      share_examples_for 'comment creation' do
         it "creates a comment" do
           expect { perform }.to change { Comment.count }.by(1)
         end
       end
 
+      context '(html)' do
+        let(:perform) { post :create, data }
+        it_should_behave_like 'comment creation'
+      end
+
       context '(js)' do
         let(:perform) { xhr :post, :create, data }
-
-        it "creates a comment" do
-          expect { perform }.to change { Comment.count }.by(1)
-        end
+        it_should_behave_like 'comment creation'
       end
     end
   end

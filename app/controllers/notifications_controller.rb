@@ -19,24 +19,31 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    if params[:id] == 'all'
-      @notifications = current_user.notifications
+    notifications = if params[:id] == 'all'
+      current_user.notifications
     else
-      @notifications = current_user.notifications.where(id: params[:id].to_i)
+      current_user.notifications.where(id: params[:id].to_i)
     end
 
-    @notifications.find_each do |notification|
+    notifications.find_each do |notification|
+      @notification = notification # keep the last one, the view will need it
       next if notification.update_attributes(params[:notification])
-      redirect_to notifications_path, :failure => _("Failed to update notification.")
-      return
+      flash[:error] = _("Failed to update notification.")
+      break
     end
-    redirect_to notifications_path, :notice  => _("Successfully updated notification.")
+    flash[:success] = _("Successfully updated notification.") unless flash[:error]
+
+    respond_to do |format|
+      format.html { redirect_to notifications_path }
+      format.js
+    end
   end
 
   def destroy
     @notification = current_user.notifications.find(params[:id])
     @notification.destroy
-    redirect_to notifications_url, :notice => _("Successfully destroyed notification.")
+    flash[:notice] = _("Successfully removed notification.")
+    redirect_to notifications_url
   end
 
   private
