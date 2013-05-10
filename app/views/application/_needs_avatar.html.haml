@@ -1,19 +1,20 @@
-.flash.flash-banner.alert.alert-warning#needs-avatar
-  .container
-    %h4= _('How about adding an avatar to your account?')
-    %p
-      = _('Knowing who you are discussing ideas with is important in communication. Also, the default avatars are a bit ugly, so a picture of you would be much better.')
-      %br/
-      != _('Just head over to %{gravatar}, it takes just a minute to set one up.') % { gravatar: link_to('Gravatar', 'http://www.gravatar.com', target:'_blank') }
-    %p= _('Oh, and I will nag you until you add one!')
+- cached_fragment resource:'needs_avatar', id:current_login.id do
+  .flash.flash-banner.alert.alert-warning#needs-avatar
+    .container
+      %h4= _('How about adding an avatar to your account?')
+      %p
+        = _('Knowing who you are discussing ideas with is important in communication. Also, the default avatars are a bit ugly, so a picture of you would be much better.')
+        %br/
+        != _('Just head over to %{gravatar}, it takes just a minute to set one up.') % { gravatar: link_to('Gravatar', 'http://www.gravatar.com', target:'_blank') }
+      %p= _('Oh, and I will nag you until you add one!')
 
-  :coffee
-    $('#needs-avatar').hide()
-    $.ajax
-      url: "#{current_login.gravatar_url(size:1)}"
-      type: 'HEAD'
-      data:
-        s: 1
-        d: 404
-    .fail (data) ->
-      $('#needs-avatar').slideDown()
+    :coffee
+      $('#needs-avatar').hide()
+      $.ajax
+        url: "#{current_login.gravatar_url(size:1)}"
+        type: 'HEAD'
+        data:
+          s: 1
+          d: 404
+      .fail (data) ->
+        $('#needs-avatar').slideDown()
