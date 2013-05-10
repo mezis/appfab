@@ -6,5 +6,9 @@
     +transition-property(opacity)
     +transition-duration(250ms)
     +opacity(0.00)
-  &:hover .af-mutable
-    +opacity(1.00)
+    +translateZ(0.0)
+  .af-dim
+    +opacity(0.33)
+  &:hover, &.focused
+    .af-mutable
+      +opacity(1.00)
