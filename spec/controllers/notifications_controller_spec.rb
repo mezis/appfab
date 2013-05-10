@@ -55,30 +55,54 @@ describe NotificationsController do
   end
 
   describe '#update' do
-    it "renders edit template when model is invalid" do
-      notification = Notification::Base.make!
-      Notification::Base.any_instance.stub(:valid? => false)
-      put :update, :id => notification.id
-      response.should redirect_to(notifications_path)
+    let(:model) { Notification::Base }
+    let(:options) { Hash.new }
+    let(:notification) { model.make!(options) }
+
+    context '(html)' do
+      let(:params) { Hash.new }
+      let(:perform) { put :update, params }
+
+      it "redirects when model is invalid" do
+        params.merge! id:notification.id
+        Notification::Base.any_instance.stub(:valid? => false)
+        perform
+        response.should redirect_to(notifications_path)
+        flash[:error].should_not be_blank
+      end
+
+      it "redirects when model is valid" do
+        params.merge! id:notification.id
+        perform
+        response.should redirect_to(notifications_path)
+        flash[:success].should_not be_blank
+      end
+
+      it "allows 'all' as id" do
+        n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
+        put :update, id: 'all', notification: { unread:false }
+        n1.reload.should_not be_unread
+        n2.reload.should_not be_unread
+      end
+
+      it "bails when any parameter but 'id' and 'unread' are passed" do
+        params.merge! id:notification.id, notification:{ recipient_id:123 }
+        expect { perform }.
+        to raise_exception(ActiveModel::MassAssignmentSecurity::Error)
+      end
     end
 
-    it "redirects when model is valid" do
-      put :update, :id => Notification::Base.make!
-      response.should redirect_to(notifications_path)
-    end
+    context '(js)' do
+      let(:model) { Notification::NewIdea }
+      let(:params) { Hash.new }
+      let(:perform) { xhr :put, :update, params }
 
-    it "allows 'all' as id" do
-      n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
-      put :update, id: 'all', notification: { unread:false }
-      n1.reload.should_not be_unread
-      n2.reload.should_not be_unread
-    end
-
-    it "bails when any parameter but 'id' and 'unread' are passed" do
-      notification = Notification::Base.make!
-      expect {
-        put :update, id: notification.id, notification: { recipient_id:123 }
-      }.to raise_exception(ActiveModel::MassAssignmentSecurity::Error)
+      it 'updates the model' do
+        params.merge! id:notification.id, notification:{ unread:false }
+        notification.should be_unread
+        perform
+        notification.reload.should_not be_unread
+      end
     end
   end
 
