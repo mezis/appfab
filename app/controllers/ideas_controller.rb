@@ -80,6 +80,12 @@ class IdeasController < ApplicationController
   def update
     @idea = find_idea(params[:id])
 
+    # specifics on account change
+    if new_account_id = params.delete(:account_id)
+      update_account @idea, new_account_id
+      return
+    end
+
     # specifics on state changes
     if state = params[:idea].andand[:state]
       # auto-set product manager when picking
@@ -111,6 +117,30 @@ class IdeasController < ApplicationController
 
   private
   include AuthorizationHelper
+
+  def update_account(idea, new_account_id)
+    new_account = Account.find(new_account_id)
+
+    # check autorization
+    unless can?(:move, @idea)
+      flash[:error] = _('You cannot move this idea unless you are the author, the product manager, or an account owner.')
+      puts flash[:error]
+      redirect_to @idea
+      return
+    end
+
+    unless current_login.accounts.include?(new_account)
+      flash[:error] = _('You must be a member of the target account to move and idea there.')
+      puts flash[:error]
+      redirect_to @idea
+      return
+    end
+
+    AppFab::Services::IdeaMover.new(idea:@idea, account:new_account).run
+    flash[:notice] = _('Successfully changed idea account')
+    redirect_to @idea
+  end
+
 
   def find_idea(id)
     idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
