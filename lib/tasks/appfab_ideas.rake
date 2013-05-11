@@ -1,3 +1,4 @@
+desc 'updates star ratings for all ideas'
 namespace :appfab do
   namespace :ideas do
     task :update_stars_cache => :environment do
