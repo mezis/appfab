@@ -202,7 +202,6 @@
 
   %li.separator
 
-  / deliver
   - if idea.can_veto»?
     - if can?(:veto, idea)
       %li
@@ -222,5 +221,26 @@
 
   %li.separator
 
+  - if can?(:move, idea) && current_login.accounts.count > 1
+    %li
+      .btn-group.btn-block
+        %a.btn.btn-block.dropdown-toggle{ href:'#', title: s_('Tooltip|Hand over the idea to another team. State, votes, comments will be preserved but any %{karma_icon} gained or lost by participants will not be carried over.') % { karma_icon: user_karma_symbol }, data:{ placement:placement, container:'.container', toggle:'dropdown'} }
+          = _('Move idea to...')
+          %span.caret
+        %ul.dropdown-menu
+          - current_login.accounts.each do |account|
+            - next if account == current_account
+            %li
+              = link_to idea_path(idea, idea: { account_id:account.id }), method: :put do
+                = account.name
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title:_('You need to be this idea\'s author or product manager, or an account owner, to move it to another account. You also need to be a member of another account.'), data:{ placement:placement } }
+        = _('Move idea to...')
+        %span.caret
+
+
+
+  %li.separator
 
 
