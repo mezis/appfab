@@ -28,7 +28,6 @@ module AppFab::Services
           old_user = record.send(field) or next
           new_user = user_in_account(old_user)
           record.send(:"#{field}=", new_user)
-          puts "updated #{record.class.name}(#{record.id}) ##{field} from #{old_user.id} to #{new_user.id}"
         end
         record.save!
       end
