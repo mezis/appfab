@@ -124,14 +124,12 @@ class IdeasController < ApplicationController
     # check autorization
     unless can?(:move, @idea)
       flash[:error] = _('You cannot move this idea unless you are the author, the product manager, or an account owner.')
-      puts flash[:error]
       redirect_to @idea
       return
     end
 
     unless current_login.accounts.include?(new_account)
       flash[:error] = _('You must be a member of the target account to move and idea there.')
-      puts flash[:error]
       redirect_to @idea
       return
     end
