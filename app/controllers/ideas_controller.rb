@@ -81,7 +81,7 @@ class IdeasController < ApplicationController
     @idea = find_idea(params[:id])
 
     # specifics on account change
-    if new_account_id = params.delete(:account_id)
+    if new_account_id = params[:idea].andand.delete(:account_id)
       update_account @idea, new_account_id
       return
     end
@@ -136,7 +136,7 @@ class IdeasController < ApplicationController
       return
     end
 
-    AppFab::Services::IdeaMover.new(idea:@idea, account:new_account).run
+    IdeaMoverService.new(idea:@idea, account:new_account).run
     flash[:notice] = _('Successfully changed idea account')
     redirect_to @idea
   end

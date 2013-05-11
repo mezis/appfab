@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AppFab::Services::IdeaMover do
+describe IdeaMoverService do
   subject { described_class.new(idea:@idea, account:@account) }
   let(:perform) { subject.run }
 
@@ -24,6 +24,11 @@ describe AppFab::Services::IdeaMover do
 
     it 'changes the idea account' do
       expect { perform }.to change { Idea.last.account }.to(@account)
+    end
+
+    it 'clears the category' do
+      @idea.update_column :category, 'foo'
+      expect { perform }.to change { @idea.reload.category }.to(nil)
     end
 
     it 'creates missing users' do

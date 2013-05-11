@@ -89,18 +89,18 @@ describe IdeasController do
       end
 
       def perform
-        put :update, id:@idea, account_id:@other_account.id
+        put :update, id:@idea, idea:{ account_id:@other_account.id }
       end
 
       def it_should_call_mover
-        AppFab::Services::IdeaMover.
+        IdeaMoverService.
           should_receive(:new).
           with(hash_including(idea:@idea, account:@other_account)).
           and_return(stub run:nil)
       end
 
       def it_should_not_call_mover
-        AppFab::Services::IdeaMover.should_not_receive(:new)
+        IdeaMoverService.should_not_receive(:new)
       end
 
       it 'works for account owner' do
