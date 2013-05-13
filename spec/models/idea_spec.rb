@@ -59,6 +59,8 @@ describe Idea do
   end
 
   describe '(sort orders)' do
+    before { Idea.delete_all }
+
     describe '.by_impact' do
       it 'takes sizing and rating into account' do
         idea1 = Idea.make!(design_size:2, development_size:2, rating:1)

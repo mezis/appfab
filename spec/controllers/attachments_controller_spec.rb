@@ -3,7 +3,9 @@ require 'spec_helper'
 describe AttachmentsController do
   login_user
   render_views
-  let(:idea) { Idea.make! }
+  fixtures :ideas
+
+  let(:idea) { ideas(:idea_submitted) }
 
   let(:file) { 
     Rack::Test::UploadedFile.new(Rails.root.join('spec/assets/image.jpg'), 'image/jpeg')
