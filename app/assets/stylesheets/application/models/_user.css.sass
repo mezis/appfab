@@ -2,10 +2,10 @@
 @import application/mixins
 @import application/variables
 
-.user
-  $small-avatar-size: 2em
-  $large-avatar-size: 128px
+$small-avatar-size: 2em
+$large-avatar-size: 128px
 
+.user
   position: relative
   width:    $small-avatar-size
   height    auto
@@ -31,25 +31,28 @@
   .name
     white-space: nowrap
 
-  &.user-large
-    $padding-size:        8px
+.user-large
+  $padding-size:        8px
 
-    padding: $padding-size
-    width:   $large-avatar-size
-    +box-shadow($medium_gray 0px 4px 7px -2px)
+  padding: $padding-size
+  width:   $large-avatar-size
+  +box-shadow($medium_gray 0px 4px 7px -2px)
 
-    .avatar
-      & + .name
-        margin-top: $padding-size
-        text-align: center
-      &:last-child
-        margin-bottom: (3 * $padding-size)
+  .avatar
+    & + .name
+      margin-top: $padding-size
+      text-align: center
+    &:last-child
+      margin-bottom: (3 * $padding-size)
 
-  &.user-fit
-    width: 100%
-    height: auto
+.user-fit
+  width: 100%
+  height: auto
 
-  &.user-inline
+.user-inline
+  display: inline-block
+  .name
     display: inline-block
-    .name
-      display: inline-block
+
+.user-hidden
+  +opacity(0.5)
