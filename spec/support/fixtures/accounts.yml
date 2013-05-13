@@ -1,0 +1,9 @@
+balisteri:
+  name: "Balistreri, Trantow and Dooley"
+  auto_adopt: false
+  domain: balisteri.biz
+  settings:
+    :categories: !ruby/object:Set
+      hash: {}
+  created_at: 2013-05-13 10:19:04.000000000 Z
+  updated_at: 2013-05-13 10:19:04.000000000 Z
