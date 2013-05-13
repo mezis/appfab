@@ -7,6 +7,6 @@ describe Comment do
   end
 
   it "should not be valid by default" do
-    Comment.new.should_not be_valid
+    described_class.new.should_not be_valid
   end
 end

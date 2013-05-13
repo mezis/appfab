@@ -2,25 +2,29 @@
 require 'spec_helper'
 
 describe User::Role do
+  fixtures :users
+
   its 'factory should work' do
     described_class.make.should be_valid
   end
 
   it "should not be valid by default" do
-    User::Role.new.should_not be_valid
+    described_class.new.should_not be_valid
   end
 
   it 'does not allow duplicates' do
-    @user = User.make!
-    @user.roles.create!(name: :developer)
-    @user.roles.build(name: :developer).should_not be_valid
+    user = users(:abigale_balisteri)
+    user.roles.create!(name: :developer)
+    user.roles.build(name: :developer).should_not be_valid
   end
 end
 
 describe User::Role::UserMethods do
+  fixtures :users
+
   describe '#plays?' do
     before do
-      @user = User.make!
+      @user = users(:abigale_balisteri)
       @user.roles.create!(name: :developer)
     end
 
@@ -42,17 +46,17 @@ describe User::Role::UserMethods do
 
   describe '#plays!' do
     it 'adds the role to the user' do
-      @user = User.make!
-      @user.plays!(:developer)
-      @user.roles.should_not be_empty
-      @user.roles.first.name.should == 'developer'
+      user = users(:abigale_balisteri)
+      user.plays!(:developer)
+      user.roles.should_not be_empty
+      user.roles.first.name.should == 'developer'
     end
 
     it 'is idempotent' do
-      @user = User.make!
-      @user.plays!(:developer)
-      @user.plays!(:developer)
-      @user.plays?(:developer).should be_true
+      user = users(:abigale_balisteri)
+      user.plays!(:developer)
+      user.plays!(:developer)
+      user.plays?(:developer).should be_true
     end
   end
 

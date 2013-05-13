@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Idea::History::Creation do
+  fixtures :users
+
   context 'idea creation' do
     let(:idea) { Idea.make! }
 

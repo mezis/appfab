@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Storage::DataStore do
-  let(:fake_file) { OpenStruct.new data: data, meta: metadata }
+  FakeFile = Struct.new(:data, :meta)
+
+  let(:fake_file) { FakeFile.new data, metadata }
   let(:metadata) { {a:1} }
 
   share_examples_for 'store and retrieve' do
