@@ -11,7 +11,7 @@
       %br
       = ff.text_field :last_name
 
-  - if can?(:update_voting_power, user)
+  - if can?(:update_admin, user)
     %p
       = f.label :voting_power
       %br
