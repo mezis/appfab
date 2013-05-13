@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe "ideas/index.html.haml" do
-  fixtures :users
+  fixtures :users, :accounts
 
   let(:ideas)     { Array.new }
   let(:category)  { 'all' }

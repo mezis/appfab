@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe "layouts/application.html.haml" do
-  fixtures :users
+  fixtures :users, :logins
 
   let(:user) { users :abigale_balisteri }
   login_user :user
