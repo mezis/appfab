@@ -1,6 +1,6 @@
 - flash.each do |name, message|
   - css_class = name.to_s.gsub(/_/, '-')
-  %div{ class: "flash flash-banner alert alert-#{css_class}"}
+  %div{ class: "flash flash-banner alert-#{css_class}"}
     .container
       = message
       %button.close{ :'data-dismiss' => 'flash' }<

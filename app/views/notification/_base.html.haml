@@ -1,12 +1,13 @@
 -# Context:
 -# - notification (Notification::Base)
+- partial = notification.class.name.underscore
 %tr.notification{ id: "notification#{notification.id}", class: (notification.unread ? 'unread' : 'read') }
-  %td.message= render notification.class.name.underscore, notification: notification
+  %td.message= render partial, notification: notification
   %td.timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
   %td.action
     - if notification.unread
-      = can_link_to notification_path(notification, notification: { unread: false }), auth:[:update, notification], method: :put, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
-        %i.icon-check
-    - else
-      = can_link_to notification_path(notification, notification: { unread: true }), auth:[:update, notification], method: :put, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
+      = can_link_to notification_path(notification, notification: { unread: false }), auth:[:update, notification], method: :put, remote:true, title: s_('Tooltip|Mark as read'), :'data-placement' => 'bottom' do
         %i.icon-check-empty
+    - else
+      = can_link_to notification_path(notification, notification: { unread: true }), auth:[:update, notification], method: :put, remote:true, title: s_('Tooltip|Mark as unread'), :'data-placement' => 'bottom' do
+        %i.icon-check
