@@ -3,6 +3,7 @@ require 'spec_helper'
 describe AttachmentsController do
   login_user
   render_views
+  
   fixtures :ideas
 
   let(:idea) { ideas(:idea_submitted) }
