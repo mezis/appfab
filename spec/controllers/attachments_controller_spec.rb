@@ -8,10 +8,9 @@ describe AttachmentsController do
 
   let(:idea) { ideas(:idea_submitted) }
 
-  let(:file) { 
+  let(:file) do
     Rack::Test::UploadedFile.new(Rails.root.join('spec/assets/image.jpg'), 'image/jpeg')
-  }
-
+  end
 
   it "create action redirects if not Ajax" do
     post :create, idea_id: idea.id
