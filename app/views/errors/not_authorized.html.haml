@@ -11,6 +11,6 @@
       = _("Looks like you need to be authenticated to view this page.")
     - resource_class.omniauth_providers.each do |provider|
       = link_to omniauth_authorize_path(resource_name, provider), class:'btn btn-primary' do
-        = _("Sign in with %{provider}") % { provider:provider_names[provider] }
+        = _("Sign in with %{provider}") % { provider: provider_names[provider] }
         %i.icon-caret-right
   .span2
