@@ -22,7 +22,7 @@ describe "layouts/application.html.haml" do
     end
 
     it "preserves diacritics" do
-      subject.should have_selector('title', text:'"Français"')
+      subject.should have_selector('title', text:/"Français"/, visible:false)
     end
 
     it "strips tags" do
