@@ -4,19 +4,19 @@ describe UsersController do
   login_user
   render_views
 
+  let(:user) { users(:abigale_balisteri) }
+
   it "index action should render index template" do
     get :index
     response.should redirect_to(account_url(@current_user.account))
   end
 
   it "show action should render show template" do
-    get :show, :id => User.make!
+    get :show, :id => user
     response.should render_template(:show)
   end
 
   context 'for an account owner' do
-    let(:user) { User.make! }
-
     before do
       @current_user.plays! :account_owner
     end

@@ -5,6 +5,8 @@ describe NotificationsController do
   login_user
   render_views
 
+  fixtures :ideas
+
   describe '#index' do
     it "index action should render index template" do
       get :index

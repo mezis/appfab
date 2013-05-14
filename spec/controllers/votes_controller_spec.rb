@@ -5,8 +5,10 @@ describe VotesController do
   login_user
   render_views
 
+  fixtures :ideas
+
   context '(vote on ideas)' do
-    let(:idea) { Idea.make! }
+    let(:idea) { ideas(:idea_submitted) }
     let(:vote) { Vote.make! subject:idea }
     let(:comment) { Comment.make! }
 
