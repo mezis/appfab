@@ -17,8 +17,8 @@ $color_solarized_base01:   #586e75 // 10/7 brgreen  240 #585858
 $color_solarized_base00:   #657b83 // 11/7 bryellow 241 #626262
 $color_solarized_base0:    #839496 // 12/6 brblue   244 #808080
 $color_solarized_base1:    #93a1a1 // 14/4 brcyan   245 #8a8a8a
-$color_solarized_base2:    desaturate(#eee8d5, 10%) //  7/7 white    254 #e4e4e4
-$color_solarized_base3:    desaturate(#fdf6e3, 30%) // 15/7 brwhite  230 #ffffd7
+$color_solarized_base2:    desaturate(#eee8d5, 15%) //  7/7 white    254 #e4e4e4
+$color_solarized_base3:    desaturate(#fdf6e3, 35%) // 15/7 brwhite  230 #ffffd7
 $color_solarized_yellow:   #b58900 //  3/3 yellow   136 #af8700
 $color_solarized_orange:   #cb4b16 //  9/3 brred    166 #d75f00
 $color_solarized_red:      #dc322f //  1/1 red      160 #d70000
@@ -55,7 +55,7 @@ $standard_box_shadow:  transparentize($color_solarized_base2, 0.5) 0px 2px 3px
 // 
 $bodyBackground:      $color_solarized_base3
 $heroUnitBackground:  $color_solarized_base2
-$textColor:           $color_solarized_base00
+$textColor:           $color_solarized_base02
 $linkColor:           $major_color
 
 $gridGutterWidth:     40px
@@ -66,9 +66,9 @@ $gridColumnWidth1200: (1200px - ($gridGutterWidth1200 * 11))/12
 $gridGutterWidth768:  30px
 $gridColumnWidth768:  (768px - ($gridGutterWidth768 * 11))/12
 
-$baseBorderRadius:    2px
+$baseBorderRadius:    1px
 $borderRadiusSmall:   1px
-$borderRadiusLarge:   4px
+$borderRadiusLarge:   3px
 $inputBorderRadius:   $baseBorderRadius
 
 $navbarHeight:              40px
@@ -89,6 +89,7 @@ $headingsFontFamily:  'Titillium Web', Helvetica, Arial, sans-serif
 $btnPrimaryBackground:          lighten($major_color, 5%)
 $btnPrimaryBackgroundHighlight: $major_color
 
+$grayLight:              $color_solarized_base1
 $grayDark:               $textColor
 $btnBorder:              $color_solarized_base2
 $btnBackground:          $color_solarized_base3
