@@ -80,8 +80,8 @@ group :assets do
   # styling
   gem 'compass-rails'
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass-rails'
-
+  gem "font-awesome-rails"
+  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
