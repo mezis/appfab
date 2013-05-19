@@ -124,6 +124,9 @@ group :development do
   gem 'rb-fchange',              require:false
   gem 'terminal-notifier-guard', require:false
 
+  # measure test coverage
+  gem 'coveralls',               require:false
+
   # heroku interaction
   gem 'taps',                    require:false
 
