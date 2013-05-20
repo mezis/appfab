@@ -1,0 +1,56 @@
+:ruby
+  current_user_vote = comment.votes.by_user(current_user).first
+  comment_class = if comment.rating > 0
+    'upvoted'
+  elsif comment.rating < 0
+    'downvoted'
+  else
+    'neutral'
+  end
+.with_bubbles[comment]{ class: comment_class }
+  = render comment.author, format: :avatar
+  - if can?(:update, comment)
+    .af-drop-area
+  .bubble.left.af-drop-hilite
+    %span.tail.af-drop-hilite-before
+    .body.clearfix
+      .attachments
+        = render comment.attachments, title:false, classes:'pull-right'
+      .markdown!= pipeline_render comment.body
+  %ul.actions
+    %li.time_ago
+      = _('%{time} ago') % { time: time_ago_in_words(comment.created_at) }
+    %li
+      = render 'attachments/uploader', owner:comment, format:'small', drop_area:"##{dom_id comment} .drop-area"
+    - if !can?(:vote, comment)
+      %li
+        %a.disabled
+          %i.icon-thumbs-up
+      %li
+        %a.disabled
+          %i.icon-thumbs-down
+    - elsif current_user_vote && current_user_vote.up
+      %li
+        %a.disabled
+          %i.icon-thumbs-up
+      %li
+        = link_to comment_vote_path(comment, current_user_vote), remote:true, method: :delete, class: 'delete-vote', title:_('Cancel your upvote') do
+          %i.icon-thumbs-down
+    - elsif current_user_vote # downvoted by user
+      %li
+        = link_to comment_vote_path(comment, current_user_vote), remote:true, method: :delete, class: 'delete-vote', title:_('Cancel your downvote') do
+          %i.icon-thumbs-up
+      %li
+        %a.disabled
+          %i.icon-thumbs-down
+    - else
+      %li
+        = link_to comment_votes_path(comment, vote: { up:true }), remote:true, method: :post, class: 'upvote', title:_('Upvote this comment') do
+          %i.icon-thumbs-up
+      %li
+        = link_to comment_votes_path(comment, vote: { up:false }), remote:true, method: :post, class: 'downvote', title:_('Downvote this comment') do
+          %i.icon-thumbs-down
+    %li
+      = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment'), confirm:_('Are you sure?') do
+        %i.icon-trash
+

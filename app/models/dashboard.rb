@@ -48,6 +48,15 @@ class Dashboard
     visible_ideas.with_state(:designed, :implemented).by_activity.limit(block_size)
   end
 
+  def notifications_recent
+    @user.notifications.unread.by_most_recent.limit(block_size)
+  end
+
+  def comments_on_followed_ideas
+    follow_idea_ids = @user.bookmarked_ideas.value_of(:id)
+    Comment.by_created_at.where(idea_id:follow_idea_ids).limit(block_size)
+  end
+
 
   private
 

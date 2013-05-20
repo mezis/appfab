@@ -1,6 +1,6 @@
-node = $('#notification<%= @notification.id %>')
+node = $('#<%= dom_id @notification %>')
 
-$(node).replaceWith '<%=j render("notification/base", notification:@notification) %>'
+$(node).replaceWith '<%=j render(@notification) %>'
 
 node.flash
   start:'af-pop'

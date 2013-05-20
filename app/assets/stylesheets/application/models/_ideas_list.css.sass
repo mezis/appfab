@@ -2,22 +2,25 @@
 @import application/variables
 @import application/mixins
 
-.ideas-list
+.af-blocklist
   +box-sizing(border-box)
   list-style-type:    none
   position:           relative
   width:              100%
 
   li
-    white-space:      nowrap
-    overflow:         hidden
-    text-overflow:    ellipsis
+    +single-line
 
-.idea-row
+.af-blocklist-row
   position:           relative
   line-height:        $small-avatar-size
-  padding-right:      (4 * $small-avatar-size) + $section_padding
+  margin-bottom:      2px
+  &:last-child
+    margin-bottom:    0
 
+.idea-line
+  +single-line
+  padding-right:      (4 * $small-avatar-size) + $section_padding
   .user-list
     position:         absolute
     top:              0
@@ -25,9 +28,8 @@
     
 
 .af-block-with-title
-  +border-radius(4px) // FIXME with variable once the new styling is in
+  +border-radius($baseBorderRadius)
   +box-sizing(border-box)
-  border:             1px solid transparent
   overflow:           hidden
   background-color:   $light_gray
   margin:             $section_spacing 0
@@ -38,9 +40,9 @@
       margin:           0
       padding:          $section_padding
     &:first-child
-      background-color: $medium_gray
+      background-color: $wellBackground
     &:last-child
-      background-color: $light_gray
+      background-color: $wellBackground
 
 
   +respond-to(wide)
