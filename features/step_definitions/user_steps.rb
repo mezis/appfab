@@ -18,7 +18,7 @@ When /^I act as "(.*?)"$/ do |first_name|
 end
 
 When /^I act as myself$/ do
-  within '.alert-act-as-user' do
+  within '#acting-as-user' do
     click_on 'click here'
   end
 end

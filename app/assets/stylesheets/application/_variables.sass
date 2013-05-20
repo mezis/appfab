@@ -4,24 +4,58 @@ $section_padding: 1ex
 $section_spacing: 3ex
 $base_margin:     20px
 $menu_height:     41px
+$banner-height:   22px
 
 // Colors
 $light_gray:      #f3f2f4
 $medium_gray:     #cccccc
-$badge_color:     #fab037
+$dark_gray:       #333
 
-$background_lite: #f2f2f2
+$color_solarized_base03:   #002b36 //  8/4 brblack  234 #1c1c1c
+$color_solarized_base02:   #073642 //  0/4 black    235 #262626
+$color_solarized_base01:   #586e75 // 10/7 brgreen  240 #585858
+$color_solarized_base00:   #657b83 // 11/7 bryellow 241 #626262
+$color_solarized_base0:    #839496 // 12/6 brblue   244 #808080
+$color_solarized_base1:    #93a1a1 // 14/4 brcyan   245 #8a8a8a
+$color_solarized_base2:    desaturate(#eee8d5, 15%) //  7/7 white    254 #e4e4e4
+$color_solarized_base3:    desaturate(#fdf6e3, 35%) // 15/7 brwhite  230 #ffffd7
+$color_solarized_yellow:   #b58900 //  3/3 yellow   136 #af8700
+$color_solarized_orange:   #cb4b16 //  9/3 brred    166 #d75f00
+$color_solarized_red:      #dc322f //  1/1 red      160 #d70000
+$color_solarized_magenta:  #d33682 //  5/5 magenta  125 #af005f
+$color_solarized_violet:   #6c71c4 // 13/5 brmagenta 61 #5f5faf
+$color_solarized_blue:     #268bd2 //  4/4 blue      33 #0087ff
+$color_solarized_cyan:     #2aa198 //  6/6 cyan      37 #00afaf
+$color_solarized_green:    #859900 //  2/2 green     64 #5f8700
 
-$major_color:     #fa8037
-$progress_color:  rgba($medium_gray, 0.5)
 
+// Semantic colors
+// $major_color:     #fa8037
+$major_color:     $color_solarized_yellow
+$progress_color:  rgba($color_solarized_base2, 0.66)
+// $progress_color:  rgba($color_solarized_base1, 0.5)
+
+$color_success:   $color_solarized_green
+$color_warning:   $color_solarized_orange
+$color_error:     $color_solarized_red
+$color_notice:    $color_solarized_base0
+
+$badge_color:     $color_solarized_yellow
+
+$focus_color:     rgba($major_color, 0.6)
 
 // Text shadows
-$small_text_shadow: rgba(black, .5) 0px 1px 2px
+$small_text_shadow:    rgba(black, .5) 0px  1px 2px
+$embossed_text_shadow: rgba(white, .5) 0px -1px 2px
 
+$standard_box_shadow:  transparentize($color_solarized_base2, 0.5) 0px 2px 3px
 
+// 
 // Bootstrap configuration
-$textColor:           #333
+// 
+$bodyBackground:      $color_solarized_base3
+$heroUnitBackground:  $color_solarized_base2
+$textColor:           $color_solarized_base02
 $linkColor:           $major_color
 
 $gridGutterWidth:     40px
@@ -32,8 +66,43 @@ $gridColumnWidth1200: (1200px - ($gridGutterWidth1200 * 11))/12
 $gridGutterWidth768:  30px
 $gridColumnWidth768:  (768px - ($gridGutterWidth768 * 11))/12
 
-$inputBorderRadius:   2px
-$navbarBackground:    $light_gray
+$baseBorderRadius:    1px
+$borderRadiusSmall:   1px
+$borderRadiusLarge:   3px
+$inputBorderRadius:   $baseBorderRadius
+
+$navbarHeight:              40px
+$navbarBackground:          $color_solarized_base2
+$navbarBackgroundHighlight: $color_solarized_base2
+$navbarText:                $color_solarized_base00
+$navbarLinkColor:           $color_solarized_base00
+$navbarLinkColorHover:      $color_solarized_yellow
+$navbarInverseBackground:          $color_solarized_base03
+$navbarInverseBackgroundHighlight: $color_solarized_base03
+$navbarInverseText:                $color_solarized_base0
+$navbarInverseLinkColor:           $color_solarized_base0
+$navbarInverseLinkColorHover:      $color_solarized_yellow
 
 $sansFontFamily:      Ubuntu, Helvetica, Helvetica, Arial, sans-serif
 $headingsFontFamily:  'Titillium Web', Helvetica, Arial, sans-serif
+
+$btnPrimaryBackground:          lighten($major_color, 5%)
+$btnPrimaryBackgroundHighlight: $major_color
+
+$grayLight:              $color_solarized_base1
+$grayDark:               $textColor
+$btnBorder:              $color_solarized_base2
+$btnBackground:          $color_solarized_base3
+$btnBackgroundHighlight: $color_solarized_base2
+
+$placeholderText: $color_solarized_base1
+$inputBackground: $color_solarized_base2
+$inputBorder:     $color_solarized_base2
+
+$formActionsBackground: $color_solarized_base1
+
+$hrBorder:       $color_solarized_base2
+$wellBackground: $color_solarized_base2
+
+$popoverBackground: $color_solarized_base2
+$popoverArrowColor: $color_solarized_base2
