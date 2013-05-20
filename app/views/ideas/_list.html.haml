@@ -1,0 +1,19 @@
+:ruby
+  # pass me a collection of +ideas+, a +title+ and and +icon+
+  # options: +padded+ acts as limit/padding
+  padding = local_assigns.fetch(:padding, nil)
+
+  ideas = ideas.in_groups_of(padding).first if padding.present?
+  ideas = [nil] * padding if ideas.nil?
+.af-block-with-title
+  %h4
+    %i{ class: "icon-#{icon}" }
+    = title
+  %ul.ideas-list
+    - ideas.each do |idea|
+      %li.idea-row
+        - if idea.present?
+          = link_to idea.title, idea
+          = render 'ideas/idea_people', limit:3, idea:idea
+        - else
+          &nbsp;

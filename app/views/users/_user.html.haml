@@ -24,12 +24,12 @@
 
     avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
 
-  .user{ options }
+  .user{ options }<>
     = link_to user do
       - if show_avatar
-        .avatar{ style: "background-image: url(#{user.login.gravatar_url(avatar_options)})" }
+        .avatar{ style: "background-image: url(#{user.login.gravatar_url(avatar_options)})" }<>
       - if show_name
-        .name
+        .name>
           = user.first_name
           - if show_karma
             %span.karma

@@ -3,9 +3,6 @@
 @import application/variables
 
 .user
-  $small-avatar-size: 2em
-  $large-avatar-size: 128px
-
   position: relative
   width:    $small-avatar-size
   height    auto
@@ -53,3 +50,11 @@
     display: inline-block
     .name
       display: inline-block
+
+.user-list
+  height:      $small-avatar-size
+  line-height: 0
+  display:     inline-block
+
+  .user
+    display:   inline-block

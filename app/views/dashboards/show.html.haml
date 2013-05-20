@@ -1,0 +1,16 @@
+- title "Dashboard"
+
+- if can?(:size, Idea)
+  = dashboard_render @dashboard, :to_size
+- else
+  = dashboard_render @dashboard, :recently_active
+
+- if can?(:veto, Idea)
+  = dashboard_render @dashboard, :for_dictator
+
+= dashboard_render @dashboard, :to_vote
+= dashboard_render @dashboard, :recently_submitted
+
+- if current_user.plays?(:product_manager)
+  = dashboard_render @dashboard, :working_set
+

@@ -1,7 +1,6 @@
 - limit = local_assigns.fetch(:limit, 15)
 - extra_paticipants = idea.participants.length - limit
-.people<
+.people.user-list<
   - idea.participants.take(limit).each do |user|
     = render user, format: :avatar
-  - if extra_paticipants > 0
-    = " …"
+
