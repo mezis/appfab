@@ -13,7 +13,7 @@
 .idea_container{ id:dom_id(idea) }
   - classes = [idea.state_name, 'with-header-wizard', (muted_details && 'af-mutable-content'), (show_category && idea_category_class(idea))]
   .af-drop-area
-  .idea.idea-maxi.af-drop-hilite{ class: classes.compact.join(' ') }
+  .idea.idea-maxi.af-drop-hilite{ class:classes }
     .meta.top
       = render 'idea_rating', idea:idea
       .category.muted.pull-left.pull-left-spaced.af-mutable

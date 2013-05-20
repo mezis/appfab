@@ -29,7 +29,7 @@
       = _('Gather brilliant ideas')
     %p= _('Ever been to the pub with your team? They\'re frustrated because they know what the users want. They\'re bursting with ideas for new features and know which bugs are really painful... but lack the avenue to express themselves.')
     %p= _('So throw that old "ideas box" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them.')
-    .how-it-works
+    .muted
       %p= _('Everyone gets a say. All team members can submit their ideas, and all team memebrs can discuss each idea until it is explicit and understandable.')
       %p= _('Architects and product managers then estimate the effort, and if the idea is properly formatted, vet it.')
       %p= _('As users contribute, they will gain %{karma} points... or lose them if they act as trolls.').html_safe % { karma: user_karma_symbol }
@@ -40,7 +40,7 @@
       = _('Let priorities emerge')
     %p= _('Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?')
     %p= _('Now forget about them. Your staff will endorse what is actually important, and priorities will emerge.')
-    .how-it-works
+    .muted
       %p= _('Once an idea is vetted, the whole team gets give an opinion: good ideas will bubble up rapidly.')
       %p= _('Some caveat apply, of course! You can make your product team a democracy by giving everyone\'s endorsements the same weight, or increase that weight for stakeholders.')
       %p= _('To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea.').html_safe % { karma: user_karma_symbol }
@@ -52,6 +52,6 @@
       = _('Get it done')
     %p= _('Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead.') % { appfab: configatron.app_name }
     %p= _('See that line above? That\'s the lifecycle of your ideas. Now it\'s up to your to push them forward.')
-    .how-it-works
+    .muted
       %p= _('We stick to one of the core tenets of Kanban: built-in rate limiting. Only a limited "volume" of ideas can be in a given stage at any time, as your team members can only work on so many things in parallel.')
       %p= _('This lets you know at all times what\'s effectively being worked on, and what the current status is.')

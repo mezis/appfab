@@ -98,16 +98,12 @@ class ApplicationController < ActionController::Base
 
 
   def render_error_page(error, options = {})
-    status = case error
-    when :missing_account then :bad_request
-    else error
-    end
-    render template:"errors/#{error}", locals:options.slice(:message), status:status
+    render template:"errors/#{error}", locals: options.slice(:message), status: error.eql?(:missing_account) ? :bad_request : error
   end
 
 
   rescue_from CanCan::AccessDenied do |exception|
-    render_error_page :forbidden, message:exception.message
+    render_error_page :forbidden, message: exception.message
   end
 
 end
