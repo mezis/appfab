@@ -18,7 +18,7 @@ module AccountsHelper
 
   def account_category_class(account, category)
     categories = account.categories.sort
-    index = categories.index(category) or return
+    index = categories.index(category) or return 'no-category'
     "category-%d-of-%d" % [index + 1, categories.size]
   end
 end
