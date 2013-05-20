@@ -10,6 +10,7 @@ development: &local
 test: &test
   <<: *local
   socket: /Volumes/MySQLRAMDisk/mysql.sock
+  database: appfab_test
 
 cucumber:
   <<: *test
