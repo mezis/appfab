@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
         end
 
         if @comment.idea
-          redirect_to @comment.idea, anchor:dom_id(@comment)
+          redirect_to idea_path(@comment.idea, anchor:dom_id(@comment))
         else
           redirect_to ideas_path
         end
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @comment.idea, anchor:dom_id(@comment) }
+      format.html { redirect_to idea_path(@comment.idea, anchor:dom_id(@comment)) }
       format.js
     end
   end
