@@ -5,7 +5,7 @@
       %p= _('The app that helps product teams build fantastic apps.')
 
       - if current_user
-        = link_to ideas_path(angle: IdeasController::DefaultAngle), class: 'btn btn-primary' do
+        = link_to ideas_path(angle: IdeasController::DEFAULT_ANGLE), class: 'btn btn-primary' do
           = _('Let\'s get cracking')
           &nbsp;
           %i.icon-caret-right
