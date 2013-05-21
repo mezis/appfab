@@ -22,6 +22,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     Rails.logger.info _auth_hash
     login = Login.find_or_create_from_auth_hash!(_auth_hash)
     login.auth_provider_data[provider.to_s] ||= _auth_hash.to_hash
+    login.remember_me = true
     login.save!
 
     return_to = session[:return_to]
