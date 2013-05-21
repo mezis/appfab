@@ -1,0 +1,16 @@
+@import compass
+
+div.af-mini-acordion
+  > div
+    +box-sizing(border-box)
+    +transition-property(height)
+    +transition-duration(250ms)
+    +transition-timing-function(linear)
+    overflow: hidden
+
+    & + div
+      height: 4px
+    &:hover
+      height: inherit
+  &:hover > div
+    height: inherit

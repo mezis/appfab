@@ -1,0 +1,24 @@
+@import application/variables
+
+// ovverride form focus halo
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+select,
+.uneditable-input
+  &:focus
+    border-color: $focus_color
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px $focus_color)
