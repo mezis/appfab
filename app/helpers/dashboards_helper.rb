@@ -1,5 +1,8 @@
 module DashboardsHelper
   def dashboard_render(dashboard, variant_name)
+    @dashboard_render_blocks ||= 0
+    @dashboard_render_blocks += 1
+
     variant = DASHBOARD_VARIANTS[variant_name]
 
     render 'block_list', 
@@ -8,6 +11,10 @@ module DashboardsHelper
       icon:       variant.icon,
       padding:    dashboard.block_size,
       format:     'line'
+  end
+
+  def dashboard_render_extra_blocks
+    count = { 0 => 0, 1 => 2, 2 => 1 }[@dashboard_render_blocks % 3]
   end
 
   private
