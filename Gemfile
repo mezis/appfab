@@ -133,6 +133,17 @@ group :development do
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
+  # as says on the tin
   gem 'license_finder',          require:false
+
+  # provides /rails/routes, built-in in Rails 4
+  gem 'sextant'
+
+  # stop logging asset request
+  gem 'quiet_assets'
+
+  # nicer error messages in the browser
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
