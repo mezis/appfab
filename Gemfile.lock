@@ -48,9 +48,6 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
-    capybara-webkit (0.14.2)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     chunky_png (1.2.8)
@@ -103,6 +100,7 @@ GEM
       multi_json (~> 1.0)
       rack
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faker (1.1.2)
@@ -110,6 +108,8 @@ GEM
     faraday (0.8.7)
       multipart-post (~> 1.1)
     fast_gettext (0.7.0)
+    faye-websocket (0.4.7)
+      eventmachine (>= 0.12.0)
     ffi (1.8.1)
     fineuploader-rails (3.3)
       actionpack (>= 3.1)
@@ -155,6 +155,7 @@ GEM
       railties (>= 3.1, < 4.1)
     hashie (2.0.5)
     hike (1.2.2)
+    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
@@ -210,6 +211,10 @@ GEM
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
     pg (0.15.1)
+    poltergeist (1.1.2)
+      capybara (~> 2.0.1)
+      faye-websocket (~> 0.4.4)
+      http_parser.rb (~> 0.5.3)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -362,7 +367,6 @@ DEPENDENCIES
   bootstrap-sass
   cancan
   capybara (~> 2.0.3)
-  capybara-webkit
   coffee-rails
   compass-rails
   configatron
@@ -397,6 +401,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2
   pg
+  poltergeist
   pry
   pry-doc
   pry-nav

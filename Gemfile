@@ -105,7 +105,7 @@ group :development do
   gem 'rspec-rails',             require:false
   gem 'cucumber-rails',          require:false
   gem 'capybara',    '~> 2.0.3', require:false # locking as 2.1.0 has issues for now
-  gem 'capybara-webkit',         require:false
+  gem 'poltergeist'    ,         require:false # PhantomJS capybara driver
   gem 'machinist',               require:false
   gem 'database_cleaner',        require:false
   gem 'faker',                   require:false
