@@ -7,7 +7,7 @@
   else
     'neutral'
   end
-.with_bubbles[comment]{ class: comment_class }
+.with_bubbles.comment-block[comment]{ class: comment_class }
   = render comment.author, format: :avatar
   - if can?(:update, comment)
     .af-drop-area
