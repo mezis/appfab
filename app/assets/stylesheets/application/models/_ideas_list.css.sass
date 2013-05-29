@@ -32,7 +32,7 @@
   +box-sizing(border-box)
   overflow:           hidden
   background-color:   $light_gray
-  margin:             $section_spacing 0
+  margin-top:         $small-avatar-size
   float:              left
 
   > *
@@ -47,14 +47,12 @@
 
   +respond-to(wide)
     width:              32%
-    margin:             $section_spacing 0
     margin-left:        2%
     &:nth-of-type(3n+2)
       clear:            left
       margin-left:      0
   +respond-to(desktop)
     width:              49%
-    margin:             $section_spacing 0
     margin-left:        2%
     &:nth-of-type(2n+2)
       clear:            left
