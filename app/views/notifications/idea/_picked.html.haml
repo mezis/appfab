@@ -1,8 +1,9 @@
 :ruby
+  idea = notification.subject
   data = {
     product_manager: user_name(notification.subject.product_manager),
     idea_title: notification.subject.title,
-    idea_link:  link_to("##{notification.subject.id}", notification.subject)
+    idea_link:  link_to(idea.title, idea)
   }
 
-= _('Idea "%{idea_title}" (%{idea_link}) was just picked by %{product_manager}').html_safe % data
+= _('%{product_manager} picked %{idea_link}').html_safe % data
