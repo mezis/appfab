@@ -38,3 +38,6 @@ push_*.dat
 
 # Script turds
 nohup.out
+
+# Coveralls output
+/coverage

@@ -2,6 +2,8 @@
 class CommentsController < ApplicationController
   include Traits::RequiresLogin
 
+  before_filter :load_comment, :only => [:show, :update, :destroy]
+
   def create
     @comment = Comment.new(params[:comment])
     @comment.author = current_user
@@ -28,8 +30,6 @@ class CommentsController < ApplicationController
 
 
   def show
-    @comment = Comment.find(params[:id])
-
     if request.xhr?
       case params['part']
       when 'attachments'
@@ -46,7 +46,6 @@ class CommentsController < ApplicationController
 
 
   def update
-    @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
       flash[:success] = _("Successfully updated comment.")
     else
@@ -57,7 +56,6 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
 
     respond_to do |format|
@@ -67,5 +65,10 @@ class CommentsController < ApplicationController
       end
       format.js
     end
+  end
+
+  private
+  def load_comment
+    @comment = Comment.find(params[:id])
   end
 end
