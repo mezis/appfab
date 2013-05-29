@@ -8,7 +8,6 @@
 //
 // general idea styling -- used on all index pages and show pages
 //
-$idea_banner_height: 2em
 
 // container
 .idea_container
@@ -44,13 +43,10 @@ $idea_banner_height: 2em
     text-align:   left
     white-space:  nowrap
 
-    +height($idea_banner_height)
-
     .user
       float:      left
-    .avatar
-      +square($idea_banner_height)
-
+      width:      $idea_banner_height
+      
   .actions
     li
       display: inline

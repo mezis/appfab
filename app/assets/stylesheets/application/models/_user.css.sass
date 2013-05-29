@@ -4,7 +4,7 @@
 
 .user
   position: relative
-  width:    $small-avatar-size
+  width:    2em
   height    auto
 
   .avatar
@@ -28,28 +28,32 @@
   .name
     white-space: nowrap
 
-  &.user-large
-    $padding-size:        8px
 
-    padding: $padding-size
-    width:   $large-avatar-size
-    +box-shadow($medium_gray 0px 4px 7px -2px)
+.user-large
+  $padding-size:        8px
 
-    .avatar
-      & + .name
-        margin-top: $padding-size
-        text-align: center
-      &:last-child
-        margin-bottom: (3 * $padding-size)
+  padding: $padding-size
+  width:   $large-avatar-size
+  +box-shadow($medium_gray 0px 4px 7px -2px)
 
-  &.user-fit
-    width: 100%
-    height: auto
+  .avatar
+    & + .name
+      margin-top: $padding-size
+      text-align: center
+    &:last-child
+      margin-bottom: (3 * $padding-size)
 
-  &.user-inline
+
+.user-fit
+  width: 100%
+  height: auto
+
+
+.user-inline
+  display: inline-block
+  .name
     display: inline-block
-    .name
-      display: inline-block
+
 
 .user-list
   height:      $small-avatar-size
