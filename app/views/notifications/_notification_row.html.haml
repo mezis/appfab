@@ -1,8 +1,7 @@
 -# Context:
 -# - notification (Notification::Base)
-- partial = "notifications/#{notification.class.name.demodulize.underscore}"
 %tr[notification]{ class: (notification.unread ? 'unread' : 'read') }
-  %td.message= render partial, notification: notification
+  %td.message= render notification.partial_name, notification: notification
   %td.timestamp= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
   %td.action
     - if notification.unread

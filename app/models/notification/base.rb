@@ -24,6 +24,11 @@ class Notification::Base < ActiveRecord::Base
     'notifications/notification'
   end 
 
+  def partial_name
+    # pluralize the first component
+    self.class.name.underscore.sub(%r(/),'s/')
+  end
+
 
   module Recipient
     def self.included(by)
