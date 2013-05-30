@@ -8,17 +8,17 @@ class IdeasController < ApplicationController
   before_filter :map_no_category, only:[:create, :update]
   before_filter :can_create_idea, only:[:new, :create]
 
-  ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
-  DefaultAngle = ValidAngles.last
+  VALID_ANGLES = %w(discussable vettable votable pickable approvable signoffable buildable followed)
+  DEFAULT_ANGLE = VALID_ANGLES.last
 
-  ValidOrders  = %w(impact activity progress creation size)
-  DefaultOrder = ValidOrders.first
+  VALID_ORDERS  = %w(impact activity progress creation size)
+  DEFAULT_ORDER = VALID_ORDERS.first
 
-  ValidFilters = %w(all authored commented vetted backed)
-  DefaultFilter = ValidFilters.first
+  VALID_FILTERS = %w(all authored commented vetted backed)
+  DEFAULT_FILTER = VALID_FILTERS.first
 
-  ValidViews = %w(cards board)
-  DefaultView = ValidViews.first
+  VALID_VIEWS = %w(cards board)
+  DEFAULT_VIEW = VALID_VIEWS.first
 
   def index
     @angle    = set_angle_from_params
@@ -160,20 +160,20 @@ class IdeasController < ApplicationController
   def set_angle_from_params
     params[:angle] =
     session[:ideas_angle] = begin
-      (ValidAngles.include?(params[:angle])        and params[:angle]) ||
-      (ValidAngles.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
+      (VALID_ANGLES.include?(params[:angle])        and params[:angle]) ||
+      (VALID_ANGLES.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
       session[:ideas_angle] ||
-      DefaultAngle
+      DEFAULT_ANGLE
     end
   end
 
   def set_view_from_params
     params[:view] =
     session[:ideas_view] = begin
-      (ValidViews.include?(params[:view])        and params[:view]) ||
-      (ValidViews.include?(session[:ideas_view]) and session[:ideas_view]) ||
+      (VALID_VIEWS.include?(params[:view])        and params[:view]) ||
+      (VALID_VIEWS.include?(session[:ideas_view]) and session[:ideas_view]) ||
       session[:ideas_view] ||
-      DefaultView
+      DEFAULT_VIEW
     end
   end
 
@@ -181,9 +181,9 @@ class IdeasController < ApplicationController
     session[:ideas_order] ||= {}
     params[:order] =
     session[:ideas_order][@angle] = begin
-      (ValidOrders.include?(params[:order])                and params[:order]) || 
-      (ValidOrders.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) || 
-      DefaultOrder
+      (VALID_ORDERS.include?(params[:order])                and params[:order]) ||
+      (VALID_ORDERS.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) ||
+      DEFAULT_ORDER
     end
   end
 
@@ -191,9 +191,9 @@ class IdeasController < ApplicationController
     session[:ideas_filter] ||= {}
     params[:filter] =
     session[:ideas_filter][@angle] = begin
-      (ValidFilters.include?(params[:filter])                and params[:filter]) || 
-      (ValidFilters.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
-      DefaultFilter
+      (VALID_FILTERS.include?(params[:filter])                and params[:filter]) ||
+      (VALID_FILTERS.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) ||
+      DEFAULT_FILTER
     end
   end
 

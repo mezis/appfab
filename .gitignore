@@ -38,3 +38,9 @@ push_*.dat
 
 # Script turds
 nohup.out
+
+# Coveralls output
+/coverage
+
+# Database configuration
+/config/database.yml
