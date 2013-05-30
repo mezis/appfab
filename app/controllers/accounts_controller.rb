@@ -2,6 +2,8 @@
 class AccountsController < ApplicationController
   include Traits::RequiresLogin
 
+  before_filter :load_account, :only => [:edit, :update, :destroy]
+
   def index
     redirect_to root_path
   end
@@ -34,12 +36,10 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    @account = Account.find(params[:id])
     authorize! :update, @account
   end
 
   def update
-    @account = Account.find(params[:id])
     authorize! :update, @account
 
     categories = params[:account].andand.delete(:categories)
@@ -55,10 +55,14 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    @account = Account.find(params[:id])
     authorize! :destroy, @account
     reset_login if @account == current_account
     @account.destroy
     redirect_to root_path, :notice => _("Successfully destroyed team %{name}.") % { name:@account.name }
+  end
+
+  private
+  def load_account
+    @account = Account.find(params[:id])
   end
 end

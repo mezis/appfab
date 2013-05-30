@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/mezis/appfab.png?branch=master)](https://travis-ci.org/mezis/appfab)
 [![Code Climate](https://codeclimate.com/github/mezis/appfab.png)](https://codeclimate.com/github/mezis/appfab)
 [![Dependency Status](https://gemnasium.com/mezis/appfab.png)](https://gemnasium.com/mezis/appfab)
+[![Coverage Status](https://coveralls.io/repos/mezis/appfab/badge.png)](https://coveralls.io/r/mezis/appfab)
 
 ## Kanban, one level up: agility at the product level.
 
@@ -41,10 +42,7 @@ close-via-commit- message) in your pull request,
 
 and be prepared to discuss your solution!
 
-If your pull request addresses an issue, and the issue is already assigned
-to a milestone, please branch then request it against that milestone's
-branch (e.g. `milestone/1/racoon-mario`) instead of against the master
-branch.
+Please always issue pull requests against the `master` branch.
 
 ### Licence
 

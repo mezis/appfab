@@ -105,7 +105,7 @@ group :development do
   gem 'rspec-rails',             require:false
   gem 'cucumber-rails',          require:false
   gem 'capybara',    '~> 2.0.3', require:false # locking as 2.1.0 has issues for now
-  gem 'capybara-webkit',         require:false
+  gem 'poltergeist'    ,         require:false # PhantomJS capybara driver
   gem 'machinist',               require:false
   gem 'database_cleaner',        require:false
   gem 'faker',                   require:false
@@ -124,12 +124,26 @@ group :development do
   gem 'rb-fchange',              require:false
   gem 'terminal-notifier-guard', require:false
 
+  # measure test coverage
+  gem 'coveralls',               require:false
+
   # heroku interaction
   gem 'taps',                    require:false
 
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
+  # as says on the tin
   gem 'license_finder',          require:false
+
+  # provides /rails/routes, built-in in Rails 4
+  gem 'sextant'
+
+  # stop logging asset request
+  gem 'quiet_assets'
+
+  # nicer error messages in the browser
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 

@@ -22,6 +22,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     Rails.logger.info _auth_hash
     login = Login.find_or_create_from_auth_hash!(_auth_hash)
     login.auth_provider_data[provider.to_s] ||= _auth_hash.to_hash
+    login.remember_me = true
     login.save!
 
     return_to = session[:return_to]
@@ -29,7 +30,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     sign_in login
     flash[:success] = _('Welcome, %{user}!') % { user: login.first_name }
     
-    redirect_to return_to || ideas_path(angle: IdeasController::DefaultAngle)
+    redirect_to return_to || ideas_path(angle: IdeasController::DEFAULT_ANGLE)
   end
 
   def _auth_hash

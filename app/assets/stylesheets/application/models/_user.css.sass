@@ -12,9 +12,13 @@
 
   .avatar
     +background-size(cover)
-    +border-radius(2px)
+    +border-radius($borderRadiusSmall)
 
-    +filter(saturate(5%))
+    // default only used when offline
+    background-color: $wellBackground
+
+    +translateZ(0)
+    +filter(saturate(0) sepia(0.5))
     &:hover
       +filter(none)
 

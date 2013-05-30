@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include Traits::RequiresLogin
 
+  before_filter :load_user, :only => [:show, :edit, :update, :destroy]
+
   def index
     unless current_account
       render_error_page :not_found,
@@ -12,17 +14,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     authorize! :read, @user
   end
 
   def edit
-    @user = User.find(params[:id])
     authorize! :update, @user
   end
 
   def update
-    @user = User.find(params[:id])
     authorize! :update, @user
 
     if @user.update_attributes(params[:user])
@@ -33,10 +32,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     authorize! :destroy, @user
 
     @user.destroy
     redirect_to users_url, :notice => "Successfully destroyed user."
+  end
+
+  private
+  def load_user
+    @user = User.find(params[:id])
   end
 end
