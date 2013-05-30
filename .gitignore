@@ -41,3 +41,6 @@ nohup.out
 
 # Coveralls output
 /coverage
+
+# Database configuration
+/config/database.yml
