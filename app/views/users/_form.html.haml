@@ -4,17 +4,14 @@
 
   %p
     = f.label :first_name
-    %br
     = f.text_field :first_name
   %p
     = f.label :last_name
-    %br
     = f.text_field :last_name
 
   - if can?(:update_admin, user)
     %p
       = f.label :voting_power
-      %br
       = f.select :voting_power, options_for_select([['1',1],['2',2],['3',3],['5',5],['8',8]], user.voting_power)
   %p
     = link_to _('Cancel'), user, class: 'btn'
