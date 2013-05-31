@@ -66,11 +66,12 @@ class Ability
     end
 
     # User
-    can :read,   User, account_id: user.account_id
-    can :update, User, id: user.id
+    can :read,   User, account_id:user.account_id, state:User.state_value(:visible)
+    can :update, User, id:user.id
+    cannot :none, User
 
     if user.plays?(:account_owner)
-      can [:update, :update_voting_power, :destroy], User, account_id: user.account_id
+      can [:read, :update, :update_admin, :destroy], User, account_id: user.account_id
     end
 
     # User role

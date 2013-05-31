@@ -3,7 +3,8 @@ ruby '2.0.0'
 
 gem 'rails'
 
-gem 'unicorn'
+gem 'unicorn', group: :production
+gem 'thin',    group: :development
 
 # database
 gem 'mysql2',  group: :development
@@ -36,6 +37,9 @@ gem 'andand'
 # Access attribute values directly, without instantiating ActiveRecord objects
 # (because Rails' #pluck breaks a lot with joins)
 gem 'valium'
+
+# Property API for plain classes
+gem 'virtus'
 
 # activerecord extensions
 gem 'state_machine', require:false

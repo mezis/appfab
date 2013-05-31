@@ -31,8 +31,6 @@ class User < ActiveRecord::Base
   default_values karma: configatron.app_fab.karma.initial,
                  voting_power: 1
 
-  accepts_nested_attributes_for :login, update_only:true
-
   delegate [:first_name, :last_name, :email, :gravatar_url] => :login
 
   scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
