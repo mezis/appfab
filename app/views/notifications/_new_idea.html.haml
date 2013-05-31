@@ -1,7 +1,7 @@
 :ruby
   data = {
     user:       user_name(notification.subject.author),
-    idea_link:  link_to(notification.subject.idea.title, notification.subject.idea)
+    idea_link:  link_to(notification.subject.title, notification.subject)
   }
 
 = _('%{user} submitted %{idea_link}').html_safe % data
