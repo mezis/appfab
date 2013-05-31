@@ -11,10 +11,6 @@
             = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current, title:ideas_view_tooltip(view) do
               %i{ class:idea_view_icon(view) }
 
-      %ul.nav.pull-right.pull-right-spaced
-        .btn.active#toggle-colorize{ 'data-toggle' => 'button' }
-          %i.icon-tint
-
       %ul.nav.pull-left
         %li.dropdown
           %a.dropdown-toggle{:'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#'}
@@ -69,8 +65,3 @@
   != filters
 .navbar.navbar-fixed-top.hidden-desktop
   != filters
-
-:coffee
-  $.unobtrusive ->
-    $('#toggle-colorize').on 'click', () ->
-      $('.ideas-index').toggleClass('af-with_colored-cards')

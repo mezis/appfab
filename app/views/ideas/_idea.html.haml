@@ -3,28 +3,27 @@
 -# - collapsed (boolean)
 -# - title_type (:link or :none)
 -# - status (:none or :header)
--# - show_category (boolean)
 :ruby
   collapsed     = local_assigns.fetch(:collapsed,     false)
   title_link    = local_assigns.fetch(:title_link,    false)
   muted_details = local_assigns.fetch(:muted,         false)
-  show_category = local_assigns.fetch(:show_category, false)
 
 .idea_container{ id:dom_id(idea) }
-  - classes = [idea.state_name, 'with-header-wizard', (muted_details && 'af-mutable-content'), (show_category && idea_category_class(idea))]
+  - classes = [idea.state_name, (muted_details && 'af-mutable-content')]
   .af-drop-area
   .idea.idea-maxi.af-drop-hilite{ class:classes }
-    .meta.top
+    
+    .meta.top.af-mutable
       = render 'idea_rating', idea:idea
-      .category.muted.pull-left.pull-left-spaced.af-mutable
+      .category.muted.pull-left.pull-left-spaced
         = idea.category || _('No category')
-      .state.muted.pull-right.pull-right-spaced.af-mutable{ title: s_('Tooltip|The current progress on this idea'), :'data-container' => '.container' }<
+      .state.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|The current progress on this idea'), :'data-container' => '.container' }<
         = idea_status(idea.state_name)
       - if idea.sized?
-        .size.muted.pull-right.pull-right-spaced.af-mutable{ title: s_('Tooltip|An architect and a product manager have sized this idea.'), :'data-container' => '.container' }
+        .size.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|An architect and a product manager have sized this idea.'), :'data-container' => '.container' }
           = idea_size_human_long(idea.size).downcase
 
-    .body
+    .body.with-category-sliver{ class:idea_category_class(idea) }
       %h3.title
         - if title_link
           = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
@@ -48,10 +47,10 @@
           %strong= _('Metrics:')
           != pipeline_render idea.metrics
 
-    .meta.bottom
+    .meta.bottom.af-mutable
       = render 'idea_people', idea:idea
 
-      .actions.af-mutable.pull-right
+      .actions.pull-right
         %ul
           %li
             = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
