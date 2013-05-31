@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe Idea do
+  fixtures :users, :accounts, :logins
+
   its 'factory should work' do
     described_class.make.should be_valid
   end

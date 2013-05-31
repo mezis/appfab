@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe VotesController do
+  fixtures :ideas
+
   login_user
   render_views
-
-  fixtures :ideas
 
   context '(vote on ideas)' do
     let(:idea) { ideas(:idea_submitted) }

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module ControllerHelpers
   def login_user(options = {})
-    fixtures :users, :logins
+    fixtures :users, :logins, :accounts
 
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:login]
