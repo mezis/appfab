@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   include User::Bookmark::UserMethods
   include LazyRecords::Model
   include Traits::LastSeenAt
+  include Traits::User::StateMachine
 
   validates_presence_of :login
   validates_presence_of :account

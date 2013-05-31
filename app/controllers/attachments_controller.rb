@@ -18,7 +18,7 @@ class AttachmentsController < ApplicationController
 
     if @attachment.save
       respond_to do |format|
-        format.json { render json: { success: true, id:@attachment.id }, status: :ok }
+        format.json { render json: { success: true, id: @attachment.id }, status: :ok }
       end
     else
       respond_to do |format|
