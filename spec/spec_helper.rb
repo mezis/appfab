@@ -50,4 +50,9 @@ RSpec.configure do |config|
   config.extend  ViewHelpers,         :type => :view
 
   config.before(:each) { LazyRecords.flush }
+
+  # Clean the test DB before and after the suits
+  DatabaseCleaner.strategy = :truncation  
+  config.before(:suite) { DatabaseCleaner.clean }
+  config.after(:suite) { DatabaseCleaner.clean }
 end
