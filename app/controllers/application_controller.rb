@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil unless current_login && current_account
-    @current_user ||= current_account.users.find_by_login_id(current_login.id).tap do |user|
+    @current_user ||= current_account.users.with_state(:visible).find_by_login_id(current_login.id).tap do |user|
       user.last_seen_at = Time.current unless acting_as_user?
     end
   end
@@ -47,8 +47,8 @@ class ApplicationController < ActionController::Base
     return unless current_login
     @current_account ||= begin
       (account_id = session[:account_id].to_i) &&
-      current_login.accounts.find_by_id(account_id) ||
-      current_login.accounts.first
+      current_login.users.with_state(:visible).where(account_id:account_id).first.andand.account ||
+      current_login.users.with_state(:visible).first.andand.account
     end
   end
   helper_method :current_account
