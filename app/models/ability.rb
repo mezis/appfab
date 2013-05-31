@@ -14,6 +14,10 @@ class Ability
       can :destroy, Idea, author_id: user.id, state: draft_or_submitted
     end
 
+    can :move, Idea do |idea|
+      user == idea.author || user == idea.product_manager || user.plays?(:account_owner)
+    end
+
     # Comment
     can    :create, Comment, idea: { author: { account_id: user.account_id } }
     can    :read,   Comment, author: { account_id: user.account_id }
