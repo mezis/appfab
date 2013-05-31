@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe "ideas/show.html.haml" do
-  fixtures :users
+  fixtures :users, :logins
 
   subject { render ; rendered }
   let(:user) { users :abigale_balisteri }
