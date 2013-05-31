@@ -5,7 +5,7 @@ class Idea::History::Base < ActiveRecord::Base
   belongs_to :idea
   belongs_to :subject, polymorphic:true
 
-  scope :by_created_at, order:'created_at DESC'
+  scope :by_created_at, order: 'created_at DESC'
 
   validates_presence_of :idea
 

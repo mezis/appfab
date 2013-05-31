@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Idea::History::Comment do
+  fixtures :users, :ideas
+
   context 'comment creation' do
     let(:comment) { Comment.make! }
 

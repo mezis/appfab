@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 describe "ideas/show.html.haml" do
+  fixtures :users, :logins
 
   subject { render ; rendered }
-  let(:user) { User.make! }
+  let(:user) { users :abigale_balisteri }
   login_user :user
 
   before do

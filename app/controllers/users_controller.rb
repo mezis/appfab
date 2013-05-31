@@ -19,15 +19,21 @@ class UsersController < ApplicationController
 
   def edit
     authorize! :update, @user
+    @form = User::EditForm.new(@user)
   end
 
   def update
     authorize! :update, @user
+    @form = User::EditForm.new(@user)
 
-    if @user.update_attributes(params[:user])
-      redirect_to @user, :notice  => "Successfully updated user."
+    if @form.needs_admin_rights?(params[:user])
+      authorize! :update_admin, @user
+    end
+
+    if @form.update_attributes(params[:user])
+      redirect_to @user, :notice  => _("Successfully updated user profile.")
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -35,10 +41,11 @@ class UsersController < ApplicationController
     authorize! :destroy, @user
 
     @user.destroy
-    redirect_to users_url, :notice => "Successfully destroyed user."
+    redirect_to users_url, :notice => _("Successfully destroyed user.")
   end
 
   private
+
   def load_user
     @user = User.find(params[:id])
   end

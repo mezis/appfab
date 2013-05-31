@@ -4,7 +4,9 @@ describe User::BookmarksController do
   login_user
   render_views
 
-  let(:idea) { Idea.make! }
+  fixtures :ideas, :accounts
+
+  let(:idea) { ideas(:idea_submitted) }
 
   it "create action should redirect when model is invalid" do
     User::Bookmark.any_instance.stub(:valid? => false)

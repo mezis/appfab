@@ -2,7 +2,9 @@ require 'spec_helper'
 require 'digest'
 
 describe Attachment do
-  let(:user) { User.make! }
+  fixtures :users
+
+  let(:user) { users(:abigale_balisteri) }
 
   before(:all) do
     @image_data = File.read('spec/assets/image.jpg')

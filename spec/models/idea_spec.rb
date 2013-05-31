@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe Idea do
+  fixtures :users, :accounts, :logins
+
   its 'factory should work' do
     described_class.make.should be_valid
   end
@@ -59,6 +61,8 @@ describe Idea do
   end
 
   describe '(sort orders)' do
+    before { Idea.delete_all }
+
     describe '.by_impact' do
       it 'takes sizing and rating into account' do
         idea1 = Idea.make!(design_size:2, development_size:2, rating:1)

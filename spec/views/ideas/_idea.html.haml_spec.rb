@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 describe "ideas/_idea.html.haml" do
+  fixtures :users, :logins, :accounts
 
   let(:local_assigns) { { idea:idea } }
-  let(:user)          { User.make! }
+  let(:user)          { users(:abigale_balisteri) }
 
   login_user :user
 

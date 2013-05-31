@@ -29,20 +29,31 @@
 
   .span3
 
-    = can_link_to edit_user_path(@user), auth:[:edit, @user], class: 'btn btn-block' do
-      = _("Edit %{user}") % { user:@user.first_name }
     = link_to users_path, class: 'btn btn-block' do
       = _("View all users")
+    = can_link_to edit_user_path(@user), auth:[:edit, @user], class: 'btn btn-block' do
+      = _("Edit %{user}") % { user:@user.first_name }
+
+    :ruby
+      classes = %w(btn btn-block)
+      other_state = @user.visible? ? :hidden : :visible
+      classes << 'active' if @user.hidden?
+    = can_link_to user_path(@user, user:{ state:User.state_value(other_state) }), method: :put, auth:[:update_admin, @user], class:classes, title:_('This will make the user unable to access this team anymore; they will also stop receiving emails. You will still see them in the user list, only greyed out.'), :'data-placement' => 'left', :'data-container' => '.container' do
+      = _("Hide %{user}") % { user:@user.first_name }
+
+    = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.'), :'data-placement' => 'left', :'data-container' => '.container' do
+      = _("Destroy %{user}") % { user:@user.first_name }
 
     %h4= _('Roles')
 
-    - User::Role::Names.each do |role_name|
-      - if role = @user.plays?(role_name)
-        = can_link_to user_role_path(@user, role), auth:[:destroy, role], method: :delete, class: 'btn btn-block  active', :'data-placement' => 'left' do
-          = user_role_name(role_name)
-      - else
-        = can_link_to user_roles_path(@user, user_role: {name: role_name}), auth:[:create, User::Role], method: :post, class: 'btn btn-block', :'data-placement' => 'left' do
-          = user_role_name(role_name)
+    .btn-group.btn-group-vertical.btn-block
+      - User::Role::Names.each do |role_name|
+        - if role = @user.plays?(role_name)
+          = can_link_to user_role_path(@user, role), auth:[:destroy, role], method: :delete, class:'btn active', :'data-placement' => 'left' do
+            = user_role_name(role_name)
+        - else
+          = can_link_to user_roles_path(@user, user_role: {name: role_name}), auth:[:create, User::Role], method: :post, class:'btn', :'data-placement' => 'left' do
+            = user_role_name(role_name)
 
     - if current_user.plays?(:account_owner)
       %hr/

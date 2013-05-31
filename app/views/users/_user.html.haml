@@ -4,7 +4,7 @@
 -# tooltip  (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(resource:User, id:user.id, v:4, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip]]) do
+= cached_fragment(disabled:true, resource:User, id:user.id, v:5, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip], can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
@@ -13,19 +13,30 @@
     avatar_size    =   local_assigns.fetch(:avatar,  nil)
     show_tooltip   =   local_assigns.fetch(:tooltip, true)
 
-    options = { id: "user#{user.id}" }
-    if show_tooltip
-      options.merge! title: user_tooltip(user), :'data-placement' => 'bottom', :'data-container' => '.container'
+    if can?(:read, user)
+      link_target = user
+    else
+      link_target  = nil
+      show_tooltip = false
+      show_karma   = false
     end
 
-    if classes = local_assigns[:classes]
-      options.merge! class: classes
+    options = { id: "user#{user.id}" }
+    if show_tooltip
+      options.merge! title: user_tooltip(user), data:{ placement:'bottom', container:'.container' }
     end
+
+    classes = []
+    if extra_classes = local_assigns[:classes]
+      extra_classes = extra_classes.split if extra_classes.kind_of?(String)
+      classes += extra_classes
+    end
+    options.merge! class:classes
 
     avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
 
   .user{ options }<>
-    = link_to user do
+    - body = capture do
       - if show_avatar
         .avatar{ style: "background-image: url(#{user.login.gravatar_url(avatar_options)})" }<>
       - if show_name
@@ -35,3 +46,8 @@
             %span.karma
               = number_with_delimiter user.karma
               = user_karma_symbol
+    - if link_target
+      = link_to link_target do
+        = body
+    - else
+      = body

@@ -10,8 +10,12 @@ class Ability
     can :read, Idea, author: { account_id: user.account_id }
     if user.plays?(:submitter)
       can :create,  Idea, author: { account_id: user.account_id }
-      can :update,  Idea, author: { account_id: user.account_id }, state:draft_or_submitted
-      can :destroy, Idea, author_id: user.id, state:draft_or_submitted
+      can :update,  Idea, author: { account_id: user.account_id }, state: draft_or_submitted
+      can :destroy, Idea, author_id: user.id, state: draft_or_submitted
+    end
+
+    can :move, Idea do |idea|
+      user == idea.author || user == idea.product_manager || user.plays?(:account_owner)
     end
 
     # Comment
@@ -62,11 +66,12 @@ class Ability
     end
 
     # User
-    can :read,   User, account_id: user.account_id
-    can :update, User, id: user.id
+    can :read,   User, account_id:user.account_id, state:User.state_value(:visible)
+    can :update, User, id:user.id
+    cannot :none, User
 
     if user.plays?(:account_owner)
-      can [:update, :update_voting_power, :destroy], User, account_id: user.account_id
+      can [:read, :update, :update_admin, :destroy], User, account_id: user.account_id
     end
 
     # User role

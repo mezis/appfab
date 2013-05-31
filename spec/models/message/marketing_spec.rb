@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Message::Marketing do
+  fixtures :users
 
   it 'validates all locales are present in summary' do
     message = described_class.new summary:{ 'fr' => 'foobar' } # 'en' locale missing

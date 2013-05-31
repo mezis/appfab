@@ -3,12 +3,14 @@ require 'spec_helper'
 describe AttachmentsController do
   login_user
   render_views
-  let(:idea) { Idea.make! }
+  
+  fixtures :ideas
 
-  let(:file) { 
+  let(:idea) { ideas(:idea_submitted) }
+
+  let(:file) do
     Rack::Test::UploadedFile.new(Rails.root.join('spec/assets/image.jpg'), 'image/jpeg')
-  }
-
+  end
 
   it "create action redirects if not Ajax" do
     post :create, idea_id: idea.id

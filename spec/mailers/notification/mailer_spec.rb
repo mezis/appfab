@@ -1,8 +1,10 @@
 require "spec_helper"
 
 describe Notification::Mailer do
+  fixtures :users, :accounts
+
   describe "digest" do
-    let(:user) { User.make! }
+    let(:user) { users(:abigale_balisteri) }
     let(:notifications) { [Notification::NewIdea.make!] }
     let(:mail) { Notification::Mailer.digest(user, notifications) }
 
