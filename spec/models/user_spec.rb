@@ -7,12 +7,12 @@ describe User do
   end
 
   it "should not be valid by default" do
-    User.new.should_not be_valid
+    described_class.new.should_not be_valid
   end
 
   describe '.create' do
     it 'sets a default karma' do
-      User.make!.karma.should == 20
+      described_class.make!.karma.should == 20
     end
 
     it 'gets user adopted by an account based on email' do

@@ -5,6 +5,9 @@ describe IdeasController do
   login_user
   render_views
 
+  fixtures :ideas
+
+  let(:idea) { ideas(:idea_submitted) }
 
   describe '#index' do
     it "renders index template" do
@@ -64,14 +67,15 @@ describe IdeasController do
 
   describe '#update' do
     it "renders edit template when model is invalid" do
-      idea = Idea.make!
+      idea
       Idea.any_instance.stub(:valid? => false)
       put :update, :id => idea.id
       response.should render_template(:edit)
     end
 
     it "redirects when model is valid" do
-      put :update, :id => Idea.make!
+      idea
+      put :update, :id => idea.id
       response.should redirect_to(idea_url(assigns[:idea]))
     end
 
@@ -85,7 +89,7 @@ describe IdeasController do
 
   describe '#destroy' do
     it "destroy action should destroy model and redirect to index action" do
-      idea = Idea.make!
+      idea
       delete :destroy, :id => idea
       response.should redirect_to(ideas_url)
       Idea.exists?(idea.id).should be_false

@@ -2,10 +2,11 @@
 require 'spec_helper'
 
 describe "ideas/index.html.haml" do
+  fixtures :users, :accounts
 
   let(:ideas)     { Array.new }
   let(:category)  { 'all' }
-  let(:user)      { User.make! }
+  let(:user)      { users(:abigale_balisteri) }
 
   subject { render ; rendered }
   login_user :user

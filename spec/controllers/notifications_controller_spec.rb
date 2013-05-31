@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe NotificationsController do
+  fixtures :ideas
+
   login_user
   render_views
 

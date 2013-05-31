@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe User::Bookmark do
-  let(:user) { User.make! }
+  fixtures :users
+
+  before { users(:abigale_balisteri) }
+  let(:user) { users(:abigale_balisteri) }
   let(:idea) { Idea.make!(author: User.make!)}
 
   it "should be valid" do

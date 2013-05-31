@@ -1,0 +1,8 @@
+abigale:
+  first_name: Abigale
+  last_name: Hudson
+  created_at: 2013-05-13 10:19:04.000000000 Z
+  updated_at: 2013-05-13 10:19:04.000000000 Z
+  email: abigale_hudson@legros.name
+  encrypted_password: $2a$04$q..mejuOgGcE5.ZWxae51uim0fkFiMIlrDUm9kkNGBJ3pin0DEBKC
+  sign_in_count: 0

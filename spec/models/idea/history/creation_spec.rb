@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Idea::History::Creation do
-  context 'idea creation' do
-    let(:idea) { Idea.make! }
+  fixtures :users
 
+  context 'idea creation' do
     it 'gets logged as history' do
-      expect { idea }.to change{ described_class.count }.by(1)
+      expect { Idea.make! }.to change{ described_class.count }.by(1)
     end
   end
 end
