@@ -9,6 +9,11 @@ require 'database_cleaner'
 require 'timecop'
 require 'coveralls'
 
+# Silence Coverall's chatty output
+module Coveralls
+  def puts(string) ; nil ; end
+end
+
 Coveralls.wear!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
