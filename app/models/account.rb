@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
 
   store :settings, accessors: [ :categories ]
 
-  default_values auto_adopt:false, categories: lambda { Set.new }
+  default_values auto_adopt: false, categories: lambda { Set.new }
 
 
   def categories_with_default
