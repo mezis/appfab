@@ -15,7 +15,7 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.
       send(angle_scope).
       by_most_recent.
-      paginate(per_page:PER_PAGE, page:params[:page])
+      paginate(per_page: PER_PAGE, page: params[:page])
   end
 
   def update
