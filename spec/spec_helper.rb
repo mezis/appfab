@@ -7,6 +7,14 @@ require 'rspec/autorun'
 
 require 'database_cleaner'
 require 'timecop'
+require 'coveralls'
+
+# Silence Coverall's chatty output
+module Coveralls
+  def puts(string) ; nil ; end
+end
+
+Coveralls.wear!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -23,6 +31,7 @@ RSpec.configure do |config|
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{::Rails.root}/spec/support/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -46,4 +55,9 @@ RSpec.configure do |config|
   config.extend  ViewHelpers,         :type => :view
 
   config.before(:each) { LazyRecords.flush }
+
+  # Clean the test DB before and after the suits
+  DatabaseCleaner.strategy = :truncation  
+  config.before(:suite) { DatabaseCleaner.clean }
+  config.after(:suite) { DatabaseCleaner.clean }
 end

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Traits::Idea::StarRating do
+  fixtures :users
+
   let(:described_module) { Traits::Idea::StarRating }
 
   it 'is part of the ancestor chain' do

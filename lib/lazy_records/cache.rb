@@ -39,7 +39,7 @@ class LazyRecords::Cache
     missing_ids = @records.select { |id,record| record.nil? }.keys
     return if missing_ids.empty?
     Rails.logger.info("eager loading #{missing_ids.count} #{model.name.pluralize}: #{missing_ids.join(', ')}")
-    scope = model.includes(@includes).where(id:missing_ids)
+    scope = model.includes(@includes).where(id: missing_ids)
     @records.merge! scope.index_by(&:id)
     nil
   end

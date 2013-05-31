@@ -5,7 +5,9 @@ describe VettingsController do
   render_views
   login_user
   
-  let(:idea) { Idea.make! }
+  fixtures :ideas
+
+  let(:idea) { ideas(:idea_submitted) }
   let(:vetting) { Vetting.make! idea:idea }
 
   it "create action should render new template when model is invalid" do

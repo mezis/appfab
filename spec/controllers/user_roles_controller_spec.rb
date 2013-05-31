@@ -5,7 +5,7 @@ describe UserRolesController do
   login_user
   render_views
 
-  let(:user) { User.make! }
+  let(:user) { users(:abigale_balisteri) }
 
   it "create action should redirect when model is invalid" do
     User::Role.any_instance.stub(:valid? => false)

@@ -5,6 +5,9 @@ describe CommentsController do
   login_user
   render_views
 
+  fixtures :ideas
+
+  let(:idea) { ideas(:idea_submitted) }
 
   describe "#create" do
     context "when model is invalid" do
@@ -23,7 +26,7 @@ describe CommentsController do
       end
 
       context '(js)' do
-        let(:perform) { xhr :post, :create, comment:{ idea_id:Idea.make!.id, body:'' } }
+        let(:perform) { xhr :post, :create, comment:{ idea_id:idea.id, body:'' } }
 
         it "mentions the error" do
           perform
@@ -33,7 +36,6 @@ describe CommentsController do
     end
 
     context "when model is valid" do
-      let(:idea) { Idea.make! }
       let(:data) { { comment: { body:'hello', idea_id:idea.id } }  }
 
       share_examples_for 'comment creation' do

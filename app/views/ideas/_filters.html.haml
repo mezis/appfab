@@ -5,7 +5,7 @@
     .container
       %ul.nav.pull-right.pull-right-spaced
         .btn-group
-          - IdeasController::ValidViews.each do |view|
+          - IdeasController::VALID_VIEWS.each do |view|
             - is_current = (@view == view)
             - classes = ['btn', is_current && 'active']
             = can_link_to ideas_path(params.merge(view:view)), class:classes, if:!is_current, title:ideas_view_tooltip(view) do
@@ -43,7 +43,7 @@
               %i.icon-sort
               %span.caret
           %ul.dropdown-menu.filter-order
-            - IdeasController::ValidOrders.each do |order|
+            - IdeasController::VALID_ORDERS.each do |order|
               - is_current = (@order == order)
               %li{ class: (is_current && 'disabled')}
                 = can_link_to ideas_path(params.merge(order:order)), if:!is_current do
@@ -59,7 +59,7 @@
               %i.icon-filter
               %span.caret
           %ul.dropdown-menu.filter-filter
-            - IdeasController::ValidFilters.each do |filter|
+            - IdeasController::VALID_FILTERS.each do |filter|
               - is_current = (@filter == filter)
               %li{ class: (is_current && 'disabled')}
                 = can_link_to ideas_path(params.merge(filter:filter)), if:!is_current do

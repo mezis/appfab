@@ -2,8 +2,8 @@
 class NotificationsController < ApplicationController
   include Traits::RequiresLogin
 
-  ValidAngles = %w(unread all)
-  DefaultAngle = ValidAngles.first
+  VALID_ANGLES = %w(unread all)
+  DEFAULT_ANGLE = VALID_ANGLES.first
   PER_PAGE = 25
 
   def index
@@ -15,7 +15,7 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.
       send(angle_scope).
       by_most_recent.
-      paginate(per_page:PER_PAGE, page:params[:page])
+      paginate(per_page: PER_PAGE, page: params[:page])
   end
 
   def update
@@ -49,7 +49,7 @@ class NotificationsController < ApplicationController
   private
 
   def get_angle_from_params
-    return params[:angle] if ValidAngles.include?(params[:angle])
-    session[:notifications_angle] || DefaultAngle
+    return params[:angle] if VALID_ANGLES.include?(params[:angle])
+    session[:notifications_angle] || DEFAULT_ANGLE
   end
 end

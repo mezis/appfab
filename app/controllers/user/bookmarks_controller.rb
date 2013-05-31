@@ -3,7 +3,7 @@ class User::BookmarksController < ApplicationController
 
   def create
     idea = current_account.ideas.find(params[:user_bookmark][:idea_id])
-    @user_bookmark = current_user.bookmarks.new(idea:idea)
+    @user_bookmark = current_user.bookmarks.new(idea: idea)
     if @user_bookmark.save
       flash[:success] = _('Bookmark successfuly added.')
     else

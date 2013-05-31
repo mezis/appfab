@@ -2,8 +2,9 @@
 require 'spec_helper'
 
 describe "layouts/application.html.haml" do
+  fixtures :users, :logins
 
-  let(:user) { User.make! }
+  let(:user) { users :abigale_balisteri }
   login_user :user
 
   subject { render ; rendered }

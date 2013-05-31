@@ -9,7 +9,6 @@ development: &local
 # Do not set this db to the same as development or production.
 test: &test
   <<: *local
-  socket: /Volumes/MySQLRAMDisk/mysql.sock
   database: appfab_test
 
 cucumber:

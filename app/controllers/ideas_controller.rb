@@ -8,17 +8,17 @@ class IdeasController < ApplicationController
   before_filter :map_no_category, only:[:create, :update]
   before_filter :can_create_idea, only:[:new, :create]
 
-  ValidAngles = %w(discussable vettable votable pickable approvable signoffable buildable followed)
-  DefaultAngle = ValidAngles.last
+  VALID_ANGLES = %w(discussable vettable votable pickable approvable signoffable buildable followed)
+  DEFAULT_ANGLE = VALID_ANGLES.last
 
-  ValidOrders  = %w(impact activity progress creation size)
-  DefaultOrder = ValidOrders.first
+  VALID_ORDERS  = %w(impact activity progress creation size)
+  DEFAULT_ORDER = VALID_ORDERS.first
 
-  ValidFilters = %w(all authored commented vetted backed)
-  DefaultFilter = ValidFilters.first
+  VALID_FILTERS = %w(all authored commented vetted backed)
+  DEFAULT_FILTER = VALID_FILTERS.first
 
-  ValidViews = %w(cards board)
-  DefaultView = ValidViews.first
+  VALID_VIEWS = %w(cards board)
+  DEFAULT_VIEW = VALID_VIEWS.first
 
   def index
     @angle    = set_angle_from_params
@@ -80,6 +80,12 @@ class IdeasController < ApplicationController
   def update
     @idea = find_idea(params[:id])
 
+    # specifics on account change
+    if new_account_id = params[:idea].andand.delete(:account_id)
+      update_account @idea, new_account_id
+      return
+    end
+
     # specifics on state changes
     if state = params[:idea].andand[:state]
       # auto-set product manager when picking
@@ -112,6 +118,28 @@ class IdeasController < ApplicationController
   private
   include AuthorizationHelper
 
+  def update_account(idea, new_account_id)
+    new_account = Account.find(new_account_id)
+
+    # check autorization
+    unless can?(:move, @idea)
+      flash[:error] = _('You cannot move this idea unless you are the author, the product manager, or an account owner.')
+      redirect_to @idea
+      return
+    end
+
+    unless current_login.accounts.include?(new_account)
+      flash[:error] = _('You must be a member of the target account to move and idea there.')
+      redirect_to @idea
+      return
+    end
+
+    IdeaMoverService.new(idea:@idea, account:new_account).run
+    flash[:notice] = _('Successfully changed idea account')
+    redirect_to @idea
+  end
+
+
   def find_idea(id)
     idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
     self.current_account = idea.account
@@ -132,20 +160,20 @@ class IdeasController < ApplicationController
   def set_angle_from_params
     params[:angle] =
     session[:ideas_angle] = begin
-      (ValidAngles.include?(params[:angle])        and params[:angle]) ||
-      (ValidAngles.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
+      (VALID_ANGLES.include?(params[:angle])        and params[:angle]) ||
+      (VALID_ANGLES.include?(session[:ideas_angle]) and session[:ideas_angle]) ||
       session[:ideas_angle] ||
-      DefaultAngle
+      DEFAULT_ANGLE
     end
   end
 
   def set_view_from_params
     params[:view] =
     session[:ideas_view] = begin
-      (ValidViews.include?(params[:view])        and params[:view]) ||
-      (ValidViews.include?(session[:ideas_view]) and session[:ideas_view]) ||
+      (VALID_VIEWS.include?(params[:view])        and params[:view]) ||
+      (VALID_VIEWS.include?(session[:ideas_view]) and session[:ideas_view]) ||
       session[:ideas_view] ||
-      DefaultView
+      DEFAULT_VIEW
     end
   end
 
@@ -153,9 +181,9 @@ class IdeasController < ApplicationController
     session[:ideas_order] ||= {}
     params[:order] =
     session[:ideas_order][@angle] = begin
-      (ValidOrders.include?(params[:order])                and params[:order]) || 
-      (ValidOrders.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) || 
-      DefaultOrder
+      (VALID_ORDERS.include?(params[:order])                and params[:order]) ||
+      (VALID_ORDERS.include?(session[:ideas_order][@angle]) and session[:ideas_order][@angle]) ||
+      DEFAULT_ORDER
     end
   end
 
@@ -163,9 +191,9 @@ class IdeasController < ApplicationController
     session[:ideas_filter] ||= {}
     params[:filter] =
     session[:ideas_filter][@angle] = begin
-      (ValidFilters.include?(params[:filter])                and params[:filter]) || 
-      (ValidFilters.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) || 
-      DefaultFilter
+      (VALID_FILTERS.include?(params[:filter])                and params[:filter]) ||
+      (VALID_FILTERS.include?(session[:ideas_filter][@angle]) and session[:ideas_filter][@angle]) ||
+      DEFAULT_FILTER
     end
   end
 
