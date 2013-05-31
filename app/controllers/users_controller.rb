@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   include Traits::RequiresLogin
-  UPDATABLE_ATTRIBUTES = %w(first_name last_name voting_power state)
-  ADMIN_ATTRIBUTES = %w(voting_power state)
 
   before_filter :load_user, :only => [:show, :edit, :update, :destroy]
 
@@ -21,24 +19,21 @@ class UsersController < ApplicationController
 
   def edit
     authorize! :update, @user
+    @form = User::EditForm.new(@user)
   end
 
   def update
     authorize! :update, @user
+    @form = User::EditForm.new(@user)
 
-    changes = params.fetch(:user, {})
-    if (changes.keys - UPDATABLE_ATTRIBUTES).any?
-      render_error_page :bad_request and return
-    end
-
-    if (changes.keys & ADMIN_ATTRIBUTES).any?
+    if @form.needs_admin_rights?(params[:user])
       authorize! :update_admin, @user
     end
 
-    if @user.update_attributes(changes)
+    if @form.update_attributes(params[:user])
       redirect_to @user, :notice  => _("Successfully updated user profile.")
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -50,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def load_user
     @user = User.find(params[:id])
   end

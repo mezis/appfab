@@ -1,15 +1,15 @@
-= form_for user do |f|
+- user = user_form.user
+= form_for user_form, url:user_path(user) do |f|
   = f.error_messages
 
-  = f.fields_for :login do |ff|
-    %p
-      = ff.label :first_name
-      %br
-      = ff.text_field :first_name
-    %p
-      = ff.label :last_name
-      %br
-      = ff.text_field :last_name
+  %p
+    = f.label :first_name
+    %br
+    = f.text_field :first_name
+  %p
+    = f.label :last_name
+    %br
+    = f.text_field :last_name
 
   - if can?(:update_admin, user)
     %p
