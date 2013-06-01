@@ -9,13 +9,13 @@
 
   .avatar
     +background-size(cover)
-    +border-radius($borderRadiusSmall)
+    +border-radius(1000px)
 
     // default only used when offline
     background-color: $wellBackground
 
     +translateZ(0)
-    +filter(saturate(0) sepia(0.5))
+    +filter(contrast(0.9) saturate(0) sepia(0.5))
     &:hover
       +filter(none)
 
@@ -30,22 +30,13 @@
 
 
 .user-large
-  $padding-size:        8px
-
-  padding: $padding-size
   width:   $large-avatar-size
-  +box-shadow($medium_gray 0px 4px 7px -2px)
-
-  .avatar
-    & + .name
-      margin-top: $padding-size
-      text-align: center
-    &:last-child
-      margin-bottom: (3 * $padding-size)
+  .avatar + .name
+    text-align: center
 
 
 .user-fit
-  width: 100%
+  width:  100%
   height: auto
 
 
@@ -65,4 +56,6 @@
   display:     inline-block
 
   .user
+    margin-right: 2ex
+    margin-bottom: 2ex
     display:   inline-block
