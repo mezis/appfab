@@ -1,15 +1,14 @@
 -# Context:
 -# - idea (Idea)
 
-.idea_container
-  - classes = [idea.state_name, idea_category_class(idea)]
-  .idea.idea-mini{ id: "idea#{idea.id}", class:classes }
-    .meta.top.clearfix
+.idea_container.af-mutable-content
+  .idea-mini[idea]{ class:idea.state_name }
+    .meta.top.clearfix.af-mutable
       = render 'idea_rating', idea:idea
-    .body
+    .body{ class:idea_category_class(idea) }
       %h3.title
-        = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
+        = link_to idea_path(idea) do
           %span= idea.title
 
-    .meta.bottom.clearfix
+    .meta.bottom.clearfix.af-mutable
       = render 'idea_people', idea:idea, limit:3

@@ -8,7 +8,8 @@
 //
 // general idea styling -- used on all index pages and show pages
 //
-$idea_banner_height: 2em
+$idea_banner_height: 28px
+$idea_avatar_offset: 4px
 
 // container
 .idea_container
@@ -38,7 +39,7 @@ $idea_banner_height: 2em
 
   .people
     float:        left
-    padding:      0
+    // padding:      0
     position:     relative
     overflow:     hidden
     text-align:   left
@@ -47,9 +48,13 @@ $idea_banner_height: 2em
     +height($idea_banner_height)
 
     .user
-      float:      left
+      float:         left
+      margin-top:    $idea_avatar_offset
+      margin-bottom: $idea_avatar_offset
+      margin-right:  2px
+      +square($idea_banner_height - 2 * $idea_avatar_offset)
     .avatar
-      +square($idea_banner_height)
+      +square($idea_banner_height - 2 * $idea_avatar_offset)
 
   .actions
     li
@@ -80,12 +85,25 @@ $idea_banner_height: 2em
 
 // mini-format idea overrides
 .idea-mini
+  $title-line-height: 1.3
+  $title-lines-shown: 3
+
   .meta.top
-    height:      auto
+    // height:      auto
   .body
     padding:     0.66ex
   .title
     margin:      0
     font-size:   medium
     font-weight: normal
-    line-height: 1.3
+
+    // hide everything but the first N lines, but open on hover
+    +transition-property(max-height)
+    +transition-duration($transition-duration)
+    line-height: $title-line-height
+    min-height:  $title-line-height * $title-lines-shown * 1em
+    max-height:  $title-line-height * $title-lines-shown * 1em
+    overflow:    hidden
+
+    &:hover
+      max-height:  1000em

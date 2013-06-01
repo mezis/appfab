@@ -21,7 +21,7 @@ $.unobtrusive () ->
   # only enable tooltips on non-touch devices
   return if ('ontouchstart' in document.documentElement)
   $('[title]').tooltip(
-    delay: { show:350, hide:150 }
+    delay: { show:500, hide:150 }
     html: true
   )
 

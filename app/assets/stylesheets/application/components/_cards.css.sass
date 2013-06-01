@@ -4,10 +4,9 @@
 
 .af-card
   // +gradient-box($wellBackground)
-  background-color: $wellBackground
-  +box-shadow($standard_box_shadow)
-  .af-with_colored-cards &
-    @extend .af-category-colored
+  .body
+    background-color: $wellBackground
+  // +box-shadow($standard_box_shadow)
 
 .af-category-label
   +square(0.9em)
@@ -17,11 +16,18 @@
   display:      inline-block
   margin-right: 1ex
 
-.af-category-colored
-  @for $total from 1 through 6
-    @for $index from 1 through $total
-      &.category-#{$index}-of-#{$total}
-        $color: hsl(255.0 * ($index - 1) / $total, 25%, 85%)
-        background-color: $color
-  &.no-category
-    background-color: hsl(0, 0%, 85%)
+$category-sliver-size: 5px
+
+.af-category-sliver
+  border-left-width: $category-sliver-size
+  border-left-style: solid
+
+@for $total from 1 through 6
+  @for $index from 1 through $total
+    .af-category-#{$index}-of-#{$total}
+      @extend .af-category-sliver
+      $color: hsl(255.0 * ($index - 1) / $total, 66%, 85%)
+      border-color: $color
+.af-category-none
+  @extend .af-category-sliver
+  border-color: hsl(0, 0%, 85%)
