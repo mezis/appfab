@@ -1,10 +1,10 @@
 - title _("Team %{team_name}") % { team_name:@account.name }, show_title:false
 
 .row
-  .span9
+  .span9.user-list
     - @account.users.sort_by(&:first_name).each do |user|
       - next if cannot?(:read, user)
-      = render user, name:true, avatar:512, tooltip:false, classes:"user-large pull-left pull-left-spaced user-#{user.state_name}"
+      = render user, name:true, avatar:512, tooltip:false, classes:"user-large pull-left user-#{user.state_name}"
     .clearfix
   .span3
     %h3= _("Team %{team_name}") % { team_name:@account.name }

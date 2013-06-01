@@ -2,24 +2,23 @@
 @import application/variables
 @import application/mixins
 
-.idea.with-header-wizard
-  =progress-gradient($x)
-    +background-image(linear-gradient(left, $progress_color 0, $progress_color $x, rgba($progress_color, 0) ($x + 1/18)))  
-  &.submitted .meta.top
-    +progress-gradient(1/9)
-  &.vetted .meta.top
-    +progress-gradient(2/9)
-  &.voted .meta.top
-    +progress-gradient(3/9)
-  &.picked .meta.top
-    +progress-gradient(4/9)
-  &.designed .meta.top
-    +progress-gradient(5/9)
-  &.approved .meta.top
-    +progress-gradient(6/9)
-  &.implemented .meta.top
-    +progress-gradient(7/9)
-  &.signed_off .meta.top
-    +progress-gradient(8/9)
-  &.live .meta.top
-    +progress-gradient(9/9)
+=progress-gradient($x)
+  +background-image(linear-gradient(left, $progress_color 0, $progress_color $x, rgba($progress_color, 0) ($x + 1/18)))  
+.idea.submitted .progressbar
+  +progress-gradient(1/9)
+.idea.vetted .progressbar
+  +progress-gradient(2/9)
+.idea.voted .progressbar
+  +progress-gradient(3/9)
+.idea.picked .progressbar
+  +progress-gradient(4/9)
+.idea.designed .progressbar
+  +progress-gradient(5/9)
+.idea.approved .progressbar
+  +progress-gradient(6/9)
+.idea.implemented .progressbar
+  +progress-gradient(7/9)
+.idea.signed_off .progressbar
+  +progress-gradient(8/9)
+.idea.live .progressbar
+  +progress-gradient(9/9)
