@@ -22,7 +22,11 @@ module FragmentCacheHelper
     cache_entry   = "#{__method__}/v#{version}/#{digest}"
 
     Rails.logger.info("Cache key: #{cache_key} -> #{digest}") if key.any?
-    Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
+    if options[:disabled]
+      capture(&block)
+    else
+      Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
+    end
   end
 
   private
