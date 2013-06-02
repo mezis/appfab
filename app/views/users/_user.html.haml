@@ -4,7 +4,7 @@
 -# tooltip  (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:false, resource:User, id:user.id, v:6, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip], local_assigns[:classes], can?(:read, user)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:6, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :tooltip, :classes), can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
