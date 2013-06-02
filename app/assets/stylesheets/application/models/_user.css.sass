@@ -4,30 +4,30 @@
 
 .user
   position: relative
-  width:    2em
+  width:    100px
   height    auto
 
   .avatar
-    +background-size(cover)
     +border-radius(1000px)
 
     // default only used when offline
     background-color: $wellBackground
 
     +translateZ(0)
-    +filter(contrast(0.9) saturate(0) sepia(0.5))
+    +filter(contrast(0.95) saturate(0) sepia(0.5))
     &:hover
       +filter(none)
 
-  // make the avatar square
-  .avatar
-    width:     auto
-    padding:   50%
+    // make the avatar fill the user box
     +box-sizing(border-box)
+    width:     100%
+    height:    auto
 
   .name
     white-space: nowrap
 
+
+// size
 
 .user-large
   width:   $large-avatar-size
@@ -35,27 +35,39 @@
     text-align: center
 
 
-.user-fit
+// layout
+
+.user-fit-width
   width:  100%
   height: auto
 
+.user-fit-height
+  height: 100%
+  width:  auto
+
 
 .user-inline
+  line-height: 0
   display: inline-block
   .name
     display: inline-block
 
 
+// state
+
 .user-hidden
   +opacity(0.5)
 
 
-.user-list
-  height:      $small-avatar-size
-  line-height: 0
-  display:     inline-block
+// collection
 
+.user-list-inline
+  line-height:        0
   .user
-    margin-right: 2ex
-    margin-bottom: 2ex
-    display:   inline-block
+    @extend .user-inline
+    margin-right:     0.33ex
+    display:          inline-block
+  .user, .avatar
+    height:           100%
+    width:            auto
+

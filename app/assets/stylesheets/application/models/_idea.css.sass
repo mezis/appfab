@@ -8,7 +8,7 @@
 //
 // general idea styling -- used on all index pages and show pages
 //
-$idea_banner_height: 28px
+$idea_banner_height: 1.4em
 $idea_avatar_offset: 4px
 
 // container
@@ -18,9 +18,8 @@ $idea_avatar_offset: 4px
 
 // idea block itself
 .idea
-  @extend .af-card
-
   .body
+    background-color: $wellBackground
     padding:          $section_padding
 
   .title
@@ -31,27 +30,17 @@ $idea_avatar_offset: 4px
         color: $textColor
 
   .meta
-    padding:  0
-    text-align: left
-    font-size: smaller
-    > *
-      padding: 0 $section_padding
+    position:       relative
+    padding:        0
+    height:         $idea_banner_height
+    line-height:    $idea_banner_height
+    margin:         2px 0
+    text-align:     left
+    font-size:      smaller
 
   .people
-    float:        left
-    position:     relative
-    overflow:     hidden
-    text-align:   left
-    white-space:  nowrap
-
-    .user
-      float:         left
-      margin-top:    $idea_avatar_offset
-      margin-bottom: $idea_avatar_offset
-      margin-right:  2px
-      +square($idea_banner_height - 2 * $idea_avatar_offset)
-    .avatar
-      +square($idea_banner_height - 2 * $idea_avatar_offset)
+    position:       relative
+    height:         100%
 
   .actions
     li
@@ -67,11 +56,6 @@ $idea_avatar_offset: 4px
 
 // maxi-format idea specifics
 .idea-maxi
-  .meta
-    height:   $idea_banner_height
-    > *
-      +height($idea_banner_height)
-      +box-sizing(border-box)
   .title
     white-space:      nowrap
     text-overflow:    ellipsis
@@ -85,8 +69,6 @@ $idea_avatar_offset: 4px
   $title-line-height: 1.3
   $title-lines-shown: 3
 
-  .meta.top
-    // height:      auto
   .body
     padding:     0.66ex
   .title

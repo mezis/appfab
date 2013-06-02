@@ -4,7 +4,7 @@
 -# tooltip  (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:true, resource:User, id:user.id, v:5, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip], can?(:read, user)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:6, key:[user.login.updated_at, user.updated_at, local_assigns[:name], local_assigns[:avatar], local_assigns[:karma], local_assigns[:tooltip], local_assigns[:classes], can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
@@ -38,7 +38,7 @@
   .user{ options }<>
     - body = capture do
       - if show_avatar
-        .avatar{ style: "background-image: url(#{user.login.gravatar_url(avatar_options)})" }<>
+        %img.avatar{ src:user.login.gravatar_url(avatar_options) }<>
       - if show_name
         .name>
           = user.first_name
