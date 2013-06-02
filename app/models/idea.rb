@@ -43,7 +43,7 @@ class Idea < ActiveRecord::Base
   scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
   scope :not_backed_by, lambda { |user| 
     backed_ideas_ids = user.backed_ideas.value_of(:id)
-    backed_ideas_ids.any? ? where('ideas.id NOT IN (?)') : scoped
+    backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
   }
 
   # Other helpers
