@@ -10,5 +10,5 @@ Feature: Sumitting ideas
   Scenario: Normal submission
      When I submit an idea "My brilliant idea"
      Then the idea should be submitted
-     Then the idea should be in angle "discussable"
-      But the idea should not be in angle "votable"
+      And the idea should be in angle "discussable"
+      And the idea should be in angle "followed"

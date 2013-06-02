@@ -4,6 +4,10 @@
       %a.brand{href: root_path}<
         %span= configatron.app_name
       %ul.nav
+        = content_tag_with_path_checking(:li, controller: 'dashboards', action: 'show') do |path|
+          %a{href: path, title: s_('Tooltip|Your dashboard'), :'data-placement' => 'bottom'} 
+            %i.icon-dashboard
+            %span= _('Dashboard')
         - if can?(:create, Idea)
           = content_tag_with_path_checking(:li, action: 'new') do |path|
             %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
@@ -11,50 +15,12 @@
               %span= _('Submit')
         = content_tag_with_path_checking(:li, angle: 'discussable') do |path|
           %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
-            = header_angle_counter('discussable')
             %i.icon-comments-alt
             %span= _('All ideas')
-        - if can?(:create, Vetting)
-          = content_tag_with_path_checking(:li, angle: 'vettable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories you can vet'), :'data-placement' => 'bottom'}
-              = header_angle_counter('vettable')
-              %i.icon-check
-              %span= _('Vet')
-        - if can?(:create, Vote)
-          = content_tag_with_path_checking(:li, angle: 'votable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories open for endorsements'), :'data-placement' => 'bottom'}
-              %i.icon-thumbs-up
-              = header_angle_counter('votable')
-              %span= _('Endorse')
-        - if can?(:pick, Idea)
-          = content_tag_with_path_checking(:li, angle: 'pickable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories you can pick'), :'data-placement' => 'bottom'}
-              %i.icon-cog
-              = header_angle_counter('pickable')
-              %span= _('Pick')
-        - if can?(:approve, Idea)
-          = content_tag_with_path_checking(:li, angle: 'approvable') do |path|
-            %a{href: path, title: s_('Tooltip|Show designed stories ready to be approved'), :'data-placement' => 'bottom'}
-              %i.icon-ok-circle
-              = header_angle_counter('approvable')
-              %span= _('Approve')
-        - if current_user.andand.plays?(:architect, :product_manager, :designer, :developer)
-          = content_tag_with_path_checking(:li, angle: 'buildable') do |path|
-            %a{href: path, title: s_('Tooltip|Show stories being worked on'), :'data-placement' => 'bottom'}
-              %i.icon-cogs
-              = header_angle_counter('buildable')
-              %span= _('Build')
-        - if can?(:sign_off, Idea)
-          = content_tag_with_path_checking(:li, angle: 'signoffable') do |path|
-            %a{href: path, title: s_('Tooltip|Show implemented stories ready to be signed off'), :'data-placement' => 'bottom'}
-              %i.icon-ok-sign
-              = header_angle_counter('signoffable')
-              %span= _('Sign Off')
         = content_tag_with_path_checking(:li, angle: 'followed') do |path|
           %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
             %i.icon-bookmark-empty
-            = header_angle_counter('followed')
-            %span= _('Follow')
+            %span= _('Bookmarks')
 
       %ul.nav.pull-right
         - if current_account

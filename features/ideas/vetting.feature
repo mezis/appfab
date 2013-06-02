@@ -8,18 +8,11 @@ Feature: Vetting ideas
     And an architect named "Archie"
     And a sized idea "Solo, make it so"
     And "Archie" has vetted the idea
-    
-
-  Scenario: Discovering vettable ideas
-    When I sign in as "Peter"
-    Then the idea should be in angle "vettable"
-     But the idea should not be in angle "votable"
 
   Scenario: Vetting an idea
     When I sign in as "Peter"
     And I vet the idea
     Then the idea should be vetted
-    And the idea should be in angle "votable"
 
   Scenario: Removing a vetting
     When I sign in as "Archie"

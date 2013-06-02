@@ -7,10 +7,6 @@ Feature: Approving ideas
     Given a benevolent dictator named "Barnaby"
     And a designed idea "Solo, make it so"    
 
-  Scenario: Discovering approvable ideas
-    When I sign in as "Barnaby"
-    Then the idea should be in angle "approvable"
-
   Scenario: Approving an idea
     When I sign in as "Barnaby"
     And I approve the idea
