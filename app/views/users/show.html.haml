@@ -2,7 +2,7 @@
 
 .row
   .span3
-    = render @user, avatar:512, name:false, tooltip:false, classes:'user-large user-fit'
+    = render @user, avatar:512, name:false, tooltip:false, classes:'user-fit-width'
     %hr/
     .karma-icons
       - @user.karma.times do
