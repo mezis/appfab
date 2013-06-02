@@ -70,14 +70,12 @@ Idea.blueprint(:vetted) do
   state            { Idea.state_machine.state(:vetted).value }
 end
 
-
 Idea.blueprint(:voted) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
   state            { Idea.state_machine.state(:voted).value }
 end
-
 
 Idea.blueprint(:designed) do
   development_size { 1 }
@@ -86,6 +84,12 @@ Idea.blueprint(:designed) do
   state            { Idea.state_machine.state(:designed).value }
 end
 
+Idea.blueprint(:implemented) do
+  development_size { 1 }
+  design_size      { 2 }
+  product_manager  { User.make!.plays!(:product_manager) }
+  state            { Idea.state_machine.state(:implemented).value }
+end
 
 Idea.blueprint(:signed_off) do
   development_size { 1 }

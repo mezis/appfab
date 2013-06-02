@@ -12,6 +12,8 @@ class Dashboard
   end
 
   def ideas_to_size
+    return [] unless @user.plays?(:product_manager, :architect)
+
     conditions = {
       :product_manager => :design_size,
       :architect => :development_size
@@ -54,6 +56,7 @@ class Dashboard
 
   def comments_on_followed_ideas
     follow_idea_ids = @user.bookmarked_ideas.value_of(:id)
+    return [] if follow_idea_ids.empty?
     Comment.by_created_at.where(idea_id:follow_idea_ids).limit(block_size)
   end
 
@@ -68,7 +71,7 @@ class Dashboard
     visible_ideas.take_random(count:block_size, seed:random_seed)
   end
 
-  # return the same seed for a given suer/day
+  # return the same seed for a given user and day
   def random_seed
     Date.today.strftime('%Y%m%d').to_i * @user.id
   end

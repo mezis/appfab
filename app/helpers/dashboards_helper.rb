@@ -5,7 +5,7 @@ module DashboardsHelper
 
     variant = DASHBOARD_VARIANTS[variant_name]
 
-    render 'block_list', 
+    render 'application/block_list', 
       collection: dashboard.send(variant_name),
       title:      variant.title,
       icon:       variant.icon,

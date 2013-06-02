@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe DashboardsController do
+  fixtures :users, :accounts, :logins
+  
   login_user
   render_views
 
