@@ -4,7 +4,7 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 before_script:
-  - mysql -e 'create database appfab_test;'
+  - psql -c 'create database appfab_test;' -U postgres
   - cp config/database-travis.yml config/database.yml
   - rake db:migrate RAILS_ENV=test
 rvm:
