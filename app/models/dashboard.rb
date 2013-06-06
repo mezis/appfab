@@ -1,3 +1,4 @@
+# A Facade to ideas, comments, and notifications for a given user.
 class Dashboard
 
   def initialize(user:nil)

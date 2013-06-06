@@ -15,6 +15,7 @@ class Idea < ActiveRecord::Base
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
   include Traits::Idea::StarRating
+  include Traits::Shuffleable
   include LazyRecords::Model
   include Idea::History::Base::HasHistory
   include Idea::History::Creation::Recorder
@@ -149,14 +150,6 @@ class Idea < ActiveRecord::Base
   end
 
 
-  # Pluck random ideas
-  def self.take_random(options = {})
-    count = options.fetch(:count)
-    seed  = options.fetch(:seed, nil)
-    limit(count).order("RAND(#{seed})")
-  end
-
-
   # called from subresources (comments, vettings, votes)
   def ping!
     update_column :active_at, Time.current
@@ -164,6 +157,7 @@ class Idea < ActiveRecord::Base
 
 
   protected
+
 
   def update_active_at
     return unless changes.any?
