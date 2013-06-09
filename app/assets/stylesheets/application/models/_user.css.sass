@@ -17,11 +17,6 @@
     // default only used when offline
     background-color: $wellBackground
 
-    +translateZ(0)
-    +filter(contrast(0.95) saturate(0) sepia(0.5))
-    &:hover
-      +filter(none)
-
     // make the avatar fill the user box
     +box-sizing(border-box)
     width:     100%
@@ -29,6 +24,13 @@
 
   .name
     white-space: nowrap
+
+// rollover
+.user a .avatar
+  +translateZ(0)
+  +filter(contrast(0.95) saturate(0) sepia(0.5))
+  &:hover
+    +filter(none)
 
 
 // size
