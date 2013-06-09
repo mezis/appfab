@@ -141,17 +141,9 @@ module IdeasHelper
     end
   end
 
-    # %h4= _('Sorry! I\'m afraid there are no %{qualifier} ideas %{filter} %{category} at the moment.') % { qualifier: @angle, filter: ideas_filter_qualifier(@filter), category: ideas_category_qualifier(@category) }
-
   def ideas_copy_for_angle(angle)
     text = case angle
-    when 'discussable' then _('This list show ideas currently open for discussion, regardless of their current status. Use the dropdowns to filter or sort them, or switch to another angle.')
-    when 'vettable'    then _('This list show the ideas that need to be **vetted** before users can endorse them. This means that those ideas have not yet been looked at by a product manager or by an architect, or that their description is not precise enough yet for them to be properly sized.')
-    when 'votable'     then _('Time to back ideas! This is the list of ideas that have been vetted and the team members spend %{karma} to endorse them.') % { karma:user_karma_symbol }
-    when 'pickable'    then _('This angle is only visible to product managers. Consider it your backlog of ideas to work on. It shows ideas that have received enough endorsements for you to consider them as worth working on.')
-    when 'approvable'  then _('This angle is only visible to the benevolent dictator. It lists the ideas that have been picked by a product manager and have been designed; this means you should take a looks at their description and roadmap, their wireframes, and possibly preliminary designs, so product teams can start actually working on them.')
-    when 'buildable'   then _('This angle lists ideas actively worked on: being designed by a product manager, implemented by a product team, or ready signed off and ready for release. It is the product team\'s working set.')
-    when 'signoffable' then _('This angle is only visible to the benevolent dictator. It lists the ideas a product manager has marked as completed and awaits your sign off for release. See the idea details, or speak to your product manager to figure out where it was staged.')
+    when 'discussable' then _('This list show ideas currently open for discussion, regardless of their current status. Use the dropdowns to filter or sort them.')
     when 'followed'    then _('This angle lists the ideas you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
     end
 

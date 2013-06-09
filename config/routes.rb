@@ -3,6 +3,7 @@ AppFab::Application.routes.draw do
 
   get "welcome/index"
   get 'welcome/fail'
+  match 'page/:page' => 'welcome#static_page', :as => :static_page
 
   resources :notifications
   resources :accounts
@@ -32,8 +33,7 @@ AppFab::Application.routes.draw do
   }
 
   resource :session, only:[:update]
-
-  match 'page/:page' => 'welcome#static_page', :as => :static_page
+  resource :dashboard, only:[:show]
 
   namespace :admin do
     unless Rails.env.production?

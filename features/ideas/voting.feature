@@ -12,13 +12,11 @@ Feature: Voting for ideas
     And I sign in as "Ulysse"
     
 
-  Scenario: Discovering votable ideas
-    Then the idea should be in angle "votable"
-
   Scenario: Voting for idea
     When I endorse the idea
     Then the idea should be endorsed
     And the idea should be in angle "votable"
+    And the idea should be in angle "followed"
 
   Scenario: Removing a vote
     When I endorse the idea
@@ -26,13 +24,6 @@ Feature: Voting for ideas
     
     Then the idea should be vetted
     And the idea should be in angle "votable"
-
-  Scenario: The idea becomes pickable
-    When I endorse the idea
-
-    Given a product manager named "Patrick"
-    And I sign in as "Patrick"
-    Then the idea should be in angle "pickable"
 
   Scenario: No double votes
     When I endorse the idea

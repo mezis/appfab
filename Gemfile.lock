@@ -117,9 +117,8 @@ GEM
     fineuploader-rails (3.3)
       actionpack (>= 3.1)
       railties (>= 3.1)
-    font-awesome-sass-rails (3.0.2.2)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
+    font-awesome-rails (3.1.1.1)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     fssm (0.2.10)
     gettext (2.3.9)
@@ -389,7 +388,7 @@ DEPENDENCIES
   dragonfly
   faker
   fineuploader-rails
-  font-awesome-sass-rails
+  font-awesome-rails
   gettext
   gettext_i18n_rails
   gravtastic

@@ -1,0 +1,8 @@
+:ruby
+  idea = notification.subject
+  data = {
+    idea_title: notification.subject.title,
+    idea_link:  link_to(idea.title, idea)
+  }
+
+= _('Idea %{idea_link} is now vetted, users can start voting for it.').html_safe % data

@@ -1,0 +1,31 @@
+.muted
+  .ht-with-margin-icon
+    .ht-margin-icon
+      %i.icon-info-sign
+    = _('This is your dashboard.')
+
+- if can?(:size, Idea)
+  = dashboard_render @dashboard, :ideas_to_size
+- else
+  = dashboard_render @dashboard, :ideas_recently_active
+
+- if can?(:veto, Idea)
+  = dashboard_render @dashboard, :ideas_for_dictator
+
+= dashboard_render @dashboard, :ideas_to_vote
+= dashboard_render @dashboard, :ideas_recently_submitted
+
+- if current_user.plays?(:product_manager)
+  = dashboard_render @dashboard, :ideas_working_set
+
+= dashboard_render @dashboard, :notifications_recent
+= dashboard_render @dashboard, :comments_on_followed_ideas
+
+- dashboard_render_extra_blocks.times do
+  .af-block-with-title
+    %h4
+      &nbsp
+    %div
+      - @dashboard.block_size.times do
+        .af-blocklist-row
+          &nbsp

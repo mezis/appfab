@@ -1,8 +1,0 @@
-:ruby
-  data = {
-    product_manager: user_name(notification.subject.product_manager),
-    idea_title: notification.subject.title,
-    idea_link:  link_to("##{notification.subject.id}", notification.subject)
-  }
-
-= _('Idea "%{idea_title}" (%{idea_link}) was just picked by %{product_manager}').html_safe % data

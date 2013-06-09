@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   before_filter :map_no_category, only:[:create, :update]
   before_filter :can_create_idea, only:[:new, :create]
 
-  VALID_ANGLES = %w(discussable vettable votable pickable approvable signoffable buildable followed)
+  VALID_ANGLES = %w(discussable followed)
   DEFAULT_ANGLE = VALID_ANGLES.last
 
   VALID_ORDERS  = %w(impact activity progress creation size)

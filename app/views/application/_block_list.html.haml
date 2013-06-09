@@ -1,0 +1,24 @@
+:ruby
+  # pass me a +collection+, a +title+ and and +icon+
+  # options:
+  # - +padded+ acts as limit/padding
+  # - +class+ added to the top element
+  # - all other options passed to the element partial
+  padding = local_assigns.fetch(:padding, nil)
+  classes = local_assigns.fetch(:class, nil)
+  options = local_assigns.except(:padding, :class)
+
+  collection = collection.in_groups_of(padding).first if padding.present?
+  collection = [nil] * padding if collection.nil?
+  
+.af-block-with-title{ class:classes }
+  %h4.muted
+    %i{ class: "icon-#{icon}" }
+    = title
+  %ul.af-blocklist
+    - collection.each do |item|
+      %li.af-blocklist-row
+        - if item.present?
+          = render item, options
+        - else
+          &nbsp;

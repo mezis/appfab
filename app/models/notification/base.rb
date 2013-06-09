@@ -19,6 +19,16 @@ class Notification::Base < ActiveRecord::Base
   scope :unread, where(unread:true)
   scope :by_most_recent, order('created_at DESC')
 
+  # makes sure all subclasses render through the "main" partial
+  def to_partial_path
+    'notifications/notification'
+  end 
+
+  def partial_name
+    # pluralize the first component
+    self.class.name.underscore.sub(%r(/),'s/')
+  end
+
 
   module Recipient
     def self.included(by)

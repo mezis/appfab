@@ -20,7 +20,7 @@
           %th/
         %tbody
           - @notifications.each do |notification|
-            = render 'notification/base', notification: notification
+            = render notification, format:'row'
 
   .span3
     = can_link_to notification_path('all', notification: { unread: false }), auth:[:update, Notification::Base], method: :put, :'data-placement' => 'left', class:'btn btn-block' do

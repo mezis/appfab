@@ -1,0 +1,9 @@
+:ruby
+  idea = notification.subject
+  data = {
+    product_manager: user_name(notification.subject.product_manager),
+    idea_title: notification.subject.title,
+    idea_link:  link_to(idea.title, idea)
+  }
+
+= _('%{product_manager} picked %{idea_link}').html_safe % data

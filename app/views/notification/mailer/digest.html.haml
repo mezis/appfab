@@ -13,7 +13,7 @@
       %li{ class: cycle('even', 'odd') }<
         .ago.muted.pull-right
           = _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
-        = render notification.class.name.underscore, notification: notification
+        = render notification.partial_name, notification:notification
 
   %p.muted<
     = _("We've marked these notifications as read for you, so we won't bug you again.")

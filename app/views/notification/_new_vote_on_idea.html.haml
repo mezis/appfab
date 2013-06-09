@@ -1,8 +1,0 @@
-:ruby
-  data = {
-    user:       user_name(notification.subject.user),
-    idea_title: notification.subject.subject.title,
-    idea_link:  link_to("##{notification.subject.subject.id}", notification.subject.subject)
-  }
-
-= _('Idea "%{idea_title}" (%{idea_link}) was endorsed by %{user}').html_safe % data
