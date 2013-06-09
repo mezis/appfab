@@ -12,8 +12,8 @@ When /^I change my full name to "(.*?)"$/ do |full_name|
 end
 
 When /^I act as "(.*?)"$/ do |first_name|
-  user = Login.find_by_first_name(first_name).users.first
-  visit "/users/#{user.id}"
+  page.find('#account-menu').first('a').click # user listing page
+  page.find('a', text:/#{first_name}/).click         # user entry
   click_on 'Act as user'
 end
 

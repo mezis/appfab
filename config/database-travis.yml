@@ -1,8 +1,7 @@
 test: &test
-  adapter:  mysql2
+  adapter:  postgresql
   database: appfab_test
-  user:     root
-  encoding: utf8
+  user:     postgres
 
 cucumber:
   <<: *test
