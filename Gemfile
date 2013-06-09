@@ -8,7 +8,7 @@ gem 'thin',    group: :development
 
 # database
 gem 'mysql2',  group: :development
-gem 'pg',      group: :production
+gem 'pg'
 
 # authentication/authorisation
 gem 'devise'
