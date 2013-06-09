@@ -1,0 +1,65 @@
+@import compass/css3/box-sizing
+@import compass/css3/border-radius
+@import application/variables
+@import application/mixins
+
+.af-blocklist
+  +box-sizing(border-box)
+  list-style-type:    none
+  position:           relative
+  width:              100%
+
+  li
+    +single-line
+
+.af-blocklist-row
+  position:           relative
+  line-height:        2
+  margin-bottom:      2px
+  &:last-child
+    margin-bottom:    0
+
+.idea-line
+  +single-line
+  padding-right:      (3 * $small-avatar-size) + $section_padding
+  .user-list
+    position:         absolute
+    top:              0
+    right:            0
+    height:           100%
+    
+
+.af-block-with-title
+  +border-radius($baseBorderRadius)
+  +box-sizing(border-box)
+  overflow:           hidden
+  background-color:   $light_gray
+  margin-top:         $small-avatar-size
+  float:              left
+
+  > *
+    &:first-child, &:last-child
+      margin:           0
+      padding:          $section_padding
+    &:first-child
+      background-color: $wellBackground
+    &:last-child
+      background-color: $wellBackground
+
+
+  +respond-to(wide)
+    width:              32%
+    margin-left:        2%
+    &:nth-of-type(3n+2)
+      clear:            left
+      margin-left:      0
+  +respond-to(desktop)
+    width:              49%
+    margin-left:        2%
+    &:nth-of-type(2n+2)
+      clear:            left
+      margin-left:      0
+  +respond-to(tablet)
+    width: 100%
+  +respond-to(phone)
+    width: 100%

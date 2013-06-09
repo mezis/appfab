@@ -30,7 +30,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     sign_in login
     flash[:success] = _('Welcome, %{user}!') % { user: login.first_name }
     
-    redirect_to return_to || ideas_path(angle: IdeasController::DEFAULT_ANGLE)
+    redirect_to return_to || dashboard_path
   end
 
   def _auth_hash

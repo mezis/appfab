@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module UsersHelper
   def user_name(user)
-    link_to(user.first_name, user, title:user_tooltip(user))
+    link_to(user.first_name, user, title:user_tooltip(user), :"data-container" => '.container')
   end
 
   def user_tooltip(user)

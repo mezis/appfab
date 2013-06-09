@@ -15,6 +15,7 @@ class Idea < ActiveRecord::Base
   include Notification::Base::CanBeSubject  
   include Traits::Idea::StateMachine
   include Traits::Idea::StarRating
+  include Traits::Shuffleable
   include LazyRecords::Model
   include Idea::History::Base::HasHistory
   include Idea::History::Creation::Recorder
@@ -41,6 +42,10 @@ class Idea < ActiveRecord::Base
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
   scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
+  scope :not_backed_by, lambda { |user| 
+    backed_ideas_ids = user.backed_ideas.value_of(:id)
+    backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
+  }
 
   # Other helpers
 
@@ -152,6 +157,7 @@ class Idea < ActiveRecord::Base
 
 
   protected
+
 
   def update_active_at
     return unless changes.any?

@@ -1,6 +1,7 @@
 require 'digest'
 
 module FragmentCacheHelper
+  FRAGMENT_CACHE_VERSION = 0
 
   # Options:
   # - any options valid for Rails.cache.fetch
@@ -12,14 +13,20 @@ module FragmentCacheHelper
     raise ArgumentError unless options[:resource] && options[:id]
 
     cache_options = options.slice!(:resource, :id, :v, :key)
-    version       = options.fetch(:v, 1)
-    cache_key     = normalize_cache_key options.fetch(:key, [])
-
+    version       = options.fetch(:v, 1) + FRAGMENT_CACHE_VERSION
+    key           = options.fetch(:key, [])
+    key.unshift options[:resource]
+    key.unshift options[:id]
+    cache_key     = normalize_cache_key key
     digest        = Digest::SHA1.hexdigest cache_key
-    cache_entry   = "#{__method__}/v#{version}/#{options[:resource]}/#{options[:id]}/#{digest}"
+    cache_entry   = "#{__method__}/v#{version}/#{digest}"
 
-    Rails.logger.info("cache key: #{options[:key].inspect} => #{cache_key}")
-    Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
+    Rails.logger.info("Cache key: #{cache_key} -> #{digest}") if key.any?
+    if options[:disabled]
+      capture(&block)
+    else
+      Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
+    end
   end
 
   private
@@ -27,6 +34,7 @@ module FragmentCacheHelper
   def normalize_cache_key(array)
     array.map do |item|
       case item
+      when Class then item.name
       when String then item
       when NilClass then 'null'
       when Fixnum, TrueClass, FalseClass then item.to_s

@@ -1,53 +1,78 @@
-@import compass
+@import compass/css3/border-radius
+@import compass/css3/transform
+@import compass/css3/filter
+@import compass/css3/box-sizing
+@import compass/css3/opacity
 @import application/mixins
 @import application/variables
 
-$small-avatar-size: 2em
-$large-avatar-size: 128px
-
 .user
   position: relative
-  width:    $small-avatar-size
+  width:    100px
   height    auto
 
   .avatar
-    +background-size(cover)
     +border-radius(1000px)
 
     // default only used when offline
     background-color: $wellBackground
 
-    +translateZ(0)
-    +filter(contrast(0.9) saturate(0) sepia(0.5))
-    &:hover
-      +filter(none)
-
-  // make the avatar square
-  .avatar
-    width:     auto
-    padding:   50%
+    // make the avatar fill the user box
     +box-sizing(border-box)
+    width:     100%
+    height:    auto
 
   .name
     white-space: nowrap
 
-.user-large
-  width:   $large-avatar-size
-  .avatar + .name
-    text-align: center
+// rollover
+.user a .avatar
+  +translateZ(0)
+  +filter(contrast(0.95) saturate(0) sepia(0.5))
+  &:hover
+    +filter(none)
 
-.user-fit
+
+// size
+
+.user-large
+  width:              $large-avatar-size
+  .avatar + .name
+    text-align:       center
+  margin-right:       2em
+  margin-bottom:      2em
+
+
+// layout
+
+.user-fit-width
   width:  100%
   height: auto
 
+
+
 .user-inline
+  line-height: 0
   display: inline-block
   .name
     display: inline-block
 
+
+// state
+
 .user-hidden
   +opacity(0.5)
 
-.user-list .user
-  margin-right: 2ex
-  margin-bottom: 2ex
+
+// collection
+
+.user-list-inline
+  line-height:        0
+  .user
+    @extend .user-inline
+    margin-right:     0.33ex
+    display:          inline-block
+  .user, .avatar
+    height:           100%
+    width:            auto
+

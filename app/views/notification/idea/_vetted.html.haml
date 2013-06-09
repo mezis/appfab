@@ -1,7 +1,0 @@
-:ruby
-  data = {
-    idea_title: notification.subject.title,
-    idea_link:  link_to("##{notification.subject.id}", notification.subject)
-  }
-
-= _('Idea "%{idea_title}" (%{idea_link}) is now vetted, users can start voting for it.').html_safe % data

@@ -1,0 +1,5 @@
+:ruby
+  # delegates to one of the notification partials based on +format+
+  format = local_assigns.fetch(:format, 'row')
+
+= render "notifications/notification_#{format}", local_assigns.except(:format)

@@ -1,0 +1,5 @@
+-# Context:
+-# - notification (Notification::Base)
+.notification-line[notification]
+  %span.message= render notification.partial_name, notification:notification
+  %span.muted= _('%{time} ago') % { time: time_ago_in_words(notification.created_at) }
