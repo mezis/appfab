@@ -190,7 +190,7 @@ GEM
     multi_json (1.7.4)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
-    newrelic_rpm (3.6.2.96)
+    newrelic_rpm (3.6.3.111)
     nifty-generators (0.4.6)
     nokogiri (1.5.9)
     oauth2 (0.8.1)
