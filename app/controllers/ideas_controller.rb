@@ -11,7 +11,7 @@ class IdeasController < ApplicationController
   VALID_ANGLES = %w(discussable followed)
   DEFAULT_ANGLE = VALID_ANGLES.last
 
-  VALID_ORDERS  = %w(impact activity progress creation size)
+  VALID_ORDERS  = %w(impact activity progress creation)
   DEFAULT_ORDER = VALID_ORDERS.first
 
   VALID_FILTERS = %w(all authored commented vetted backed)
