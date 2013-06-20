@@ -14,6 +14,7 @@ class AddImpactCacheToIdeas < ActiveRecord::Migration
       SET impact_cache =
         1000 * #{qtn 'ideas'}.rating / (#{qtn 'ideas'}.design_size + #{qtn 'ideas'}.development_size)
       WHERE TRUE
+      AND ideas.state            BETWEEN 1 AND 7
       AND ideas.rating           IS NOT NULL
       AND ideas.design_size      IS NOT NULL
       AND ideas.development_size IS NOT NULL      
