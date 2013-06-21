@@ -12,7 +12,7 @@ module FragmentCacheHelper
   def cached_fragment(options = {}, &block)
     raise ArgumentError unless options[:resource] && options[:id]
 
-    cache_options = options.slice!(:resource, :id, :v, :key)
+    cache_options = options.slice!(:resource, :id, :v, :key, :disabled)
     version       = options.fetch(:v, 1) + FRAGMENT_CACHE_VERSION
     key           = options.fetch(:key, [])
     key.unshift options[:resource]
@@ -23,10 +23,10 @@ module FragmentCacheHelper
 
     Rails.logger.info("Cache key: #{cache_key} -> #{digest}") if key.any?
     if options[:disabled]
-      capture(&block)
-    else
-      Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
+      Rails.cache.delete(cache_entry)
     end
+    
+    Rails.cache.fetch(cache_entry, cache_options) { capture(&block) }
   end
 
   private
