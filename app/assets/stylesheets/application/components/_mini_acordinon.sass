@@ -1,17 +1,21 @@
+@import application/variables
 @import compass/css3/box-sizing
 @import compass/css3/transition
 
 div.af-mini-acordion
+  $minimum-flash-height: 4px
+  $maximum-flash-height: 250px
+
   > div
+    // border: 1px dotted pink
+
     +box-sizing(border-box)
-    +transition-property(height)
-    +transition-duration(250ms)
-    +transition-timing-function(linear)
+    +transition-property(max-height)
+    +transition-duration($transition-duration)
     overflow: hidden
 
+    max-height: $maximum-flash-height
     & + div
-      height: 4px
-    &:hover
-      height: inherit
+      max-height: $minimum-flash-height
   &:hover > div
-    height: inherit
+    max-height: $maximum-flash-height
