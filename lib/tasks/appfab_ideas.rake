@@ -6,5 +6,11 @@ namespace :appfab do
         Idea.update_star_cache(account:account)
       end
     end
+
+    task :update_comments_count => :environment do
+      Idea.find_each do |idea|
+        idea.update_column :comments_count, idea.comments.count
+      end
+    end
   end
 end

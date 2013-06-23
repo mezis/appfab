@@ -58,7 +58,7 @@
           %li
             = link_to idea_path(idea, anchor: 'comments'), title: s_('Tooltip|Show comments') do
               %i.icon-comments-alt<>
-              - if (count = idea.comments.count) > 0
+              - if (count = idea.comments_count) > 0
                 = count
           %li.separator
           %li
