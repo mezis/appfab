@@ -16,3 +16,9 @@
           - grouped_ideas[state_name].andand.each do |idea|
             .af-rtable-cell
               = render 'idea_mini', idea:idea, title_link:true
+          - hidden_count = @idea_counts.fetch(state_name, 0) - grouped_ideas.fetch(state_name, []).length
+          - if hidden_count > 0
+            .af-rtable-cell
+              %div
+                .ht-separator-text
+                  %p= _('+%{count} hidden') % { count:hidden_count } 
