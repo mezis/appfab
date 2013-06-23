@@ -54,7 +54,6 @@ RSpec.configure do |config|
   config.extend  ControllerHelpers,   :type => :controller
   config.extend  ViewHelpers,         :type => :view
 
-  config.before(:each) { LazyRecords.flush }
   config.before(:each) { Rails.cache.clear }
 
   # Clean the test DB before and after the suite (for fixtures)

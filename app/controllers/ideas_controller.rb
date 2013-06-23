@@ -61,7 +61,7 @@ class IdeasController < ApplicationController
     end
 
     # eager-load participants
-    @ideas.map(&:participants)
+    @ideas = @ideas.includes(:participants => :login)
   end
 
   def show

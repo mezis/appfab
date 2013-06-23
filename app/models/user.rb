@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   include Notification::Base::CanBeSubject
   include Notification::Base::Recipient
   include User::Bookmark::UserMethods
-  include LazyRecords::Model
   include Traits::LastSeenAt
   include Traits::User::StateMachine
 
