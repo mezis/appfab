@@ -47,6 +47,17 @@ class Idea < ActiveRecord::Base
     backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
   }
 
+  def self.limit_per_state(limit:10)
+    ids = values_of(:id, :state).group_by(&:last).values.map { |id_states| id_states.take(limit).map(&:first) }.flatten
+    where id:ids
+  end
+
+  def self.counts_per_state
+    Hash[
+      group(:state).count.map { |state_value,count| [state_name(state_value), count] }
+    ]
+  end
+
   # Other helpers
 
   def participants
