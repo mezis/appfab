@@ -7,9 +7,10 @@ namespace :appfab do
       end
     end
 
-    task :update_comments_count => :environment do
+    task :update_counts => :environment do
       Idea.find_each do |idea|
         idea.update_column :comments_count, idea.comments.count
+        idea.update_column :votes_cache,    idea.votes.count
       end
     end
   end

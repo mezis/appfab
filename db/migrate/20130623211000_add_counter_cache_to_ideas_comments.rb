@@ -1,6 +1,6 @@
 class AddCounterCacheToIdeasComments < ActiveRecord::Migration
   def up
-    add_column :ideas, :comments_count, :integer
+    add_column :ideas, :comments_count, :integer, :default => 0
   end
 
   def down
