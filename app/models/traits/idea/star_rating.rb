@@ -20,7 +20,7 @@ module Traits::Idea::StarRating
   end
 
   protected
-  STARS_MIN_STATE = :vetted
+  STARS_MIN_STATE = :voted
   STARS_MAX_STATE = :signed_off
 
   def set_impact_cache
