@@ -65,7 +65,7 @@ class Dashboard
   private
 
   def visible_ideas
-    @account.ideas.without_state(:draft)
+    @account.ideas.without_state(:draft).includes(:participants => :login)
   end
 
   def random_visible_ideas

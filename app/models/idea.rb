@@ -1,6 +1,4 @@
 # encoding: UTF-8
-require 'lazy_records'
-
 class Idea < ActiveRecord::Base
   attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
 
@@ -16,7 +14,6 @@ class Idea < ActiveRecord::Base
   include Traits::Idea::StateMachine
   include Traits::Idea::StarRating
   include Traits::Shuffleable
-  include LazyRecords::Model
   include Idea::History::Base::HasHistory
   include Idea::History::Creation::Recorder
   include Idea::History::StateChange::Recorder
@@ -25,7 +22,8 @@ class Idea < ActiveRecord::Base
   has_many   :vetters,    :class_name => 'User', :through => :vettings, :source => :user
   has_many   :backers,    :class_name => 'User', :through => :votes,    :source => :user
   has_many   :bookmarks,  :class_name => 'User::Bookmark', :dependent => :destroy
-  has_many   :bookmarkers, :through => :bookmarks, :source => :idea
+
+  has_and_belongs_to_many :participants, :class_name => 'User', :join_table => User::Bookmark.table_name #, :order => "#{User::Bookmark.quoted_table_name}.created_at"
 
   validates_presence_of  :author
   validates_presence_of  :account
@@ -59,20 +57,6 @@ class Idea < ActiveRecord::Base
   end
 
   # Other helpers
-
-  def participants
-    ids = Rails.cache.fetch("#{self.class.name}/#{__method__}/#{id}/#{active_at.to_i}") do
-      [
-        self.author.id,
-        self.votes.value_of(:user_id),
-        self.vettings.value_of(:user_id),
-        self.comments.value_of(:author_id)
-      ].flatten.uniq
-    end
-
-    lazy_collection_of(User, ids:ids, includes:[:login])
-  end
-
 
   def sized?
     design_size.present? && development_size.present?

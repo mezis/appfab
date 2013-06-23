@@ -194,7 +194,7 @@ module IdeasHelper
 
   def idea_rating_message(idea)
     if Rails.env.development?
-      "stars: #{idea.stars_cache}, impact: #{idea.impact_cache}, development size: #{idea.development_size}, design size: #{idea.design_size}, votes: #{idea.votes.count}, vote weight: #{idea.rating}"
+      "stars: #{idea.stars_cache}, impact: #{idea.impact_cache}, development size: #{idea.development_size}, design size: #{idea.design_size}, votes: #{idea.votes_cache}, vote weight: #{idea.rating}"
     else
       if idea.star_rating
         _('The current impact rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter, and divided by the estimated effort for this idea.')
