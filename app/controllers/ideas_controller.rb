@@ -20,22 +20,44 @@ class IdeasController < ApplicationController
   VALID_VIEWS = %w(cards board)
   DEFAULT_VIEW = VALID_VIEWS.first
 
+  LIMIT_RANGE = 5..100
+  DEFAULT_LIMIT = { 'board' => 6, 'cards' => 12 }
+
   def index
     @angle    = set_angle_from_params
     @order    = set_order_from_params_and_angle
     @filter   = set_filter_from_params_and_angle
     @category = set_category_from_params_and_angle
     @view     = set_view_from_params
+    @limit    = set_limit_from_params(@view)
+    @state    = set_state_from_params
 
-    @ideas = current_account.ideas.
-      send(:"#{@angle}_by", current_user).
-      send(:"by_#{@order}")
+
+    # account, angle and filter
+    @ideas = current_account.ideas
+    @ideas = @ideas.send(:"#{@angle}_by", current_user)
     @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter == 'all'
 
     if @category == 'none'
       @ideas = @ideas.where(category: nil)
     elsif @category != 'all'
       @ideas = @ideas.where(category: @category)
+    end
+
+    @ideas = @ideas.with_state(@state.to_sym) unless @state == 'all'
+
+    # counts before ordering and pagination
+    @idea_counts = @ideas.counts_per_state if @view == 'board'
+
+    # order
+    @ideas = @ideas.send(:"by_#{@order}")
+
+    # pagination
+    case @view
+    when 'board'
+      @ideas = @ideas.limit_per_state(limit:@limit)
+    else
+      @ideas = @ideas.paginate(page:1, per_page:@limit)
     end
 
     # eager-load participants
@@ -205,6 +227,21 @@ class IdeasController < ApplicationController
       (valid_categories.include?(params[:category])                and params[:category]) || 
       (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) || 
       'all'
+    end
+  end
+
+  def set_limit_from_params(view)
+    @limit = begin
+      limit = params[:limit].to_i rescue 0
+      LIMIT_RANGE.include?(limit) ? limit : DEFAULT_LIMIT[view]
+    end
+  end
+
+  VALID_STATES = Idea.state_machine.states.map(&:name).map(&:to_s)
+  def set_state_from_params
+    @state = begin
+      state = params.fetch(:state, 'all')
+      VALID_STATES.include?(state) ? state : 'all'
     end
   end
 
