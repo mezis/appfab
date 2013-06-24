@@ -15,7 +15,6 @@ class Ability
       end
       can :destroy, Idea, author_id: user.id, state: draft_or_submitted
     end
-    cannot :update,  Idea
 
     can :move, Idea do |idea|
       user == idea.author || user == idea.product_manager || user.plays?(:account_owner)
