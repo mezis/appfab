@@ -3,8 +3,8 @@ ruby '2.0.0'
 
 gem 'rails'
 
-gem 'unicorn', group: :production
-gem 'thin',    group: :development
+gem 'rainbows', group: :production
+gem 'thin',     group: :development
 
 # database
 gem 'mysql2',  group: :development
