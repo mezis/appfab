@@ -4,7 +4,7 @@
 -# tooltip  (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:false, resource:User, id:user.id, v:6, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :tooltip, :classes), can?(:read, user)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:7, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :tooltip, :classes)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
@@ -13,17 +13,9 @@
     avatar_size    =   local_assigns.fetch(:avatar,  nil)
     show_tooltip   =   local_assigns.fetch(:tooltip, true)
 
-    if can?(:read, user)
-      link_target = user
-    else
-      link_target  = nil
-      show_tooltip = false
-      show_karma   = false
-    end
-
     options = { id: "user#{user.id}" }
     if show_tooltip
-      options.merge! title: user_tooltip(user), data:{ placement:'bottom', container:'.container' }
+      options.merge! data: { placement:'bottom', container:'body', 'tooltip-url' => user_path(user) }
     end
 
     classes = []
@@ -31,12 +23,12 @@
       extra_classes = extra_classes.split if extra_classes.kind_of?(String)
       classes += extra_classes
     end
-    options.merge! class:classes
+    options.merge! class: classes
 
     avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
 
   .user{ options }<>
-    - body = capture do
+    = link_to user do
       - if show_avatar
         %img.avatar{ src:user.login.gravatar_url(avatar_options) }<>
       - if show_name
@@ -46,8 +38,3 @@
             %span.karma
               = number_with_delimiter user.karma
               = user_karma_symbol
-    - if link_target
-      = link_to link_target do
-        = body
-    - else
-      = body

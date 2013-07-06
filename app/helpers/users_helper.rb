@@ -4,15 +4,19 @@ module UsersHelper
     link_to(user.first_name, user, title:user_tooltip(user), :"data-container" => '.container')
   end
 
-  def user_tooltip(user)
+  def user_tooltip_options(user)
+    { data: { tooltip_url:user_path(user), placement: 'bottom', container: '.container' } }
+  end
+
+  def user_tooltip_text(user)
     lines = []
-    lines.push(s_('Tooltip|%{user} currently has %{points} %{karma}.') % {
+    lines.push(s_('Tooltip|%{user} currently has %{points} %{karma}.').html_safe % {
       user:   user.first_name,
       points: user.karma,
       karma:  user_karma_symbol
     })
 
-    lines.push(s_('Tooltip|They are %{roles}.') % { roles: user_roles_sentence(user) }) if user.roles.any?
+    lines.push(s_('Tooltip|They are %{roles}.').html_safe % { roles: user_roles_sentence(user) }) if user.roles.any?
 
     safe_join(lines.compact, tag(:br))
   end
