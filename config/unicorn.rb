@@ -1,3 +1,14 @@
+# Rainbows-specific configuration
+
+Rainbows! do
+  use :ThreadPool                        # concurrency model to use
+  worker_connections        ENV['UNICORN_THREADS'].to_i
+  keepalive_timeout         ENV['UNICORN_KEEPALIVE'].to_i # zero disables keepalives entirely
+  client_max_body_size      5_000_000    # 5 megabytes
+  keepalive_requests        100          # default:100
+  client_header_buffer_size 2_000        # 2 kilobytes
+end
+
 # Sample verbose configuration file for Unicorn (not Rack)
 #
 # This configuration file documents many features of Unicorn
