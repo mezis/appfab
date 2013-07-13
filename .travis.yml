@@ -9,4 +9,7 @@ before_script:
   - rake db:migrate RAILS_ENV=test
 rvm:
   - 2.0.0
-script: rake spec cucumber
+env:
+  - BUILD_TARGET=spec
+  - BUILD_TARGET=cucumber
+script: rake $BUILD_TARGET
