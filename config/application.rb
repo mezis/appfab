@@ -80,5 +80,8 @@ module AppFab
 
     # backing store for page/action/fragment caching
     config.cache_store = :dalli_store
+
+    # Enable threaded mode
+    config.threadsafe!
   end
 end
