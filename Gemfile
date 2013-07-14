@@ -76,6 +76,9 @@ gem 'sentry-raven'
 # coffeescript JS views
 gem 'coffee-rails'
 
+# pjax-style links without full page reloads
+gem 'turbolinks'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -85,6 +88,7 @@ group :assets do
   gem 'compass-rails'
   gem 'bootstrap-sass'
   gem "font-awesome-rails"
+  gem 'animation'
   
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

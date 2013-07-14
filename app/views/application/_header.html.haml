@@ -1,68 +1,69 @@
 .navbar.navbar-fixed-top.navbar-inverse#main-navbar
   .navbar-inner
-    .container
-      %a.brand{href: root_path}<
-        %span= configatron.app_name
-      %ul.nav
-        = content_tag_with_path_checking(:li, controller: 'dashboards', action: 'show') do |path|
-          %a{href: path, title: s_('Tooltip|Your dashboard'), :'data-placement' => 'bottom'} 
-            %i.icon-dashboard
-            %span= _('Dashboard')
-        - if can?(:create, Idea)
-          = content_tag_with_path_checking(:li, action: 'new') do |path|
-            %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
-              %i.icon-edit
-              %span= _('Submit')
-        = content_tag_with_path_checking(:li, angle: 'discussable') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
-            %i.icon-comments-alt
-            %span= _('All ideas')
-        = content_tag_with_path_checking(:li, angle: 'followed') do |path|
-          %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
-            %i.icon-bookmark-empty
-            %span= _('Bookmarks')
+    %div{ data: { barberpole: true } }
+      .container
+        %a.brand{href: root_path}<
+          %span= configatron.app_name
+        %ul.nav
+          = content_tag_with_path_checking(:li, controller: 'dashboards', action: 'show') do |path|
+            %a{href: path, title: s_('Tooltip|Your dashboard'), :'data-placement' => 'bottom'} 
+              %i.icon-dashboard
+              %span= _('Dashboard')
+          - if can?(:create, Idea)
+            = content_tag_with_path_checking(:li, action: 'new') do |path|
+              %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
+                %i.icon-edit
+                %span= _('Submit')
+          = content_tag_with_path_checking(:li, angle: 'discussable') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
+              %i.icon-comments-alt
+              %span= _('All ideas')
+          = content_tag_with_path_checking(:li, angle: 'followed') do |path|
+            %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
+              %i.icon-bookmark-empty
+              %span= _('Bookmarks')
 
-      %ul.nav.pull-right
-        - if current_account
-          = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
-            %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
-              %span.team-name= current_account.name
-              %i.icon-group
-            %ul.dropdown-menu#account-menu
-              %li
-                = link_to current_account do
-                  %i.icon-user
-                  = _('List team members')
-              %li
-                = can_link_to edit_account_path(current_account), auth:[:update, current_account], :'data-placement' => 'left' do
-                  %i.icon-edit
-                  = _('Edit team')
-              - if login_other_accounts.any?
+        %ul.nav.pull-right
+          - if current_account
+            = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
+              %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
+                %span.team-name= current_account.name
+                %i.icon-group
+              %ul.dropdown-menu#account-menu
+                %li
+                  = link_to current_account do
+                    %i.icon-user
+                    = _('List team members')
+                %li
+                  = can_link_to edit_account_path(current_account), auth:[:update, current_account], :'data-placement' => 'left' do
+                    %i.icon-edit
+                    = _('Edit team')
+                - if login_other_accounts.any?
+                  %li.divider
+                  %li
+                    %a.disabled= _('Switch to another team:')
+                  - login_other_accounts.each do |account|
+                    %li
+                      = link_to session_path(account_id:account), method:'put' do
+                        %i.icon-group
+                        = account.name
                 %li.divider
                 %li
-                  %a.disabled= _('Switch to another team:')
-                - login_other_accounts.each do |account|
-                  %li
-                    = link_to session_path(account_id:account), method:'put' do
-                      %i.icon-group
-                      = account.name
-              %li.divider
-              %li
-                = link_to new_account_path do
-                  = _('New product team')
-        - if current_user
-          = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
-            = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
-              %span.first-name= current_login.first_name
-              %span.karma
-                %span.figure= number_with_delimiter current_user.karma
-                = user_karma_symbol
-          = content_tag_with_path_checking(:li, controller: 'notifications', action: 'index', html: { class:'inbox', title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }) do |path|
-            = link_to path do
-              - count = current_user.notifications.unread.count
-              %span.figure= number_with_delimiter(count) if count > 0
-              %i.icon-inbox
-        - if current_login
-          %li.sign-out
-            = link_to destroy_login_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
-              %i.icon-eject<>
+                  = link_to new_account_path do
+                    = _('New product team')
+          - if current_user
+            = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
+              = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
+                %span.first-name= current_login.first_name
+                %span.karma
+                  %span.figure= number_with_delimiter current_user.karma
+                  = user_karma_symbol
+            = content_tag_with_path_checking(:li, controller: 'notifications', action: 'index', html: { class:'inbox', title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }) do |path|
+              = link_to path do
+                - count = current_user.notifications.unread.count
+                %span.figure= number_with_delimiter(count) if count > 0
+                %i.icon-inbox
+          - if current_login
+            %li.sign-out
+              = link_to destroy_login_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
+                %i.icon-eject<>
