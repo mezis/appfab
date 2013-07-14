@@ -1,148 +1,149 @@
-.row
-  .span12
-    %h1= _('Release notes')
+= cached_fragment resource:'welcome', id:'release_notes' do
+  .row
+    .span12
+      %h1= _('Release notes')
 
-    .well
-      :markdown
-        ### 25 June 2013
+      .well
+        :markdown
+          ### 25 June 2013
 
-        New features:
+          New features:
 
-        - Introducing the dashboard: a new page, which you land on after login. Intended to replace "angles" (the former links on the top navigation bar) and improve discoverability of actions to take and new ideas.
-        - Account owners can disable individual users.
-        - Authors, product managers, and account owners now can move ideas between accounts (teams).
-        - "Submitter" role (not on by default for newly registered users) that restricts who can submit ideas.
-        - Star idea ratings: top 20% of ideas have four stars, etc.
-        - Notifications page now has async read/unread links.
+          - Introducing the dashboard: a new page, which you land on after login. Intended to replace "angles" (the former links on the top navigation bar) and improve discoverability of actions to take and new ideas.
+          - Account owners can disable individual users.
+          - Authors, product managers, and account owners now can move ideas between accounts (teams).
+          - "Submitter" role (not on by default for newly registered users) that restricts who can submit ideas.
+          - Star idea ratings: top 20% of ideas have four stars, etc.
+          - Notifications page now has async read/unread links.
 
-        Fixes:
+          Fixes:
 
-        - Ordering by size was broken, now removed (redundanct with impact ordering).
-        - Missing avatar nagging banner now properly displayed.
+          - Ordering by size was broken, now removed (redundanct with impact ordering).
+          - Missing avatar nagging banner now properly displayed.
 
-        Improvements:
+          Improvements:
 
-        - Flatter, contrasted, less obtrusive design.
-        - Card and board views now display a limited number of ideas by default (resp. 6 and 12).
-        - "Vote" concept renamed to "Endorsement" everywhere (as "vote" was misleading).
-        - Better help text on idea submission.
-        - Better performance.
+          - Flatter, contrasted, less obtrusive design.
+          - Card and board views now display a limited number of ideas by default (resp. 6 and 12).
+          - "Vote" concept renamed to "Endorsement" everywhere (as "vote" was misleading).
+          - Better help text on idea submission.
+          - Better performance.
 
-    .well
-      :markdown
-        ### 15 April 2013
+      .well
+        :markdown
+          ### 15 April 2013
 
-        New features:
+          New features:
 
-        - Record and display idea history
-        - Adds missing avatar nag banner
-        - Lets users size and vet separately
-        - Only displays the first paragraph of ideas in list views
+          - Record and display idea history
+          - Adds missing avatar nag banner
+          - Lets users size and vet separately
+          - Only displays the first paragraph of ideas in list views
 
-        Fixes:
+          Fixes:
 
-        - Fixes UX silence when submitting bad comments
-        - Fixes comment creation errors
-        - Fixes displayed "last seen" timestamp
-        - Fix product manager user name layout
-        - Fixes escaping in pages titles (accents, quotes)
+          - Fixes UX silence when submitting bad comments
+          - Fixes comment creation errors
+          - Fixes displayed "last seen" timestamp
+          - Fix product manager user name layout
+          - Fixes escaping in pages titles (accents, quotes)
 
-        Improvements:
+          Improvements:
 
-        - Adds confirmations to deletion link
-        - Return to requested page after login
-        - Uses Unicorn to improve performance
-        - Allow .jpeg extension in uploads
+          - Adds confirmations to deletion link
+          - Return to requested page after login
+          - Uses Unicorn to improve performance
+          - Allow .jpeg extension in uploads
 
 
-    .well
-      :markdown
-        ### 4 March 2013
+      .well
+        :markdown
+          ### 4 March 2013
 
-        New features:
+          New features:
 
-        - Attachments on comments
-        - Drag-and-drop attachments on idea panel and on comments
+          - Attachments on comments
+          - Drag-and-drop attachments on idea panel and on comments
 
-        Fixes:
+          Fixes:
 
-        - Addressed CVE-2013-0269
-        - Image caching now works
-        - Progress gradients now full for "live" ideas
-        - Fixed the always-visible "jsut submitted" banner
+          - Addressed CVE-2013-0269
+          - Image caching now works
+          - Progress gradients now full for "live" ideas
+          - Fixed the always-visible "jsut submitted" banner
 
-        Improvements
+          Improvements
 
-        - AppFab now runs on Ruby 2
-        - Manipulating attachments and comments is now AJAX on idea pages
-        - Performance optimisations on idea listings, and with permission checking
+          - AppFab now runs on Ruby 2
+          - Manipulating attachments and comments is now AJAX on idea pages
+          - Performance optimisations on idea listings, and with permission checking
 
-    .well
-      :markdown
-        ### 22 February 2013
+      .well
+        :markdown
+          ### 22 February 2013
 
-        Fixes:
+          Fixes:
 
-        - No more errors when following links from an email while viewing a different team
+          - No more errors when following links from an email while viewing a different team
 
-    .well
-      :markdown
-        ### 18 February 2013
-        
-        New features:
+      .well
+        :markdown
+          ### 18 February 2013
+          
+          New features:
 
-        - Idea drafts
-        - Account owners can act as another user
-        - Kanban board-style idea layout (optional)
-        - Per-status help text to idea pages
-        - Per-angle help text to idea listings
-        - Ideas now coloured according to category
+          - Idea drafts
+          - Account owners can act as another user
+          - Kanban board-style idea layout (optional)
+          - Per-status help text to idea pages
+          - Per-angle help text to idea listings
+          - Ideas now coloured according to category
 
-        Fixes:
+          Fixes:
 
-        - Sort by activity should now work correctly
-        - When creating ideas, the first category is no longer the default
-        - Users can set an idea to "no category"
-        - User list ordered by first name
-        - Card header/footer no longer hidden on idea page
-        - Dropdowns now work on mobile browsers
-        - Sort by rating now puts unsized idea at the bottom, not the top
-        - Copy fixed in the "sorry, no idea" banner
-        - Hides "time to vote" banner when already backed idea
+          - Sort by activity should now work correctly
+          - When creating ideas, the first category is no longer the default
+          - Users can set an idea to "no category"
+          - User list ordered by first name
+          - Card header/footer no longer hidden on idea page
+          - Dropdowns now work on mobile browsers
+          - Sort by rating now puts unsized idea at the bottom, not the top
+          - Copy fixed in the "sorry, no idea" banner
+          - Hides "time to vote" banner when already backed idea
 
-        Improvements:
+          Improvements:
 
-        - UX for idea create/edit errors
-        - Idea category in card header
-        - Header restyled
-        - Filters moved to a responsive navigation bar with dropdowns
-        - Semantics of "buildable" angle
-        - Renamed "discussable" angle to "all ideas"
-        - Removed "alpha" badge
-        - More participant avatars shown for an idea
-        - Report runtime errors to Sentry
-        - Tooltips disabled on touch devices
+          - UX for idea create/edit errors
+          - Idea category in card header
+          - Header restyled
+          - Filters moved to a responsive navigation bar with dropdowns
+          - Semantics of "buildable" angle
+          - Renamed "discussable" angle to "all ideas"
+          - Removed "alpha" badge
+          - More participant avatars shown for an idea
+          - Report runtime errors to Sentry
+          - Tooltips disabled on touch devices
 
-    .well
-      :markdown
-        ### 6 February 2013
+      .well
+        :markdown
+          ### 6 February 2013
 
-        - Fixes authentication security
-        - Redirects to SSL automatically
-        - Restyles state, sizing, actions on cards
-        - Fixes some Markdown rendering issues (lists in comments, block quotes)
-        - Paginates notifications
+          - Fixes authentication security
+          - Redirects to SSL automatically
+          - Restyles state, sizing, actions on cards
+          - Fixes some Markdown rendering issues (lists in comments, block quotes)
+          - Paginates notifications
 
-    .well
-      :markdown
-        ### 23 January 2013
+      .well
+        :markdown
+          ### 23 January 2013
 
-        This is the first post-alpha release.
+          This is the first post-alpha release.
 
-        - Fixes Omniauth issues
-        - Raises the minimum votes per idea to 2
-        - Lets all account members edit an idea, not just the author
-        - Prevents spammy notifications on a user's own actions
-        - Avoids sending empty notifications emails
-        - Marks notifications as read when emailing
-        - Adds marketing messages and release notes
+          - Fixes Omniauth issues
+          - Raises the minimum votes per idea to 2
+          - Lets all account members edit an idea, not just the author
+          - Prevents spammy notifications on a user's own actions
+          - Avoids sending empty notifications emails
+          - Marks notifications as read when emailing
+          - Adds marketing messages and release notes
