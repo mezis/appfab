@@ -1,5 +1,5 @@
-= cached_fragment disabled:false, v:2, resource:'needs_avatar', id:current_login.id do
-  .af-flash.af-flash-warning#needs-avatar
+= cached_fragment disabled:false, v:3, resource:'needs_avatar', id:current_login.id do
+  .af-flash.af-flash-warning#needs-avatar{ data: { gravatar_url: current_login.gravatar_url(size:1) } }
     .container
       %h4
         %button.close{ :'data-dismiss' => 'af-flash' }<
@@ -10,16 +10,3 @@
         %br/
         != _('Just head over to %{gravatar}, it takes just a minute to set one up.') % { gravatar: link_to('Gravatar', 'http://www.gravatar.com', target:'_blank') }
       %p= _('Oh, and I will nag you until you add one!')
-
-    :coffee
-      $('#needs-avatar').hide()
-      $.ajax
-        url: "#{current_login.gravatar_url(size:1)}"
-        type: 'HEAD'
-        data:
-          s: 1
-          d: 404
-      .success (data) ->
-        $('#needs-avatar').remove()
-      .fail (data) ->
-        $('#needs-avatar').slideDown()
