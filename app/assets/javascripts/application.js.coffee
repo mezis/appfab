@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require fineuploader
+#= require turbolinks
 #= require_tree .
 
 
@@ -25,3 +26,11 @@ $.unobtrusive () ->
     html: true
   )
 
+$(document).on 'page:fetch', () ->
+  $('[data-barberpole]').addClass('af-barberpole')
+
+$(document).ready () ->
+  $(document).ajaxStart () ->
+    $('[data-barberpole]').addClass('af-barberpole')
+  $(document).ajaxComplete () ->
+    $('[data-barberpole]').removeClass('af-barberpole')
