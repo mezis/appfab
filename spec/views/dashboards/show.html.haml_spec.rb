@@ -9,7 +9,7 @@ describe 'dashboards/show.html.haml' do
   let(:notification) { Notification::NewIdea.make(subject:idea, recipient:user, created_at:1.hour.ago) }
   let(:comment) { Comment.make(idea:idea, author:user) }
   let(:dashboard) {
-    mock 'dashboard',
+    double 'dashboard',
       block_size:                 3,
       ideas_to_size:              [idea,idea],
       ideas_recently_active:      [idea,idea],
