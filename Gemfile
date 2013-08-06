@@ -78,6 +78,7 @@ gem 'coffee-rails'
 
 # pjax-style links without full page reloads
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 # Gems used only for assets and not required
 # in production environments by default.
