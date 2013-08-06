@@ -23,8 +23,10 @@ describe WelcomeController do
     end
 
     it 'shows content for known pages' do
-      controller.should_receive(:render, with:'foo_bar').any_number_of_times
+      controller.stub(:render)
+      controller.should_receive(:render).with('foo_bar')
       get :static_page, page:'foo-bar'
+
       response.should be_success
     end
   end
