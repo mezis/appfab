@@ -23,6 +23,7 @@ describe IdeasController do
     end
 
     it "switches to the idea account as necessary" do
+      DatabaseCleaner.clean!
       user = User.make!
       sign_in user.login
 
