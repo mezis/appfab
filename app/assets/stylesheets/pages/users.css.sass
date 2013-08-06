@@ -1,0 +1,18 @@
+@import compass/css3/hyphenation
+@import application/variables
+@import application/mixins
+
+.btn.btn-block.disabled
+  color: $color_solarized_base1
+
+.btn-group
+  .btn
+    color: $color_solarized_base1
+
+  .active
+    background-color: $color_solarized_green
+    color: $inactive_gray
+    text-shadow: none
+
+    &:hover
+      color: $inactive_gray
