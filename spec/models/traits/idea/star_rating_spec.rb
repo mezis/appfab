@@ -43,11 +43,12 @@ describe Traits::Idea::StarRating do
         subject.impact_cache.should == 1333
       end
 
-      it 'gets updated when a vote is cast' do
+      it 'gets updated when votes are cast' do
         subject.update_attributes! design_size:1, development_size:2
         subject.votes.create! user:subject.author
+        subject.votes.create! user:User.make!
         subject.reload
-        result.should == 333
+        result.should == 666
       end
     end
   end

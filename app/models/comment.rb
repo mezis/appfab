@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   attr_accessible :idea, :parent, :author, :rating, :body
   attr_accessible :idea_id, :parent_id
 
-  belongs_to :idea
+  belongs_to :idea, :counter_cache => true
   belongs_to :author, :class_name => 'User'
   has_many   :votes, :as => :subject, :dependent => :destroy
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy

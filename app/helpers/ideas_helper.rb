@@ -191,5 +191,17 @@ module IdeasHelper
   def idea_category_class(idea)
     account_category_class(idea.account, idea.category)
   end
+
+  def idea_rating_message(idea)
+    if Rails.env.development?
+      "stars: #{idea.stars_cache}, impact: #{idea.impact_cache}, development size: #{idea.development_size}, design size: #{idea.design_size}, votes: #{idea.votes_cache}, vote weight: #{idea.rating}"
+    else
+      if idea.star_rating
+        _('The current impact rating of this idea. It is calculated from the number of votes it has received, weighed by the voting power of each voter, and divided by the estimated effort for this idea.')
+      else
+         _('This idea has no impact rating.')
+      end
+    end
+  end
 end
 

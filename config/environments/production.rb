@@ -44,7 +44,7 @@ AppFab::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = ENV['ASSET_HOST']
   config.action_controller.default_url_options = { host: ENV['APP_DOMAIN'], protocol:'https' }
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
@@ -60,9 +60,6 @@ AppFab::Application.configure do
     password:   ENV['MANDRILL_API_KEY']
   }
   config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'], protocol:'https', only_path:false }
-
-  # Enable threaded mode
-  # config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

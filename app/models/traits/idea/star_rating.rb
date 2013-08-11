@@ -6,8 +6,8 @@ module Traits::Idea::StarRating
   extend ActiveSupport::Concern
 
   included do
-    before_validation :set_impact_cache, :if => :should_update_impact_cache?
-    after_save :update_star_cache, :if => :impact_cache_changed?
+    before_validation :set_impact_cache,  :if => :should_update_impact_cache?
+    after_save        :update_star_cache, :if => :should_update_impact_cache?
   end
 
   def star_rating
@@ -20,21 +20,22 @@ module Traits::Idea::StarRating
   end
 
   protected
+  STARS_MIN_STATE = :voted
+  STARS_MAX_STATE = :signed_off
 
   def set_impact_cache
     self.impact_cache = calculate_impact_rating
   end
 
   def calculate_impact_rating
-    if rating && design_size && development_size
-      1000 * rating / (design_size + development_size)
-    else
-      nil
-    end
+    return if rating.nil? || design_size.nil? || development_size.nil?
+    return unless (Idea.state_value(STARS_MIN_STATE)..Idea.state_value(STARS_MAX_STATE)).include? state
+
+    1000 * rating / (design_size + development_size)
   end
 
   def should_update_impact_cache?
-    rating_changed? || design_size_changed? || development_size_changed?
+    rating_changed? || design_size_changed? || development_size_changed? || state_changed?
   end
 
   def update_star_cache
@@ -45,10 +46,10 @@ module Traits::Idea::StarRating
     def update_star_cache(account:nil)
       raise ArgumentError unless account
 
-      min_state = state_value(:vetted)
-      max_state = state_value(:signed_off)
+      min_state = state_value(STARS_MIN_STATE)
+      max_state = state_value(STARS_MAX_STATE)
       idea_ids = account.ideas.
-        where('state >= ? AND state <= ?', min_state, max_state).
+        where('state BETWEEN ? AND ?', min_state, max_state).
         where('rating > ?', 0).
         by_impact.
         value_of(:id).

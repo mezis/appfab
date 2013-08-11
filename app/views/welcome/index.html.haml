@@ -1,57 +1,58 @@
-.row
-  .span12
-    .hero-unit
-      %h1= configatron.app_name
-      %p= _('The app that helps product teams build fantastic apps.')
+= cached_fragment resource:'welcome', id:'index', key:[!!current_user] do
+  .row
+    .span12
+      .hero-unit
+        %h1= configatron.app_name
+        %p= _('The app that helps product teams build fantastic apps.')
 
-      - if current_user
-        = link_to ideas_path(angle: IdeasController::DEFAULT_ANGLE), class: 'btn btn-primary' do
-          = _('Let\'s get cracking')
-          &nbsp;
-          %i.icon-caret-right
-      - else
-        = link_to login_omniauth_authorize_path(provider: :google_oauth2), class: 'btn btn-primary' do
-          = _('Sign in with your Google account')
-          &nbsp;
-          %i.icon-caret-right
+        - if current_user
+          = link_to ideas_path(angle: IdeasController::DEFAULT_ANGLE), class: 'btn btn-primary' do
+            = _('Let\'s get cracking')
+            &nbsp;
+            %i.icon-caret-right
+        - else
+          = link_to login_omniauth_authorize_path(provider: :google_oauth2), class: 'btn btn-primary' do
+            = _('Sign in with your Google account')
+            &nbsp;
+            %i.icon-caret-right
 
-.row
-  .span12
-    %ul#states
-      - Idea.state_machine.states.sort_by(&:value).map(&:name).each do |state_name|
-        %li.badge= idea_status(state_name)
-        - unless state_name == :live
-          %i.icon-caret-right.muted
-.row#pitch
-  .span4
-    %h4<>
-      %i.icon-comments-alt
-      = _('Gather brilliant ideas')
-    %p= _('Ever been to the pub with your team? They\'re frustrated because they know what the users want. They\'re bursting with ideas for new features and know which bugs are really painful... but lack the avenue to express themselves.')
-    %p= _('So throw that old "ideas box" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them.')
-    .muted
-      %p= _('Everyone gets a say. All team members can submit their ideas, and all team memebrs can discuss each idea until it is explicit and understandable.')
-      %p= _('Architects and product managers then estimate the effort, and if the idea is properly formatted, vet it.')
-      %p= _('As users contribute, they will gain %{karma} points... or lose them if they act as trolls.').html_safe % { karma: user_karma_symbol }
+  .row
+    .span12
+      %ul#states
+        - Idea.state_machine.states.sort_by(&:value).map(&:name).each do |state_name|
+          %li.badge= idea_status(state_name)
+          - unless state_name == :live
+            %i.icon-caret-right.muted
+  .row#pitch
+    .span4
+      %h4<>
+        %i.icon-comments-alt
+        = _('Gather brilliant ideas')
+      %p= _('Ever been to the pub with your team? They\'re frustrated because they know what the users want. They\'re bursting with ideas for new features and know which bugs are really painful... but lack the avenue to express themselves.')
+      %p= _('So throw that old "ideas box" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them.')
+      .muted
+        %p= _('Everyone gets a say. All team members can submit their ideas, and all team memebrs can discuss each idea until it is explicit and understandable.')
+        %p= _('Architects and product managers then estimate the effort, and if the idea is properly formatted, vet it.')
+        %p= _('As users contribute, they will gain %{karma} points... or lose them if they act as trolls.').html_safe % { karma: user_karma_symbol }
 
-  .span4
-    %h4<>
-      %i.icon-envelope
-      = _('Let priorities emerge')
-    %p= _('Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?')
-    %p= _('Now forget about them. Your staff will endorse what is actually important, and priorities will emerge.')
-    .muted
-      %p= _('Once an idea is vetted, the whole team gets give an opinion: good ideas will bubble up rapidly.')
-      %p= _('Some caveat apply, of course! You can make your product team a democracy by giving everyone\'s endorsements the same weight, or increase that weight for stakeholders.')
-      %p= _('To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea.').html_safe % { karma: user_karma_symbol }
-      %p= _('These mechanics make sure that the proverbial needle will emerge from your team\'s barrage of ideas.')
+    .span4
+      %h4<>
+        %i.icon-envelope
+        = _('Let priorities emerge')
+      %p= _('Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?')
+      %p= _('Now forget about them. Your staff will endorse what is actually important, and priorities will emerge.')
+      .muted
+        %p= _('Once an idea is vetted, the whole team gets give an opinion: good ideas will bubble up rapidly.')
+        %p= _('Some caveat apply, of course! You can make your product team a democracy by giving everyone\'s endorsements the same weight, or increase that weight for stakeholders.')
+        %p= _('To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea.').html_safe % { karma: user_karma_symbol }
+        %p= _('These mechanics make sure that the proverbial needle will emerge from your team\'s barrage of ideas.')
 
-  .span4
-    %h4<>
-      %i.icon-bookmark-empty
-      = _('Get it done')
-    %p= _('Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead.') % { appfab: configatron.app_name }
-    %p= _('See that line above? That\'s the lifecycle of your ideas. Now it\'s up to your to push them forward.')
-    .muted
-      %p= _('We stick to one of the core tenets of Kanban: built-in rate limiting. Only a limited "volume" of ideas can be in a given stage at any time, as your team members can only work on so many things in parallel.')
-      %p= _('This lets you know at all times what\'s effectively being worked on, and what the current status is.')
+    .span4
+      %h4<>
+        %i.icon-bookmark-empty
+        = _('Get it done')
+      %p= _('Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead.') % { appfab: configatron.app_name }
+      %p= _('See that line above? That\'s the lifecycle of your ideas. Now it\'s up to your to push them forward.')
+      .muted
+        %p= _('We stick to one of the core tenets of Kanban: built-in rate limiting. Only a limited "volume" of ideas can be in a given stage at any time, as your team members can only work on so many things in parallel.')
+        %p= _('This lets you know at all times what\'s effectively being worked on, and what the current status is.')

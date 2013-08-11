@@ -54,7 +54,7 @@ describe Karma::IdeaObserver do
     it 'all backers gains karma' do
       backer = User.make!
       idea.votes.make! user: backer
-      lambda { idea.deliver» }.should change { backer.reload.karma }.by(1)
+      lambda { idea.deliver» }.should change { backer.reload.karma }.by(10)
     end
   end
 end

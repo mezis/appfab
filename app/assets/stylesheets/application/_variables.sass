@@ -15,7 +15,7 @@ $idea_banner_height: 24px
 // Durations
 $transition-duration: 250ms
 
-// Colors
+// Colors (DO NOT USE DIRECTLY — DEPRECATED)
 $light_gray:      #f3f2f4
 $medium_gray:     #cccccc
 $dark_gray:       #333
@@ -39,10 +39,9 @@ $color_solarized_green:    #859900 //  2/2 green     64 #5f8700
 
 
 // Semantic colors
-// $major_color:     #fa8037
 $major_color:     $color_solarized_yellow
+$minor_color:     $color_solarized_blue
 $progress_color:  rgba($color_solarized_base2, 0.66)
-// $progress_color:  rgba($color_solarized_base1, 0.5)
 
 $color_success:   $color_solarized_green
 $color_warning:   $color_solarized_orange
@@ -83,11 +82,13 @@ $inputBorderRadius:   $baseBorderRadius
 $navbarHeight:              40px
 $navbarBackground:          $color_solarized_base2
 $navbarBackgroundHighlight: $color_solarized_base2
+$navbarLinkBackgroundActive: transparent
 $navbarText:                $color_solarized_base00
 $navbarLinkColor:           $color_solarized_base00
 $navbarLinkColorHover:      $color_solarized_yellow
 $navbarInverseBackground:          $color_solarized_base03
 $navbarInverseBackgroundHighlight: $color_solarized_base03
+$navbarInverseLinkBackgroundActive: transparent
 $navbarInverseText:                $color_solarized_base0
 $navbarInverseLinkColor:           $color_solarized_base0
 $navbarInverseLinkColorHover:      $color_solarized_yellow
@@ -97,6 +98,9 @@ $headingsFontFamily:  'Titillium Web', Helvetica, Arial, sans-serif
 
 $btnPrimaryBackground:          lighten($major_color, 5%)
 $btnPrimaryBackgroundHighlight: $major_color
+
+$btnInfoBackground:             lighten($minor_color, 5%)
+$btnInfoBackgroundHighlight:    $minor_color
 
 $grayLight:              $color_solarized_base1
 $grayDark:               $textColor

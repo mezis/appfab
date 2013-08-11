@@ -1,7 +1,10 @@
-- cached_fragment resource:'needs_avatar', id:current_login.id do
-  .flash.flash-banner.alert.alert-warning#needs-avatar
+= cached_fragment disabled:false, v:2, resource:'needs_avatar', id:current_login.id do
+  .af-flash.af-flash-warning#needs-avatar
     .container
-      %h4= _('How about adding an avatar to your account?')
+      %h4
+        %button.close{ :'data-dismiss' => 'af-flash' }<
+          %i.icon-remove
+        = _('How about adding an avatar to your account?')
       %p
         = _('Knowing who you are discussing ideas with is important in communication. Also, the default avatars are a bit ugly, so a picture of you would be much better.')
         %br/

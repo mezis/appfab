@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require fineuploader
+#= require turbolinks
 #= require_tree .
 
 
@@ -23,7 +24,7 @@ $.unobtrusive () ->
   return if ('ontouchstart' in document.documentElement)
   $('[title]').tooltip(
     delay: { show:500, hide:150 }
-    html:  true
+    html: true
   )
 
 
@@ -53,3 +54,13 @@ $.unobtrusive () ->
 
   $('[data-tooltip-url]').on 'mouseout', () ->
     $(this).tooltip('hide')
+
+
+$(document).on 'page:fetch', () ->
+  $('[data-barberpole]').addClass('af-barberpole')
+
+$(document).ready () ->
+  $(document).ajaxStart () ->
+    $('[data-barberpole]').addClass('af-barberpole')
+  $(document).ajaxComplete () ->
+    $('[data-barberpole]').removeClass('af-barberpole')

@@ -1,34 +1,25 @@
 -# Context:
 -# user     (User)
 -# name     (boolean, default false),
--# tooltip  (boolean, default true)
+-# link     (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:false, resource:User, id:user.id, v:7, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :tooltip, :classes)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:7, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :classes, :link), can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
     show_name      =   local_assigns.fetch(:name,    !show_avatar)
     show_karma     =   local_assigns.fetch(:karma,   show_name)
     avatar_size    =   local_assigns.fetch(:avatar,  nil)
-    show_tooltip   =   local_assigns.fetch(:tooltip, true)
+    wrap_link      = !!local_assigns.fetch(:link,    true)
+    classes        =   local_assigns.fetch(:classes, nil)
 
-    options = { id: "user#{user.id}" }
-    if show_tooltip
-      options.merge! data: { placement:'bottom', container:'body', 'tooltip-url' => user_path(user) }
-    end
-
-    classes = []
-    if extra_classes = local_assigns[:classes]
-      extra_classes = extra_classes.split if extra_classes.kind_of?(String)
-      classes += extra_classes
-    end
-    options.merge! class: classes
+    link_target = (can?(:read, user) && wrap_link) ? user : nil
 
     avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
 
-  .user{ options }<>
-    = link_to user do
+  %div[user]{ class:classes }<>
+    - body = capture do
       - if show_avatar
         %img.avatar{ src:user.login.gravatar_url(avatar_options) }<>
       - if show_name
@@ -38,3 +29,8 @@
             %span.karma
               = number_with_delimiter user.karma
               = user_karma_symbol
+    - if link_target
+      = link_to link_target, data:{ placement:'bottom', container:'.container', 'tooltip-url' => user_path(user) } do
+        = body
+    - else
+      = body

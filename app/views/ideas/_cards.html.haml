@@ -1,9 +1,9 @@
 -# Give me an array of +@ideas+
 
 .row
-  .span3
-    = render 'angle_copy'
   .span9
     = render 'no_ideas_banner'
     - @ideas.each do |idea|
       = render 'idea', idea:idea, collapsed:true, title_link:true, muted:true
+  .span3
+    = render 'angle_copy'

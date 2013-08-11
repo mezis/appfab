@@ -5,8 +5,14 @@
 #   helper :layout
 module LayoutsHelper
   def page_title
+    title_components = [configatron.app_name]
+    
+    title_components.unshift(current_account.name) if current_account
+
     saved_title = content_for(:title)
-    saved_title.blank? ? configatron.app_name : "#{saved_title} - #{configatron.app_name}"
+    title_components.unshift(saved_title) unless saved_title.blank?
+
+    title_components.join(' • ')
   end
 
   def title(page_title, options = {})

@@ -11,21 +11,27 @@
   width:    100px
   height    auto
 
+  .avatar
+    +border-radius(1000px)
+
+    // default only used when offline
+    background-color: $wellBackground
+
+    // make the avatar fill the user box
+    +box-sizing(border-box)
+    width:     100%
+    height:    auto
+
   .name
     white-space: nowrap
 
-.avatar
-  +border-radius(1000px)
-
+// rollover
+.user a .avatar
   +translateZ(0)
   +filter(contrast(0.95) saturate(0) sepia(0.5))
   &:hover
     +filter(none)
 
-  // make the avatar fill the user box
-  +box-sizing(border-box)
-  width:     100%
-  height:    auto
 
 // size
 
