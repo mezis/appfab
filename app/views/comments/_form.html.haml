@@ -1,16 +1,8 @@
 - if can?(:create, comment)
   = form_for comment, id:'new_comment', remote:true do |f|
     = f.hidden_field :idea_id
-    .control-group.clearfix
+    .control-group.js-fading-errors.clearfix
       .controls.clearfix
         = f.text_area :body, rows: 2, placeholder: _('Take part in the discussion, type your comments here!')
         = errors_for_field(comment, :body, class:'pull-right')
       = f.submit _('Post comment'), class:'btn btn-small pull-right', disable_with:_('Posting...')
-
-  :coffeescript
-    $('.field_with_errors').closest('.control-group').addClass('error')
-    $('.field_with_errors').find('textarea').on('focus', () ->
-      control = $(this).closest('.control-group')
-      control.removeClass('error')
-      control.find('.help-block.error').fadeOut()
-    )
