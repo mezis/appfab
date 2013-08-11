@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'digest'
 
 describe Attachment do
-  fixtures :users
+  fixtures :users, :ideas
 
   let(:user) { users(:abigale_balisteri) }
 
@@ -25,7 +25,7 @@ describe Attachment do
       @file.unlink
     end
 
-    let(:attachment) { Attachment.new owner:user, uploader:user, file:@file }
+    let(:attachment) { Attachment.new owner:ideas(:idea_submitted), uploader:user, file:@file }
 
     it 'can save files' do
       attachment.save!
