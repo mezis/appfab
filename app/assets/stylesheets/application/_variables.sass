@@ -15,11 +15,10 @@ $idea_banner_height: 24px
 // Durations
 $transition-duration: 250ms
 
-// Colors
+// Colors (DO NOT USE DIRECTLY — DEPRECATED)
 $light_gray:      #f3f2f4
 $medium_gray:     #cccccc
 $dark_gray:       #333
-$inactive_gray:   #eae6d9
 
 $color_solarized_base03:   #002b36 //  8/4 brblack  234 #1c1c1c
 $color_solarized_base02:   #073642 //  0/4 black    235 #262626
@@ -40,10 +39,9 @@ $color_solarized_green:    #859900 //  2/2 green     64 #5f8700
 
 
 // Semantic colors
-// $major_color:     #fa8037
 $major_color:     $color_solarized_yellow
+$minor_color:     $color_solarized_blue
 $progress_color:  rgba($color_solarized_base2, 0.66)
-// $progress_color:  rgba($color_solarized_base1, 0.5)
 
 $color_success:   $color_solarized_green
 $color_warning:   $color_solarized_orange
@@ -100,6 +98,9 @@ $headingsFontFamily:  'Titillium Web', Helvetica, Arial, sans-serif
 
 $btnPrimaryBackground:          lighten($major_color, 5%)
 $btnPrimaryBackgroundHighlight: $major_color
+
+$btnInfoBackground:             lighten($minor_color, 5%)
+$btnInfoBackgroundHighlight:    $minor_color
 
 $grayLight:              $color_solarized_base1
 $grayDark:               $textColor
