@@ -1,11 +1,11 @@
 # encoding: UTF-8
 module UsersHelper
   def user_name(user)
-    link_to(user.first_name, user, title:user_tooltip(user), :"data-container" => '.container')
+    link_to(user.first_name, user, user_tooltip_options(user))
   end
 
   def user_tooltip_options(user)
-    { data: { tooltip_url:user_path(user), placement: 'bottom', container: '.container' } }
+    { data: { name:user.first_name, tooltip_url:user_path(user), placement: 'bottom', container: '.container' } }
   end
 
   def user_tooltip_text(user)
