@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails'
+gem 'rails', '~> 3.2.6'
 
 gem 'rainbows', group: :production
 gem 'thin',     group: :development

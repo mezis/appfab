@@ -101,7 +101,7 @@ describe IdeasController do
         IdeaMoverService.
           should_receive(:new).
           with(hash_including(idea:@idea, account:@other_account)).
-          and_return(stub run:nil)
+          and_return(double run:nil)
       end
 
       def it_should_not_call_mover
