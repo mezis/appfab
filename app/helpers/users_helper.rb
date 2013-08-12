@@ -5,7 +5,7 @@ module UsersHelper
   end
 
   def user_tooltip_options(user)
-    { data: { name:user.first_name, tooltip_url:user_path(user), placement: 'bottom', container: '.container' } }
+    { data: { tooltip_url:user_path(user), placement: 'bottom', container: '.container' } }
   end
 
   def user_tooltip_text(user)
