@@ -21,9 +21,10 @@ $.unobtrusive ->
         this.clearForTooltip()
         $(this).attr('title', data)
         $(this).tooltip
-          trigger: 'manual hover'
-          delay:   { show:500, hide:250 }
-          html:    true
+          trigger:   'manual hover'
+          delay:     { show:500, hide:250 }
+          container: 'body'
+          html:      true
         $(this).tooltip('show') if $(this).data('should-show')
       complete: () ->
         $(this).removeClass('af-loading')

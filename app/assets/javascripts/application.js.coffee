@@ -24,8 +24,9 @@ $.unobtrusive () ->
 
   return if ('ontouchstart' in document.documentElement)
   $('[title]').tooltip
-    delay: { show:500, hide:150 }
-    html: true
+    delay:     { show:500, hide:150 }
+    container: 'body'
+    html:      true
 
 
 $(document).on 'page:fetch', () ->
