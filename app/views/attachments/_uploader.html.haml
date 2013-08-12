@@ -22,7 +22,7 @@
       uploader_id = "uploader_#{SecureRandom.hex(4)}"
 
     - if format == 'big'
-      - uploader_tempate = capture do
+      - uploader_template = capture do
         .qq-uploader<
           .btn.btn-block.qq-upload-button>
             .af-drop-area.qq-upload-drop-area<>
@@ -32,7 +32,7 @@
             .qq-drop-processing-spinner<>
           %ul.qq-upload-list<>
     - elsif format == 'small'
-      - uploader_tempate = capture do
+      - uploader_template = capture do
         .qq-uploader<
           %a.qq-upload-button>
             .af-drop-area.qq-upload-drop-area<>
@@ -51,36 +51,7 @@
         %a.qq-upload-retry{ href: '#' }= _('Retry')
         %span.qq-upload-status-text
 
-    .af-uploader{ id:uploader_id }
-    :coffeescript
-      $(document).ready(() ->
-        uploader = new qq.FineUploader(
-          debug:              true
-          element:            document.getElementById('#{uploader_id}')
-          classes:
-            success:          'alert alert-success'
-            fail:             'alert alert-error'
-          template:           '#{j uploader_tempate}'
-          fileTemplate:       '#{j file_template}'
-          dragAndDrop:
-            extraDropzones:   $('##{dom_id owner} .af-drop-area')
-          request:
-            endpoint:         '#{upload_endpoint}'
-            customHeaders:
-              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            forceMultipart:   true
-            inputName:        'attachment[file]'
-          validation:
-            allowedExtensions: ['jpg', 'jpeg', 'png', 'txt', 'md', 'rtf', 'csv', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'ods', 'odt']
-            sizeLimit:         #{5 * (1<<20)}
-          callbacks:
-            onComplete: (id, name, data) ->
-              $('#{refresh_target}').load('#{refresh_endpoint}')
-              if data.success
-                $('##{uploader_id} .qq-upload-list li').eq(id).fadeOut()
-
-        )
-      )
+    .af-uploader{ id:uploader_id, data: { uploader: true, parent: dom_id(owner), template: { uploader:uploader_template, file:file_template }, refresh: { target: refresh_target, endpoint: refresh_endpoint }, upload: { endpoint: upload_endpoint } } }
 - else
   - case format 
   - when 'big'

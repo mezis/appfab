@@ -15,7 +15,8 @@
     %span.tail.af-drop-hilite-before
     .body.clearfix
       .attachments
-        = render comment.attachments, title:false, classes:'pull-right'
+        - if comment.attachments_count > 0
+          = render comment.attachments, title:false, classes:'pull-right'
       .markdown!= pipeline_render comment.body
   %ul.actions
     %li.time_ago
