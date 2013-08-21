@@ -1,4 +1,10 @@
+@import application/variables
+
 .tooltip-inner
-  line-height: 130%
+  line-height:      130%
+  background-color: black
+  color:            white
 .tooltip
   min-width:   10em
+  &.in
+    +opacity(95)
