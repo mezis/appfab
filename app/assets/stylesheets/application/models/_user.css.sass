@@ -14,9 +14,6 @@
   .avatar
     +border-radius(1000px)
 
-    // default only used when offline
-    background-color: $wellBackground
-
     // make the avatar fill the user box
     +box-sizing(border-box)
     width:     100%
@@ -24,6 +21,9 @@
 
   .name
     white-space: nowrap
+
+  > a
+    display: block
 
 // rollover
 .user a .avatar
@@ -63,6 +63,8 @@
 .user-hidden
   +opacity(0.5)
 
+.user-no-hover .avatar
+  +filter(none)
 
 // collection
 

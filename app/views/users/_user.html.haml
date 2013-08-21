@@ -4,12 +4,13 @@
 -# link     (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:false, resource:User, id:user.id, v:7, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :classes, :link), can?(:read, user)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:8, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :classes, :link), can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
     show_name      =   local_assigns.fetch(:name,    !show_avatar)
     show_karma     =   local_assigns.fetch(:karma,   show_name)
+    show_tooltip   = !!local_assigns.fetch(:tooltip, true)
     avatar_size    =   local_assigns.fetch(:avatar,  nil)
     wrap_link      = !!local_assigns.fetch(:link,    true)
     classes        =   local_assigns.fetch(:classes, nil)
@@ -17,6 +18,7 @@
     link_target = (can?(:read, user) && wrap_link) ? user : nil
 
     avatar_options = avatar_size.kind_of?(Integer) ? { size:avatar_size } : {}
+    link_options = show_tooltip ? user_tooltip_options(user) : {}
 
   %div[user]{ class:classes }<>
     - body = capture do
@@ -30,7 +32,7 @@
               = number_with_delimiter user.karma
               = user_karma_symbol
     - if link_target
-      = link_to link_target, title: user_tooltip(user), data:{ placement:'bottom', container:'.container' } do
+      = link_to link_target, link_options do
         = body
     - else
       = body

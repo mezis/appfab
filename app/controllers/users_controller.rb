@@ -15,6 +15,10 @@ class UsersController < ApplicationController
 
   def show
     authorize! :read, @user
+
+    if request.xhr?
+      render partial: 'users/tooltip', locals:{ user: @user }
+    end
   end
 
   def edit

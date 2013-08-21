@@ -21,11 +21,13 @@
 
 $.unobtrusive () ->
   # only enable tooltips on non-touch devices
+
   return if ('ontouchstart' in document.documentElement)
-  $('[title]').tooltip(
-    delay: { show:500, hide:150 }
-    html: true
-  )
+  $('[title]').tooltip
+    delay:     { show:500, hide:150 }
+    container: 'body'
+    html:      true
+
 
 $(document).on 'page:fetch', () ->
   $('[data-barberpole]').addClass('af-barberpole')
