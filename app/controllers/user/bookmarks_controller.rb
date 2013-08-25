@@ -10,10 +10,16 @@ class User::BookmarksController < ApplicationController
       flash[:error] = _('Failed to add bookmark.')
     end
 
-    if @user_bookmark.idea
-      redirect_to idea_path(@user_bookmark.idea)
-    else
-      redirect_to ideas_path(angle: 'followed')
+    respond_to do |format|
+      format.html do
+        if @user_bookmark.idea
+          redirect_to idea_path(@user_bookmark.idea)
+        else
+          redirect_to ideas_path(angle: 'followed')
+        end
+      end
+
+      format.js
     end
   end
 
@@ -21,6 +27,13 @@ class User::BookmarksController < ApplicationController
     @user_bookmark = current_user.bookmarks.find(params[:id])
     @user_bookmark.destroy
     flash[:notice] = _("Successfully removed bookmark.")
-    redirect_to idea_path(@user_bookmark.idea)
+
+    respond_to do |format|
+      format.html do
+        redirect_to idea_path(@user_bookmark.idea)
+      end
+
+      format.js
+    end
   end
 end

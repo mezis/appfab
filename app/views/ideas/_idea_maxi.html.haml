@@ -68,9 +68,4 @@
             = can_link_to idea, confirm: _('Are you sure?'), method: :delete, auth:[:destroy,idea], title: s_('Tooltip|Delete Idea') do
               %i.icon-trash<>
           %li
-            - if bookmark = bookmark_for_idea(idea)
-              = link_to user_bookmark_path(bookmark), method: :delete, title: _('Remove bookmark') do
-                %i.icon-bookmark
-            - else
-              = link_to user_bookmarks_path(user_bookmark:{idea_id:idea}), method: :post, title: _('Bookmark this idea') do
-                %i.icon-bookmark-empty
+            = render 'bookmark_link', idea:idea

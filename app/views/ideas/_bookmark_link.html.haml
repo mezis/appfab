@@ -1,0 +1,8 @@
+-# Give me an +idea+.
+%span.idea-bookmark-link
+  - if bookmark = bookmark_for_idea(idea)
+    = link_to user_bookmark_path(bookmark), method: :delete, remote: true, title: _('Remove bookmark') do
+      %i.icon-bookmark
+  - else
+    = link_to user_bookmarks_path(user_bookmark:{idea_id:idea}), method: :post, remote: true, title: _('Bookmark this idea') do
+      %i.icon-bookmark-empty
