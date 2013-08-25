@@ -1,6 +1,13 @@
-@import application/mixins
 @import application/variables
 
 .markdown
-  blockquote p
-    font-size:    inherit
+  blockquote
+    margin:           0
+    padding-left:     1ex
+    border-left:      2px solid rgba($textColor, 0.5)
+    font-style:       italic
+    p
+      margin-bottom:  10px
+      font-size:      inherit
+      font-weight:    inherit
+      line-height:    inherit
