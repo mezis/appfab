@@ -19,22 +19,4 @@ describe BookmarkObserver do
       }.should change { user.bookmarks.count }.by(1)
     end
   end
-
-  context 'when a user vets on an idea' do
-    it 'bookmarks it' do
-      idea = Idea.make!
-      lambda {
-        user.vettings.make!(idea:idea)
-      }.should change { user.bookmarks.count }.by(1)
-    end
-  end
-
-  context 'when a user votes for an idea' do
-    it 'bookmarks it' do
-      idea = Idea.make!
-      lambda {
-        user.votes.make!(subject:idea)
-      }.should change { user.bookmarks.count }.by(1)
-    end
-  end
 end
