@@ -51,6 +51,9 @@ AppFab::Application.configure do
   # config.assets.precompile += %w( search.js )
   config.assets.precompile += %w( email.css pages/welcome.css )
 
+  # Cache assets so the next round of compilation is faster
+  config.assets.cache_store = :dalli_store
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.smtp_settings = {
