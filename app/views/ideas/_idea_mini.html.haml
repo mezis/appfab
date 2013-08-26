@@ -1,14 +1,14 @@
 -# Context:
 -# - idea (Idea)
+= cached_fragment(disabled:false, resource:'idea_mini', id:idea.id, v:1, key:[idea.active_at]) do
+  .idea_container.af-mutable-content
+    .idea-mini[idea]{ class:idea.state_name }
+      .meta.top.clearfix.af-mutable
+        = render 'idea_rating', idea:idea
+      .body{ class:idea_category_class(idea) }
+        %h3.title
+          = link_to idea_path(idea) do
+            %span= idea.title
 
-.idea_container.af-mutable-content
-  .idea-mini[idea]{ class:idea.state_name }
-    .meta.top.clearfix.af-mutable
-      = render 'idea_rating', idea:idea
-    .body{ class:idea_category_class(idea) }
-      %h3.title
-        = link_to idea_path(idea) do
-          %span= idea.title
-
-    .meta.bottom.clearfix.af-mutable
-      = render 'idea_people', idea:idea, limit:3
+      .meta.bottom.clearfix.af-mutable
+        = render 'idea_people', idea:idea, limit:3

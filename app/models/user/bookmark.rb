@@ -9,6 +9,9 @@ class User::Bookmark < ActiveRecord::Base
 
   scope :idea_is, lambda { |idea| where(:idea_id => idea.id) }
 
+  after_create  :ping_idea
+  after_destroy :ping_idea
+
   module UserMethods
     def self.included(by)
       by.class_eval do
@@ -33,5 +36,11 @@ class User::Bookmark < ActiveRecord::Base
         user.bookmarks.where(idea_id: idea.id).destroy_all
       end
     end
+  end
+
+  private
+
+  def ping_idea
+    idea.ping!
   end
 end

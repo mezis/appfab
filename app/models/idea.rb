@@ -145,7 +145,7 @@ class Idea < ActiveRecord::Base
   end
 
 
-  # called from subresources (comments, vettings, votes)
+  # called from subresources (comments, vettings, votes, bookmarks)
   def ping!
     update_column :active_at, Time.current
   end
