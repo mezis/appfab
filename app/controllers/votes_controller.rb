@@ -10,6 +10,7 @@ class VotesController < ApplicationController
   def create
     @vote = @subject.votes.new(params[:vote])
     @vote.user = current_user
+    authorize! :vote, @subject if @vote.valid?
 
     if @vote.save
       flash[:success] = votes_message(@vote, :ok)
@@ -26,10 +27,11 @@ class VotesController < ApplicationController
   def destroy
     @vote = @subject.votes.find(params[:id])
     @vote.destroy
+    authorize! :destroy, @vote
 
     respond_to do |format|
       format.html { redirect_to @return_to, :notice => votes_message(@vote, :cancel) }
-      format.js   { redirect_to @subject }
+      format.js   { redirect_to @subject, status:303 }
     end
   end
 
