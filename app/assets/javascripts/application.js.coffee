@@ -39,6 +39,7 @@ $(document).on 'page:change', () ->
 $(document).on 'page:restore', () ->
   $('[data-barberpole]').removeClass('af-barberpole')
   $('[title]').tooltip('hide')
+  $('.tooltip').remove()
 
 $(document).ready () ->
   $(document).ajaxStart () ->
