@@ -30,17 +30,17 @@ module Traits::Idea::StateMachine
   end
 
   def can_become_vetted?
-    design_size && development_size && (vettings.count >= configatron.app_fab.vettings_needed)
+    design_size && development_size && (vettings.count >= §.vettings_needed)
   end
 
 
   def enough_votes?
-    (votes.count >= configatron.app_fab.votes_needed)
+    (votes.count >= §.votes_needed)
   end
 
 
   def enough_design_capacity?
-    return if configatron.app_fab.design_capacity >=
+    return if §.design_capacity >=
       Idea.with_state(:picked).managed_by(self.product_manager).sum(:design_size) +
       self.design_size
     errors.add :base, _('Not enough design capacity')
@@ -48,7 +48,7 @@ module Traits::Idea::StateMachine
 
 
   def enough_development_capacity?
-    return if configatron.app_fab.design_capacity >=
+    return if §.design_capacity >=
       Idea.with_state(:approved).managed_by(self.product_manager).sum(:development_size) +
       self.development_size
     errors.add :base, _('Not enough development capacity')
