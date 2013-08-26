@@ -7,8 +7,8 @@ gem 'rails', '~> 3.2.6'
 gem 'rainbows', group: :production
 gem 'thin',     group: :development
 
-# process runner that load .env
-gem 'foreman',  group: :development
+# load .env
+gem 'dotenv-rails', group: :development
 
 # database
 gem 'mysql2',  group: :development

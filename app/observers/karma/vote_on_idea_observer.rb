@@ -20,7 +20,7 @@ class Karma::VoteOnIdeaObserver < ActiveRecord::Observer
 
   def change_karma(record, sign)
     return if record.down? # no downvoting on ideas (normally)
-    record.user.change_karma!           by:(sign * configatron.app_fab.karma.vote)
-    record.subject.author.change_karma! by:(sign * configatron.app_fab.karma.upvoted)
+    record.user.change_karma!           by:(sign * §.karma.vote)
+    record.subject.author.change_karma! by:(sign * §.karma.upvoted)
   end
 end

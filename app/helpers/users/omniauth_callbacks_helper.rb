@@ -1,3 +1,5 @@
 # encoding: UTF-8
-module Users::OmniauthCallbacksHelper
+module Users
+  module OmniauthCallbacksHelper
+  end
 end

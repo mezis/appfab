@@ -15,5 +15,10 @@ namespace :appfab do
         idea.update_column :votes_cache,    idea.votes.count
       end
     end
+
+    desc 'removes bookmarks for old live ideas'
+    task :bookmark_cleanup => :environment do
+      BookmarkCleanupService.new.run
+    end
   end
 end

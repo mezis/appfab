@@ -34,12 +34,12 @@
     - if can?(:create, idea.vettings.build)
       - if vetting = current_user.vettings.where(idea_id: idea.id).first
         %li
-          = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+          = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-check
             = _('Cancel your vetting')
       - else
         %li
-          = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+          = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-check
             = _('Vet this idea')
     - else
@@ -60,12 +60,12 @@
     - if can?(:create, idea.votes.build)
       - if vote = current_user.votes.on_idea(idea).first
         %li
-          = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your endorsement of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled!') % { points: -configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+          = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your endorsement of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled!') % { points: -§.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-thumbs-down
             = _('Withdraw endorsement')
       - else
         %li
-          = link_to idea_votes_path(idea), method: :post, class: 'btn btn-block btn-primary', title: s_('Tooltip|Endorsing this idea means that you believe it will be impactful. Endorsing costs %{points} %{karma_icon}.') % { points: configatron.app_fab.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
+          = link_to idea_votes_path(idea), method: :post, class: 'btn btn-block btn-primary', title: s_('Tooltip|Endorsing this idea means that you believe it will be impactful. Endorsing costs %{points} %{karma_icon}.') % { points: §.karma.vote, karma_icon: user_karma_symbol }, :'data-placement' => placement do
             %i.icon-thumbs-up
             = _('Endorse this')
     - else

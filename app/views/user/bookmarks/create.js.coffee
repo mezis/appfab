@@ -1,3 +1,0 @@
-target = $('#<%= dom_id @user_bookmark.idea %> .idea-bookmark-link')
-target.find('[title]').tooltip('destroy')
-target.replaceWith '<%=j render("ideas/bookmark_link", idea:@user_bookmark.idea) %>'
