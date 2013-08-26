@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.author = current_user
+    authorize! :create, @comment
 
     success = @comment.save
       
@@ -30,6 +31,8 @@ class CommentsController < ApplicationController
 
 
   def show
+    authorize! :read, @comment
+
     if request.xhr?
       case params['part']
       when 'attachments'
@@ -46,6 +49,8 @@ class CommentsController < ApplicationController
 
 
   def update
+    authorize! :update, @comment
+
     if @comment.update_attributes(params[:comment])
       flash[:success] = _("Successfully updated comment.")
     else
@@ -56,6 +61,7 @@ class CommentsController < ApplicationController
 
 
   def destroy
+    authorize! :destroy, @comment
     @comment.destroy
 
     respond_to do |format|
