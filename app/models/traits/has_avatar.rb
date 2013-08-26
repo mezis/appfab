@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'gravtastic'
 
 module Traits::HasAvatar
   extend ActiveSupport::Concern

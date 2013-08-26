@@ -1,6 +1,4 @@
 # encoding: UTF-8
-require 'gravtastic'
-
 class Login < ActiveRecord::Base
   include Traits::HasAvatar
   
