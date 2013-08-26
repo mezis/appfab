@@ -1,20 +1,22 @@
 // pulsating animation
+@import application/variables
+@import animation
 @import compass/support
 @import compass/css3/shared
-@import animation
-@import application/variables
 @import compass/css3/images
+@import compass/css3/background-size
 
 +keyframes(af-barberpole)
   from
     background-position: 0 0
   to
-    background-position: 60px 30px
+    background-position: 40px 0
 
 .af-barberpole
-  $color1: $navbarInverseBackground
-  $color2: $textColor
+  $color1:   $navbarInverseBackground
+  $color2:   $textColor
+  $gradient: linear-gradient(-45deg, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%, $color2)
 
-  background-size: 30px 30px
-  +background(linear-gradient(-45deg, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%, $color2))
-  +animation(af-barberpole 1s linear infinite)
+  +background-size(40px 40px)
+  +animation(af-barberpole 0.5s linear infinite)
+  +background-image($gradient)
