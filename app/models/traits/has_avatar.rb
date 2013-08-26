@@ -5,6 +5,6 @@ module Traits::HasAvatar
 
   included do
     include Gravtastic
-    has_gravatar :email, size: 80, filetype: :jpg, default: :retro, secure:false
+    has_gravatar :email, size: 80, filetype: :jpg, default: :retro, secure:true
   end
 end
