@@ -10,7 +10,7 @@ class VotesController < ApplicationController
   def create
     @vote = @subject.votes.new(params[:vote])
     @vote.user = current_user
-    authorize! :create, @vote
+    authorize! :vote, @subject if @vote.valid?
 
     if @vote.save
       flash[:success] = votes_message(@vote, :ok)

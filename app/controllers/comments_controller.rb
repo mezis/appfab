@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.author = current_user
-    authorize! :create, @comment
+    authorize! :create, @comment if @comment.valid?
 
     success = @comment.save
       
