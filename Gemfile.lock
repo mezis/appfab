@@ -104,6 +104,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
     dotenv (0.8.0)
+    dotenv-rails (0.8.0)
+      dotenv (= 0.8.0)
     dragonfly (0.9.15)
       multi_json (~> 1.0)
       rack
@@ -406,6 +408,7 @@ DEPENDENCIES
   database_cleaner
   default_value_for
   devise
+  dotenv-rails
   dragonfly
   faker
   fineuploader-rails
