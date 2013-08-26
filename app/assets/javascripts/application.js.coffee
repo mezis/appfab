@@ -32,6 +32,10 @@ $.unobtrusive () ->
 $(document).on 'page:fetch', () ->
   $('[data-barberpole]').addClass('af-barberpole')
 
+$(document).on 'page:change', () ->
+  $('[title]').tooltip('hide')
+  $('.tooltip').remove()
+
 $(document).ready () ->
   $(document).ajaxStart () ->
     $('[data-barberpole]').addClass('af-barberpole')
