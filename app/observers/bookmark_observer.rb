@@ -2,14 +2,19 @@
 class BookmarkObserver < ActiveRecord::Observer
   observe :idea, :comment
 
+  def after_create(record)
+    return true unless record.kind_of?(Idea)
+    _create_bookmark_for(record, record.author)
+  end
+
   def after_save(record)
-    idea = case record
-      when Idea     then record
-      when Comment  then record.idea
-    end
+    return true unless record.kind_of?(Comment)
+    _create_bookmark_for(record.idea, record.author)
+  end
 
-    user = record.author
+  private
 
+  def _create_bookmark_for(idea, user)
     user.bookmarks.transaction do
       return if user.bookmarks.idea_is(idea).any?
       user.bookmarks.create!(idea: idea)
