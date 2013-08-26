@@ -145,6 +145,8 @@ module IdeasHelper
     text = case angle
     when 'discussable' then _('This list show ideas currently open for discussion, regardless of their current status. Use the dropdowns to filter or sort them.')
     when 'followed'    then _('This angle lists the ideas you are currently following. Remember, as soon as you participate on an idea (be it by commenting, vetting, or voting), we will bookmark it for you. You can un-bookmark ideas with the bottom-right icon on each idea card.')
+    else 
+      _("Ow, I'm not sure how you landed here. This doesn't look like a view I knwo about, sorry!")
     end
 
     pipeline_render text
