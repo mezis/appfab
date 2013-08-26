@@ -13,7 +13,7 @@
     = csrf_meta_tag
     = yield(:head)
 
-  %body{ data: {user_id: current_user.id, pusher_key:Pusher.key } }
+  %body{ data: {user_id: current_user.andand.id, pusher_key:Pusher.key } }
     #header
       = render 'header'
       = yield :after_header
