@@ -29,7 +29,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @return_to, :notice => votes_message(@vote, :cancel) }
-      format.js   { redirect_to @subject }
+      format.js   { redirect_to @subject, status:303 }
     end
   end
 
