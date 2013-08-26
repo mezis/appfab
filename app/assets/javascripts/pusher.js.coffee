@@ -26,3 +26,4 @@ $.unobtrusive () ->
         n  = node.find('.notifications .figure')
         n.text(data.notifications)
         n.flash(start: 'af-flashable-burnin', end: 'af-flashable-burnout')
+    console.log "pusher bindings established"
