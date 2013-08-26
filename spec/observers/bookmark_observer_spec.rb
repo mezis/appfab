@@ -19,4 +19,15 @@ describe BookmarkObserver do
       }.should change { user.bookmarks.count }.by(1)
     end
   end
+
+  context 'when and idea changes' do
+    it 'does not bookmark it for the author' do
+      idea = Idea.make!
+      idea.author.bookmarks.destroy_all
+
+      lambda {
+        idea.save!
+      }.should_not change { idea.author.bookmarks.count }
+    end
+  end
 end

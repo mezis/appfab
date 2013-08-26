@@ -1,0 +1,11 @@
+var target = $('#<%= dom_id @notification %>');
+
+target.find('[title]').tooltip('destroy');
+
+target.replaceWith('<%=j render(@notification) %>');
+
+target.flash({
+  start: 'af-pop'
+});
+
+target.activateUnobtrusiveJavascript();
