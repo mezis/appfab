@@ -20,11 +20,11 @@ class Karma::VoteOnCommentObserver < ActiveRecord::Observer
 
   def change_karma(record, sign)
     if record.up?
-      record.user.change_karma!           by:(sign * configatron.app_fab.karma.upvote)
-      record.subject.author.change_karma! by:(sign * configatron.app_fab.karma.upvoted)
+      record.user.change_karma!           by:(sign * §.karma.upvote)
+      record.subject.author.change_karma! by:(sign * §.karma.upvoted)
     else
-      record.user.change_karma!           by:(sign * configatron.app_fab.karma.downvote)
-      record.subject.author.change_karma! by:(sign * configatron.app_fab.karma.downvoted)
+      record.user.change_karma!           by:(sign * §.karma.downvote)
+      record.subject.author.change_karma! by:(sign * §.karma.downvoted)
     end
   end    
 end

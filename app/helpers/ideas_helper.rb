@@ -170,7 +170,7 @@ module IdeasHelper
     when :submitted
       _("This idea was submitted, but is not vetted yet. It needs to be looked at by both a product manager and an architect, each of whom will estimate the effort involved and vet it. They also can just comment on it and ask you to provide more details, give it a better title, or elaborate on the problem statement for instance: only specific, precise ideas can be sized properly.")
     when :vetted
-      _("This idea has been vetted by a product manager and an architect, but has not received enough endorsements yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} endorsements for an idea to proceed.") % { minimum_votes:configatron.app_fab.votes_needed }
+      _("This idea has been vetted by a product manager and an architect, but has not received enough endorsements yet, so no team can pick it up and start working on it. There is a minimum of %{minimum_votes} endorsements for an idea to proceed.") % { minimum_votes:§.votes_needed }
     when :voted
       _("Great! This idea has received more than the minimum endorsements. Assuming it is or becomes one of the top rated ideas, a product team will pick it up and start working on it.")
     when :picked
