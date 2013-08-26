@@ -1,5 +1,6 @@
 $("#<%= dom_id @comment %>").flash({
-  end:'af-poof'
-  after: (target) ->
+  end: 'af-poof',
+  after: function(target) {
     $(target).slideUp()
-})
+  }
+});
