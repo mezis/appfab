@@ -42,7 +42,7 @@ gem 'andand'
 # (because Rails' #pluck breaks a lot with joins)
 gem 'valium'
 
-# Property API for plain classes
+# Property API for plain classes (used for form objects)
 gem 'virtus'
 
 # activerecord extensions
@@ -86,6 +86,9 @@ gem 'jquery-turbolinks'
 
 # push / websocket events
 gem 'pusher'
+
+# speeds up Travis builds by caching the bundle
+gem 'bundle_cache'
 
 # Gems used only for assets and not required
 # in production environments by default.
