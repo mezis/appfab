@@ -8,7 +8,7 @@ gem 'rainbows', group: :production
 gem 'thin',     group: :development
 
 # load .env
-gem 'dotenv-rails', group: :development
+gem 'dotenv-rails'
 
 # database
 gem 'mysql2',  group: :development
