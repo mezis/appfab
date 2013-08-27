@@ -26,12 +26,13 @@ describe IdeasController do
       DatabaseCleaner.clean!
       user = User.make!
       sign_in user.login
-
+      idea          = Idea.make! author:user
       other_account = Account.make!
       other_user    = user.login.users.create! account:other_account
-      idea          = Idea.make! author:other_user
+      other_idea    = Idea.make! author:other_user
 
       get :show, id:idea
+      get :show, id:other_idea
       response.should be_success
       flash[:account_switch].should_not be_blank
     end

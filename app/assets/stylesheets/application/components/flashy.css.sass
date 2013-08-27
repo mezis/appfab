@@ -1,19 +1,26 @@
 @import compass/css3/opacity
 @import compass/css3/transition
 @import compass/css3/transform
+@import compass/css3/text-shadow
 @import application/mixins
 @import application/variables
 
 .af-flashable
-  +transition-property(transform opacity)
+  +transition-property(transform opacity color text-shadow)
   +transition-duration($transition-duration)
-
   +scale(1.0)
   +opacity(1.0)
 
-  &.af-pop
-    +scale(1.1)
-    +opacity(0.0)
-  &.af-poof
-    +scale(0.0)
-    +opacity(0.0)
+.af-flashable-pop
+  +scale(1.1)
+  +opacity(0.0)
+.af-flashable-poof
+  +scale(0.0)
+  +opacity(0.0)
+
+.af-flashable-burnin
+  +text-shadow(white 0px 0px 2px)
+  color: white
+.af-flashable-burnout
+  +text-shadow(white 0px 0px 50px)
+  color: $navbarInverseText

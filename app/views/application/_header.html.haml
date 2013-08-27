@@ -23,7 +23,7 @@
               %i.icon-bookmark-empty
               %span= _('Bookmarks')
 
-        %ul.nav.pull-right
+        %ul.nav.pull-right#current_user
           - if current_account
             = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
               %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
@@ -52,14 +52,14 @@
                   = link_to new_account_path do
                     = _('New product team')
           - if current_user
-            = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id: current_user.to_param, html: { class:'name' }) do |path|
+            = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id:current_user.to_param, html: { class:'name' }) do |path|
               = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
                 %span.first-name= current_login.first_name
                 %span.karma
                   %span.figure= number_with_delimiter current_user.karma
                   = user_karma_symbol
             = content_tag_with_path_checking(:li, controller: 'notifications', action: 'index', html: { class:'inbox', title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }) do |path|
-              = link_to path do
+              = link_to path, class: 'notifications' do
                 - count = current_user.notifications.unread.count
                 %span.figure= number_with_delimiter(count) if count > 0
                 %i.icon-inbox

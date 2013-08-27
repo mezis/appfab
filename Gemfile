@@ -8,7 +8,7 @@ gem 'rainbows', group: :production
 gem 'thin',     group: :development
 
 # load .env
-gem 'dotenv-rails', group: :development
+gem 'dotenv-rails'
 
 # database
 gem 'mysql2',  group: :development
@@ -84,6 +84,9 @@ gem 'coffee-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
+# push / websocket events
+gem 'pusher'
+
 # speeds up Travis builds by caching the bundle
 gem 'bundle_cache'
 
@@ -139,6 +142,9 @@ group :development do
   gem 'rb-fsevent',              require:false
   gem 'rb-fchange',              require:false
   gem 'terminal-notifier-guard', require:false
+
+  # stub version of the Pusher API
+  gem 'pusher-fake'
 
   # measure test coverage
   gem 'coveralls',               require:false

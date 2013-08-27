@@ -60,4 +60,7 @@ RSpec.configure do |config|
   DatabaseCleaner.strategy = :truncation  
   config.before(:suite) { DatabaseCleaner.clean }
   config.after(:suite) { DatabaseCleaner.clean }
+
+  # Stub APIs
+  config.before(:each) { Pusher.stub :trigger }
 end

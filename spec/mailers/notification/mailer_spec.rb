@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Notification::Mailer do
-  fixtures :users, :accounts
+  fixtures :users, :accounts, :logins
 
   describe "digest" do
     let(:user) { users(:abigale_balisteri) }
