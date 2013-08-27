@@ -4,7 +4,6 @@ $.unobtrusive () ->
   pusher_key = $('body').data('pusher-key')
   user_id    = $('body').data('user-id')
   $.getScript "https://d3dy5gmtp8yhk7.cloudfront.net/2.0/pusher.min.js", ->
-    console.log "pusher script loaded"  
     pusher     = new Pusher(pusher_key)
     channel    = pusher.subscribe("user-#{user_id}")
     channel.bind 'echo', (data) ->
@@ -26,4 +25,3 @@ $.unobtrusive () ->
         n  = node.find('.notifications .figure')
         n.text(data.notifications)
         n.flash(start: 'af-flashable-burnin', end: 'af-flashable-burnout')
-    console.log "pusher bindings established"
