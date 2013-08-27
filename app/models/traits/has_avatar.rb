@@ -7,5 +7,11 @@ module Traits::HasAvatar
   included do
     include Gravtastic
     has_gravatar :email, size: 80, filetype: :jpg, default: :retro, secure:true
+
+    if Rails.env.test?
+      def gravatar_url(*args)
+        "/favicon.ico"
+      end
+    end
   end
 end
