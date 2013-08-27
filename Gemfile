@@ -140,6 +140,9 @@ group :development do
   gem 'rb-fchange',              require:false
   gem 'terminal-notifier-guard', require:false
 
+  # stub version of the Pusher API
+  gem 'pusher-fake'
+
   # measure test coverage
   gem 'coveralls',               require:false
 
