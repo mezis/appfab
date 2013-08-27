@@ -7,13 +7,17 @@ class Ability
 
     # Idea permissions
     draft_or_submitted = [:draft, :submitted].map { |sym| Idea.state_value(sym) }
-    can :read, Idea, author: { account_id: user.account_id }
+    can :read, Idea, account_id: user.account_id
     if user.plays?(:submitter)
-      can :create,  Idea, author: { account_id: user.account_id }
+      can :create,  Idea, account_id: user.account_id
       can :update, Idea do |idea|
         idea.author == user && [:draft, :submitted].include?(idea.state_name)
       end
       can :destroy, Idea, author_id: user.id, state: draft_or_submitted
+    end
+
+    can :vote, Idea do |idea|
+      user.account_id == idea.account_id
     end
 
     can :move, Idea do |idea|
@@ -47,7 +51,6 @@ class Ability
     end
 
     # Vote
-    can :create,  Vote
     can :destroy, Vote do |r|
       r.user_id == user.id && r.recently_created?
     end
