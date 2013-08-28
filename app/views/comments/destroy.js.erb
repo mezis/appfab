@@ -1,6 +1,7 @@
 $("#<%= dom_id @comment %>").flash({
-  end: 'af-poof',
+  end: 'af-flashable-poof',
   after: function(target) {
+    $(target).attr('style', 'visibility:hidden;')
     $(target).slideUp()
   }
 });

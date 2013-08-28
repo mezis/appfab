@@ -5,7 +5,7 @@ target.find('[title]').tooltip('destroy');
 target.replaceWith('<%=j render(@notification) %>');
 
 target.flash({
-  start: 'af-pop'
+  start: 'af-flashable-pop'
 });
 
 target.activateUnobtrusiveJavascript();

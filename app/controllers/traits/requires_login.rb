@@ -13,6 +13,6 @@ module Traits::RequiresLogin
   end
 
   def show_return_to
-    Rails.logger.info "Return to: #{session[:return_to]}"
+    Rails.logger.info "Return to: #{session[:return_to]}" if session[:return_to]
   end
 end
