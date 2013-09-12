@@ -1,7 +1,34 @@
-= cached_fragment resource:'welcome', id:'release_notes' do
+= cached_fragment resource:'welcome', id:'release_notes', v:2 do
   .row
     .span12
       %h1= _('Release notes')
+
+      .well
+        :markdown
+          ### Upcoming
+
+          New features:
+
+          - Vetting and endorsing no longer automatically bookmark
+          - Bigger karma reward for idea participants when ideas go live
+          - Turbolinks (most links no longer reload the whole page)
+
+          Fixes:
+
+          - Cannot delete comments by canceling up/down votes
+          - Avatar layout issues in Chrome
+          - Javascript errors with the nag banner in some browsers
+          - Fixed styling for quotes in comments
+
+          Improvements:
+
+          - Serve assets through Cloudfront
+          - Faster comment posting
+          - Faster deploys
+          - Faster board view through caching
+          - Auto remove bookmarks on ideas that have been live for 1+ week
+          - Bookmarking / unbookmarking is now AJAX (no page relaods)
+
 
       .well
         :markdown
