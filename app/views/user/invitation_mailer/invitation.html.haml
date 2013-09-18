@@ -1,0 +1,12 @@
+.email.user-invitation
+  .well
+    .title= _("%{user}, welcome aboard!") % { user: @user.first_name }
+
+  %p= _("You've been invited to join team %{name} on %{appname}.") % { name: @user.account.name, appname: configatron.app_name }
+
+  %p
+    = _("Simply go to %{app_link} and sign in, we've already set up your account!").html_safe % { app_link: link_to(configatron.app_name, root_url) }
+    %br/
+    = _("If you've logged in before, %{team_name} has been added to your team menu.") % { team_name: @user.account.name }
+
+  = render 'email_footer'
