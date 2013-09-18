@@ -18,6 +18,7 @@ namespace :appfab do
 
     desc 'removes bookmarks for old live ideas'
     task :bookmark_cleanup => :environment do
+      require "bookmark_cleanup_service"
       BookmarkCleanupService.new.run
     end
   end
