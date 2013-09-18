@@ -8,7 +8,7 @@ class Login < ActiveRecord::Base
   devise :database_authenticatable,
     :rememberable, 
     :trackable, :validatable,
-    :omniauthable, :token_authenticatable
+    :omniauthable
 
   has_many :users
   has_many :accounts, through: :users
