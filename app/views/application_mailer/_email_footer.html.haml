@@ -1,0 +1,8 @@
+= cached_fragment resource:'partial', id:'application/email_footer' do
+  .well.footer
+    = link_to root_url do
+      %img.pull-left.muted{ src:"#{root_url}appfab-favicon.png"}/
+      %p.align-right.muted
+        = "#{configatron.app_name}."
+        = _('The app that helps product teams build fantastic apps.')
+      .clearfix
