@@ -53,9 +53,6 @@
       .actions.pull-right
         %ul
           %li
-            = can_link_to idea_path(idea), if:(params[:action] != 'show'), title: s_('Tooltip|Expand Idea') do
-              %i.icon-fullscreen<>
-          %li
             = link_to idea_path(idea, anchor: 'comments'), title: s_('Tooltip|Show comments') do
               %i.icon-comments-alt<>
               - if (count = idea.comments_count) > 0
