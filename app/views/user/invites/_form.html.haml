@@ -1,0 +1,8 @@
+- if can? :invite, nil
+  = form_tag user_invites_path do
+    %h4= _("Invite user")
+    = text_field_tag  'login[first_name]', nil, placeholder: _('First name')
+    = text_field_tag  'login[last_name]',  nil, placeholder: _('Last name')
+    = email_field_tag 'login[email]',      nil, placeholder: _('Email')
+    %div.text-right
+      %input.btn{ name:'commit', type:'submit', value:_("Invite")}

@@ -19,18 +19,12 @@ class Users::OmniauthCallbacksController < ApplicationController
   private
 
   def _sign_in_from_hash(provider)
-    Rails.logger.info _auth_hash
-    login = Login.find_or_create_from_auth_hash!(_auth_hash)
-    login.auth_provider_data[provider.to_s] ||= _auth_hash.to_hash
-    login.remember_me = true
-    login.save!
-
+    login = LoginService.new(_auth_hash).run
     return_to = session[:return_to]
-
-    sign_in login
+    sign_in(login)
     flash[:success] = _('Welcome, %{user}!') % { user: login.first_name }
     
-    redirect_to return_to || dashboard_path
+    redirect_to(return_to || dashboard_path)
   end
 
   def _auth_hash

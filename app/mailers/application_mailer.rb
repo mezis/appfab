@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   default from: '"AppFab" <noreply@dec0de.me>'
-  helper :users, :user_roles, :application
+  helper :users, :user_roles, :application, :fragment_cache
 
   # all paths need to be turned into URLs of course inside an email.
   # neat trick:

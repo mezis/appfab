@@ -33,11 +33,7 @@
                 %li
                   = link_to current_account do
                     %i.icon-user
-                    = _('List team members')
-                %li
-                  = can_link_to edit_account_path(current_account), auth:[:update, current_account], :'data-placement' => 'left' do
-                    %i.icon-edit
-                    = _('Edit team')
+                    = _('View team details')
                 - if login_other_accounts.any?
                   %li.divider
                   %li
@@ -50,7 +46,7 @@
                 %li.divider
                 %li
                   = link_to new_account_path do
-                    = _('New product team')
+                    = _('Create new team')
           - if current_user
             = content_tag_with_path_checking(:li, controller: 'users', action: 'show', id:current_user.to_param, html: { class:'name' }) do |path|
               = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do

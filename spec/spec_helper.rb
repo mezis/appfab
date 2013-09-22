@@ -49,10 +49,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # Devise
   config.include Devise::TestHelpers, :type => :controller
   config.extend  ControllerHelpers,   :type => :controller
   config.extend  ViewHelpers,         :type => :view
+  config.extend  EmailHelpers
+  config.include OmniauthHelpers
 
   config.before(:each) { Rails.cache.clear }
 

@@ -33,9 +33,6 @@ describe User::Role::UserMethods do
       @user.plays?(:product_manager).should be_false
     end
 
-    it 'accepts strings' do
-      @user.plays?('developer').should be_true
-    end
 
     it 'fails on unknown roles' do
       expect {
