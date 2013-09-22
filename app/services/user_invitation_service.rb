@@ -21,8 +21,7 @@ class UserInvitationService
     return false if login.accounts.include?(@inviter.account)
 
     new_user = login.users.create!(account: @inviter.account)
-    
     User::InvitationMailer.invitation(inviter:@inviter, user:new_user).deliver
-    true
+    return true
   end
 end
