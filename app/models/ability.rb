@@ -63,7 +63,7 @@ class Ability
     if user.plays?(:benevolent_dictator)
       can :approve,  Idea
       can :sign_off, Idea
-      can :veto,     Idea
+      can :abort,     Idea
     end
 
     # User

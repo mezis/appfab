@@ -111,8 +111,8 @@ module Traits::Idea::StateMachine
           transition [:vetted, :voted] => same
         end
 
-        event :veto› do
           transition [:vetted, :voted, :picked, :designed] => :submitted do
+        event :abort› do
             self.vettings.destroy_all
             self.votes.destroy_all
           end

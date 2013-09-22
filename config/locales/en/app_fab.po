@@ -895,7 +895,7 @@ msgstr ""
 msgid "Tooltip|This idea cannot be marked as %{state} yet."
 msgstr ""
 
-msgid "Tooltip|This idea cannot be vetoed."
+msgid "Tooltip|This idea cannot be aborted."
 msgstr ""
 
 msgid "Tooltip|This idea cannot be vetted yet."
@@ -913,7 +913,7 @@ msgstr ""
 msgid "Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the \"karma\" points you can spend to vote on ideas. Gain more points as you participate!"
 msgstr ""
 
-msgid "Tooltip|Veto this idea. Use with caution and please leave a comment mentionning why you're vetoing this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly."
+msgid "Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you're aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly."
 msgstr ""
 
 msgid "Tooltip|Your dashboard"
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Vet this idea"
 msgstr ""
 
-msgid "Veto"
+msgid "Abort"
 msgstr ""
 
 msgid "Vetted by you"
