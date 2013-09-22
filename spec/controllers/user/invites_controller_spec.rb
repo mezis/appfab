@@ -13,6 +13,7 @@ describe User::InvitesController do
     it 'calls invitation service' do
       UserInvitationService.should_receive(:new).and_return(mock_service)
       request.env["HTTP_REFERER"] = "http://example.com"
+      @current_user.plays! :account_owner
 
       post :create, login: {
         email:      Faker::Internet.email,

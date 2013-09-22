@@ -4,6 +4,8 @@ class User::InvitesController < ApplicationController
   before_filter :authenticate_login!
 
   def create
+    authorize! :invite, nil
+
     invitee = Login.new params[:login].slice(:email, :first_name, :last_name)
     invited = UserInvitationService.new(inviter:current_user, login:invitee).run
 
