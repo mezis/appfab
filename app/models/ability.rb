@@ -10,9 +10,7 @@ class Ability
     can :read, Idea, account_id: user.account_id
     if user.plays?(:submitter)
       can :create,  Idea, account_id: user.account_id
-      can :update, Idea do |idea|
-        idea.author == user && [:draft, :submitted].include?(idea.state_name)
-      end
+      can :update,  Idea, author_id: user.id, state: draft_or_submitted
       can :destroy, Idea, author_id: user.id, state: draft_or_submitted
     end
 
