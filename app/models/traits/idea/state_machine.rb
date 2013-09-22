@@ -67,7 +67,7 @@ module Traits::Idea::StateMachine
 
   def try_to_vet!
     return unless submitted? && can_become_vetted?
-    vet»
+    vet›
   end
 
 
@@ -96,49 +96,49 @@ module Traits::Idea::StateMachine
         state :signed_off,   value: 7
         state :live,         value: 8
 
-        event :submit» do
+        event :submit› do
           transition :draft => :submitted
         end
 
-        event :vet» do
+        event :vet› do
           transition :submitted => :vetted, :if => :can_become_vetted?
           transition :submitted => same
         end
 
-        event :vote» do
+        event :vote› do
           transition :vetted => :voted,  :if => :enough_votes?
           transition :voted  => :vetted, :unless => :enough_votes?
           transition [:vetted, :voted] => same
         end
 
-        event :veto» do
+        event :veto› do
           transition [:vetted, :voted, :picked, :designed] => :submitted do
             self.vettings.destroy_all
             self.votes.destroy_all
           end
         end
 
-        event :pick» do
+        event :pick› do
           transition :voted => :picked
         end
 
-        event :design» do
+        event :design› do
           transition :picked => :designed
         end
 
-        event :approve» do
+        event :approve› do
           transition :designed => :approved
         end
 
-        event :implement» do
+        event :implement› do
           transition :approved => :implemented
         end
 
-        event :sign_off» do
+        event :sign_off› do
           transition :implemented => :signed_off
         end
 
-        event :deliver» do
+        event :deliver› do
           transition :signed_off => :live
         end
 

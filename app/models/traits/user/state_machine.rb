@@ -33,11 +33,11 @@ module Traits::User::StateMachine
         state :visible,      value: 0
         state :hidden,       value: 1
 
-        event :hide» do
+        event :hide› do
           transition :visible => :hidden
         end
 
-        event :show» do
+        event :show› do
           transition :hidden => :visible
         end
       end

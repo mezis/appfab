@@ -30,7 +30,7 @@
 
 
   / vet
-  - if idea.can_vet»?
+  - if idea.can_vet›?
     - if can?(:create, idea.vettings.build)
       - if vetting = current_user.vettings.where(idea_id: idea.id).first
         %li
@@ -56,7 +56,7 @@
 
 
   / vote
-  - if idea.can_vote»?
+  - if idea.can_vote›?
     - if can?(:vote, idea)
       - if vote = current_user.votes.on_idea(idea).first
         %li
@@ -82,7 +82,7 @@
 
 
   / pick
-  - if idea.can_pick»?
+  - if idea.can_pick›?
     - if can?(:pick, idea)
       %li
         = link_to idea_path(idea, idea: { state: :picked }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), :'data-placement' => placement do
@@ -102,7 +102,7 @@
 
 
   / design
-  - if idea.can_design»?
+  - if idea.can_design›?
     - if can?(:design, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'designed' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.<br/>Make sure you\'ve attached design files!'), :'data-placement' => placement do
@@ -118,7 +118,7 @@
 
 
   / approve
-  - if idea.can_approve»?
+  - if idea.can_approve›?
     - if can?(:approve, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'approved' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), :'data-placement' => placement do
@@ -139,7 +139,7 @@
 
 
   / implement
-  - if idea.can_implement»?
+  - if idea.can_implement›?
     - if can?(:implement, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'implemented' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), :'data-placement' => placement do
@@ -158,7 +158,7 @@
 
 
   / sign off
-  - if idea.can_sign_off»?
+  - if idea.can_sign_off›?
     - if can?(:sign_off, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'signed_off' } ), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea signs it off for delivery.'), :'data-placement' => placement do
@@ -182,7 +182,7 @@
 
 
   / deliver
-  - if idea.can_deliver»?
+  - if idea.can_deliver›?
     - if can?(:deliver, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), :'data-placement' => placement do
@@ -202,7 +202,7 @@
 
   %li.separator
 
-  - if idea.can_veto»?
+  - if idea.can_veto›?
     - if can?(:veto, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Veto this idea. Use with caution and please leave a comment mentionning why you\'re vetoing this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, :'data-placement' => placement do

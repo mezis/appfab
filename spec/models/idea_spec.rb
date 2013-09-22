@@ -48,7 +48,7 @@ describe Idea do
     @idea = Idea.make!(:vetted, design_size: 4)
     configatron.temp do
       §.design_capacity = 3
-      @idea.can_pick»?.should be_false
+      @idea.can_pick›?.should be_false
     end
   end
 
@@ -56,7 +56,7 @@ describe Idea do
     @idea = Idea.make!(:designed, development_size: 4)
     configatron.temp do
       §.design_capacity = 3
-      @idea.can_pick»?.should be_false
+      @idea.can_pick›?.should be_false
     end
   end
 

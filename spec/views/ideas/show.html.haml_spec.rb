@@ -18,7 +18,7 @@ describe "ideas/show.html.haml" do
     end
 
     Timecop.travel(10.minutes.ago) do    
-      @idea.submit»
+      @idea.submit›
     end
   end
 

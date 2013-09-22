@@ -31,7 +31,7 @@ describe Karma::IdeaObserver do
     it 'the submitter gains karma' do
       idea.state_name.should == :voted
       lambda {
-        idea.pick»
+        idea.pick›
         idea.state_name.should == :picked
       }.should change { author.reload.karma }.by(10)
     end
@@ -42,19 +42,19 @@ describe Karma::IdeaObserver do
 
     it 'the submitter gains karma' do
       idea.state_name.should == :signed_off
-      lambda { idea.deliver» }.should change { author.reload.karma }.by(20)
+      lambda { idea.deliver› }.should change { author.reload.karma }.by(20)
     end
 
     it 'all commenters gains karma' do
       commenter = User.make!
       idea.comments.make! author: commenter
-      lambda { idea.deliver» }.should change { commenter.reload.karma }.by(1)
+      lambda { idea.deliver› }.should change { commenter.reload.karma }.by(1)
     end
 
     it 'all backers gains karma' do
       backer = User.make!
       idea.votes.make! user: backer
-      lambda { idea.deliver» }.should change { backer.reload.karma }.by(10)
+      lambda { idea.deliver› }.should change { backer.reload.karma }.by(10)
     end
   end
 end

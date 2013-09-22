@@ -48,7 +48,7 @@ describe Notification::IdeaObserver do
 
       it 'notifies participants' do
         idea
-        lambda { idea.pick» }.should change(@participant.notifications, :count).by(1)
+        lambda { idea.pick› }.should change(@participant.notifications, :count).by(1)
       end
     end
 
@@ -57,7 +57,7 @@ describe Notification::IdeaObserver do
 
       it 'notifies participants' do
         idea
-        lambda { idea.deliver» }.should change(@participant.notifications, :count).by(1)
+        lambda { idea.deliver› }.should change(@participant.notifications, :count).by(1)
       end
     end
   end

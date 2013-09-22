@@ -22,7 +22,7 @@
         - else
           - raise RuntimeError.new('bad idea state')
 
-- if @idea.can_vote»? && can?(:create, @idea.votes.build) && !@idea.backed_by?(current_user)
+- if @idea.can_vote›? && can?(:create, @idea.votes.build) && !@idea.backed_by?(current_user)
   - content_for :extra_flashes do
     .af-flash.af-flash-success
       .container
