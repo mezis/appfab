@@ -29,9 +29,9 @@ class User::Role < ActiveRecord::Base
         role_names.uniq.each do |role_name|
           next if plays?(role_name)
           self.roles.create!(name: role_name)
+          @cached_roles = nil
         end
       end
-      @cached_roles = nil
       return self
     end
 
@@ -41,6 +41,10 @@ class User::Role < ActiveRecord::Base
       (role_names - Names).empty? or
         raise ArgumentError.new("Unknown roles in arguments")
       return (cached_roles & role_names).any?
+    end
+
+    def role_named(role_name)
+      self.roles.all.find { |r| r.name.to_sym == role_name }
     end
 
     protected
