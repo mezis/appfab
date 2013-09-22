@@ -1,6 +1,8 @@
 # encoding: UTF-8
+require 'set'
+
 class User::Role < ActiveRecord::Base
-  Names = [:submitter, :product_manager, :architect, :developer, :designer, :benevolent_dictator, :account_owner]
+  Names = Set.new(%i(submitter product_manager architect developer designer benevolent_dictator account_owner))
 
   attr_accessible :user, :name, :user_id
 
@@ -34,16 +36,17 @@ class User::Role < ActiveRecord::Base
     end
 
     def plays?(*role_names)
-      role_names = role_names.map { |name| name.kind_of?(String) ? name.to_sym : name }
+      role_names = Set.new(role_names)
+      # role_names = role_names.map { |name| name.kind_of?(String) ? name.to_sym : name }
       (role_names - Names).empty? or
         raise ArgumentError.new("Unknown roles in arguments")
-      return cached_roles.find { |role| role_names.include?(role.name.to_sym) }
+      return (cached_roles & role_names).any?
     end
 
     protected
 
     def cached_roles
-      @cached_roles ||= self.roles.all
+      @cached_roles ||= Set.new(self.roles.value_of(:name).map(&:to_sym))
     end
   end
 
