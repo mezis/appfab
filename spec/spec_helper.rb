@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.extend  ControllerHelpers,   :type => :controller
   config.extend  ViewHelpers,         :type => :view
   config.extend  EmailHelpers
+  config.include OmniauthHelpers
 
   config.before(:each) { Rails.cache.clear }
 
