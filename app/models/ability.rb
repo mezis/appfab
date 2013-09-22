@@ -56,9 +56,7 @@ class Ability
     end
 
     # Idea lifecycle
-    if user.plays?(:product_manager)
-      can :pick, Idea
-    end
+    can :pick,      Idea if user.plays?(:product_manager)
     can :design,    Idea, product_manager_id: user.id
     can :implement, Idea, product_manager_id: user.id
     can :deliver,   Idea, product_manager_id: user.id
@@ -95,5 +93,7 @@ class Ability
     if user.plays?(:account_owner)
       can [:update, :destroy], Account, id: user.account_id
     end
+
+    can :invite if user.plays?(:account_owner)
   end
 end

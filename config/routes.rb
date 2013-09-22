@@ -26,6 +26,7 @@ AppFab::Application.routes.draw do
 
   namespace :user do
     resources :bookmarks, only: [:create, :destroy]
+    resources :invites, only: [:create]
   end
 
   devise_for :logins, :path => :session, :controllers => {
@@ -34,6 +35,7 @@ AppFab::Application.routes.draw do
 
   resource :session, only:[:update]
   resource :dashboard, only:[:show]
+
 
   namespace :admin do
     unless Rails.env.production?

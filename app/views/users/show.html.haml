@@ -51,7 +51,7 @@
 
     .btn-group.btn-group-vertical.btn-block
       - User::Role::Names.each do |role_name|
-        - if role = @user.plays?(role_name)
+        - if role = @user.role_named(role_name)
           = can_link_to user_role_path(@user, role), auth:[:destroy, role], method: :delete, class:'btn active', :'data-placement' => 'left' do
             = user_role_name(role_name)
         - else
