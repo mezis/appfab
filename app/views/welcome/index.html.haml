@@ -1,11 +1,11 @@
-= cached_fragment resource:'welcome', id:'index', key:[!!current_user] do
+= cached_fragment resource:'welcome', id:'index', v:2, key:[!!current_login] do
   .row
     .span12
       .hero-unit
         %h1= configatron.app_name
         %p= _('The app that helps product teams build fantastic apps.')
 
-        - if current_user
+        - if current_login
           = link_to ideas_path(angle: IdeasController::DEFAULT_ANGLE), class: 'btn btn-primary' do
             = _('Let\'s get cracking')
             &nbsp;
