@@ -27,6 +27,7 @@ end
 §.karma.idea.commenter.picked  = +1
 §.karma.idea.commenter.live    = +1
 
+§.karma.idea.backer.vetted     = +0
 §.karma.idea.backer.picked     = +1
 §.karma.idea.backer.live       = +10
 
