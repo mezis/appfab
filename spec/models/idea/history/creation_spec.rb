@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Idea::History::Creation do
-  fixtures :users
+  fixtures :users, :logins, :accounts
 
   context 'idea creation' do
     it 'gets logged as history' do
