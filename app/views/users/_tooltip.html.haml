@@ -1,5 +1,6 @@
 -# Give ma a +user+
-.text-center
-  .user.user-no-hover.user-inline
-    %img.avatar{ src:user.login.gravatar_url(avatar:512) }<>
-= user_tooltip_text(user)
+= cached_fragment resource:'user/tooltip', id:user.id, key:[user.updated_at, user.login.updated_at] do
+  .text-center
+    .user.user-no-hover.user-inline
+      %img.avatar{ src:user.login.gravatar_url(avatar:512) }<>
+  = user_tooltip_text(user)
