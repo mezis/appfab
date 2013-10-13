@@ -23,6 +23,17 @@
 
   %li.separator
 
+  
+  - if can?(:take_over, idea)
+    %li
+      = link_to idea_path(idea, idea: { product_manager_id: current_user.id }), method: :put, class: 'btn btn-block', title: s_("Tooltip|Take over this idea from another product manager. We'll tell them of course, so they don't get surprised!"), data: { placement: 'left' } do
+        = _('Become product manager')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: s_('Tooltip|Sorry, you cannot take over this idea.'), data: { placement: 'left' } }
+        = _('Become product manager')
+
+
   - if can?(:move, idea) && current_login.accounts.count > 1
     %li
       .btn-group.btn-block

@@ -24,6 +24,10 @@ class Ability
     can :move, Idea, author_id: user.id
     can :move, Idea if user.plays?(:account_owner)
 
+    can :take_over, Idea do |idea|
+      user.plays?(:product_manager) &&
+      (idea.account_id == user.account_id) &&
+      (idea.product_manager_id != user.id) 
     end
 
     # Comment
