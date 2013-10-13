@@ -90,6 +90,9 @@ gem 'pusher'
 # speeds up Travis builds by caching the bundle
 gem 'bundle_cache'
 
+# makes the app (more) 12-factor compliant
+gem 'rails_12factor', group: :production
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
