@@ -1,0 +1,24 @@
+/ sign off
+- if idea.state_machine.can_sign_off›?
+  - if can?(:sign_off, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'signed_off' } ), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea signs it off for delivery.'), data: { placement: 'left' } do
+        %i.icon-ok-sign
+        = _('Sign off')
+  - elsif can?(:force_sign_off, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'signed_off' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as signed off on behalf of the Benevolent Dictator, who will be notified.'), confirm:idea_force_action_confimation, data: { placement: 'left' } do
+        %i.icon-ok-sign
+        = _('Sign off')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can sign off a staged idea.'), data: { placement: 'left' } }
+        %i.icon-ok-sign
+        = _('Sign off')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:signed_off), data: { placement: 'left' } }
+      %i.icon-ok-sign
+      = _('Sign off')
+
+

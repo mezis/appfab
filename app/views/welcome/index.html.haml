@@ -19,7 +19,7 @@
   .row
     .span12
       %ul#states
-        - Idea.state_machine.states.sort_by(&:value).map(&:name).each do |state_name|
+        - IdeaStateMachine.all_state_names.each do |state_name|
           %li.badge= idea_status(state_name)
           - unless state_name == :live
             %i.icon-caret-right.muted

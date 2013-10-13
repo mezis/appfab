@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Karma::VoteOnIdeaObserver do
   before do
     @author = User.make!
-    @idea   = Idea.make! author: @author
+    @idea   = Idea.make! author: @author, state: IdeaStateMachine.state_value(:vetted)
     @voter  = User.make!
   end
 

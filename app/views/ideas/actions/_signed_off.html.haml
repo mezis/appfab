@@ -1,0 +1,17 @@
+/ deliver
+- if idea.state_machine.can_deliver›?
+  - if can?(:deliver, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), data: { placement: 'left' } do
+        %i.icon-truck
+        = _('Deliver')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as delivered.'), data: { placement: 'left' } }
+        %i.icon-truck
+        = _('Deliver')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:implemented), data: { placement: 'left' } }
+      %i.icon-truck
+      = _('Deliver')

@@ -4,9 +4,10 @@ class IdeasController < ApplicationController
 
   before_filter :require_account!
   before_filter :cleanup_session
-  before_filter :map_state_names, only:[:create, :update]
-  before_filter :map_no_category, only:[:create, :update]
-  before_filter :can_create_idea, only:[:new, :create]
+  before_filter :map_state_names,        only:[:create, :update]
+  before_filter :map_product_manager_id, only:[:update]
+  before_filter :map_no_category,        only:[:create, :update]
+  before_filter :can_create_idea,        only:[:new, :create]
 
   VALID_ANGLES = %w(discussable followed)
   DEFAULT_ANGLE = VALID_ANGLES.last
@@ -109,16 +110,19 @@ class IdeasController < ApplicationController
     end
 
     # specifics on state changes
-    if state = params[:idea].andand[:state]
+    if state = params[:idea].andand.delete(:state)
       # auto-set product manager when picking
-      if state == Idea.state_value(:picked)
+      if state == IdeaStateMachine.state_value(:picked)
         @idea.product_manager = current_user
       end
 
-      if @idea.draft? && state == Idea.state_value(:submitted)
+      if @idea.state_machine.draft? && state == IdeaStateMachine.state_value(:submitted)
         # this is a draft promoted to submitted
         session[:just_submitted] = true
       end
+
+      @idea.state = state
+      IdeaStateMachineService.new(@idea).run
     end
 
     if @idea.update_attributes(params[:idea])
@@ -219,6 +223,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
   def set_category_from_params_and_angle
     session[:ideas_category] ||= {}
     params[:category] =
@@ -230,6 +235,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
   def set_limit_from_params(view)
     @limit = begin
       limit = params[:limit].to_i rescue 0
@@ -237,7 +243,8 @@ class IdeasController < ApplicationController
     end
   end
 
-  VALID_STATES = Idea.state_machine.states.map(&:name).map(&:to_s)
+
+  VALID_STATES = IdeaStateMachine.all_state_names.map(&:to_s)
   def set_state_from_params
     @state = begin
       state = params.fetch(:state, 'all')
@@ -245,18 +252,28 @@ class IdeasController < ApplicationController
     end
   end
 
+
+  # map state names to values
   def map_state_names
-    # map state names to values
     return unless state = params[:idea].andand[:state]
-    params[:idea][:state] = Idea.state_value(state)
+    params[:idea][:state] = IdeaStateMachine.state_value(state)
   end
 
+
+  # map 'none' category to the valid nil
   def map_no_category
-    # map 'none' category to the valid nil
     return unless category = params[:idea].andand[:category]
     return unless category == 'none'
     params[:idea][:category] = nil
   end
+
+
+  # replace user id with a user instance
+  def map_product_manager_id
+    return unless product_manager_id = params[:idea].andand.delete(:product_manager_id)
+    params[:idea][:product_manager] = current_account.users.find(product_manager_id)
+  end
+
 
   def can_create_idea
     return if can?(:create, Idea)

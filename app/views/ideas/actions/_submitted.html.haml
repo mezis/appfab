@@ -1,0 +1,50 @@
+/ size
+- if can?(:size, idea)
+  - [[:product_manager, :design_size, :picture], [:architect, :development_size, :wrench]].each do |role,field,icon|
+    %li{ class:field }
+      .btn-group.ht-as-table
+        .btn.disabled
+          %i{ class: "icon-#{icon}" }
+        - 1.upto(4) do |size|
+          - if current_user.plays?(role)
+            - if idea.send(field) == size
+              %a.btn.btn-info.active{ title: s_('Tooltip|This idea currently has a %{size} %{size_type}') % { size: idea_size_human_long(size), size_type: idea_size_type_name(field).downcase } }
+                = idea_size_human(size)
+            - else
+              = link_to idea_size_human(size), idea_path(idea, idea: {field => size}), method: :put, class: 'btn', title: s_('Tooltip|Click to give this idea a %{size} %{size_type}') % { size: idea_size_human_long(size), size_type: idea_size_type_name(field).downcase }
+          - else
+            - if idea.send(field) == size
+              %a.btn.btn-info.disabled= idea_size_human(size)
+            - else
+              %a.btn.disabled= idea_size_human(size)
+- elsif idea.sized?
+  %li
+    %a.btn.btn-block.disabled= _('Idea sized')
+- else
+  %li
+    %a.btn.btn-block.disabled= _('Idea not sized')
+
+
+/ vet
+- if idea.state_machine.can_vet›?
+  - if can?(:create, idea.vettings.build)
+    - if vetting = current_user.vettings.where(idea_id: idea.id).first
+      %li
+        = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
+          %i.icon-check
+          = _('Cancel your vetting')
+    - else
+      %li
+        = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
+          %i.icon-check
+          = _('Vet this idea')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: s_('Tooltip|Only architects and product managers can vet ideas.'), data: { placement: 'left' } }
+        %i.icon-check
+        = _('Vet this idea')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:vetted), data: { placement: 'left' } }
+      %i.icon-check
+      = _('Vet this idea')

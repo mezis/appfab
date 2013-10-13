@@ -9,7 +9,7 @@
 - else
   = dashboard_render @dashboard, :ideas_recently_active
 
-- if can?(:veto, Idea)
+- if can?(:abort, Idea)
   = dashboard_render @dashboard, :ideas_for_dictator
 
 = dashboard_render @dashboard, :ideas_to_vote

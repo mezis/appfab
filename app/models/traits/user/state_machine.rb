@@ -9,11 +9,6 @@ module Traits::User::StateMachine
     setup_state_machine
   end
 
-  # FIXME: this need to be factored out to a super module
-  def all_states
-    @@all_states ||= self.class.state_machine.states.map(&:name)
-  end
-
   module ClassMethods
     # FIXME: this need to be factored out to a super module
     def state_value(state_name)
@@ -33,11 +28,11 @@ module Traits::User::StateMachine
         state :visible,      value: 0
         state :hidden,       value: 1
 
-        event :hide» do
+        event :hide› do
           transition :visible => :hidden
         end
 
-        event :show» do
+        event :show› do
           transition :hidden => :visible
         end
       end

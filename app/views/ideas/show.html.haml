@@ -7,13 +7,13 @@
         %button.close{ :'data-dismiss' => 'alert' }<
           %i.icon-remove
 
-        - if @idea.submitted?
+        - if @idea.state_machine.submitted?
           %h4= _('Awesome! Your idea was submitted.')
           %p
             = _('As it is the most recently active story, it now appears at the top the the discussion list.')
             %br/
             = _('This means your team should now start discussing it! Take part in the discussion to perfect your idea. Once it is correctly formatted and documented, a product manager and an architect should vet it, and the voting will start!')
-        - elsif @idea.draft?
+        - elsif @idea.state_machine.draft?
           %h4= _('Neat! You just created a draft idea.')
           %p
             = _('It will no be visible to others; we have bookmarked it for you so you can find it again by going to the "followed" angle.')
@@ -22,7 +22,7 @@
         - else
           - raise RuntimeError.new('bad idea state')
 
-- if @idea.can_vote»? && can?(:create, @idea.votes.build) && !@idea.backed_by?(current_user)
+- if @idea.state_machine.can_vote›? && can?(:create, @idea.votes.build) && !@idea.backed_by?(current_user)
   - content_for :extra_flashes do
     .af-flash.af-flash-success
       .container
@@ -55,4 +55,4 @@
     .ht-with-margin-icon.muted
       .ht-margin-icon
         %i.icon-info-sign
-      != idea_copy_for_state(@idea.state_name)
+      != idea_copy_for_state(@idea.state_machine.state_name)

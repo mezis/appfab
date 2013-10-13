@@ -2,7 +2,7 @@
   - if idea.errors.any?
     .alert.alert-error
       = f.error_messages
-  = hidden_field_tag 'idea[state]', idea.state_name
+  = hidden_field_tag 'idea[state]', idea.state_machine.state_name
 
   .row.control-group.af-mutable-content
     .span12
@@ -64,10 +64,10 @@
       - data_options = { disable_with:_('Saving...') }
       - if idea.new_record?
         = f.submit _('Submit idea'),   class: 'btn btn-primary', data:data_options
-        = f.submit _('Save as draft'), class: 'btn', data:data_options.merge(setstate:'draft')
+        = f.submit _('Save as draft'), class: 'btn', data:data_options.merge(setstate: 'draft')
         - cancel_path = ideas_path
-      - elsif idea.draft?
-        = f.submit _('Submit idea'), class: 'btn', data:data_options.merge(setstate:'submitted')
+      - elsif idea.state_machine.draft?
+        = f.submit _('Submit idea'), class: 'btn', data:data_options.merge(setstate: 'submitted')
         = f.submit _('Update draft'), class: 'btn btn-primary', data:data_options
         - cancel_path = idea_path(idea)
       - else

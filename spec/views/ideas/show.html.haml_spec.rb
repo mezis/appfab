@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe "ideas/show.html.haml" do
-  fixtures :users, :logins
+  fixtures :users, :logins, :accounts
 
   subject { render ; rendered }
   let(:user) { users :abigale_balisteri }
@@ -18,7 +18,8 @@ describe "ideas/show.html.haml" do
     end
 
     Timecop.travel(10.minutes.ago) do    
-      @idea.submit»
+      @idea.state_machine.submit›
+      @idea.save!
     end
   end
 

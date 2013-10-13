@@ -36,7 +36,9 @@ class Vote < ActiveRecord::Base
 
   def notify_idea
     return unless subject.kind_of?(Idea)
-    subject.vote»
+    if subject.state_machine.can_vote›?
+      IdeaStateMachineService.new(subject).trigger!(:vote›)
+    end
     subject.ping!
   end
 end

@@ -29,34 +29,18 @@ describe Idea do
 
     it 'does not become vetted when just sized' do
       @idea.update_attributes! design_size:1, development_size:1
-      @idea.reload.should_not be_vetted
+      @idea.reload.state_machine.should_not be_vetted
     end
 
     it 'does not become vetted when just vetted twice' do
       2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.reload.should_not be_vetted
+      @idea.reload.state_machine.should_not be_vetted
     end
 
-    it 'becomes "vetted" when sized and vetted twice' do
+    it 'becomes "vetted" when vetted twice then sized' do
       2.times { Vetting.make!(idea: @idea, user: User.make!) }
       @idea.reload.update_attributes! design_size:1, development_size:1
-      @idea.reload.should be_vetted
-    end
-  end
-
-  it 'cannot be picked if the manager is at design capacity' do
-    @idea = Idea.make!(:vetted, design_size: 4)
-    configatron.temp do
-      §.design_capacity = 3
-      @idea.can_pick»?.should be_false
-    end
-  end
-
-  it 'cannot be approved if the manager is at development capacity' do
-    @idea = Idea.make!(:designed, development_size: 4)
-    configatron.temp do
-      §.design_capacity = 3
-      @idea.can_pick»?.should be_false
+      @idea.reload.state_machine.should be_vetted
     end
   end
 

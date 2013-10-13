@@ -1,0 +1,15 @@
+/ design
+- if idea.state_machine.can_design›?
+  - if can?(:design, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'designed' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.<br/>Make sure you\'ve attached design files!'), data: { placement: 'left' } do
+        = _('Mark as designed')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as designed.'), data: { placement: 'left' } }
+        = _('Mark as designed')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:designed), data: { placement: 'left' } }
+      = _('Mark as designed')
+
