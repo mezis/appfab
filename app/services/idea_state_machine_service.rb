@@ -17,10 +17,7 @@ class IdeaStateMachineService
     end
 
     _idea.transaction do
-      path.each do |transition|
-        $stderr.puts "----- performing #{transition.inspect}"
-        transition.perform
-      end
+      path.each { |transition| transition.perform }
     end
   end
 

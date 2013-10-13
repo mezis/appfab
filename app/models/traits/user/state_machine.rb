@@ -9,8 +9,6 @@ module Traits::User::StateMachine
     setup_state_machine
   end
 
-  # FIXME: this need to be factored out to a super module
-
   module ClassMethods
     # FIXME: this need to be factored out to a super module
     def state_value(state_name)

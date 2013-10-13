@@ -103,12 +103,6 @@ class IdeaStateMachine
     # transition hooks
     # 
     after_transition :on => :abort›, :do => :_remove_vettings_and_votes!
-   
-    # around_transition do |vehicle, transition, block|
-    #   $stderr.puts("------- begin transition #{transition.inspect}")
-    #   block.call
-    #   $stderr.puts("------- end transition #{transition.inspect}")
-    # end
   end
 
 
@@ -122,7 +116,6 @@ class IdeaStateMachine
   end
 
   def _remove_vettings_and_votes!
-    # $stderr.puts('---------- removing vettings & votes')
     idea.vettings.destroy_all
     idea.votes.destroy_all
   end
