@@ -33,7 +33,7 @@ describe Rating::VoteObserver do
 
   context 'voting on ideas' do
     before do
-      @idea  = Idea.make!
+      @idea  = Idea.make!(:vetted)
       @voter = User.make!
     end
 

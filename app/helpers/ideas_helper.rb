@@ -161,7 +161,7 @@ module IdeasHelper
   end
 
   def ideas_board_states
-    Idea.state_machine.states.sort_by(&:value).map(&:name) - [:draft]
+    IdeaStateMachine.all_state_names - [:draft]
   end
 
 
@@ -188,6 +188,10 @@ module IdeasHelper
     when :live
       _("Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra %{karma}.") % { karma:user_karma_symbol }
     end
+  end
+
+  def idea_force_action_confimation
+    _('You are acting on behalf of the Benevolent Dictator. Are you sure?')
   end
 
   def idea_category_class(idea)

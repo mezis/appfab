@@ -1,5 +1,5 @@
 / vote
-- if idea.can_vote›?
+- if idea.state_machine.can_vote›?
   - if can?(:vote, idea)
     - if vote = current_user.votes.on_idea(idea).first
       %li

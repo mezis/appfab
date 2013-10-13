@@ -6,7 +6,7 @@ class Ability
     user ||= User.new
 
     # Idea permissions
-    draft_or_submitted = [:draft, :submitted].map { |sym| Idea.state_value(sym) }
+    draft_or_submitted = [:draft, :submitted].map { |sym| IdeaStateMachine.state_value(sym) }
     can :read, Idea, account_id: user.account_id
     if user.plays?(:submitter)
       can :create,  Idea, account_id: user.account_id
@@ -14,12 +14,16 @@ class Ability
       can :destroy, Idea, author_id: user.id, state: draft_or_submitted
     end
 
-    can :vote, Idea do |idea|
-      user.account_id == idea.account_id
+    if user.plays?(:benevolent_dictator)
+      can :update,  Idea, account_id: user.account_id, state: draft_or_submitted
     end
 
-    can :move, Idea do |idea|
-      user == idea.author || user == idea.product_manager || user.plays?(:account_owner)
+    can :vote, Idea, account_id: user.account_id
+
+    can :move, Idea, product_manager: user.id
+    can :move, Idea, author_id: user.id
+    can :move, Idea if user.plays?(:account_owner)
+
     end
 
     # Comment
@@ -54,11 +58,13 @@ class Ability
     end
 
     # Idea lifecycle
-    can :pick,      Idea if user.plays?(:product_manager)
-    can :design,    Idea, product_manager_id: user.id
-    can :implement, Idea, product_manager_id: user.id
-    can :deliver,   Idea, product_manager_id: user.id
-
+    can :pick,           Idea, account_id: user.account_id if user.plays?(:product_manager)
+    can :force_approve,  Idea, product_manager_id: user.id
+    can :design,         Idea, product_manager_id: user.id
+    can :implement,      Idea, product_manager_id: user.id
+    can :force_sign_off, Idea, product_manager_id: user.id
+    can :deliver,        Idea, product_manager_id: user.id
+    can :abort,          Idea, product_manager_id: user.id
 
     if user.plays?(:benevolent_dictator)
       can :approve,  Idea
@@ -93,5 +99,11 @@ class Ability
     end
 
     can :invite if user.plays?(:account_owner)
+  end
+
+  private
+
+  def draft_or_submitted(idea)
+    [:draft, :submitted].include?(idea.state_machine.state_name)
   end
 end

@@ -1,24 +1,25 @@
 -# encoding: UTF-8
 -# Context: idea (Idea)
 %ul#ideas-action
-  = render "ideas/actions/#{idea.state_name}", idea:idea
-  
-  - if idea.can_abort›?
+  = render "ideas/actions/#{idea.state_machine.state_name}", idea:idea
+
+  - if idea.state_machine.can_abort›?
     - if can?(:abort, idea)
       %li
-        = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you\'re aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, data: { placement: 'left' } do
-          %i.icon-ban-circle
+        = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you\'re aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, confirm:s_("Popup|Are you sure? This will cause all vettings and endorsements for this idea to be destroyed."), data: { placement: 'left' } do
+          %i.icon-fast-backward
           = _('Abort')
     - else
       %li
         %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can sign off a staged idea.'), data: { placement: 'left' } }
-          %i.icon-ban-circle
+          %i.icon-fast-backward
           = _('Abort')
   - else
     %li
       %a.btn.btn-block.disabled{ title: s_('Tooltip|This idea cannot be aborted.'), data: { placement: 'left' } }
-        %i.icon-ban-circle
+        %i.icon-fast-backward
         = _('Abort')
+
 
   %li.separator
 
@@ -39,7 +40,6 @@
       %a.btn.btn-block.disabled{ title:_('You need to be this idea\'s author or product manager, or an account owner, to move it to another account. You also need to be a member of another account.'), data:{ placement: 'left' } }
         = _('Move idea to...')
         %span.caret
-
 
 
   %li.separator

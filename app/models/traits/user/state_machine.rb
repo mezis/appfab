@@ -10,9 +10,6 @@ module Traits::User::StateMachine
   end
 
   # FIXME: this need to be factored out to a super module
-  def all_states
-    @@all_states ||= self.class.state_machine.states.map(&:name)
-  end
 
   module ClassMethods
     # FIXME: this need to be factored out to a super module

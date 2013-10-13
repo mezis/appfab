@@ -16,7 +16,7 @@ describe IdeaMoverService do
 
   context '(with idea and account)' do
     before do
-      @idea        = Idea.make!
+      @idea        = Idea.make!(:vetted)
       @participant = User.make!
       @old_account = @idea.account
       @account     = Account.make!
@@ -50,6 +50,7 @@ describe IdeaMoverService do
     end
 
     it 'preserves vettings' do
+      @idea.update_column :state, IdeaStateMachine.state_value(:submitted)
       @vetting = Vetting.make!(idea:@idea, user:@participant)
       perform
       @new_participant = @vetting.reload.user

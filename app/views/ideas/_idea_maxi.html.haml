@@ -9,7 +9,7 @@
   muted_details = local_assigns.fetch(:muted,         false)
 
 .idea_container{ id:dom_id(idea) }
-  - classes = [idea.state_name, (muted_details && 'af-mutable-content')]
+  - classes = [idea.state_machine.state_name, (muted_details && 'af-mutable-content')]
   .af-drop-area
   .idea.idea-maxi.af-drop-hilite{ class:classes }
     
@@ -18,7 +18,7 @@
       .category.muted.pull-left.pull-left-spaced
         = idea.category || _('No category')
       .state.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|The current progress on this idea'), :'data-container' => '.container' }<
-        = idea_status(idea.state_name)
+        = idea_status(idea.state_machine.state_name)
       - if idea.sized?
         .size.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|An architect and a product manager have sized this idea.'), :'data-container' => '.container' }
           = idea_size_human_long(idea.size).downcase

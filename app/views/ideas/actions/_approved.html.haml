@@ -1,5 +1,5 @@
 / implement
-- if idea.can_implement›?
+- if idea.state_machine.can_implement›?
   - if can?(:implement, idea)
     %li
       = link_to idea_path(idea, idea: { state: 'implemented' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), data: { placement: 'left' } do

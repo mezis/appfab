@@ -11,7 +11,7 @@ class Idea < ActiveRecord::Base
   belongs_to :product_manager, :class_name => 'User'
 
   include Notification::Base::CanBeSubject  
-  include Traits::Idea::StateMachine
+  include Traits::Idea::HasStates
   include Traits::Idea::StarRating
   include Traits::Shuffleable
   include Idea::History::Base::HasHistory
@@ -43,6 +43,13 @@ class Idea < ActiveRecord::Base
   scope :not_backed_by, lambda { |user| 
     backed_ideas_ids = user.backed_ideas.value_of(:id)
     backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
+  }
+
+  scope :with_state, lambda { |*states|
+    where('ideas.state IN (?)', IdeaStateMachine.state_values(*states))
+  }
+  scope :without_state, lambda { |*states|
+    where('ideas.state NOT IN (?)', IdeaStateMachine.state_values(*states))
   }
 
   def self.limit_per_state(limit:10)

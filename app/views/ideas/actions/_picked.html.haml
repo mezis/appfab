@@ -1,5 +1,5 @@
 / design
-- if idea.can_design›?
+- if idea.state_machine.can_design›?
   - if can?(:design, idea)
     %li
       = link_to idea_path(idea, idea: { state: 'designed' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this confirm that the idea is designed, and ready for approval before implementation begins.<br/>Make sure you\'ve attached design files!'), data: { placement: 'left' } do

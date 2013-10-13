@@ -26,7 +26,7 @@
 
 
 / vet
-- if idea.can_vet›?
+- if idea.state_machine.can_vet›?
   - if can?(:create, idea.vettings.build)
     - if vetting = current_user.vettings.where(idea_id: idea.id).first
       %li

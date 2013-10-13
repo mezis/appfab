@@ -9,16 +9,14 @@ describe BookmarkCleanupService do
 
   it 'delete bookmarks for old live ideas' do
     Timecop.travel(2.weeks.ago) do
-      idea.state = Idea.state_value(:live)
-      idea.save!
+      idea.update_attributes! state: IdeaStateMachine.state_value(:live)
     end
 
     expect { perform }.to change { User::Bookmark.count }.by(-1)
   end
 
   it 'ignores bookmarks for recently live ideas' do
-    idea.state = Idea.state_value(:live)
-    idea.save!
+    idea.update_attributes! state: IdeaStateMachine.state_value(:live)
 
     expect { perform }.not_to change { User::Bookmark.count }
   end

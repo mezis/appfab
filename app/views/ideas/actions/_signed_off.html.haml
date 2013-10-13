@@ -1,5 +1,5 @@
 / deliver
-- if idea.can_deliver›?
+- if idea.state_machine.can_deliver›?
   - if can?(:deliver, idea)
     %li
       = link_to idea_path(idea, idea: { state: 'live' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this idea marks it as live.'), data: { placement: 'left' } do
