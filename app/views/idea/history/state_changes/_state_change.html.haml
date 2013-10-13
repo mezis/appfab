@@ -1,2 +1,2 @@
 .idea-history.ht-separator-text
-  %p= _('Changed %{old_state} → %{new_state} (%{time} ago)') % { old_state:Idea.state_name(state_change.old_state), new_state:Idea.state_name(state_change.new_state), time:time_ago_in_words(state_change.created_at) }
+  %p= _('Changed %{old_state} → %{new_state} (%{time} ago)') % { old_state:IdeaStateMachine.state_name(state_change.old_state), new_state:IdeaStateMachine.state_name(state_change.new_state), time:time_ago_in_words(state_change.created_at) }

@@ -11,6 +11,8 @@ describe VotesController do
     let(:idea) { ideas(:idea_submitted) }
     let(:vote) { Vote.make! subject:idea }
 
+    before { idea.update_column :state, IdeaStateMachine.state_value(:vetted) }
+
     describe '#create' do
       it "redirects to idea when model is invalid" do
         Vote.any_instance.stub(:valid? => false)

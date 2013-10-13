@@ -1,0 +1,19 @@
+= render 'ideas/actions/vetted', idea:idea
+
+/ pick
+- if idea.state_machine.can_pick›?
+  - if can?(:pick, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: :picked }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Picking an idea means you and your product team will start investigating and designing it.'), data: { placement: 'left' } do
+        %i.icon-cog
+        = _('Pick this idea')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: not_authorized_message(:pick, idea), data: { placement: 'left' } }
+        %i.icon-cog
+        = _('Pick this idea')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:picked), data: { placement: 'left' } }
+      %i.icon-cog
+      = _('Pick this idea')

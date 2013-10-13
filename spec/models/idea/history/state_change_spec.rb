@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Idea::History::StateChange do
-  fixtures :users
+  fixtures :users, :logins, :accounts
 
   context 'idea state change' do
     let(:idea) { Idea.make!(state:-1) } # draft
-    let(:perform) { idea.submit» }
+    let(:perform) { idea.state = 0 ; idea.save! }
 
     it 'gets logged as history' do
       expect { perform }.to change{ described_class.count }.by(1)

@@ -1,0 +1,18 @@
+/ implement
+- if idea.state_machine.can_implement›?
+  - if can?(:implement, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'implemented' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Clicking this marks the idea as implemented. It should be ready for a demonstration for sign-off purposes.'), data: { placement: 'left' } do
+        = _('Mark as implemented')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: _('Sorry, only an idea\'s product manager can mark it as implemented.'), data: { placement: 'left' } }
+        = _('Mark as implemented')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:implemented), data: { placement: 'left' } }
+      = _('Mark as implemented')
+
+
+
+

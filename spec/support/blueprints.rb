@@ -67,35 +67,35 @@ Idea.blueprint(:vetted) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
-  state            { Idea.state_machine.state(:vetted).value }
+  state            { IdeaStateMachine.state_value(:vetted) }
 end
 
 Idea.blueprint(:voted) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
-  state            { Idea.state_machine.state(:voted).value }
+  state            { IdeaStateMachine.state_value(:voted) }
 end
 
 Idea.blueprint(:designed) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
-  state            { Idea.state_machine.state(:designed).value }
+  state            { IdeaStateMachine.state_value(:designed) }
 end
 
 Idea.blueprint(:implemented) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
-  state            { Idea.state_machine.state(:implemented).value }
+  state            { IdeaStateMachine.state_value(:implemented) }
 end
 
 Idea.blueprint(:signed_off) do
   development_size { 1 }
   design_size      { 2 }
   product_manager  { User.make!.plays!(:product_manager) }
-  state            { Idea.state_machine.state(:signed_off).value }
+  state            { IdeaStateMachine.state_value(:signed_off) }
 end
 
 

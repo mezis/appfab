@@ -14,6 +14,6 @@ class Vetting < ActiveRecord::Base
 
   scope :idea_is, lambda { |idea| where(idea_id: idea.id) }
 
-  after_create { |record| record.idea.andand.vet» }
+  after_create { |record| IdeaStateMachineService.new(record.idea).trigger!(:vet›) }
   after_create { |record| record.idea.andand.ping! }
 end

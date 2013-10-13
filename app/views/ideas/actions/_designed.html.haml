@@ -1,0 +1,22 @@
+/ approve
+- if idea.state_machine.can_approve›?
+  - if can?(:approve, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'approved' }), method: :put, class: 'btn btn-block btn-primary', title: s_('Tooltip|Click this to approve the idea as designed. If you don\'t approve it (yet), feel free to leave a comment accordingly!'), data: { placement: 'left' } do
+        %i.icon-ok-circle
+        = _('Approve')
+  - elsif can?(:force_approve, idea)
+    %li
+      = link_to idea_path(idea, idea: { state: 'approved' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as designed on behalf of the Benevolent Dictator, who will be notified.'), confirm:idea_force_action_confimation, data: { placement: 'left' } do
+        %i.icon-ok-circle
+        = _('Approve')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can approve an idea design.'), data: { placement: 'left' } }
+        %i.icon-ok-circle
+        = _('Approve')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:approved), data: { placement: 'left' } }
+      %i.icon-ok-circle
+      = _('Approve')

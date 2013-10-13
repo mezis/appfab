@@ -2,7 +2,7 @@
 -# - idea (Idea)
 = cached_fragment(disabled:false, resource:'idea_mini', id:idea.id, v:1, key:[idea.active_at]) do
   .idea_container.af-mutable-content
-    .idea-mini[idea]{ class:idea.state_name }
+    .idea-mini[idea]{ class:idea.state_machine.state_name }
       .meta.top.clearfix.af-mutable
         = render 'idea_rating', idea:idea
       .body{ class:idea_category_class(idea) }

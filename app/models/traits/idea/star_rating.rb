@@ -22,6 +22,7 @@ module Traits::Idea::StarRating
   protected
   STARS_MIN_STATE = :voted
   STARS_MAX_STATE = :signed_off
+  STARS_STATE_RANGE = (IdeaStateMachine.state_value(STARS_MIN_STATE)..IdeaStateMachine.state_value(STARS_MAX_STATE))
 
   def set_impact_cache
     self.impact_cache = calculate_impact_rating
@@ -29,7 +30,7 @@ module Traits::Idea::StarRating
 
   def calculate_impact_rating
     return if rating.nil? || design_size.nil? || development_size.nil?
-    return unless (Idea.state_value(STARS_MIN_STATE)..Idea.state_value(STARS_MAX_STATE)).include? state
+    return unless STARS_STATE_RANGE.include? state
 
     1000 * rating / (design_size + development_size)
   end
@@ -46,8 +47,8 @@ module Traits::Idea::StarRating
     def update_star_cache(account:nil)
       raise ArgumentError unless account
 
-      min_state = state_value(STARS_MIN_STATE)
-      max_state = state_value(STARS_MAX_STATE)
+      min_state = IdeaStateMachine.state_value(STARS_MIN_STATE)
+      max_state = IdeaStateMachine.state_value(STARS_MAX_STATE)
       idea_ids = account.ideas.
         where('state BETWEEN ? AND ?', min_state, max_state).
         where('rating > ?', 0).

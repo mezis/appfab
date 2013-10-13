@@ -3,23 +3,22 @@ class Notification::IdeaObserver < ActiveRecord::Observer
   observe :idea
 
   def after_create(record)
-    return unless record.submitted? 
+    return true unless record.state_machine.submitted? 
     record.account.users.playing(:product_manager, :architect).each do |user|
       Notification::NewIdea.create! subject:record, recipient:user
     end
-  ensure
-    return true
+    true
   end
 
 
   def after_save(record)
-    return unless record.state_changed?
-    notification_class = StateChangeNotifications[record.state_name] or return
+    return true unless record.state_changed?
+    return true if record.state_was && (record.state_was >= record.state)
+    notification_class = StateChangeNotifications[record.state_machine.state_name] or return
     record.participants.each do |user|
       notification_class.create! subject:record, recipient:user
     end
-  ensure
-    return true
+    true
   end
 
   private

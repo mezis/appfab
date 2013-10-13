@@ -11,15 +11,13 @@ module Traits::Shuffleable
 
     protected
 
-    PRIME_A      = 46_691
-    PRIME_B      = 50_821
-    PRIME_C      = 54_251
-    MAX_ELEMENTS = 10_000
+    PRIME_A      = 7_901
+    PRIME_B      = 7_907
+    PRIME_C      = 7_919
 
     # Pseudo-RNG seeded by +seed+ and +id+.
     def get_random_order_sql(seed)
-      seed = seed % MAX_ELEMENTS
-      "((#{PRIME_A} * id + #{PRIME_B * seed + PRIME_C}) % #{MAX_ELEMENTS})"
+      "((#{PRIME_A} * ((id + #{seed % PRIME_C}) % #{PRIME_C}) + #{PRIME_B}) % #{PRIME_C})"
     end
 
   end

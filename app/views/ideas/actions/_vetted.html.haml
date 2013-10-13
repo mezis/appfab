@@ -1,0 +1,23 @@
+/ vote
+- if idea.state_machine.can_vote›?
+  - if can?(:vote, idea)
+    - if vote = current_user.votes.on_idea(idea).first
+      %li
+        = link_to idea_vote_path(idea, vote), method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your endorsement of this story.<br/>You will get back %{points} %{karma_icon}.<br/>Make sure you add a comment to explain why you canceled!') % { points: -§.karma.vote, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
+          %i.icon-thumbs-down
+          = _('Withdraw endorsement')
+    - else
+      %li
+        = link_to idea_votes_path(idea), method: :post, class: 'btn btn-block btn-primary', title: s_('Tooltip|Endorsing this idea means that you believe it will be impactful. Endorsing costs %{points} %{karma_icon}.') % { points: §.karma.vote, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
+          %i.icon-thumbs-up
+          = _('Endorse this')
+  - else
+    %li
+      %a.btn.btn-block.disabled{ title: not_authorized_message(:vote, idea), data: { placement: 'left' } }
+        %i.icon-thumbs-up
+        = _('Endorse this')
+- else
+  %li
+    %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:voted), data: { placement: 'left' } }
+      %i.icon-thumbs-up
+      = _('Endorse this')

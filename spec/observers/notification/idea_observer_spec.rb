@@ -39,6 +39,7 @@ describe Notification::IdeaObserver do
       it 'notifies participants' do
         idea.vettings.make! user: User.make!
         idea.vettings.make! user: User.make!
+        idea.reload.state_machine.should be_vetted
         Notification::Idea::Vetted.where(recipient_id: @participant.id).count.should == 1
       end
     end
@@ -48,7 +49,9 @@ describe Notification::IdeaObserver do
 
       it 'notifies participants' do
         idea
-        lambda { idea.pick» }.should change(@participant.notifications, :count).by(1)
+        lambda {
+          idea.update_attributes! state: IdeaStateMachine.state_value(:picked)
+        }.should change(@participant.notifications, :count).by(1)
       end
     end
 
@@ -57,7 +60,9 @@ describe Notification::IdeaObserver do
 
       it 'notifies participants' do
         idea
-        lambda { idea.deliver» }.should change(@participant.notifications, :count).by(1)
+        lambda {
+          idea.update_attributes! state: IdeaStateMachine.state_value(:live)
+        }.should change(@participant.notifications, :count).by(1)
       end
     end
   end
