@@ -2,8 +2,12 @@
 require 'spec_helper'
 
 describe Notification::VoteObserver do
+  fixtures :users, :logins, :accounts, :ideas
+
   context 'vote on ideas' do
-    let(:vote) { Vote.make! user: User.make!, subject: Idea.make! }
+    let(:voter) { User.make! }
+    let(:idea) { ideas(:idea_submitted) }
+    let(:vote) { Vote.make! user:voter, subject:idea }
 
     it 'notifies idea participants' do
       @user = User.make!
@@ -11,9 +15,9 @@ describe Notification::VoteObserver do
       lambda { vote }.should change(@user.notifications.of_type(:new_vote_on_idea), :count).by(1)      
     end
 
-    it 'does not notify anyone else' do
-      Idea.any_instance.stub participants: []
-      lambda { vote }.should_not change(Notification::NewVoteOnIdea, :count)
+    it 'does not notify the voter' do
+      Idea.any_instance.stub participants: [voter]
+      lambda { vote }.should_not change(voter.notifications.of_type(:new_vote_on_idea), :count)
     end
   end
 
