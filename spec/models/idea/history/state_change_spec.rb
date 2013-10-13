@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Idea::History::StateChange do
-  fixtures :users
+  fixtures :users, :logins, :accounts
 
   context 'idea state change' do
     let(:idea) { Idea.make!(state:-1) } # draft
