@@ -5,7 +5,7 @@ describe BookmarkCleanupService do
 
   subject { described_class.new }
   let(:perform) { subject.run }
-  let(:idea) { Idea.make!(:signed_off) }
+  let(:idea) { Idea.make!(:signed_off, author: User.make!) }
 
   it 'delete bookmarks for old live ideas' do
     Timecop.travel(2.weeks.ago) do
