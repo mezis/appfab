@@ -73,4 +73,8 @@ AppFab::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   config.roadie.provider = Roadie::FilesystemProvider.new('/assets', Rails.root.join('public', 'assets'))
+
+  # Load dependencies also from rake tasks
+  # http://stackoverflow.com/questions/4300240/rails-3-rake-task-cant-find-model-in-production
+  config.dependency_loading = true if $rails_rake_task
 end
