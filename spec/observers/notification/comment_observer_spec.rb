@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe Notification::CommentObserver do
+  fixtures :users, :accounts, :logins
+
   context 'when a new comment is posted' do
     let(:commenter) { User.make! }
     let(:idea) { Idea.make! }

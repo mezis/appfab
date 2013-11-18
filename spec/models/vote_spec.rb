@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Vote do
-  fixtures :users
+  fixtures :users, :accounts, :logins
   its 'factory should work' do
     described_class.make.should be_valid
   end
