@@ -59,7 +59,7 @@ class Idea < ActiveRecord::Base
 
   def self.counts_per_state
     Hash[
-      group(:state).count.map { |state_value,count| [state_name(state_value), count] }
+      group(:state).count.map { |state_value,count| [IdeaStateMachine.state_name(state_value), count] }
     ]
   end
 
