@@ -20,12 +20,7 @@ class LoginService
   def _find_or_build_login
     Rails.logger.debug("Auth hash: #{@auth_hash.inspect}")
 
-    if @auth_hash[:provider] == 'developer'
-      @login = Login.where(email: @auth_hash[:info][:email]).first
-      return if @login.present?
-    end
-
-    @login = Login.where(uid: @auth_hash[:uid], provider: @auth_hash[:provider]).first
+    @login = Login.where(email: @auth_hash[:info][:email]).first
     return if @login.present?
 
     @login = Login.new.tap do |login|
