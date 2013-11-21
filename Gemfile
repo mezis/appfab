@@ -43,6 +43,7 @@ gem 'virtus'
 # activerecord extensions
 gem 'state_machine', require:false
 gem 'default_value_for'
+gem 'rails-observers'
 
 # attached files & image manipulation
 gem 'dragonfly'
