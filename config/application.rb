@@ -73,8 +73,8 @@ module AppFab
     # https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar#troubleshooting
     config.assets.initialize_on_precompile = false
 
-      # Cache assets so the next round of compilation is faster
-      config.assets.cache_store = :dalli_store
+    # Cache assets so the next round of compilation is faster
+    config.assets.cache_store = :dalli_store
 
     # backing store for page/action/fragment caching
     config.cache_store = :dalli_store
