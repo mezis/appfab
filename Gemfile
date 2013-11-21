@@ -11,7 +11,6 @@ gem 'thin',     group: :development
 gem 'dotenv-rails'
 
 # database
-gem 'mysql2',  group: :development
 gem 'pg'
 
 # authentication/authorisation
@@ -103,7 +102,7 @@ group :assets do
   gem 'bootstrap-sass'
   gem "font-awesome-rails"
   gem 'animation'
-  
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

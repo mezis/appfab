@@ -228,7 +228,6 @@ GEM
     multi_test (0.0.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
-    mysql2 (0.3.13)
     newrelic_rpm (3.6.7.152)
     nifty-generators (0.4.6)
     nokogiri (1.6.0)
@@ -472,7 +471,6 @@ DEPENDENCIES
   license_finder
   machinist
   memcachier
-  mysql2
   newrelic_rpm
   nifty-generators
   omniauth-github
