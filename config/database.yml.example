@@ -1,5 +1,5 @@
 development: &local
-  adapter:  mysql2
+  adapter:  postgresql
   database: appfab_dev
   user:     root
   host:     localhost
