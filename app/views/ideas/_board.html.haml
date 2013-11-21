@@ -1,6 +1,6 @@
 -# Give me an array of +ideas+
 
-- grouped_ideas = @ideas.group_by(&:state_name)
+- grouped_ideas = @ideas.group_by { |i| IdeaStateMachine.state_name(i.state) }
 - state_names = ideas_board_states
 
 .row
