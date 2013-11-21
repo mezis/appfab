@@ -44,6 +44,36 @@ describe Idea do
     end
   end
 
+  describe '.counts_per_state' do
+    let(:scope) { described_class }
+    let(:result) { scope.counts_per_state }
+
+    it 'is empty when no ideas' do
+      result.should be_empty
+    end
+
+    context 'with ideas' do
+      before do
+        2.times { Idea.make!(:vetted) }
+        1.times { Idea.make!(:submitted) }
+      end
+
+      it 'counts multiples' do
+        result[:vetted]   .should == 2
+        result[:submitted].should == 1
+        result[:picked]   .should be_nil
+      end
+
+      context 'with other scope' do
+        let(:scope) { Idea.with_state(:submitted) }
+
+        it 'respects scope' do
+          result.should == { submitted: 1 }
+        end
+      end
+    end
+  end
+
   describe '(sort orders)' do
     before { Idea.delete_all }
 
