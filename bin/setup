@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+echo "Creating database config"
+echo "You might need to change the postgresql credentials in config/database.yml"
+cp config/database.yml.example config/database.yml
+
+bundle install
+
+bundle exec rake db:setup
