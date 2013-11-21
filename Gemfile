@@ -1,7 +1,7 @@
 source ENV.fetch('GEM_SOURCE','https://rubygems.org')
 ruby '2.0.0'
 
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 4.0.0'
 
 # webservers
 gem 'rainbows', group: :production
