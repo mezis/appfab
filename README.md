@@ -18,6 +18,12 @@ Its goal is not to replace day-to-day tools like Kanbanery or Pivotal
 Tracker, but rather a means to let the collective pitch ideas, priorise them
 through voting, and follow them through their whole lifecycle.
 
+### Setup
+
+AppFab requires `Ruby 2.0`, `Postgresql` and `MemCache` to be installed.
+
+With those installed you can setup the application by running: `./bin/setup`
+
 
 ### Usage
 
