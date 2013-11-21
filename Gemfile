@@ -94,20 +94,16 @@ gem 'rails_12factor', group: :production
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails'
+gem 'sass-rails'
 
-  # styling
-  gem 'compass-rails'
-  gem 'bootstrap-sass'
-  gem "font-awesome-rails"
-  gem 'animation'
+# styling
+gem 'compass-rails'
+gem 'bootstrap-sass'
+gem "font-awesome-rails"
+gem 'animation'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
+# asset minification
+gem 'uglifier', '>= 1.0.3'
 
 
 group :development do
