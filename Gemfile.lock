@@ -1,5 +1,5 @@
 GEM
-  remote: http://yarp.dev/
+  remote: https://rubygems.org/
   specs:
     actionmailer (3.2.14)
       actionpack (= 3.2.14)
