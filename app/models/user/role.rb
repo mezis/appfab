@@ -4,7 +4,7 @@ require 'set'
 class User::Role < ActiveRecord::Base
   Names = Set.new(%i(submitter product_manager architect developer designer benevolent_dictator account_owner))
 
-  attr_accessible :user, :name, :user_id
+  # attr_accessible :user, :name, :user_id
 
   belongs_to :user
   validates_presence_of   :user

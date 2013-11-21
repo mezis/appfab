@@ -3,7 +3,7 @@ class Message::Marketing < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject
 
-  attr_accessible :link, :summary
+  # attr_accessible :link, :summary
   store :payload, accessors: [ :summary, :body ]
 
   default_values summary:proc { Hash.new }

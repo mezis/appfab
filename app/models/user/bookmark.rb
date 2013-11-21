@@ -1,7 +1,7 @@
 class User::Bookmark < ActiveRecord::Base
   self.table_name = 'user_bookmarks'
 
-  attr_accessible :idea, :user
+  # attr_accessible :idea, :user
   belongs_to :user
   belongs_to :idea
 

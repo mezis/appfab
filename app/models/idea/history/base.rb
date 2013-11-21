@@ -1,6 +1,6 @@
 class Idea::History::Base < ActiveRecord::Base
   self.table_name = 'idea_histories'
-  attr_accessible :idea, :subject
+  # attr_accessible :idea, :subject
 
   belongs_to :idea
   belongs_to :subject, polymorphic:true

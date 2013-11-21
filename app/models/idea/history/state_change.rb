@@ -1,5 +1,5 @@
 class Idea::History::StateChange < Idea::History::Base
-  attr_accessible :idea, :old_state, :new_state
+  # attr_accessible :idea, :old_state, :new_state
 
   validates_presence_of :old_state, :new_state
 

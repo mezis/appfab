@@ -4,7 +4,7 @@ module Traits::User::StateMachine
   extend ActiveSupport::Concern
 
   included do
-    attr_accessible :state
+    # attr_accessible :state
     validates_presence_of :state
     setup_state_machine
   end

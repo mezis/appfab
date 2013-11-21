@@ -20,7 +20,7 @@ module Traits::Idea::HasStates
   ]
 
   included do
-    attr_accessible :state
+    # attr_accessible :state
 
     validates_presence_of  :state
     validates_inclusion_of :state, in: IdeaStateMachine.all_state_values

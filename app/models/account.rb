@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Account < ActiveRecord::Base
-  attr_accessible :name, :auto_adopt, :domain, :categories
+  # attr_accessible :name, :auto_adopt, :domain, :categories
 
   has_many :users, :dependent => :destroy
   has_many :ideas

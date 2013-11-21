@@ -3,7 +3,7 @@
 class User < ActiveRecord::Base
   extend Forwardable
 
-  attr_accessible :karma, :account, :voting_power, :login_attributes, :login
+  # attr_accessible :karma, :account, :voting_power, :login_attributes, :login
 
   belongs_to :login
   belongs_to :account

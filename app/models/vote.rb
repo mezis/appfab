@@ -1,7 +1,7 @@
 # encoding: UTF-8
 # encoding: UTF-8
 class Vote < ActiveRecord::Base
-  attr_accessible :subject, :user, :up
+  # attr_accessible :subject, :user, :up
 
   belongs_to :user
   belongs_to :subject, :polymorphic => true, :counter_cache => :votes_cache

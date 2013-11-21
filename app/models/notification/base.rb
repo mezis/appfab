@@ -2,7 +2,7 @@
 class Notification::Base < ActiveRecord::Base
   self.table_name = 'notifications'
 
-  attr_accessible :recipient, :subject, :body, :unread
+  # attr_accessible :recipient, :subject, :body, :unread
 
   belongs_to :recipient, :class_name => 'User'
   belongs_to :subject, :polymorphic => true

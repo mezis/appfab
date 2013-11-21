@@ -1,6 +1,6 @@
 class Storage::Chunk < ActiveRecord::Base
   self.table_name = 'storage_chunks'
-  attr_accessible :data, :idx
+  # attr_accessible :data, :idx
 
   belongs_to :file, class_name: 'Storage::File'
 

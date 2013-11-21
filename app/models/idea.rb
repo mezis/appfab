@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
+  # attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
 
   belongs_to :author, :class_name => 'User'
   belongs_to :account
