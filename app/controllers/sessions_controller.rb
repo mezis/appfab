@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
 
   def switch_account(account_id)
-    unless current_login.accounts.value_of(:id).include?(account_id)
+    unless current_login.accounts.pluck(:id).include?(account_id)
       flash[:error] = _("Oops, you're not a member of that account.")
       return
     end

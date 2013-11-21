@@ -167,7 +167,7 @@ class IdeasController < ApplicationController
 
 
   def find_idea(id)
-    idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
+    idea = Idea.where(account_id:current_login.accounts.pluck(:id)).find(id)
     self.current_account = idea.account
     return idea
   end

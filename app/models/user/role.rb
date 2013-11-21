@@ -50,7 +50,7 @@ class User::Role < ActiveRecord::Base
     protected
 
     def cached_roles
-      @cached_roles ||= Set.new(self.roles.value_of(:name).map(&:to_sym))
+      @cached_roles ||= Set.new(self.roles.pluck(:name).map(&:to_sym))
     end
   end
 

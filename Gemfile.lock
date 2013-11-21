@@ -411,8 +411,6 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.4)
-    valium (0.5.0)
-      activerecord (>= 3.0.2)
     virtus (0.5.5)
       backports (~> 3.3)
       descendants_tracker (~> 0.0.1)
@@ -504,6 +502,5 @@ DEPENDENCIES
   timecop
   turbolinks
   uglifier (>= 1.0.3)
-  valium
   virtus
   will_paginate

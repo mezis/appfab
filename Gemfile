@@ -37,10 +37,6 @@ gem 'configatron'
 # syntax sugar
 gem 'andand'
 
-# Access attribute values directly, without instantiating ActiveRecord objects
-# (because Rails' #pluck breaks a lot with joins)
-gem 'valium'
-
 # Property API for plain classes (used for form objects)
 gem 'virtus'
 

@@ -38,10 +38,10 @@ class Idea < ActiveRecord::Base
   before_save :update_active_at
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
-  scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
+  scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.pluck(:id)) }
   scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
   scope :not_backed_by, lambda { |user| 
-    backed_ideas_ids = user.backed_ideas.value_of(:id)
+    backed_ideas_ids = user.backed_ideas.pluck(:id)
     backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
   }
 
@@ -74,7 +74,7 @@ class Idea < ActiveRecord::Base
   end
 
   def backed_by?(user)
-    backers.value_of(:id).include?(user.id)
+    backers.pluck(:id).include?(user.id)
   end
 
 

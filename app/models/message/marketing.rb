@@ -20,7 +20,7 @@ class Message::Marketing < ActiveRecord::Base
       else raise ArgumentError
     end
 
-    existing_recipient_ids = self.notified_users.value_of(:id)
+    existing_recipient_ids = self.notified_users.pluck(:id)
     scope = scope.excluding_ids(existing_recipient_ids) if existing_recipient_ids.any?
     
     transaction do
