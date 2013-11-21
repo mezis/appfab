@@ -5,5 +5,6 @@
 require File.expand_path('../config/application', __FILE__)
 
 require 'rake_ext/raven'
+require 'gettext_i18n_rails/tasks'
 
 AppFab::Application.load_tasks
