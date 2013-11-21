@@ -94,7 +94,8 @@ gem 'rails_12factor', group: :production
 gem 'sass-rails'
 
 # styling
-gem 'compass-rails'
+gem 'sass', '~> 3.2.0'
+gem 'compass-rails', '2.0.alpha.0'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'animation'

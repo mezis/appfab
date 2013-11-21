@@ -59,7 +59,7 @@ GEM
       xpath (~> 1.0.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
-    chunky_png (1.2.8)
+    chunky_png (1.2.9)
     coderay (1.0.9)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -72,7 +72,7 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
+    compass-rails (2.0.alpha.0)
       compass (>= 0.12.2, < 0.14)
     configatron (2.13.0)
       yamler (>= 0.1.0)
@@ -136,7 +136,7 @@ GEM
     fast_gettext (0.8.0)
     faye-websocket (0.4.7)
       eventmachine (>= 0.12.0)
-    ffi (1.9.0)
+    ffi (1.9.3)
     fineuploader-rails (3.3)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -290,6 +290,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.1)
       sprockets-rails (~> 2.0.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -340,8 +342,7 @@ GEM
     ruby_parser (3.2.2)
       sexp_processor (~> 4.1)
     rubyzip (0.9.9)
-    sass (3.3.0.rc.1)
-      listen (~> 1.1.0)
+    sass (3.2.12)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -436,7 +437,7 @@ DEPENDENCIES
   cancan
   capybara (~> 2.0.3)
   coffee-rails
-  compass-rails
+  compass-rails (= 2.0.alpha.0)
   configatron
   coveralls
   cucumber-rails
@@ -481,6 +482,7 @@ DEPENDENCIES
   quiet_assets
   rack-cache
   rails (~> 4.0.0)
+  rails-observers
   rails_12factor
   rainbows
   rb-fchange
@@ -492,6 +494,7 @@ DEPENDENCIES
   rspec-rails
   ruby-prof
   ruby_parser
+  sass (~> 3.2.0)
   sass-rails
   sentry-raven
   sextant
