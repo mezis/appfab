@@ -15,8 +15,8 @@ Given /^an account "(.*?)"$/ do |name|
 end
 
 Given /^(?:I am|"(.*?)" is) a member of account "(.*?)"$/ do |who, account_name|
-  account = Account.find_by_name(account_name)
-  login = who ? Login.find_by_first_name(who) : current_login
+  account = Account.where(name: account_name).first
+  login = who ? Login.where(first_name: who).first : current_login
 
   login.users.create! account:account
   Mentions[Account] = account

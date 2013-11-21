@@ -2,10 +2,10 @@
 
 def current_account
   account_name = page.find('#header .team-name').text
-  current_login.accounts.find_by_name(account_name)
+  current_login.accounts.where(name: account_name).first
 end
 
 def current_login
   first_name = page.find('#header .first-name').text
-  Login.find_by_first_name(first_name)
+  Login.where(first_name: first_name).first
 end
