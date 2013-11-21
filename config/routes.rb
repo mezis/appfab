@@ -3,7 +3,7 @@ AppFab::Application.routes.draw do
 
   get "welcome/index"
   get 'welcome/fail'
-  match 'page/:page' => 'welcome#static_page', :as => :static_page
+  match 'page/:page' => 'welcome#static_page', :as => :static_page, via: :get
 
   resources :notifications
   resources :accounts
