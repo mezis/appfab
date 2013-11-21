@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   scope :excluding, lambda { |*users| where('users.id NOT IN (?)', users.flatten.map(&:id)) }
   scope :excluding_ids, lambda { |*ids| where('users.id NOT IN (?)', ids.flatten.uniq) }
   scope :first_name_is, lambda { |name| joins(:login).where('logins.first_name = ?', name) }
-  scope :by_first_name, joins(:login).order(:first_name)
+  scope :by_first_name, -> { joins(:login).order(:first_name) }
 
   # this is not implemented as an association, since polymorphism and has_many through do not play well together
   def backed_ideas

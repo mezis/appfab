@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body, message:_('Blank comments are not permitted.')
   validates_presence_of :rating
 
-  scope :by_created_at, order:'created_at DESC'
+  scope :by_created_at, -> { order('created_at DESC') }
 
   after_create { |record| record.idea.andand.ping! }
 end

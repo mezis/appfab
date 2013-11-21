@@ -17,8 +17,8 @@ class Vote < ActiveRecord::Base
 
   scope :on_idea,   lambda { |*ideas| where(subject_type:'Idea', subject_id:ideas)}
   scope :by_user,   lambda { |user| where(user_id:user.id) }
-  scope :upvote,    where(up:true)
-  scope :downvote,  where(up:false)
+  scope :upvote,    -> { where(up:true)  }
+  scope :downvote,  -> { where(up:false) }
 
   after_create  :notify_idea
   after_destroy :notify_idea
