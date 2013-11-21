@@ -48,6 +48,10 @@ describe Idea do
     let(:scope) { described_class }
     let(:result) { scope.counts_per_state }
 
+    before do
+      Idea.delete_all # Clear fixtures
+    end
+
     it 'is empty when no ideas' do
       result.should be_empty
     end
