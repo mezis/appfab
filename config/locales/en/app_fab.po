@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-09 23:28+0100\n"
+"POT-Creation-Date: 2013-11-21 22:23+0000\n"
 "PO-Revision-Date: 2012-10-30 13:30+0000\n"
 "Last-Translator: Julien Letessier <>\n"
 "Language-Team: English\n"
@@ -16,6 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%{inviter} has invited you to join team %{name} on %{appname}"
+msgstr ""
 
 msgid "%{model} invalid"
 msgstr ""
@@ -29,7 +32,7 @@ msgstr ""
 msgid "%{user} commented on %{idea_link}"
 msgstr ""
 
-msgid "%{user} endorsed %{idea_link})"
+msgid "%{user} endorsed %{idea_link}"
 msgstr ""
 
 msgid "%{user} has just joined your account!"
@@ -42,6 +45,15 @@ msgid "%{user} vetted %{idea_link}"
 msgstr ""
 
 msgid "%{user}, hello again!"
+msgstr ""
+
+msgid "%{user}, welcome aboard!"
+msgstr ""
+
+msgid "+%{count} hidden"
+msgstr ""
+
+msgid "Abort"
 msgstr ""
 
 msgid "Act as user"
@@ -83,6 +95,9 @@ msgstr ""
 msgid "Backed by you"
 msgstr ""
 
+msgid "Become product manager"
+msgstr ""
+
 msgid "Blank comments are not permitted."
 msgstr ""
 
@@ -113,13 +128,16 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-msgid "Changed %{old_state} â %{new_state} (%{time} ago)"
+msgid "Changed %{old_state} → %{new_state} (%{time} ago)"
 msgstr ""
 
 msgid "Commented by you"
 msgstr ""
 
 msgid "Create a team"
+msgstr ""
+
+msgid "Create new team"
 msgstr ""
 
 msgid "Currently worked on"
@@ -152,7 +170,7 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-msgid "Edit team"
+msgid "Email"
 msgstr ""
 
 msgid "Endorse this"
@@ -194,6 +212,9 @@ msgstr ""
 msgid "Failed to vote on the comment."
 msgstr ""
 
+msgid "First name"
+msgstr ""
+
 msgid "Gather brilliant ideas"
 msgstr ""
 
@@ -233,7 +254,7 @@ msgid_plural "Has vetted %{count} ideas"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Has Ã%{count} voting power."
+msgid "Has ×%{count} voting power."
 msgstr ""
 
 msgid "Here's a digest of the most recent notifications you missed..."
@@ -371,6 +392,18 @@ msgstr ""
 msgid "Idea|Feature"
 msgstr ""
 
+msgid "If you've logged in before, %{team_name} has been added to your team menu."
+msgstr ""
+
+msgid "Invite"
+msgstr ""
+
+msgid "Invite sent to %{user}"
+msgstr ""
+
+msgid "Invite user"
+msgstr ""
+
 msgid "Is a backer of one idea"
 msgid_plural "Is a backer of %{count} ideas"
 msgstr[0] ""
@@ -385,13 +418,13 @@ msgstr ""
 msgid "Knowing who you are discussing ideas with is important in communication. Also, the default avatars are a bit ugly, so a picture of you would be much better."
 msgstr ""
 
+msgid "Last name"
+msgstr ""
+
 msgid "Let priorities emerge"
 msgstr ""
 
 msgid "Let's get cracking"
-msgstr ""
-
-msgid "List team members"
 msgstr ""
 
 msgid "Looks like you need to be authenticated to view this page."
@@ -421,19 +454,13 @@ msgstr ""
 msgid "Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead."
 msgstr ""
 
-msgid "New product team"
-msgstr ""
-
 msgid "No category"
 msgstr ""
 
+msgid "No need, %{user} is already a member!"
+msgstr ""
+
 msgid "Not authorized"
-msgstr ""
-
-msgid "Not enough design capacity"
-msgstr ""
-
-msgid "Not enough development capacity"
 msgstr ""
 
 msgid "Notifications"
@@ -475,6 +502,9 @@ msgstr ""
 msgid "Or you could %{discuss_link} ideas with others?"
 msgstr ""
 
+msgid "Ow, I'm not sure how you landed here. This doesn't look like a view I knwo about, sorry!"
+msgstr ""
+
 msgid "Perhaps it's time to %{discuss_link} ideas with others?"
 msgstr ""
 
@@ -488,6 +518,9 @@ msgid "Pick this idea"
 msgstr ""
 
 msgid "Please consider your decision to endorse an idea carefully."
+msgstr ""
+
+msgid "Popup|Are you sure? This will cause all vettings and endorsements for this idea to be destroyed."
 msgstr ""
 
 msgid "Post comment"
@@ -512,6 +545,9 @@ msgid "Recently submitted"
 msgstr ""
 
 msgid "Release notes"
+msgstr ""
+
+msgid "Remember that you can find your %{own_ideas} and your %{bookmarked_ideas} easily."
 msgstr ""
 
 msgid "Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?"
@@ -553,7 +589,10 @@ msgstr ""
 msgid "Sign off"
 msgstr ""
 
-msgid "So throw that old \"ideas box\" awayâbe it an online form or a real-world box. Time to let the team pitch their ideas and defend them."
+msgid "Simply go to %{app_link} and sign in, we've already set up your account!"
+msgstr ""
+
+msgid "So throw that old \"ideas box\" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them."
 msgstr ""
 
 msgid "Solution:"
@@ -802,6 +841,9 @@ msgstr ""
 msgid "Tooltip|%{user} currently has %{points} %{karma}."
 msgstr ""
 
+msgid "Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you're aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly."
+msgstr ""
+
 msgid "Tooltip|An architect and a product manager have sized this idea."
 msgstr ""
 
@@ -856,6 +898,12 @@ msgstr ""
 msgid "Tooltip|Mark as unread"
 msgstr ""
 
+msgid "Tooltip|Mark the idea as designed on behalf of the Benevolent Dictator, who will be notified."
+msgstr ""
+
+msgid "Tooltip|Mark the idea as signed off on behalf of the Benevolent Dictator, who will be notified."
+msgstr ""
+
 msgid "Tooltip|Only architects and product managers can vet ideas."
 msgstr ""
 
@@ -880,10 +928,19 @@ msgstr ""
 msgid "Tooltip|Sign out"
 msgstr ""
 
+msgid "Tooltip|Sorry, you cannot take over this idea."
+msgstr ""
+
+msgid "Tooltip|Take over this idea from another product manager. We'll tell them of course, so they don't get surprised!"
+msgstr ""
+
 msgid "Tooltip|The current progress on this idea"
 msgstr ""
 
 msgid "Tooltip|They are %{roles}."
+msgstr ""
+
+msgid "Tooltip|This idea cannot be aborted."
 msgstr ""
 
 msgid "Tooltip|This idea cannot be endorsed anymore."
@@ -893,9 +950,6 @@ msgid "Tooltip|This idea cannot be endorsed yet."
 msgstr ""
 
 msgid "Tooltip|This idea cannot be marked as %{state} yet."
-msgstr ""
-
-msgid "Tooltip|This idea cannot be aborted."
 msgstr ""
 
 msgid "Tooltip|This idea cannot be vetted yet."
@@ -911,9 +965,6 @@ msgid "Tooltip|This idea has already been vetted."
 msgstr ""
 
 msgid "Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the \"karma\" points you can spend to vote on ideas. Gain more points as you participate!"
-msgstr ""
-
-msgid "Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you're aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly."
 msgstr ""
 
 msgid "Tooltip|Your dashboard"
@@ -967,13 +1018,13 @@ msgstr ""
 msgid "Vet this idea"
 msgstr ""
 
-msgid "Abort"
-msgstr ""
-
 msgid "Vetted by you"
 msgstr ""
 
 msgid "View all users"
+msgstr ""
+
+msgid "View team details"
 msgstr ""
 
 msgid "Was last seen on %{app_name} %{time_ago} ago"
@@ -983,6 +1034,9 @@ msgid "We don't know about the page you're trying to access."
 msgstr ""
 
 msgid "We stick to one of the core tenets of Kanban: built-in rate limiting. Only a limited \"volume\" of ideas can be in a given stage at any time, as your team members can only work on so many things in parallel."
+msgstr ""
+
+msgid "We're only showing you %{count} of a total %{total_count} ideas. Don't worry, the others haven't been lost—It's just they're probably not that important if they haven't bubbled up the list."
 msgstr ""
 
 msgid "We've marked these notifications as read for you, so we won't bug you again."
@@ -1001,6 +1055,9 @@ msgid "Withdraw endorsement"
 msgstr ""
 
 msgid "Wow, just wow. This idea is live. Oh and by the way—the author and eveyone who backed this idea just got some extra %{karma}."
+msgstr ""
+
+msgid "You are acting on behalf of the Benevolent Dictator. Are you sure?"
 msgstr ""
 
 msgid "You are currently acting as %{user}. Please be careful, and %{click_here} to become %{real_user} again."
@@ -1045,16 +1102,22 @@ msgstr ""
 msgid "You need to be this idea's author or product manager, or an account owner, to move it to another account. You also need to be a member of another account."
 msgstr ""
 
-msgid "You'll probably want to attach some files to this ideaâperhaps a photo of a napkin sketch or a spreadsheet with graphs to back you up and prove how great this is going to be. Don't fret, we'll let you do so as soon as you've saved."
+msgid "You'll probably want to attach some files to this idea—perhaps a photo of a napkin sketch or a spreadsheet with graphs to back you up and prove how great this is going to be. Don't fret, we'll let you do so as soon as you've saved."
 msgstr ""
 
 msgid "You're not part of a team yet!"
+msgstr ""
+
+msgid "You've been invited to join team %{name} on %{appname}."
 msgstr ""
 
 msgid "Your comment on %{idea_link} was %{upvoted_or_downvoted}"
 msgstr ""
 
 msgid "Your ideas"
+msgstr ""
+
+msgid "bookmarked ideas"
 msgstr ""
 
 msgid "click here"
@@ -1067,6 +1130,9 @@ msgid "downvoted"
 msgstr ""
 
 msgid "in the \"%{category}\" category"
+msgstr ""
+
+msgid "own ideas"
 msgstr ""
 
 msgid "submit"
