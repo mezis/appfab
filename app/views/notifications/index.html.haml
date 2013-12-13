@@ -11,7 +11,7 @@
           %h4= _('I\'m afraid you have no notifications yet.')
         - if Idea.discussable_by(current_user).any?
           %br/
-          = _('Perhaps it\'s time to %{discuss_link} ideas with others?').html_safe % { discuss_link: link_to(_('discuss'), ideas_path(angle: 'discussable'))}
+          = _('Perhaps it\'s time to %{discuss_link} ideas with others?') % { discuss_link: link_to(_('discuss'), ideas_path(angle: 'discussable'))}
     - else
       %table.table
         %thead

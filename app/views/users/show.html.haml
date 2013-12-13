@@ -15,7 +15,7 @@
     %ul
       - if @user.last_seen_at
         %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(@user.last_seen_at) }
-      %li= _('Has %{count} %{karma_symbol}').html_safe % { count:@user.karma, karma_symbol:user_karma_symbol }
+      %li= _('Has %{count} %{karma_symbol}') % { count:@user.karma, karma_symbol:user_karma_symbol }
       %li= _('Has ×%{count} voting power.') % { count:@user.voting_power }
       - if count = @user.ideas.count and count > 0
         %li= n_('Has submitted an idea', 'Has submitted %{count} ideas', count) % { count:count }
