@@ -10,7 +10,7 @@ before_install:
 before_script:
   - psql -c 'create database appfab_test;' -U postgres
   - cp config/database-travis.yml config/database.yml
-  - rake db:migrate
+  - bundle exec rake db:migrate
 after_script:
   - bundle_cache
 rvm:
@@ -24,4 +24,4 @@ env:
   matrix:
     - BUILD_TARGET=spec
     - BUILD_TARGET=cucumber
-script: rake $BUILD_TARGET
+script: bundle exec rake $BUILD_TARGET
