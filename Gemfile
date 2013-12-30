@@ -42,7 +42,7 @@ gem 'virtus'
 
 # activerecord extensions
 gem 'state_machine', require:false
-gem 'default_value_for'
+gem 'default_value_for', git: 'https://github.com/FooBarWidget/default_value_for.git', branch: 'rails4'
 gem 'rails-observers'
 
 # attached files & image manipulation
