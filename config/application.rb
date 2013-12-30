@@ -78,5 +78,9 @@ module AppFab
 
     # backing store for page/action/fragment caching
     config.cache_store = :dalli_store
+
+    # Raise exceptions on bad locales, and default to English
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :en
   end
 end
