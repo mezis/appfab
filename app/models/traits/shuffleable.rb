@@ -17,7 +17,7 @@ module Traits::Shuffleable
 
     # Pseudo-RNG seeded by +seed+ and +id+.
     def get_random_order_sql(seed)
-      "((#{PRIME_A} * ((id + #{seed % PRIME_C}) % #{PRIME_C}) + #{PRIME_B}) % #{PRIME_C})"
+      "((#{PRIME_A} * ((#{quoted_table_name}.#{quoted_primary_key} + #{seed % PRIME_C}) % #{PRIME_C}) + #{PRIME_B}) % #{PRIME_C})"
     end
 
   end

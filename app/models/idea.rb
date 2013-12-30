@@ -39,11 +39,6 @@ class Idea < ActiveRecord::Base
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.pluck(:id)) }
-  scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
-  scope :not_backed_by, lambda { |user| 
-    backed_ideas_ids = user.backed_ideas.pluck(:id)
-    backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
-  }
 
   scope :with_state, lambda { |*states|
     where('ideas.state IN (?)', IdeaStateMachine.state_values(*states))
@@ -148,7 +143,25 @@ class Idea < ActiveRecord::Base
   end
 
   def self.backed_by(user)
-    joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
+    # this originally looked like:
+    #   joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
+    # the new code works because of the uniqueness clause on votes (no double
+    # votes)
+    joins(:votes).where('votes.user_id = ?', user.id)
+  end
+
+  def self.not_backed_by(user)
+    ideas = self.arel_table
+    votes = Vote.arel_table.alias('backings')
+    joins_sql = ideas.
+      join(votes, Arel::Nodes::OuterJoin).
+      on(
+        votes[:subject_type].eq(self.name),
+        votes[:subject_id]  .eq(ideas[:id]),
+        votes[:user_id]     .eq(user.id)).
+      join_sources
+
+    joins(joins_sql).where(votes[:user_id].eq(nil))
   end
 
 

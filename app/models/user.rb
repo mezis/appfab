@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
   # this is not implemented as an association, since polymorphism and has_many through do not play well together
   def backed_ideas
-    Idea.backed_by(self)
+    Idea.unscoped.backed_by(self)
   end
 
 
