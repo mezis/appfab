@@ -6,7 +6,7 @@
 # - http://pivotallabs.com/form-backing-objects-for-fun-and-profit/
 
 class User::EditForm
-  include Virtus
+  include Virtus.model
   extend Forwardable
   extend ActiveModel::Naming
   include ActiveModel::Conversion

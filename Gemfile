@@ -95,7 +95,7 @@ gem 'sass-rails'
 
 # styling
 gem 'sass', '~> 3.2.0'
-gem 'compass-rails', '2.0.alpha.0'
+gem 'compass-rails'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'animation'
