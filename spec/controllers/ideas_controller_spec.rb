@@ -52,11 +52,24 @@ describe IdeasController do
   end
 
   describe '#create' do
-    it "renders new template when model is invalid" do
+    let(:params) {{ idea: { title: 'foo', state: 'draft' } }}
+
+    before do
       @current_user.plays! :submitter
+    end
+
+    it "renders new template when model is invalid" do
       Idea.any_instance.stub(:valid? => false)
-      post :create
+      post :create, params
       response.should render_template(:new)
+    end
+
+    context 'when the model is valid' do
+
+      it 'redirects to the idea' do
+        post :create, params
+        response.should redirect_to(idea_path(Idea.last))
+      end
     end
   end
 
@@ -68,23 +81,25 @@ describe IdeasController do
   end
 
   describe '#update' do
+    let(:params) {{ id: idea.id, idea: { title: 'foo', state: 'draft' } }}
+
     it "renders edit template when model is invalid" do
       idea
       Idea.any_instance.stub(:valid? => false)
-      put :update, :id => idea.id
+      put :update, params
       response.should render_template(:edit)
     end
 
     it "redirects when model is valid" do
       idea
-      put :update, :id => idea.id
+      put :update, params
       response.should redirect_to(idea_url(assigns[:idea]))
     end
 
     it "causes the idea to be bookmarked" do
       idea = Idea.make!(author: User.make!)
       @current_user.bookmarked_ideas.should_not include(idea) # sanity check
-      put :update, :id => idea
+      put :update, id: idea.id, idea: { title: 'bar' }
       @current_user.bookmarked_ideas.reload.should include(idea)
     end
 
