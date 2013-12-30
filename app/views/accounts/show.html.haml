@@ -14,7 +14,7 @@
     = can_link_to edit_account_path(@account), auth:[:update, @account], class:'btn btn-block' do
       %i.icon-pencil
       = _("Edit")
-    = can_link_to @account, auth:[:destroy, @account], confirm: 'Are you sure?', method: :delete, class:'btn btn-block' do
+    = can_link_to @account, auth:[:destroy, @account], data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-block' do
       %i.icon-trash
       = _("Destroy")
 

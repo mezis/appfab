@@ -7,7 +7,7 @@
         = _('Sign off')
   - elsif can?(:force_sign_off, idea)
     %li
-      = link_to idea_path(idea, idea: { state: 'signed_off' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as signed off on behalf of the Benevolent Dictator, who will be notified.'), confirm:idea_force_action_confimation, data: { placement: 'left' } do
+      = link_to idea_path(idea, idea: { state: 'signed_off' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as signed off on behalf of the Benevolent Dictator, who will be notified.'), data: { confirm:idea_force_action_confimation, placement: 'left' } do
         %i.icon-ok-sign
         = _('Sign off')
   - else

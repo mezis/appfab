@@ -43,7 +43,7 @@
       %i.icon-eye-close
       = _("Hide %{user}") % { user:@user.first_name }
 
-    = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.'), :'data-placement' => 'left', :'data-container' => '.container' do
+    = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', data: { confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), placement: 'left', container: '.container' }, title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.') do
       %i.icon-trash
       = _("Destroy %{user}") % { user:@user.first_name }
 

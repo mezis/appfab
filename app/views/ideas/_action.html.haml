@@ -6,7 +6,7 @@
   - if idea.state_machine.can_abort›?
     - if can?(:abort, idea)
       %li
-        = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you\'re aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, confirm:s_("Popup|Are you sure? This will cause all vettings and endorsements for this idea to be destroyed."), data: { placement: 'left' } do
+        = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you\'re aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, data: { confirm: s_("Popup|Are you sure? This will cause all vettings and endorsements for this idea to be destroyed."), placement: 'left' } do
           %i.icon-fast-backward
           = _('Abort')
     - else
