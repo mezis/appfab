@@ -86,14 +86,14 @@ describe Idea do
         idea1 = Idea.make!(design_size:2, development_size:2, rating:1)
         idea2 = Idea.make!(design_size:3, development_size:3, rating:6)
 
-        described_class.by_impact.all.should == [idea2, idea1]
+        described_class.by_impact.to_a.should == [idea2, idea1]
       end
 
       it 'puts unsized ideas at the end' do
         idea1 = Idea.make!(design_size:nil, development_size:nil, rating:0)
         idea2 = Idea.make!(design_size:2,   development_size:2,   rating:1)
 
-        described_class.by_impact.all.should == [idea2, idea1]
+        described_class.by_impact.to_a.should == [idea2, idea1]
       end
     end
   end
