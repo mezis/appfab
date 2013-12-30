@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
 
     begin
       Account.transaction do
-        @account = Account.new(params[:account])
+        @account = Account.new(account_params)
         @account.save!
         @account.users.create!(login:current_login).plays!(:account_owner, :submitter)
       end
@@ -42,12 +42,12 @@ class AccountsController < ApplicationController
   def update
     authorize! :update, @account
 
-    categories = params[:account].andand.delete(:categories)
+    categories = account_params[:categories]
     if categories.kind_of?(String)
-      params[:account][:categories] = Set.new categories.split(/\s*,\s*/)
+      account_params[:categories] = Set.new categories.split(/\s*,\s*/)
     end
 
-    if @account.update_attributes(params[:account])
+    if @account.update_attributes(account_params)
       redirect_to @account, :notice  => _("Successfully updated team %{name}.") % { name:@account.name }
     else
       render :action => 'edit'
@@ -62,7 +62,12 @@ class AccountsController < ApplicationController
   end
 
   private
+
   def load_account
     @account = Account.find(params[:id])
+  end
+
+  def account_params
+    params.require(:account).permit(:name, :categories)
   end
 end

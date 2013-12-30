@@ -22,7 +22,7 @@ module UsersHelper
   end
 
   def user_roles_sentence(user)
-    user.roles.values_of(:name).map { |role| user_role_name(role).downcase }.to_sentence
+    user.roles.pluck(:name).map { |role| user_role_name(role).downcase }.to_sentence
   end
 
   def user_karma_symbol

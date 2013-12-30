@@ -16,7 +16,7 @@ describe VotesController do
     describe '#create' do
       it "redirects to idea when model is invalid" do
         Vote.any_instance.stub(:valid? => false)
-        post :create, :idea_id => idea.id
+        post :create, idea_id: idea.id
         response.should redirect_to(idea_path(idea))
       end
     end

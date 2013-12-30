@@ -6,7 +6,7 @@ class User::InvitesController < ApplicationController
   def create
     authorize! :invite, nil
 
-    invitee = Login.new params[:login].slice(:email, :first_name, :last_name)
+    invitee = Login.new login_params
     invited = UserInvitationService.new(inviter:current_user, login:invitee).run
 
     if invited
@@ -19,5 +19,11 @@ class User::InvitesController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
+  end
+
+  private
+
+  def login_params
+    params.require(:login).permit(:email, :first_name, :last_name)
   end
 end

@@ -1,11 +1,12 @@
 # encoding: UTF-8
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
   include Traits::RequiresLogin
 
   before_filter :load_comment, :only => [:show, :update, :destroy]
 
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
     @comment.author = current_user
     authorize! :create, @comment if @comment.valid?
 
@@ -51,7 +52,7 @@ class CommentsController < ApplicationController
   def update
     authorize! :update, @comment
 
-    if @comment.update_attributes(params[:comment])
+    if @comment.update_attributes(comment_params)
       flash[:success] = _("Successfully updated comment.")
     else
       flash[:error] = _("Failed to update comment.")
@@ -74,7 +75,12 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def load_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:idea_id, :body)
   end
 end
