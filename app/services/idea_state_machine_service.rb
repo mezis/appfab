@@ -13,7 +13,7 @@ class IdeaStateMachineService
     state_to   = IdeaStateMachine.state_name(_idea.state)
     path = _state_machine.state_paths(from:state_from, to:state_to).min_by(&:length)
     if path.nil?
-      raise RuntimeError, "invalid transition from #{idea.state_was} to #{idea.state}"
+      raise RuntimeError, "invalid transition from #{state_from} to #{state_to}"
     end
 
     _idea.transaction do

@@ -81,7 +81,7 @@ describe IdeasController do
   end
 
   describe '#update' do
-    let(:params) {{ id: idea.id, idea: { title: 'foo', state: 'draft' } }}
+    let(:params) {{ id: idea.id, idea: { title: 'foo', state: 'submitted' } }}
 
     it "renders edit template when model is invalid" do
       idea

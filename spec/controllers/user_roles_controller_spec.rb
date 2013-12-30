@@ -6,17 +6,21 @@ describe UserRolesController do
   render_views
 
   let(:user) { users(:abigale_balisteri) }
+  
+  describe '#create' do
+    let(:params) {{ user_id: user.id, user_role: { name: 'submitter' } }}
 
-  it "create action should redirect when model is invalid" do
-    User::Role.any_instance.stub(:valid? => false)
-    post :create, :user_id => user.id
-    response.should redirect_to(user_path(user))
-  end
+    it "create action should redirect when model is invalid" do
+      User::Role.any_instance.stub(:valid? => false)
+      post :create, params
+      response.should redirect_to(user_path(user))
+    end
 
-  it "create action should redirect when model is valid" do
-    User::Role.any_instance.stub(:valid? => true)
-    post :create, :user_id => user.id
-    response.should redirect_to(user_path(user))
+    it "create action should redirect when model is valid" do
+      User::Role.any_instance.stub(:valid? => true)
+      post :create, params
+      response.should redirect_to(user_path(user))
+    end
   end
 
   it "destroy action should destroy model and redirect to index action" do
