@@ -5,7 +5,7 @@ describe 'fixtures' do
 
   it 'has only valid fixtures' do
     records_to_check = {} # name -> model
-    ActiveRecord::Fixtures.all_loaded_fixtures.each_pair do |model_name, fixture_list|
+    ActiveRecord::FixtureSet.all_loaded_fixtures.each_pair do |model_name, fixture_list|
       fixture_list.fixtures.keys.each do |record_name|
         records_to_check[record_name] = model_name
       end
