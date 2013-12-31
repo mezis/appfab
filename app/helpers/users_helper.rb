@@ -26,7 +26,7 @@ module UsersHelper
   end
 
   def user_karma_symbol
-    content_tag(:i, '', :class => 'icon-leaf karma')
+    %{<i class='icon-leaf karma'></i>}.html_safe
   end
 
   def user_random_greeting(user)
