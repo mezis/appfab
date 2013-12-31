@@ -1,3 +1,6 @@
+language: ruby
+cache: bundler
+
 services:
   - memcache
 before_install:
@@ -15,7 +18,6 @@ env:
   matrix:
     - BUILD_TARGET=spec
     - BUILD_TARGET=cucumber
-script: bundle exec rake $BUILD_TARGET
-cache:
-  - bundler
+script:
+  - bundle exec rake $BUILD_TARGET
 
