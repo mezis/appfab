@@ -40,10 +40,6 @@ GEM
       sass (>= 3.2.0.alpha.95)
     arel (4.0.1)
     atomic (1.1.14)
-    aws-sdk (1.27.0)
-      json (~> 1.4)
-      nokogiri (>= 1.4.4)
-      uuidtools (~> 2.1)
     axiom-types (0.0.5)
       descendants_tracker (~> 0.0.1)
       ice_nine (~> 0.9)
@@ -56,9 +52,6 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
-    bundle_cache (0.2.1)
-      aws-sdk (>= 1.0.0)
-      bundler
     cancan (1.6.10)
     capybara (2.0.3)
       mime-types (>= 1.16)
@@ -206,7 +199,6 @@ GEM
     jquery-turbolinks (2.0.1)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.1)
@@ -448,7 +440,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  bundle_cache
   cancan
   capybara (~> 2.0.3)
   coffee-rails
