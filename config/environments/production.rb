@@ -21,6 +21,9 @@ AppFab::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Cache assets on the client side
+  config.static_cache_control = "public, max-age=#{1.year.to_i}"
+  
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
