@@ -14,7 +14,7 @@ before_script:
 after_script:
   - bundle_cache
 rvm:
-  - 2.0.0
+  - 2.1.0
 env:
   global:
     - RAILS_ENV=test
