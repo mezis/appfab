@@ -26,32 +26,32 @@
     - if !can?(:vote, comment)
       %li
         %a.disabled
-          %i.icon-thumbs-up
+          %i.fa.fa-thumbs-up
       %li
         %a.disabled
-          %i.icon-thumbs-down
+          %i.fa.fa-thumbs-down
     - elsif current_user_vote && current_user_vote.up
       %li
         %a.disabled
-          %i.icon-thumbs-up
+          %i.fa.fa-thumbs-up
       %li
         = link_to comment_vote_path(comment, current_user_vote), remote:true, method: :delete, class: 'delete-vote', title:_('Cancel your upvote') do
-          %i.icon-thumbs-down
+          %i.fa.fa-thumbs-down
     - elsif current_user_vote # downvoted by user
       %li
         = link_to comment_vote_path(comment, current_user_vote), remote:true, method: :delete, class: 'delete-vote', title:_('Cancel your downvote') do
-          %i.icon-thumbs-up
+          %i.fa.fa-thumbs-up
       %li
         %a.disabled
-          %i.icon-thumbs-down
+          %i.fa.fa-thumbs-down
     - else
       %li
         = link_to comment_votes_path(comment, vote: { up:true }), remote:true, method: :post, class: 'upvote', title:_('Upvote this comment') do
-          %i.icon-thumbs-up
+          %i.fa.fa-thumbs-up
       %li
         = link_to comment_votes_path(comment, vote: { up:false }), remote:true, method: :post, class: 'downvote', title:_('Downvote this comment') do
-          %i.icon-thumbs-down
+          %i.fa.fa-thumbs-down
     %li
       = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment'), data: { confirm:_('Are you sure?') } do
-        %i.icon-trash
+        %i.fa.fa-trash-o
 

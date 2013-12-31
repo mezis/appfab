@@ -32,7 +32,7 @@
     = link_to users_path, class: 'btn btn-block' do
       = _("View all users")
     = can_link_to edit_user_path(@user), auth:[:edit, @user], class: 'btn btn-block' do
-      %i.icon-pencil
+      %i.fa.fa-pencil
       = _("Edit %{user}") % { user:@user.first_name }
 
     :ruby
@@ -40,11 +40,11 @@
       other_state = @user.visible? ? :hidden : :visible
       classes << 'active' if @user.hidden?
     = can_link_to user_path(@user, user:{ state:User.state_value(other_state) }), method: :put, auth:[:update_admin, @user], class:classes, title:_('This will make the user unable to access this team anymore; they will also stop receiving emails. You will still see them in the user list, only greyed out.'), :'data-placement' => 'left', :'data-container' => '.container' do
-      %i.icon-eye-close
+      %i.fa.fa-eye-slash
       = _("Hide %{user}") % { user:@user.first_name }
 
     = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', data: { confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), placement: 'left', container: '.container' }, title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.') do
-      %i.icon-trash
+      %i.fa.fa-trash-o
       = _("Destroy %{user}") % { user:@user.first_name }
 
     %h4= _('Roles')
@@ -61,5 +61,5 @@
     - if current_user.plays?(:account_owner)
       %hr/
       = link_to session_path(user_id:@user.id), method: :put, class: 'btn btn-block' do
-        %i.icon-user-md
+        %i.fa.fa-user-md
         = _('Act as user')

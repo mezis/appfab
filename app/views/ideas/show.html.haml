@@ -5,7 +5,7 @@
     .af-flash.af-flash-success
       .container
         %button.close{ :'data-dismiss' => 'alert' }<
-          %i.icon-remove
+          %i.fa.fa-times
 
         - if @idea.state_machine.submitted?
           %h4= _('Awesome! Your idea was submitted.')
@@ -27,7 +27,7 @@
     .af-flash.af-flash-success
       .container
         %button.close{ :'data-dismiss' => 'alert' }<
-          %i.icon-remove
+          %i.fa.fa-times
         %h4= _('Time to give your opinion!')
         %p
           = _('Please consider your decision to endorse an idea carefully.')
@@ -54,5 +54,5 @@
     %hr/
     .ht-with-margin-icon.muted
       .ht-margin-icon
-        %i.icon-info-sign
+        %i.fa.fa-info-circle
       != idea_copy_for_state(@idea.state_machine.state_name)

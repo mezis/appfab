@@ -9,12 +9,12 @@
           = link_to ideas_path(angle: IdeasController::DEFAULT_ANGLE), class: 'btn btn-primary' do
             = _('Let\'s get cracking')
             &nbsp;
-            %i.icon-caret-right
+            %i.fa.fa-caret-right
         - else
           = link_to login_omniauth_authorize_path(provider: :google_oauth2), class: 'btn btn-primary' do
             = _('Sign in with your Google account')
             &nbsp;
-            %i.icon-caret-right
+            %i.fa.fa-caret-right
 
   .row
     .span12
@@ -22,11 +22,11 @@
         - IdeaStateMachine.all_state_names.each do |state_name|
           %li.badge= idea_status(state_name)
           - unless state_name == :live
-            %i.icon-caret-right.muted
+            %i.fa.fa-caret-right.muted
   .row#pitch
     .span4
       %h4<>
-        %i.icon-comments-alt
+        %i.fa.fa-comments-o
         = _('Gather brilliant ideas')
       %p= _('Ever been to the pub with your team? They\'re frustrated because they know what the users want. They\'re bursting with ideas for new features and know which bugs are really painful... but lack the avenue to express themselves.')
       %p= _('So throw that old "ideas box" away—be it an online form or a real-world box. Time to let the team pitch their ideas and defend them.')
@@ -37,7 +37,7 @@
 
     .span4
       %h4<>
-        %i.icon-envelope
+        %i.fa.fa-envelope
         = _('Let priorities emerge')
       %p= _('Remember those long hours of head-scratching and meetings to figure if upgrading the accounting or the email subsystem was the most urgent?')
       %p= _('Now forget about them. Your staff will endorse what is actually important, and priorities will emerge.')
@@ -49,7 +49,7 @@
 
     .span4
       %h4<>
-        %i.icon-bookmark-empty
+        %i.fa.fa-bookmark-o
         = _('Get it done')
       %p= _('Need to know what your product team is going to deliver when? Thanks to its Kanban inspirations, %{appfab} relieves you from preparing unreliable planning and gives a clear view of the road ahead.') % { appfab: configatron.app_name }
       %p= _('See that line above? That\'s the lifecycle of your ideas. Now it\'s up to your to push them forward.')

@@ -7,20 +7,20 @@
         %ul.nav
           = content_tag_with_path_checking(:li, controller: 'dashboards', action: 'show') do |path|
             %a{href: path, title: s_('Tooltip|Your dashboard'), :'data-placement' => 'bottom'} 
-              %i.icon-dashboard
+              %i.fa.fa-dashboard
               %span= _('Dashboard')
           - if can?(:create, Idea)
             = content_tag_with_path_checking(:li, action: 'new') do |path|
               %a{href: path, title: s_('Tooltip|Follow this link to submit a new idea'), :'data-placement' => 'bottom'} 
-                %i.icon-edit
+                %i.fa.fa-edit
                 %span= _('Submit')
           = content_tag_with_path_checking(:li, angle: 'discussable') do |path|
             %a{href: path, title: s_('Tooltip|Show stories currently being discussed'), :'data-placement' => 'bottom'}
-              %i.icon-comments-alt
+              %i.fa.fa-comments-o
               %span= _('All ideas')
           = content_tag_with_path_checking(:li, angle: 'followed') do |path|
             %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
-              %i.icon-bookmark-empty
+              %i.fa.fa-bookmark-o
               %span= _('Bookmarks')
 
         %ul.nav.pull-right#current_user
@@ -28,11 +28,11 @@
             = content_tag_with_path_checking(:li, controller: 'accounts', html: { class:'dropdown' }) do
               %a.dropdown-toggle#account-dropdown{ role:'button', :'data-toggle' => 'dropdown', :'data-target' =>'#', href:'#' }
                 %span.team-name= current_account.name
-                %i.icon-group
+                %i.fa.fa-group
               %ul.dropdown-menu#account-menu
                 %li
                   = link_to current_account do
-                    %i.icon-user
+                    %i.fa.fa-user
                     = _('View team details')
                 - if login_other_accounts.any?
                   %li.divider
@@ -41,7 +41,7 @@
                   - login_other_accounts.each do |account|
                     %li
                       = link_to session_path(account_id:account), method:'put' do
-                        %i.icon-group
+                        %i.fa.fa-group
                         = account.name
                 %li.divider
                 %li
@@ -58,8 +58,8 @@
               = link_to path, class: 'notifications' do
                 - count = current_user.notifications.unread.count
                 %span.figure= number_with_delimiter(count) if count > 0
-                %i.icon-inbox
+                %i.fa.fa-inbox
           - if current_login
             %li.sign-out
               = link_to destroy_login_session_path, method: :delete, title: s_('Tooltip|Sign out'), :'data-placement' => 'left' do
-                %i.icon-eject<>
+                %i.fa.fa-eject<>

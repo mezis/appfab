@@ -26,7 +26,7 @@
         .qq-uploader<
           .btn.btn-block.qq-upload-button>
             .af-drop-area.qq-upload-drop-area<>
-            %i.icon-upload
+            %i.fa.fa-upload
             = _('Attach a file')
           .qq-drop-processing<>
             .qq-drop-processing-spinner<>
@@ -36,7 +36,7 @@
         .qq-uploader<
           %a.qq-upload-button>
             .af-drop-area.qq-upload-drop-area<>
-            %i.icon-upload
+            %i.fa.fa-upload
           .qq-drop-processing<>
             .qq-drop-processing-spinner<>
           .qq-upload-list<>
@@ -56,8 +56,8 @@
   - case format 
   - when 'big'
     .btn.btn-block.disabled{ title:not_authorized_message(:update, owner) }
-      %i.icon-upload
+      %i.fa.fa-upload
       = _('Attach a file')
   - when 'small'
     %a.disabled{ title:not_authorized_message(:update, owner) }
-      %i.icon-upload
+      %i.fa.fa-upload

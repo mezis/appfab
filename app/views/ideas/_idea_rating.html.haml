@@ -1,10 +1,10 @@
 - if idea.star_rating
   .idea-rating.pull-left.pull-left-spaced{ title: idea_rating_message(idea), :'data-placement' => 'right', :'data-container' => '.container' }<
     - if idea.star_rating == 0
-      %i.icon-star-empty
+      %i.fa.fa-star-o
     - else
       - idea.star_rating.times do
-        %i.icon-star
+        %i.fa.fa-star
 - else
   .idea-rating.pull-left.pull-left-spaced{ title: idea_rating_message(idea), :'data-placement' => 'right', :'data-container' => '.container' }<
-    %i.icon-ellipsis-horizontal
+    %i.fa.fa-ellipsis-h

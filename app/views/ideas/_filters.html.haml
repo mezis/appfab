@@ -18,7 +18,7 @@
               = account_category_title(@category)
               %span.caret
             .visible-phone
-              %i.icon-sitemap
+              %i.fa.fa-sitemap
               %span.caret
           %ul.dropdown-menu.filter-category
             - categories = %w[all] + account_categories(current_user) + %w[none]
@@ -36,7 +36,7 @@
               = idea_order_human(@order)
               %span.caret
             .visible-phone
-              %i.icon-sort
+              %i.fa.fa-sort
               %span.caret
           %ul.dropdown-menu.filter-order
             - IdeasController::VALID_ORDERS.each do |order|
@@ -52,7 +52,7 @@
               = idea_filter_human(@filter)
               %span.caret
             .visible-phone
-              %i.icon-filter
+              %i.fa.fa-filter
               %span.caret
           %ul.dropdown-menu.filter-filter
             - IdeasController::VALID_FILTERS.each do |filter|
