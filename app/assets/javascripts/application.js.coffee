@@ -18,7 +18,6 @@
 #= require turbolinks
 #= require_tree .
 
-
 $.unobtrusive () ->
   # only enable tooltips on non-touch devices
   return if ('ontouchstart' in document.documentElement)
@@ -45,3 +44,8 @@ $(document).ready () ->
     $('[data-barberpole]').addClass('af-barberpole')
   $(document).ajaxComplete () ->
     $('[data-barberpole]').removeClass('af-barberpole')
+
+###!
+# Asset version manual bump: 1
+###
+
