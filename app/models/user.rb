@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
 
   # attr_accessible :karma, :account, :voting_power, :login_attributes, :login
 
-  belongs_to :login
-  belongs_to :account
+  belongs_to :login,   inverse_of: :users
+  belongs_to :account, inverse_of: :users
 
   has_many :ideas, :foreign_key => :author_id, :dependent => :destroy
   has_many :vettings, :dependent => :destroy
