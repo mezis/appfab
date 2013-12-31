@@ -15,14 +15,14 @@
     %ul
       - if @user.last_seen_at
         %li= _('Was last seen on %{app_name} %{time_ago} ago') % { app_name: configatron.app_name, time_ago: time_ago_in_words(@user.last_seen_at) }
-      %li= _('Has %{count} %{karma_symbol}').html_safe % { count:@user.karma, karma_symbol:user_karma_symbol }
+      %li= _('Has %{count} %{karma_symbol}') % { count:@user.karma, karma_symbol:user_karma_symbol }
       %li= _('Has ×%{count} voting power.') % { count:@user.voting_power }
       - if count = @user.ideas.count and count > 0
         %li= n_('Has submitted an idea', 'Has submitted %{count} ideas', count) % { count:count }
       - if count = @user.vetted_ideas.count and count > 0
         %li= n_('Has vetted one idea', 'Has vetted %{count} ideas', count) % { count:count }
       -# the count.count below is due to some association wierdnees
-      - if count = @user.backed_ideas.count.count and count > 0
+      - if count = @user.backed_ideas.count and count > 0
         %li= n_('Is a backer of one idea', 'Is a backer of %{count} ideas', count) % { count:count }
       - if count = @user.notifications.unread.count and count > 0
         %li= n_('Has an unread notification', 'Has %{count} unread notifications', count) % { count:count }
@@ -43,7 +43,7 @@
       %i.icon-eye-close
       = _("Hide %{user}") % { user:@user.first_name }
 
-    = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.'), :'data-placement' => 'left', :'data-container' => '.container' do
+    = can_link_to user_path(@user), method: :delete, auth:[:destroy, @user], class: 'btn btn-block', data: { confirm:_('Are you really, really sure? We recommend that you only ever hide users.'), placement: 'left', container: '.container' }, title:_('Obliterate all of this user\'s data, including any idea they\'ve posted, comments written, endorsements cast, and so on. You should really just hide users, which prevents them from logging in or receiving emails.') do
       %i.icon-trash
       = _("Destroy %{user}") % { user:@user.first_name }
 

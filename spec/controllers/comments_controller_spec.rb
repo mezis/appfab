@@ -11,12 +11,14 @@ describe CommentsController do
 
   describe "#create" do
     context "when model is invalid" do
+      let(:data) {{ comment: { idea_id:idea.id, body:'' } }}
+    
       context '(html)' do
-        let(:perform) { post :create }
+        let(:perform) { post :create, data }
 
         it "redirects to idea list" do
           perform
-          response.should redirect_to(ideas_path)
+          response.should redirect_to(idea_path(idea, anchor:'new_comment'))
         end
 
         it "flashes" do
@@ -26,7 +28,7 @@ describe CommentsController do
       end
 
       context '(js)' do
-        let(:perform) { xhr :post, :create, comment:{ idea_id:idea.id, body:'' } }
+        let(:perform) { xhr :post, :create, data }
 
         it "mentions the error" do
           perform
@@ -36,7 +38,7 @@ describe CommentsController do
     end
 
     context "when model is valid" do
-      let(:data) { { comment: { body:'hello', idea_id:idea.id } }  }
+      let(:data) {{ comment: { body:'hello', idea_id:idea.id } }}
 
       share_examples_for 'comment creation' do
         it "creates a comment" do
@@ -56,16 +58,21 @@ describe CommentsController do
     end
   end
 
-  it "update action should redirect to idea when model is invalid" do
-    comment = Comment.make!
-    Comment.any_instance.stub(:valid? => false)
-    put :update, :id => comment.id
-    response.should redirect_to(idea_path(comment.idea))
-  end
+  describe '#update' do
+    let(:comment) { Comment.make! }
+    let(:perform) { put :update, :id => comment, comment: { body: 'foobar' } }
 
-  it "update action should redirect to idea when model is valid" do
-    put :update, :id => Comment.make!
-    response.should redirect_to(idea_path(Comment.last.idea))
+    it "update action should redirect to idea when model is invalid" do
+      comment
+      Comment.any_instance.stub(:valid? => false)
+      perform
+      response.should redirect_to(idea_path(comment.idea))
+    end
+
+    it "update action should redirect to idea when model is valid" do
+      perform
+      response.should redirect_to(idea_path(comment.idea))
+    end
   end
 
   it "destroy action should destroy model and redirect to idea action" do

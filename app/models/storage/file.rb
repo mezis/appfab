@@ -1,6 +1,6 @@
 class Storage::File < ActiveRecord::Base
   self.table_name = 'storage_files'
-  attr_accessible :metadata, :accessed_at
+  # attr_accessible :metadata, :accessed_at
 
   has_many :chunks, class_name: 'Storage::Chunk', autosave: true, dependent: :delete_all
 

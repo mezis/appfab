@@ -53,7 +53,7 @@ module Traits::Idea::StarRating
         where('state BETWEEN ? AND ?', min_state, max_state).
         where('rating > ?', 0).
         by_impact.
-        value_of(:id).
+        pluck(:id).
         reverse
 
       group_size = (idea_ids.length / 5.0).ceil

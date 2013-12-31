@@ -37,7 +37,7 @@ class IdeaMoverService
   # creating it on the fly as a hidden user
   def user_in_account(user)
     login = user.login
-    other_user = @account.users.find_by_login_id(login.id)
+    other_user = @account.users.where(login_id: login.id).first
     return other_user unless other_user.nil?
     @account.users.create!(login:login, state:User.state_value(:hidden))
   end

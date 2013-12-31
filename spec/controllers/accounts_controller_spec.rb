@@ -28,7 +28,7 @@ describe AccountsController do
 
   it "create action should render new template when model is invalid" do
     Account.any_instance.stub(:valid? => false)
-    post :create
+    post :create, account: { name: 'test team' }
     response.should render_template(:new)
   end
 
@@ -45,12 +45,12 @@ describe AccountsController do
   it "update action should render edit template when model is invalid" do
     account = @current_user.account
     Account.any_instance.stub(:valid? => false)
-    put :update, :id => account.id
+    put :update, :id => account.id, account: { name: 'foo' }
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
-    put :update, :id => @current_user.account
+    put :update, :id => @current_user.account, account: { name: 'foo' }
     response.should redirect_to(account_url(assigns[:account]))
   end
 

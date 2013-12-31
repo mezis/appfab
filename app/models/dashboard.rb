@@ -56,7 +56,7 @@ class Dashboard
   end
 
   def comments_on_followed_ideas
-    follow_idea_ids = @user.bookmarked_ideas.value_of(:id)
+    follow_idea_ids = @user.bookmarked_ideas.pluck(:id)
     return [] if follow_idea_ids.empty?
     Comment.by_created_at.where(idea_id:follow_idea_ids).limit(block_size)
   end

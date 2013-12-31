@@ -6,7 +6,7 @@
       = _('Things have been happening in team %{name}.') % { name:@user.account.name }
       %br/
       = _('Here\'s a digest of the most recent notifications you missed...')
-    %p= _('See you soon on %{appname}!').html_safe % { appname:link_to(configatron.app_name, root_url)  }
+    %p= _('See you soon on %{appname}!') % { appname:link_to(configatron.app_name, root_url)  }
 
   %ul.block-list
     - @notifications.each_with_index do |notification, index|

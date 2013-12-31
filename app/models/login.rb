@@ -13,9 +13,9 @@ class Login < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :accounts, through: :users
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :provider, :uid
-  attr_accessible :first_name, :last_name
+  # attr_accessible :email, :password, :password_confirmation, :remember_me
+  # attr_accessible :provider, :uid
+  # attr_accessible :first_name, :last_name
 
   validates_presence_of :first_name
 

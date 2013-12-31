@@ -4,7 +4,7 @@
   %i.icon-users
   = _("You're not part of a team yet!")
 
-%p= _('You need to be attached to an account before you can access most of %{appfab}.').html_safe % { appfab:configatron.app_name }
+%p= _('You need to be attached to an account before you can access most of %{appfab}.') % { appfab:configatron.app_name }
 %p= _('You can ask your account owner for an invite... and in the meantime why not create a team of your own!')
 
 = render 'accounts/form', account:Account.new(name: "#{current_login.first_name}'s")

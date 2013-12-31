@@ -9,4 +9,4 @@
         %i.icon-info-sign
       = _("We're only showing you %{count} of a total %{total_count} ideas. Don't worry, the others haven't been lost—It's just they're probably not that important if they haven't bubbled up the list.") % { count:@ideas.size, total_count:@ideas.total_entries }
       %br/
-      = _("Remember that you can find your %{own_ideas} and your %{bookmarked_ideas} easily.").html_safe % { own_ideas:(link_to _('own ideas'), ideas_path(view:'cards', filter:'author')), bookmarked_ideas:link_to(_('bookmarked ideas'), ideas_path(view:'cards', angle:'followed')) }
+      = _("Remember that you can find your %{own_ideas} and your %{bookmarked_ideas} easily.") % { own_ideas:(link_to _('own ideas'), ideas_path(view:'cards', filter:'author')), bookmarked_ideas:link_to(_('bookmarked ideas'), ideas_path(view:'cards', angle:'followed')) }

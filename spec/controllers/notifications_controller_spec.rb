@@ -62,11 +62,11 @@ describe NotificationsController do
     let(:notification) { model.make!(options) }
 
     context '(html)' do
-      let(:params) { Hash.new }
+      let(:params) {{ notification: { unread: false } }}
       let(:perform) { put :update, params }
 
       it "redirects when model is invalid" do
-        params.merge! id:notification.id
+        params.merge! id: notification.id
         Notification::Base.any_instance.stub(:valid? => false)
         perform
         response.should redirect_to(notifications_path)
@@ -74,7 +74,7 @@ describe NotificationsController do
       end
 
       it "redirects when model is valid" do
-        params.merge! id:notification.id
+        params.merge! id: notification.id
         perform
         response.should redirect_to(notifications_path)
         flash[:success].should_not be_blank
@@ -82,15 +82,15 @@ describe NotificationsController do
 
       it "allows 'all' as id" do
         n1,n2 = [1,2].map { Notification::Base.make! recipient:@current_user, unread:true }
-        put :update, id: 'all', notification: { unread:false }
+        params.merge! id: 'all'
+        perform
         n1.reload.should_not be_unread
         n2.reload.should_not be_unread
       end
 
-      it "bails when any parameter but 'id' and 'unread' are passed" do
-        params.merge! id:notification.id, notification:{ recipient_id:123 }
-        expect { perform }.
-        to raise_exception(ActiveModel::MassAssignmentSecurity::Error)
+      it "ignore any parameter but 'id' and 'unread' are passed" do
+        params.merge! id: notification.id, notification: { recipient_id: 123 }
+        expect { perform }.not_to raise_exception
       end
     end
 

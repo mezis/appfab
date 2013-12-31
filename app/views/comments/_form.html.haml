@@ -5,4 +5,4 @@
       .controls.clearfix
         = f.text_area :body, rows: 2, placeholder: _('Take part in the discussion, type your comments here!')
         = errors_for_field(comment, :body, class:'pull-right')
-      = f.submit _('Post comment'), class:'btn btn-small pull-right', disable_with:_('Posting...')
+      = f.submit _('Post comment'), class:'btn btn-small pull-right', data: { disable_with: _('Posting...') }

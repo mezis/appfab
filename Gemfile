@@ -1,7 +1,7 @@
 source ENV.fetch('GEM_SOURCE','https://rubygems.org')
 ruby '2.0.0'
 
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 4.0.0'
 
 # webservers
 gem 'rainbows', group: :production
@@ -37,16 +37,13 @@ gem 'configatron'
 # syntax sugar
 gem 'andand'
 
-# Access attribute values directly, without instantiating ActiveRecord objects
-# (because Rails' #pluck breaks a lot with joins)
-gem 'valium'
-
 # Property API for plain classes (used for form objects)
 gem 'virtus'
 
 # activerecord extensions
 gem 'state_machine', require:false
-gem 'default_value_for'
+gem 'default_value_for', git: 'https://github.com/FooBarWidget/default_value_for.git', branch: 'rails4'
+gem 'rails-observers'
 
 # attached files & image manipulation
 gem 'dragonfly'
@@ -94,20 +91,17 @@ gem 'rails_12factor', group: :production
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails'
+gem 'sass-rails'
 
-  # styling
-  gem 'compass-rails'
-  gem 'bootstrap-sass'
-  gem "font-awesome-rails"
-  gem 'animation'
+# styling
+gem 'sass', '~> 3.2.0'
+gem 'compass-rails'
+gem 'bootstrap-sass'
+gem "font-awesome-rails"
+gem 'animation'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
+# asset minification
+gem 'uglifier', '>= 1.0.3'
 
 
 group :development do

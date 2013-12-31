@@ -86,7 +86,7 @@ class IdeasController < ApplicationController
   end
 
   def create
-    @idea = current_user.ideas.new(params[:idea])
+    @idea = current_user.ideas.new(idea_params)
     @idea.account = current_account
     if @idea.save
       session[:just_submitted] = true
@@ -104,13 +104,13 @@ class IdeasController < ApplicationController
     @idea = find_idea(params[:id])
 
     # specifics on account change
-    if new_account_id = params[:idea].andand.delete(:account_id)
+    if new_account_id = idea_params.delete(:account_id)
       update_account @idea, new_account_id
       return
     end
 
     # specifics on state changes
-    if state = params[:idea].andand.delete(:state)
+    if state = idea_params.delete(:state)
       # auto-set product manager when picking
       if state == IdeaStateMachine.state_value(:picked)
         @idea.product_manager = current_user
@@ -125,9 +125,9 @@ class IdeasController < ApplicationController
       IdeaStateMachineService.new(@idea).run
     end
 
-    if @idea.update_attributes(params[:idea])
+    if @idea.update_attributes(idea_params)
       current_user.bookmarked_ideas.add!(@idea)
-      redirect_to @idea, notice:_("Successfully updated idea.")
+      redirect_to @idea, notice: _("Successfully updated idea.")
     else
       session.delete(:just_submitted)
       render :action => 'edit'
@@ -137,7 +137,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea = Idea.find(params[:id])
     @idea.destroy
-    redirect_to ideas_url, :notice => "Successfully destroyed idea."
+    redirect_to ideas_url, notice: _("Successfully destroyed idea.")
   end
 
 
@@ -167,7 +167,7 @@ class IdeasController < ApplicationController
 
 
   def find_idea(id)
-    idea = Idea.where(account_id:current_login.accounts.value_of(:id)).find(id)
+    idea = Idea.where(account_id:current_login.accounts.pluck(:id)).find(id)
     self.current_account = idea.account
     return idea
   end
@@ -255,23 +255,23 @@ class IdeasController < ApplicationController
 
   # map state names to values
   def map_state_names
-    return unless state = params[:idea].andand[:state]
-    params[:idea][:state] = IdeaStateMachine.state_value(state)
+    return unless state = idea_params[:state]
+    idea_params[:state] = IdeaStateMachine.state_value(state)
   end
 
 
   # map 'none' category to the valid nil
   def map_no_category
-    return unless category = params[:idea].andand[:category]
+    return unless category = idea_params[:category]
     return unless category == 'none'
-    params[:idea][:category] = nil
+    idea_params[:category] = nil
   end
 
 
   # replace user id with a user instance
   def map_product_manager_id
-    return unless product_manager_id = params[:idea].andand.delete(:product_manager_id)
-    params[:idea][:product_manager] = current_account.users.find(product_manager_id)
+    return unless product_manager_id = idea_params.delete(:product_manager_id)
+    idea_params[:product_manager] = current_account.users.find(product_manager_id)
   end
 
 
@@ -279,5 +279,11 @@ class IdeasController < ApplicationController
     return if can?(:create, Idea)
     flash[:error] = not_authorized_message(:create, Idea)
     redirect_back_or_to ideas_path
+  end
+
+  def idea_params
+    @_idea_params ||= params.
+      require(:idea).
+      permit(:account_id, :state, :product_manager_id, :title, :problem, :solution, :metrics, :design_size, :development_size, :category)
   end
 end

@@ -8,7 +8,7 @@ class VotesController < ApplicationController
 
 
   def create
-    @vote = @subject.votes.new(params[:vote])
+    @vote = @subject.votes.new(vote_params)
     @vote.user = current_user
     authorize! :vote, @subject if @vote.valid?
 
@@ -47,9 +47,13 @@ class VotesController < ApplicationController
     end
   end
 
+  def vote_params
+    params.fetch(:vote, {}).permit(:up)
+  end
+
   def parse_up_param
-    return unless direction = params[:vote].andand[:up]
-    params[:vote][:up] = case direction
+    return unless direction = vote_params[:up]
+    vote_params[:up] = case direction
       when /true/i  then true
       when /false/i then false
       else raise ArgumentError

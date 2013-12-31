@@ -68,11 +68,10 @@ AppFab::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
   config.roadie.provider = Roadie::FilesystemProvider.new('/assets', Rails.root.join('public', 'assets'))
+
+  # Do not load the world
+  config.eager_load = false
 
   # Load dependencies also from rake tasks
   # http://stackoverflow.com/questions/4300240/rails-3-rake-task-cant-find-model-in-production

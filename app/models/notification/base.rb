@@ -2,7 +2,7 @@
 class Notification::Base < ActiveRecord::Base
   self.table_name = 'notifications'
 
-  attr_accessible :recipient, :subject, :body, :unread
+  # attr_accessible :recipient, :subject, :body, :unread
 
   belongs_to :recipient, :class_name => 'User'
   belongs_to :subject, :polymorphic => true
@@ -16,8 +16,8 @@ class Notification::Base < ActiveRecord::Base
     where(type: (Notification.const_get type_symbol.to_s.camelize))
   }
 
-  scope :unread, where(unread:true)
-  scope :by_most_recent, order('created_at DESC')
+  scope :unread, -> { where(unread:true) }
+  scope :by_most_recent, -> { order('created_at DESC') }
 
   # makes sure all subclasses render through the "main" partial
   def to_partial_path

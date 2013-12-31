@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Vetting < ActiveRecord::Base
-  attr_accessible :user, :idea
+  # attr_accessible :user, :idea
 
   belongs_to :user
   belongs_to :idea

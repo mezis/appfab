@@ -4,9 +4,9 @@ require 'set'
 class User::Role < ActiveRecord::Base
   Names = Set.new(%i(submitter product_manager architect developer designer benevolent_dictator account_owner))
 
-  attr_accessible :user, :name, :user_id
+  # attr_accessible :user, :name, :user_id
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :roles
   validates_presence_of   :user
   validates_presence_of   :name
   validates_inclusion_of  :name, in: Names
@@ -16,7 +16,7 @@ class User::Role < ActiveRecord::Base
   module UserMethods
     def self.included(by)
       by.class_eval do
-        has_many :roles, class_name: 'User::Role', :dependent => :destroy
+        has_many :roles, class_name: 'User::Role', :dependent => :destroy, inverse_of: :user
 
         scope :playing, lambda { |*role_names|
           joins(:roles).where('user_roles.name' => role_names).group('users.id')
@@ -44,13 +44,13 @@ class User::Role < ActiveRecord::Base
     end
 
     def role_named(role_name)
-      self.roles.all.find { |r| r.name.to_sym == role_name }
+      self.roles.to_a.find { |r| r.name.to_sym == role_name }
     end
 
     protected
 
     def cached_roles
-      @cached_roles ||= Set.new(self.roles.value_of(:name).map(&:to_sym))
+      @cached_roles ||= Set.new(self.roles.pluck(:name).map(&:to_sym))
     end
   end
 

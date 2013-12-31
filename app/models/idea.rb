@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
+  # attr_accessible :title, :problem, :solution, :metrics, :deadline, :author, :design_size, :development_size, :rating, :category, :product_manager, :active_at
 
   belongs_to :author, :class_name => 'User'
   belongs_to :account
@@ -38,12 +38,7 @@ class Idea < ActiveRecord::Base
   before_save :update_active_at
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
-  scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.value_of(:id)) }
-  scope :backed_by, lambda { |user| joins(:votes).where('votes.user_id = ?', user.id) }
-  scope :not_backed_by, lambda { |user| 
-    backed_ideas_ids = user.backed_ideas.value_of(:id)
-    backed_ideas_ids.any? ? where('ideas.id NOT IN (?)', backed_ideas_ids) : scoped
-  }
+  scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.pluck(:id)) }
 
   scope :with_state, lambda { |*states|
     where('ideas.state IN (?)', IdeaStateMachine.state_values(*states))
@@ -74,7 +69,7 @@ class Idea < ActiveRecord::Base
   end
 
   def backed_by?(user)
-    backers.value_of(:id).include?(user.id)
+    backers.pluck(:id).include?(user.id)
   end
 
 
@@ -148,7 +143,25 @@ class Idea < ActiveRecord::Base
   end
 
   def self.backed_by(user)
-    joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
+    # this originally looked like:
+    #   joins(:votes).where('votes.user_id = ?', user.id).group('ideas.id')
+    # the new code works because of the uniqueness clause on votes (no double
+    # votes)
+    joins(:votes).where('votes.user_id = ?', user.id)
+  end
+
+  def self.not_backed_by(user)
+    ideas = self.arel_table
+    votes = Vote.arel_table.alias('backings')
+    joins_sql = ideas.
+      join(votes, Arel::Nodes::OuterJoin).
+      on(
+        votes[:subject_type].eq(self.name),
+        votes[:subject_id]  .eq(ideas[:id]),
+        votes[:user_id]     .eq(user.id)).
+      join_sources
+
+    joins(joins_sql).where(votes[:user_id].eq(nil))
   end
 
 

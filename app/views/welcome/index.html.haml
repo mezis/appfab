@@ -33,7 +33,7 @@
       .muted
         %p= _('Everyone gets a say. All team members can submit their ideas, and all team memebrs can discuss each idea until it is explicit and understandable.')
         %p= _('Architects and product managers then estimate the effort, and if the idea is properly formatted, vet it.')
-        %p= _('As users contribute, they will gain %{karma} points... or lose them if they act as trolls.').html_safe % { karma: user_karma_symbol }
+        %p= _('As users contribute, they will gain %{karma} points... or lose them if they act as trolls.') % { karma: user_karma_symbol }
 
     .span4
       %h4<>
@@ -44,7 +44,7 @@
       .muted
         %p= _('Once an idea is vetted, the whole team gets give an opinion: good ideas will bubble up rapidly.')
         %p= _('Some caveat apply, of course! You can make your product team a democracy by giving everyone\'s endorsements the same weight, or increase that weight for stakeholders.')
-        %p= _('To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea.').html_safe % { karma: user_karma_symbol }
+        %p= _('To make sure voting is carefully considered, users have to spend some of their %{karma} to back an idea.') % { karma: user_karma_symbol }
         %p= _('These mechanics make sure that the proverbial needle will emerge from your team\'s barrage of ideas.')
 
     .span4

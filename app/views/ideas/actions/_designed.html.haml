@@ -7,7 +7,7 @@
         = _('Approve')
   - elsif can?(:force_approve, idea)
     %li
-      = link_to idea_path(idea, idea: { state: 'approved' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as designed on behalf of the Benevolent Dictator, who will be notified.'), confirm:idea_force_action_confimation, data: { placement: 'left' } do
+      = link_to idea_path(idea, idea: { state: 'approved' }, force:true), method: :put, class: 'btn btn-block', title: s_('Tooltip|Mark the idea as designed on behalf of the Benevolent Dictator, who will be notified.'), data: { confirm:idea_force_action_confimation, placement: 'left' } do
         %i.icon-ok-circle
         = _('Approve')
   - else

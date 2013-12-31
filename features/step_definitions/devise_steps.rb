@@ -17,7 +17,7 @@ Given /^an? (.*) named "(\w+)"$/ do |role, first_name|
 end
 
 Given /^I sign in as "(\w+)"$/ do |first_name|
-  login = Login.find_by_first_name(first_name)
+  login = Login.where(first_name: first_name).first
   visit '/session/sign_out'
   visit '/session/sign_in'
   click_link 'Sign in with Developer'

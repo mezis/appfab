@@ -32,7 +32,7 @@
         %p
           = _('Please consider your decision to endorse an idea carefully.')
           %br/
-          = _('You can only back so many ideas, as each endorsement will cost you %{count} %{karma}.').html_safe % { count: -§.karma.vote, karma:user_karma_symbol }
+          = _('You can only back so many ideas, as each endorsement will cost you %{count} %{karma}.') % { count: -§.karma.vote, karma:user_karma_symbol }
           %br/
           = _('You can withdraw your endorsement within 15 minutes of casting it if you\'re having second thoughts, but after that point, it will be final!')
 

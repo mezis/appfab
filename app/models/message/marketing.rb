@@ -3,7 +3,7 @@ class Message::Marketing < ActiveRecord::Base
 
   include Notification::Base::CanBeSubject
 
-  attr_accessible :link, :summary
+  # attr_accessible :link, :summary
   store :payload, accessors: [ :summary, :body ]
 
   default_values summary:proc { Hash.new }
@@ -20,7 +20,7 @@ class Message::Marketing < ActiveRecord::Base
       else raise ArgumentError
     end
 
-    existing_recipient_ids = self.notified_users.value_of(:id)
+    existing_recipient_ids = self.notified_users.pluck(:id)
     scope = scope.excluding_ids(existing_recipient_ids) if existing_recipient_ids.any?
     
     transaction do
