@@ -5,6 +5,13 @@
 require File.expand_path('../config/application', __FILE__)
 
 require 'rake_ext/raven'
-require 'gettext_i18n_rails/tasks'
+
+if Rails.env.development?
+  begin
+    require 'gettext_i18n_rails/tasks'
+  rescue LoadError => e
+    warn 'I18n tasks may be unavailable.'
+  end
+end
 
 AppFab::Application.load_tasks
