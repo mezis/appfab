@@ -17,11 +17,11 @@
     - if is_image
       &nbsp;
     - else
-      %i.icon-file
+      %i.fa.fa-file
       = attachment.name.gsub(/.*\./,'').upcase
   - if show_title
     .name
       = attachment.name.gsub(/(.*)\..*/,'\1')
   - if can?(:destroy, attachment)
     = link_to attachment, method: :delete, remote:true, class:'af-corner-link af-mutable', data: { confirm: _('Are you sure?') } do
-      %i.icon-trash
+      %i.fa.fa-trash-o

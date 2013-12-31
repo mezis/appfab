@@ -28,7 +28,7 @@
         - if title_link
           = link_to idea_path(idea), title: s_('Tooltip|Expand Idea') do
             %span= idea.title
-            %i.icon-arrow-right
+            %i.fa.fa-arrow-right
         - else
           = idea.title
 
@@ -54,15 +54,15 @@
         %ul
           %li
             = link_to idea_path(idea, anchor: 'comments'), title: s_('Tooltip|Show comments') do
-              %i.icon-comments-alt<>
+              %i.fa.fa-comments-o<>
               - if (count = idea.comments_count) > 0
                 = count
           %li.separator
           %li
             = can_link_to edit_idea_path(idea), auth:[:update, idea], title: s_('Tooltip|Edit Idea') do
-              %i.icon-pencil<>
+              %i.fa.fa-pencil<>
           %li
             = can_link_to idea, data: { confirm: _('Are you sure?') }, method: :delete, auth:[:destroy,idea], title: s_('Tooltip|Delete Idea') do
-              %i.icon-trash<>
+              %i.fa.fa-trash-o<>
           %li
             = render 'bookmark_link', idea:idea

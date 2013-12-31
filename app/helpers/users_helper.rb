@@ -26,7 +26,7 @@ module UsersHelper
   end
 
   def user_karma_symbol
-    %{<i class='icon-leaf karma'></i>}.html_safe
+    %{<i class='fa fa-leaf karma'></i>}.html_safe
   end
 
   def user_random_greeting(user)

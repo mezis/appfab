@@ -7,17 +7,17 @@
     - if can?(:abort, idea)
       %li
         = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Abort this idea. Use with caution and please leave a comment mentionning why you\'re aborting this idea.<br/>Note that all endorsements and vettings will be destroyed, and %{karma_icon} readjusted accordingly.') % { karma_icon: user_karma_symbol }, data: { confirm: s_("Popup|Are you sure? This will cause all vettings and endorsements for this idea to be destroyed."), placement: 'left' } do
-          %i.icon-fast-backward
+          %i.fa.fa-fast-backward
           = _('Abort')
     - else
       %li
         %a.btn.btn-block.disabled{ title: _('Sorry, only a benevolent dictator can sign off a staged idea.'), data: { placement: 'left' } }
-          %i.icon-fast-backward
+          %i.fa.fa-fast-backward
           = _('Abort')
   - else
     %li
       %a.btn.btn-block.disabled{ title: s_('Tooltip|This idea cannot be aborted.'), data: { placement: 'left' } }
-        %i.icon-fast-backward
+        %i.fa.fa-fast-backward
         = _('Abort')
 
 

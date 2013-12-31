@@ -1,9 +1,9 @@
 # encoding: UTF-8
 module IdeasHelper
   IdeaIcons = {
-    bug:     'icon-fire',
-    chore:   'icon-bar-chart',
-    feature: 'icon-beaker',
+    bug:     'fa fa-fire',
+    chore:   'fa fa-bar-chart',
+    feature: 'fa fa-beaker',
   }
 
   def idea_kind_select_options
@@ -88,9 +88,9 @@ module IdeasHelper
 
   def idea_view_icon(view)
     case view
-    when 'cards' then 'icon-list-alt'
-    when 'board' then 'icon-columns'
-    when 'list'  then 'icon-table'
+    when 'cards' then 'fa fa-list-alt'
+    when 'board' then 'fa fa-columns'
+    when 'list'  then 'fa fa-table'
     else raise ArgumentError
     end
   end

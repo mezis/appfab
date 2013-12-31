@@ -4,7 +4,7 @@
     %li{ class:field }
       .btn-group.ht-as-table
         .btn.disabled
-          %i{ class: "icon-#{icon}" }
+          %i{ class: "fa fa-#{icon}" }
         - 1.upto(4) do |size|
           - if current_user.plays?(role)
             - if idea.send(field) == size
@@ -31,20 +31,20 @@
     - if vetting = current_user.vettings.where(idea_id: idea.id).first
       %li
         = can_link_to idea_vetting_path(idea, vetting), auth:[:destroy, vetting], method: :delete, class: 'btn btn-block', title: s_('Tooltip|By pressing this you cancel your vetting of this story. You will lose %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
-          %i.icon-check
+          %i.fa.fa-check
           = _('Cancel your vetting')
     - else
       %li
         = link_to idea_vettings_path(idea), method: :post, class: 'btn btn-primary btn-block', title: s_('Tooltip|By pressing this you are confirming the idea is properly formatted and clearly explained.<br/>At this stage you opinion on the idea should not be taken into account.<br/>Vetting will grant you %{points} %{karma_icon}.') % { points: §.karma.vetting, karma_icon: user_karma_symbol }, data: { placement: 'left' } do
-          %i.icon-check
+          %i.fa.fa-check
           = _('Vet this idea')
   - else
     %li
       %a.btn.btn-block.disabled{ title: s_('Tooltip|Only architects and product managers can vet ideas.'), data: { placement: 'left' } }
-        %i.icon-check
+        %i.fa.fa-check
         = _('Vet this idea')
 - else
   %li
     %a.btn.btn-block.disabled{ title: idea_unavailable_action_tooptip(idea,:vetted), data: { placement: 'left' } }
-      %i.icon-check
+      %i.fa.fa-check
       = _('Vet this idea')

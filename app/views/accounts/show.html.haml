@@ -12,10 +12,10 @@
     %p= _('They have a total of %{count} %{karma_symbol}.') % { count: current_account.users.sum(:karma), karma_symbol:user_karma_symbol }
 
     = can_link_to edit_account_path(@account), auth:[:update, @account], class:'btn btn-block' do
-      %i.icon-pencil
+      %i.fa.fa-pencil
       = _("Edit")
     = can_link_to @account, auth:[:destroy, @account], data: { confirm: 'Are you sure?' }, method: :delete, class:'btn btn-block' do
-      %i.icon-trash
+      %i.fa.fa-trash-o
       = _("Destroy")
 
     %hr/
