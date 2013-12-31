@@ -1,27 +1,25 @@
+language: ruby
+cache: 
+  directories:
+    - vendor/bundle
+
 services:
   - memcache
-bundler_args: --path=~/.bundle
 before_install:
-  - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-  - gem install bundler bundle_cache
-  - bundle_cache_install
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 before_script:
   - psql -c 'create database appfab_test;' -U postgres
   - cp config/database-travis.yml config/database.yml
   - bundle exec rake db:migrate
-after_script:
-  - bundle_cache
 rvm:
   - 2.0.0
 env:
   global:
     - RAILS_ENV=test
-    - AWS_S3_BUCKET=bundle-cache-us
-    - BUNDLE_ARCHIVE=appfab
-    - secure: HdqU0O47txQMZhQy2aXEQ514g7Bh01XRgOvINI+8+rCK+176rARzux0NIzVUaPYODcEvsAK/7PV6PQvFpLJ6GaA9QngASWWbNCF3Za/wZDjbUSyP73FSszfXzQK1QfHvs/vH1nPt8Ul7L4nnU2Z2dpoXXPvtB/HCnszpB6mlNdw=
   matrix:
     - BUILD_TARGET=spec
     - BUILD_TARGET=cucumber
-script: bundle exec rake $BUILD_TARGET
+script:
+  - bundle exec rake $BUILD_TARGET
+
