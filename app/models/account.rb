@@ -2,7 +2,7 @@
 class Account < ActiveRecord::Base
   # attr_accessible :name, :auto_adopt, :domain, :categories
 
-  has_many :users, :dependent => :destroy
+  has_many :users, inverse_of: :account, :dependent => :destroy
   has_many :ideas
 
   validates_presence_of :name

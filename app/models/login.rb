@@ -10,7 +10,7 @@ class Login < ActiveRecord::Base
     :trackable, :validatable,
     :omniauthable
 
-  has_many :users, dependent: :destroy
+  has_many :users,    inverse_of: :login, dependent: :destroy
   has_many :accounts, through: :users
 
   # attr_accessible :email, :password, :password_confirmation, :remember_me
