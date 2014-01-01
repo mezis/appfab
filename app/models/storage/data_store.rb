@@ -1,7 +1,7 @@
 class Storage::DataStore
 
   # +temp_object+ should respond to +data+ and +meta+
-  def store(temp_object, opts={})
+  def write(temp_object, opts={})
     ::Storage::File.transaction do
       file = ::Storage::File.create!(metadata: temp_object.meta)
       file.data = temp_object.data
@@ -12,10 +12,12 @@ class Storage::DataStore
     end
   end
 
-  def retrieve(uid)
+  def read(uid)
     file = ::Storage::File.find(uid.to_i)
     file.update_attributes!(accessed_at: Time.now)
     [ file.data, file.metadata ]
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 
   def destroy(uid)

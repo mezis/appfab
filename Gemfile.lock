@@ -116,7 +116,7 @@ GEM
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
-    dragonfly (0.9.15)
+    dragonfly (1.0.2)
       multi_json (~> 1.0)
       rack
     em-http-request (1.0.3)

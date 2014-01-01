@@ -1,10 +1,11 @@
 class Attachment < ActiveRecord::Base
+  extend Dragonfly::Model
   # attr_accessible :mime_type, :size, :name, :owner, :uploader, :file
 
   belongs_to :owner, :polymorphic => true, :counter_cache => true
   belongs_to :uploader, :class_name => 'User'
 
-  file_accessor :file
+  dragonfly_accessor :file
 
   delegate :format, to: :file
 
