@@ -7,8 +7,8 @@
   large = 180
   is_image = attachment.mime_type =~ /^image/
 
-  image_small = is_image && attachment.file.thumb("#{size}x#{size}#").jpg.url
-  image_large = is_image && attachment.file.thumb("#{large}x#{large}#").jpg.url
+  image_small = is_image && attachment.file.thumb("#{size}x#{size}#").encode('jpg').url
+  image_large = is_image && attachment.file.thumb("#{large}x#{large}#").encode('jpg').url
 
   attachment_title = "%s (%s)" % [ attachment.name, number_to_human_size(attachment.size) ]
 

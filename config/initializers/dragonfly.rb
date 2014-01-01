@@ -1,33 +1,20 @@
 require 'dragonfly'
 
-Dragonfly[:files].tap do |dragonfly_app|
-  dragonfly_app.configure_with(:imagemagick)
-  dragonfly_app.configure_with(:rails)
-  dragonfly_app.define_macro(ActiveRecord::Base, :file_accessor)
-  dragonfly_app.datastore = Storage::DataStore.new
-  dragonfly_app.configure do |config|
-    config.identify_command = "identify -quiet"
-  end
+# Configure
+Dragonfly.app.configure do
+  plugin :imagemagick,
+    identify_command: 'identify -quiet'
+
+  protect_from_dos_attacks true
+  secret '07b23dcdfc0cc6f7ed12540ffdb1e74adc0fd914331c8936881edd9d4b5edd74'
+
+  url_format '/media/:job/:name'
+
+  datastore Storage::DataStore.new
 end
 
-memcached_url = case Rails.env
-when 'development'
-  'memcached://127.0.0.1:11211/rack-cache'
-when 'test'
-  'heap:/'
-else
-  "memcached://%<user>s:%<password>s@%<host>s/rack-cache" % {
-    host:     ENV['MEMCACHIER_SERVERS'].split(',').first,
-    user:     ENV['MEMCACHIER_USERNAME'],
-    password: ENV['MEMCACHIER_PASSWORD']
-  }
-end
+# Logger
+Dragonfly.logger = Rails.logger
 
-AppFab::Application.config.middleware.insert 0, 'Rack::Cache', {
-  :metastore   => memcached_url,
-  :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body"),
-  :verbose     => false,
-}
-
-AppFab::Application.config.middleware.insert_after 'Rack::Cache', 
-  'Dragonfly::Middleware', :files
+# Mount as middleware
+AppFab::Application.config.middleware.use Dragonfly::Middleware
