@@ -1,4 +1,5 @@
 require 'dragonfly'
+require 'dragonfly-activerecord/store'
 
 # Configure
 Dragonfly.app.configure do
@@ -10,7 +11,7 @@ Dragonfly.app.configure do
 
   url_format '/media/:job/:name'
 
-  datastore Storage::DataStore.new
+  datastore Dragonfly::ActiveRecord::Store.new
 end
 
 # Logger

@@ -47,6 +47,7 @@ gem 'rails-observers'
 
 # attached files & image manipulation
 gem 'dragonfly'
+gem 'dragonfly-activerecord'
 gem 'fineuploader-rails'
 
 # caching, at the Rack level
