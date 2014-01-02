@@ -119,6 +119,8 @@ GEM
     dragonfly (1.0.2)
       multi_json (~> 1.0)
       rack
+    dragonfly-activerecord (0.0.1)
+      activerecord (>= 3.2.6)
     em-http-request (1.0.3)
       addressable (>= 2.2.3)
       cookiejar
@@ -454,6 +456,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   dragonfly
+  dragonfly-activerecord
   faker
   fineuploader-rails
   font-awesome-rails
