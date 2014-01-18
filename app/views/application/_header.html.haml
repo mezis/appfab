@@ -22,6 +22,7 @@
             %a{href: path, title: s_('Tooltip|Show stories you are following'), :'data-placement' => 'bottom'}
               %i.fa.fa-bookmark-o
               %span= _('Bookmarks')
+          %li= render 'search'
 
         %ul.nav.pull-right#current_user
           - if current_account
