@@ -13,6 +13,8 @@ AppFab::Application.routes.draw do
     resources :attachments, only: [:create, :destroy, :show]
   end
 
+  get '/search', controller: :search, action: :index
+
   resources :comments do
     resources :votes, only: [:create, :destroy]
     resources :attachments, only: [:create, :destroy, :show]

@@ -1,0 +1,4 @@
+= form_for(@search || Search.new, method: :get, html: { class: 'form-search' }) do |f|
+  .input-append
+    = f.text_field :query, class: 'input-medium search-query', placeholder: 'Search'
+    = f.submit 'Go', class: 'btn'

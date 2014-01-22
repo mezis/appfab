@@ -101,6 +101,8 @@ gem 'animation'
 # asset minification
 gem 'uglifier', '>= 1.0.3'
 
+# Search
+gem 'textacular', '~> 3.0'
 
 group :development do
   # better generators

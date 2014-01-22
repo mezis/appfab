@@ -14,7 +14,7 @@
   .idea.idea-maxi.af-drop-hilite{ class:classes }
     
     .meta.top.af-mutable
-      = render 'idea_rating', idea:idea
+      = render 'ideas/idea_rating', idea:idea
       .category.muted.pull-left.pull-left-spaced
         = idea.category || _('No category')
       .state.muted.pull-right.pull-right-spaced{ title: s_('Tooltip|The current progress on this idea'), :'data-container' => '.container' }<
@@ -48,7 +48,7 @@
           != pipeline_render idea.metrics
 
     .meta.bottom.af-mutable
-      = render 'idea_people', idea:idea
+      = render 'ideas/idea_people', idea:idea
 
       .actions.pull-right
         %ul
@@ -65,4 +65,4 @@
             = can_link_to idea, data: { confirm: _('Are you sure?') }, method: :delete, auth:[:destroy,idea], title: s_('Tooltip|Delete Idea') do
               %i.fa.fa-trash-o<>
           %li
-            = render 'bookmark_link', idea:idea
+            = render 'ideas/bookmark_link', idea:idea
