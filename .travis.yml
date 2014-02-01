@@ -3,16 +3,22 @@ services:
 before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+install:
+  - ./rebund/run download
   - gem update bundler
+  - bundle install --path vendor/bundle
 before_script:
   - psql -c 'create database appfab_test;' -U postgres
   - cp config/database-travis.yml config/database.yml
   - bundle exec rake db:migrate
+after_script:
+  - ./rebund/run upload
 rvm:
   - 2.1.0
 env:
   global:
     - RAILS_ENV=test
+    - secure: "HFtHThHDSBRB0h/OhszRAoaYM0hvmD/2kS2rhDMzF7Vo3qFu0vFSRX06hWGSUUuZQSju+FP7BI6DwQAF8Ff6j7G378+JVgCTCcB1urn5xZi6w2EdIqfF2HWzBwQDB1Ss6OEK068nNw6J44+LRG/Y4t859wWOVUxOSBdWVyLB0fg="
   matrix:
     - BUILD_TARGET=spec
     - BUILD_TARGET=cucumber
