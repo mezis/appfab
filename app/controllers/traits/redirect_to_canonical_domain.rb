@@ -10,7 +10,6 @@ module Traits::RedirectToCanonicalDomain
 
   def redirect_to_canonical_domain
     return unless request.method == 'GET'
-    return if Rails.env.test? # FIXME: this should not be necessary
     return if request.host == ENV['APP_DOMAIN']
 
     uri = URI.parse(request.url)

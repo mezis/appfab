@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Traits::RedirectToHttps, :type => :controller do
-  controller do
+  controller(ActionController::Base) do
     include Traits::RedirectToHttps
 
     def index
