@@ -109,10 +109,11 @@ group :development do
   gem 'nifty-generators',        require:false
 
   # debugging
-  gem 'pry',                     require:false
-  gem 'pry-nav',                 require:false
-  gem 'pry-doc',                 require:false
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-doc'
   gem 'pry-rails'
+  gem 'pry-remote'
   gem 'ruby-prof',               require:false
 
   # tdd

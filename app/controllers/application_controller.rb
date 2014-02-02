@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include Traits::RedirectToCanonicalDomain
   include Traits::RedirectToHttps
   include Traits::RenderUjs
   include Traits::FlashesInHeaders
