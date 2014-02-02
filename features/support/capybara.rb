@@ -57,3 +57,4 @@ def wait_for_page_load
   page.has_content? '' if Capybara.javascript_driver == :webkit
 end
 
+Capybara.default_host = "http://#{ENV['APP_DOMAIN']}"

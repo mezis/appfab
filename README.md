@@ -20,10 +20,18 @@ through voting, and follow them through their whole lifecycle.
 
 ### Setup
 
-AppFab requires `Ruby 2.0`, `Postgresql` and `MemCache` to be installed.
+AppFab requires `Ruby 2.1`, `PostgreSQL` and `memcached` to be installed.
 
 With those installed you can setup the application by running: `./bin/setup`
 
+Locally, it is preferable to use [Pow](http://pow.cx/) with to run Appfab, using
+the `.dev.io` local domain.  If you do not want to use pow, configure `.env`
+with `APP_DOMAIN=localhost`. This is because Appfab will make attempts to
+redirect you to a canonical domain.
+
+If you want to test SSL redirections, we recommend to use
+[tunnels](https://github.com/jugyo/tunnels) in conjunction with Pow--it's the
+simplest way to serve SSL locally.
 
 ### Usage
 
