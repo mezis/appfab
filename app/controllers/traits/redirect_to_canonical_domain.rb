@@ -12,6 +12,9 @@ module Traits::RedirectToCanonicalDomain
     return unless request.method == 'GET'
     return if request.host == ENV['APP_DOMAIN']
 
+    # simple way to ignore redirection when running capybara tests
+    return if request.host == '127.0.0.1' && Rails.env.test?
+
     uri = URI.parse(request.url)
     uri.host   = ENV['APP_DOMAIN']
     uri.scheme = 'https'
