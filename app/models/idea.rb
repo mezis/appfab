@@ -48,7 +48,7 @@ class Idea < ActiveRecord::Base
   }
 
   def self.limit_per_state(limit:10)
-    ids = values_of(:id, :state).group_by(&:last).values.map { |id_states| id_states.take(limit).map(&:first) }.flatten
+    ids = pluck(:id, :state).group_by(&:last).values.map { |id_states| id_states.take(limit).map(&:first) }.flatten
     where id:ids
   end
 
