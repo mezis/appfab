@@ -78,6 +78,25 @@ describe Idea do
     end
   end
 
+  describe '.limit_per_state' do
+    before { Idea.delete_all }
+    let(:result) { Idea.limit_per_state }
+
+    it 'returns a relation' do
+      result.should be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    it 'returns nothing when no ideas' do
+      result.should be_empty
+    end
+
+    it 'returns a mapping when ideas present' do
+      2.times { Idea.make!(state: 0) }
+      1.times { Idea.make!(state: 2) }
+      result.to_a.map(&:state).sort.should == [0, 0, 2]
+    end
+  end
+
   describe '(sort orders)' do
     before { Idea.delete_all }
 
