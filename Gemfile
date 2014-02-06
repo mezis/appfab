@@ -146,9 +146,6 @@ group :development do
   # measure test coverage
   gem 'coveralls',               require:false
 
-  # heroku interaction
-  gem 'taps',                    require:false
-
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
