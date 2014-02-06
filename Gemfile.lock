@@ -376,8 +376,6 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    sinatra (1.0)
-      rack (>= 1.0)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -390,11 +388,6 @@ GEM
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
     state_machine (1.2.0)
-    taps (0.3.24)
-      rack (>= 1.0.1)
-      rest-client (>= 1.4.0, < 1.7.0)
-      sequel (~> 3.20.0)
-      sinatra (~> 1.0.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     terminal-notifier-guard (1.5.3)
@@ -515,7 +508,6 @@ DEPENDENCIES
   sentry-raven
   sextant
   state_machine
-  taps
   terminal-notifier-guard
   textacular (~> 3.0)
   thin
