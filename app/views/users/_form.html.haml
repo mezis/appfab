@@ -14,5 +14,8 @@
       = f.label :voting_power
       = f.select :voting_power, options_for_select([['1',1],['2',2],['3',3],['5',5],['8',8]], user.voting_power)
   %p
+    = f.label :receives_digest, 'Daily digest'
+    = f.check_box :receives_digest
+  %p
     = link_to _('Cancel'), user, class: 'btn'
     = f.submit class: 'btn btn-primary'
