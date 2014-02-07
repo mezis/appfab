@@ -52,6 +52,24 @@ end
 Idea.blueprint(:submitted) do
 end
 
+Idea.blueprint(:draft) do
+end
+
+Idea.blueprint(:picked) do
+end
+
+Idea.blueprint(:approved) do
+end
+
+Idea.blueprint(:live) do
+end
+
+Idea.blueprint(:graveyarded) do
+end
+
+Idea.blueprint(:archived) do
+end
+
 Idea.blueprint(:sized) do
   development_size { 1 }
   design_size      { 2 }

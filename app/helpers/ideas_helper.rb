@@ -43,6 +43,7 @@ module IdeasHelper
   def idea_status(state)
     state = state.to_sym if state.kind_of?(String)
     case state
+    when :archived    then s_('Idea state|archived')  
     when :graveyarded then s_('Idea state|graveyarded')
     when :draft       then s_('Idea state|draft')
     when :submitted   then s_('Idea state|submitted')    
@@ -168,6 +169,8 @@ module IdeasHelper
 
   def idea_copy_for_state(state_name)
     case state_name
+    when :archived
+      _("This idea is archived: It has been moved out of the stack to make way for other ideas.")
     when :graveyarded
       _("This idea is in the graveyard: It has become obsolete or irrelevant and has been moved out of the stack to make way for other ideas.")
     when :draft
