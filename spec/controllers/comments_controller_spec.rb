@@ -78,14 +78,14 @@ describe CommentsController do
   it "edits a recent enough comment" do
     comment = Comment.make!
     get :edit, :id => comment
-    assert_select ".test-editable"
+    assert_select ".edit_comment"
   end
 
   it "does not edit an old comment" do
     comment = Comment.make!
     Comment.any_instance.stub(:recently_created? => false)
     get :edit, :id => comment
-    assert_select ".test-editable", count: 0
+    assert_select ".edit_comment", count: 0
   end
 
   it "destroy action should destroy model and redirect to idea action" do
