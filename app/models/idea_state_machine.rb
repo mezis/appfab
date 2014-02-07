@@ -65,10 +65,6 @@ class IdeaStateMachine
       transition :archived => same
     end
 
-    event :archive do
-      
-    end
-
     event :submit› do
       transition :draft => :submitted
     end
