@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
   include Traits::RequiresLogin
 
-  before_filter :load_comment, :only => [:show, :update, :destroy]
+  before_filter :load_comment, :only => [:show, :update, :destroy, :edit]
 
   def create
     @comment = Comment.new(comment_params)
@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     authorize! :create, @comment if @comment.valid?
 
     success = @comment.save
-      
+
     respond_to do |format|
       format.html do
         if success
@@ -54,10 +54,16 @@ class CommentsController < ApplicationController
 
     if @comment.update_attributes(comment_params)
       flash[:success] = _("Successfully updated comment.")
-    else
-      flash[:error] = _("Failed to update comment.")
+      redirect_to @comment.idea, anchor: 'comments'
+      return
     end
-    redirect_to @comment.idea, anchor: 'comments'
+    flash.now[:error] = _("Failed to update comment.")
+    render :edit
+  end
+
+
+  def edit
+    authorize! :update, @comment
   end
 
 

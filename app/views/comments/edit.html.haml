@@ -1,0 +1,10 @@
+- if @comment.recently_created?
+  %h1.test-editable Correct your typo
+  = form_for @comment, id:'edit_comment' do |f|
+    .control-group.clearfix
+      .controls.clearfix
+        = f.text_area :body, rows: 2
+        = errors_for_field(@comment, :body, class:'pull-right')
+      = f.submit _('Update comment'), class:'btn btn-small pull-right'
+- else
+  %h1.test-not-editable Sorry your comment was made too long ago!

@@ -12,7 +12,7 @@ describe CommentsController do
   describe "#create" do
     context "when model is invalid" do
       let(:data) {{ comment: { idea_id:idea.id, body:'' } }}
-    
+
       context '(html)' do
         let(:perform) { post :create, data }
 
@@ -66,13 +66,26 @@ describe CommentsController do
       comment
       Comment.any_instance.stub(:valid? => false)
       perform
-      response.should redirect_to(idea_path(comment.idea))
+      response.should be_success
     end
 
     it "update action should redirect to idea when model is valid" do
       perform
       response.should redirect_to(idea_path(comment.idea))
     end
+  end
+
+  it "edits a recent enough comment" do
+    comment = Comment.make!
+    get :edit, :id => comment
+    assert_select ".test-editable"
+  end
+
+  it "does not edit an old comment" do
+    comment = Comment.make!
+    Comment.any_instance.stub(:recently_created? => false)
+    get :edit, :id => comment
+    assert_select ".test-editable", count: 0
   end
 
   it "destroy action should destroy model and redirect to idea action" do
