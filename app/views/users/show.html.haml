@@ -26,6 +26,10 @@
         %li= n_('Is a backer of one idea', 'Is a backer of %{count} ideas', count) % { count:count }
       - if count = @user.notifications.unread.count and count > 0
         %li= n_('Has an unread notification', 'Has %{count} unread notifications', count) % { count:count }
+      - if @user.receives_digest
+        %li= _('Receives daily digest email')
+      - else
+        %li= _('Doesn\'t receive daily digest email')
 
   .span3
 

@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :comments, :foreign_key => :author_id, :dependent => :destroy
   has_many :ideas_as_product_manager, :class_name => 'Idea', :foreign_key => :product_manager_id
   has_many :vetted_ideas, :class_name => 'Idea', :through => :vettings, :source => :idea
-  
+
   include User::Role::UserMethods
   include Notification::Base::CanBeSubject
   include Notification::Base::Recipient
@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   scope :excluding_ids, lambda { |*ids| where('users.id NOT IN (?)', ids.flatten.uniq) }
   scope :first_name_is, lambda { |name| joins(:login).where('logins.first_name = ?', name) }
   scope :by_first_name, -> { joins(:login).order(:first_name) }
+  scope :receives_digest, -> { where(receives_digest: true) }
 
   # this is not implemented as an association, since polymorphism and has_many through do not play well together
   def backed_ideas

@@ -1,6 +1,6 @@
 # Form object to allow user mutation without resorting to
 # +accepts_nested_attributes_for+
-# 
+#
 # Inspired from
 # - http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
 # - http://pivotallabs.com/form-backing-objects-for-fun-and-profit/
@@ -12,10 +12,11 @@ class User::EditForm
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attribute :first_name,    String
-  attribute :last_name,     String
-  attribute :voting_power,  Fixnum
-  attribute :state,         Fixnum
+  attribute :first_name,        String
+  attribute :last_name,         String
+  attribute :voting_power,      Fixnum
+  attribute :state,             Fixnum
+  attribute :receives_digest,   Boolean
 
   attr_reader :user, :login
 
@@ -29,10 +30,11 @@ class User::EditForm
     @user  = user
     @login = user.login
 
-    self.voting_power = user.voting_power
-    self.state        = user.state
-    self.first_name   = login.first_name
-    self.last_name    = login.last_name
+    self.voting_power     = user.voting_power
+    self.state            = user.state
+    self.first_name       = login.first_name
+    self.last_name        = login.last_name
+    self.receives_digest  = user.receives_digest
   end
 
 
@@ -42,10 +44,11 @@ class User::EditForm
     raise ArgumentError if (params.keys - attributes.keys).any?
     self.attributes = attributes.merge(params)
 
-    user.voting_power = attributes[:voting_power]
-    user.state        = attributes[:state]
-    login.first_name  = attributes[:first_name]
-    login.last_name   = attributes[:last_name]
+    user.voting_power     = attributes[:voting_power]
+    user.state            = attributes[:state]
+    user.receives_digest  = attributes[:receives_digest]
+    login.first_name      = attributes[:first_name]
+    login.last_name       = attributes[:last_name]
 
     return false unless valid?
     persist!
