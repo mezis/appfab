@@ -27,7 +27,7 @@ class Ability
     can :take_over, Idea do |idea|
       user.plays?(:product_manager) &&
       (idea.account_id == user.account_id) &&
-      (idea.product_manager_id != user.id) 
+      (idea.product_manager_id != user.id)
     end
 
     # Comment

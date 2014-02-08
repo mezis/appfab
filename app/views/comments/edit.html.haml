@@ -1,0 +1,10 @@
+- if @comment.recently_created?
+  - title _("Correct your typo!")
+  = form_for @comment, id:'edit_comment' do |f|
+    .control-group.clearfix
+      .controls.clearfix
+        = f.text_area :body, rows: 4
+        = errors_for_field(@comment, :body, class:'pull-right')
+      = f.submit _('Update comment'), class:'btn btn-small pull-right'
+- else
+  - title _("Sorry your comment was made too long ago!")

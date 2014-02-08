@@ -54,4 +54,8 @@
     %li
       = can_link_to comment_path(comment), auth:[:destroy, comment], method: :delete, remote:true, class: 'delete', title:_('Delete this comment'), data: { confirm:_('Are you sure?') } do
         %i.fa.fa-trash-o
+    - if can?(:update, comment)
+      %li
+        = link_to edit_comment_path(comment), auth: [:destroy, comment], class: 'edit', title: _('Edit this comment') do
+          %i.fa.fa-pencil
 
