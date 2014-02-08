@@ -5,6 +5,8 @@ class SearchController < ApplicationController
   before_filter :require_account!
 
   def index
-    @search = Search.new(params[:search].fetch(:query, nil))
+    @search = Search.new(
+      scope: current_account.ideas, 
+      query: params[:search].fetch(:query, nil))
   end
 end
