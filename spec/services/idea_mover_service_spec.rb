@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe IdeaMoverService do
+  fixtures :users, :accounts, :logins
   subject { described_class.new(idea:@idea, account:@account) }
   let(:perform) { subject.run }
 
@@ -11,7 +12,7 @@ describe IdeaMoverService do
   it 'borks if idea already in target account' do
     @idea    = Idea.make!
     @account = @idea.account
-    expect { perform }.to raise_exception(ArgumentError)    
+    expect { perform }.to raise_exception(ArgumentError)
   end
 
   context '(with idea and account)' do
