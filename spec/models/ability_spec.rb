@@ -4,7 +4,6 @@ require "cancan/matchers"
 
 describe Ability do
   fixtures :users, :accounts, :logins
-
   before { Idea.delete_all }
 
   describe "comments" do
@@ -54,4 +53,6 @@ describe Ability do
       end
     end
   end
+
+  # TODO describe Idea and other permissions here.
 end
