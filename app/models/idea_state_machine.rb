@@ -59,10 +59,14 @@ class IdeaStateMachine
     state :live,         value: 8
 
     event :bury do
-      transition (any - [:implemented, :signed_off, :live, :archived]) => :graveyarded
+      transition (any - [:implemented, :signed_off, :live, :archived, :graveyarded, :archived]) => :graveyarded
       transition [:implemented, :signed_off, :live] => :archived
-      transition :graveyarded => same
-      transition :archived => same
+      # transition :graveyarded => same
+      # transition :archived => same
+    end
+
+    event :revive do
+      transition [:graveyarded, :archived] => :submitted
     end
 
     event :submit› do
@@ -95,22 +99,22 @@ class IdeaStateMachine
     event :approve› do
       transition :designed => :approved
     end
-    
+
     event :implement› do
       transition :approved => :implemented
     end
-    
+
     event :sign_off› do
       transition :implemented => :signed_off
     end
-    
+
     event :deliver› do
       transition :signed_off => :live
     end
 
-    # 
+    #
     # transition hooks
-    # 
+    #
     after_transition :on => :abort›, :do => :_remove_vettings_and_votes!
   end
 

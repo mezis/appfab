@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
 
 
     # account, angle and filter
-    @ideas = current_account.ideas
+    @ideas = current_account.ideas.undead_ideas
     @ideas = @ideas.send(:"#{@angle}_by", current_user)
     @ideas = @ideas.send(:"#{@filter}_by", current_user) unless @filter == 'all'
 
@@ -229,8 +229,8 @@ class IdeasController < ApplicationController
     params[:category] =
     session[:ideas_category][@angle] = begin
       valid_categories = (current_user.account.andand.categories || []) + %w(all none)
-      (valid_categories.include?(params[:category])                and params[:category]) || 
-      (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) || 
+      (valid_categories.include?(params[:category])                and params[:category]) ||
+      (valid_categories.include?(session[:ideas_category][@angle]) and session[:ideas_category][@angle]) ||
       'all'
     end
   end
