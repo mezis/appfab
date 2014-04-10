@@ -6,7 +6,7 @@ class SearchController < ApplicationController
 
   def index
     @search = Search.new(
-      scope: current_account.ideas, 
+      scope: current_account.ideas,
       query: params[:search].fetch(:query, nil))
   end
 end
