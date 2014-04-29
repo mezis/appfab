@@ -23,7 +23,7 @@
 
   %li.separator
 
-  
+
   - if can?(:take_over, idea)
     %li
       = link_to idea_path(idea, idea: { product_manager_id: current_user.id }), method: :put, class: 'btn btn-block', title: s_("Tooltip|Take over this idea from another product manager. We'll tell them of course, so they don't get surprised!"), data: { placement: 'left' } do
@@ -52,7 +52,20 @@
         = _('Move idea to...')
         %span.caret
 
+  - if idea.state_machine.can_bury?
+    - if can?(:bury, idea)
+      %li
+        .btn-group.btn-block
+          = link_to idea_path(idea, idea: { state: 'graveyarded' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Graveyard this idea. It\'s not deleted, just moved out of the way to allow other ideas to rise to the top of the stack.'), data: { confirm: s_("Popup|Are you sure? This idea will no longer appear unless you know to search for it."), placement: 'left' } do
+            %i.fa.fa-archive
+            = _('Bury')
+
+  - if idea.state_machine.can_revive?
+    - if can?(:revive, idea)
+      %li
+        .btn-group.btn-block
+          = link_to idea_path(idea, idea: { state: 'submitted' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Bring it back into the list and have it viewable by others.') do
+            %i.fa.fa-medkit
+            = _('Revive')
 
   %li.separator
-
-

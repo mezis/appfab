@@ -62,6 +62,8 @@ class Ability
     end
 
     # Idea lifecycle
+    can :bury,           Idea
+    can :revive,         Idea
     can :pick,           Idea, account_id: user.account_id if user.plays?(:product_manager)
     can :force_approve,  Idea, product_manager_id: user.id
     can :design,         Idea, product_manager_id: user.id

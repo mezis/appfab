@@ -23,24 +23,45 @@ describe Idea do
   end
 
   context 'given a submitted idea' do
-    before do
-      @idea = Idea.make!(:submitted)
-    end
+    
+    let(:idea) { Idea.make!(:submitted) }
 
     it 'does not become vetted when just sized' do
-      @idea.update_attributes! design_size:1, development_size:1
-      @idea.reload.state_machine.should_not be_vetted
+      idea.update_attributes! design_size:1, development_size:1
+      idea.reload.state_machine.should_not be_vetted
     end
 
     it 'does not become vetted when just vetted twice' do
-      2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.reload.state_machine.should_not be_vetted
+      2.times { Vetting.make!(idea: idea, user: User.make!) }
+      idea.reload.state_machine.should_not be_vetted
     end
 
     it 'becomes "vetted" when vetted twice then sized' do
-      2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.reload.update_attributes! design_size:1, development_size:1
-      @idea.reload.state_machine.should be_vetted
+      2.times { Vetting.make!(idea: idea, user: User.make!) }
+      idea.reload.update_attributes! design_size:1, development_size:1
+      idea.reload.state_machine.should be_vetted
+    end
+
+    it 'can be graveyarded' do
+      IdeaStateMachineService.new(idea).trigger!(:bury)
+      idea.reload.state_machine.should be_graveyarded
+    end
+
+    to_the_graveyard = IdeaStateMachine.state_names-[:implemented, :signed_off, :live, :archived, :graveyarded]
+    to_the_graveyard.each do |allowed_state|
+      let(:idea) { Idea.make!(allowed_state) }
+      it "can be graveyarded from #{allowed_state}" do
+        IdeaStateMachineService.new(idea).trigger!(:bury)
+        idea.reload.state_machine.should be_graveyarded
+      end
+    end
+
+    [:implemented, :signed_off, :live, :archived].each do |disallowed_state|
+      let(:idea) { Idea.make!(disallowed_state) }
+      it "can be archived from #{disallowed_state}" do
+        IdeaStateMachineService.new(idea).trigger!(:bury)
+        idea.reload.state_machine.should_not be_archived
+      end
     end
   end
 

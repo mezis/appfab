@@ -7,7 +7,7 @@ GIT
       activerecord (>= 3.2.0, < 5.0)
 
 GEM
-  remote: http://yarp.dev/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.0.3)
       actionpack (= 4.0.3)
