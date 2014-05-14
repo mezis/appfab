@@ -42,25 +42,28 @@ describe Idea do
       idea.reload.state_machine.should be_vetted
     end
 
-    it 'can be graveyarded' do
-      IdeaStateMachineService.new(idea).trigger!(:bury)
-      idea.reload.state_machine.should be_graveyarded
-    end
-
-    to_the_graveyard = IdeaStateMachine.state_names-[:implemented, :signed_off, :live, :archived, :graveyarded]
-    to_the_graveyard.each do |allowed_state|
-      let(:idea) { Idea.make!(allowed_state) }
-      it "can be graveyarded from #{allowed_state}" do
-        IdeaStateMachineService.new(idea).trigger!(:bury)
-        idea.reload.state_machine.should be_graveyarded
+    [[ :submitted, :graveyarded ],
+     [ :voted,     :graveyarded ],
+     [ :live,      :archived ]
+    ].each do |source, dest| 
+      it "can transition from #{source} to #{dest}" do
+        idea = Idea.make!(source)
+        expect(IdeaStateMachine.state_name(idea.state)).to eq(source)
+        
+        idea.state = IdeaStateMachine.state_value(dest)
+        expect { IdeaStateMachineService.new(idea).run }.not_to raise_error
       end
     end
 
-    [:implemented, :signed_off, :live, :archived].each do |disallowed_state|
-      let(:idea) { Idea.make!(disallowed_state) }
-      it "can be archived from #{disallowed_state}" do
-        IdeaStateMachineService.new(idea).trigger!(:bury)
-        idea.reload.state_machine.should_not be_archived
+    [[ :submitted, :archived ],
+     [ :live,      :graveyarded ]
+    ].each do |source, dest| 
+      it "cannot transition from #{source} to #{dest}" do
+        idea = Idea.make!(source)
+        expect(IdeaStateMachine.state_name(idea.state)).to eq(source)
+
+        idea.state = IdeaStateMachine.state_value(dest)
+        expect { IdeaStateMachineService.new(idea).run }.to raise_error
       end
     end
   end

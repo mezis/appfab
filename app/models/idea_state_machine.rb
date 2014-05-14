@@ -45,7 +45,6 @@ class IdeaStateMachine
 
 
   state_machine :state, :initial => :submitted do
-    state :archived,     value: -3
     state :graveyarded,  value: -2
     state :draft,        value: -1
     state :submitted,    value: 0
@@ -57,14 +56,18 @@ class IdeaStateMachine
     state :implemented,  value: 6
     state :signed_off,   value: 7
     state :live,         value: 8
+    state :archived,     value: 9
 
     event :bury do
-      transition (any - [:implemented, :signed_off, :live, :archived, :graveyarded, :archived]) => :graveyarded
-      transition [:implemented, :signed_off, :live] => :archived
+      transition [:submitted, :vetted, :voted] => :graveyarded
     end
 
     event :revive do
-      transition [:graveyarded, :archived] => :submitted
+      transition :graveyarded => :submitted
+    end
+
+    event :archive do
+      transition :live => :archived
     end
 
     event :submit› do
@@ -83,7 +86,7 @@ class IdeaStateMachine
     end
 
     event :abort› do
-      transition (any - [:draft, :submitted, :live]) => :submitted
+      transition [:vetted, :voted, :picked, :designed, :approved, :signed_off] => :submitted
     end
 
     event :pick› do

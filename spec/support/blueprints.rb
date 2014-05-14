@@ -50,24 +50,31 @@ Idea.blueprint do
 end
 
 Idea.blueprint(:submitted) do
+  state { IdeaStateMachine.state_value(:submitted) }
 end
 
 Idea.blueprint(:draft) do
+  state { IdeaStateMachine.state_value(:draft) }
 end
 
 Idea.blueprint(:picked) do
+  state { IdeaStateMachine.state_value(:picked) }
 end
 
 Idea.blueprint(:approved) do
+  state { IdeaStateMachine.state_value(:approved) }
 end
 
 Idea.blueprint(:live) do
+  state { IdeaStateMachine.state_value(:live) }
 end
 
 Idea.blueprint(:graveyarded) do
+  state { IdeaStateMachine.state_value(:graveyarded) }
 end
 
 Idea.blueprint(:archived) do
+  state { IdeaStateMachine.state_value(:archived) }
 end
 
 Idea.blueprint(:sized) do
