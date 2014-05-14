@@ -18,7 +18,7 @@ describe Traits::LastSeenAt do
 
       context 'when cache value more recent' do
         it 'returns the cached value' do
-          Timecop.travel(new_stamp) { subject.last_seen_at = Time.current }
+          Timecop.travel(new_stamp) { subject.update_attribute(:last_seen_at, Time.current) }
           result.should > stamp
         end
       end
@@ -34,6 +34,7 @@ describe Traits::LastSeenAt do
       end
 
       it 'is preserved' do
+        subject.save!
         subject.reload.last_seen_at.should == new_stamp
       end
 
@@ -45,10 +46,10 @@ describe Traits::LastSeenAt do
 
     describe 'update_last_seen_at!' do
       it 'updates the stored timestamp' do
-        subject.last_seen_at = new_stamp
+        subject.update_attribute(:last_seen_at, new_stamp)
         subject.update_last_seen_at!
         Rails.cache.clear
-        subject.reload.last_seen_at.should == new_stamp        
+        subject.reload.last_seen_at.should == new_stamp
       end
     end
   end
