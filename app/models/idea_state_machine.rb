@@ -61,8 +61,6 @@ class IdeaStateMachine
     event :bury do
       transition (any - [:implemented, :signed_off, :live, :archived, :graveyarded, :archived]) => :graveyarded
       transition [:implemented, :signed_off, :live] => :archived
-      # transition :graveyarded => same
-      # transition :archived => same
     end
 
     event :revive do
