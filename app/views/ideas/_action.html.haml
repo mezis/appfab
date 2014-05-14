@@ -68,4 +68,12 @@
             %i.fa.fa-medkit
             = _('Revive')
 
+  - if idea.state_machine.can_archive?
+    - if can?(:archive, idea)
+      %li
+        .btn-group.btn-block
+          = link_to idea_path(idea, idea: { state: 'archived' }), method: :put, class: 'btn btn-block', title: s_('Tooltip|Archive this idea but keep it for future reference.') do
+            %i.fa.fa-archive
+              = _('Archive')
+
   %li.separator
