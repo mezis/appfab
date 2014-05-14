@@ -23,24 +23,48 @@ describe Idea do
   end
 
   context 'given a submitted idea' do
-    before do
-      @idea = Idea.make!(:submitted)
-    end
+    
+    let(:idea) { Idea.make!(:submitted) }
 
     it 'does not become vetted when just sized' do
-      @idea.update_attributes! design_size:1, development_size:1
-      @idea.reload.state_machine.should_not be_vetted
+      idea.update_attributes! design_size:1, development_size:1
+      idea.reload.state_machine.should_not be_vetted
     end
 
     it 'does not become vetted when just vetted twice' do
-      2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.reload.state_machine.should_not be_vetted
+      2.times { Vetting.make!(idea: idea, user: User.make!) }
+      idea.reload.state_machine.should_not be_vetted
     end
 
     it 'becomes "vetted" when vetted twice then sized' do
-      2.times { Vetting.make!(idea: @idea, user: User.make!) }
-      @idea.reload.update_attributes! design_size:1, development_size:1
-      @idea.reload.state_machine.should be_vetted
+      2.times { Vetting.make!(idea: idea, user: User.make!) }
+      idea.reload.update_attributes! design_size:1, development_size:1
+      idea.reload.state_machine.should be_vetted
+    end
+
+    [[ :submitted, :graveyarded ],
+     [ :voted,     :graveyarded ],
+     [ :live,      :archived ]
+    ].each do |source, dest| 
+      it "can transition from #{source} to #{dest}" do
+        idea = Idea.make!(source)
+        expect(IdeaStateMachine.state_name(idea.state)).to eq(source)
+        
+        idea.state = IdeaStateMachine.state_value(dest)
+        expect { IdeaStateMachineService.new(idea).run }.not_to raise_error
+      end
+    end
+
+    [[ :submitted, :archived ],
+     [ :live,      :graveyarded ]
+    ].each do |source, dest| 
+      it "cannot transition from #{source} to #{dest}" do
+        idea = Idea.make!(source)
+        expect(IdeaStateMachine.state_name(idea.state)).to eq(source)
+
+        idea.state = IdeaStateMachine.state_value(dest)
+        expect { IdeaStateMachineService.new(idea).run }.to raise_error
+      end
     end
   end
 

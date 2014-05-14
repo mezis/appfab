@@ -1,5 +1,5 @@
 - @search.ideas.each do |idea|
-  = render partial: 'ideas/idea_maxi', locals: { :idea => idea }
+  = render partial: 'ideas/idea_maxi', locals: { :idea => idea, title_link: true }
 
 - if @search.ideas.empty?
   %h3.text-center No ideas matches #{@search.query.inspect}

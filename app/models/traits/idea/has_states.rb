@@ -7,6 +7,8 @@ module Traits::Idea::HasStates
   ImmutableAfterVetting = %w(title problem solution metrics design_size development_size category)
 
   StatesForWizard = [
+    N_('Ideas State|archived'),
+    N_('Ideas State|graveyarded'),
     N_('Ideas State|draft'),
     N_('Ideas State|submitted'),
     N_('Ideas State|vetted'),

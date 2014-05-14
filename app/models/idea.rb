@@ -10,7 +10,7 @@ class Idea < ActiveRecord::Base
   has_many   :attachments, :class_name => 'Attachment', :as => :owner, :dependent => :destroy
   belongs_to :product_manager, :class_name => 'User'
 
-  include Notification::Base::CanBeSubject  
+  include Notification::Base::CanBeSubject
   include Traits::Idea::HasStates
   include Traits::Idea::StarRating
   include Traits::Shuffleable
@@ -39,6 +39,7 @@ class Idea < ActiveRecord::Base
 
   scope :managed_by, lambda { |user| where(product_manager_id: user) }
   scope :not_vetted_by,  lambda { |user| where('ideas.id NOT IN (?)', user.vetted_ideas.pluck(:id)) }
+  scope :undead_ideas, -> { where('state NOT IN (?)',IdeaStateMachine.state_values(:graveyarded,:archived)) }
 
   scope :with_state, lambda { |*states|
     where('ideas.state IN (?)', IdeaStateMachine.state_values(*states))
@@ -74,7 +75,7 @@ class Idea < ActiveRecord::Base
 
 
   # Search angles
-  
+
   def self.discussable_by(user)
     user.account.ideas.without_state(:draft)
   end

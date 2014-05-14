@@ -24,6 +24,7 @@ db/schema.rb
 # CTags turds
 .tags
 .tags_sorted_by_file
+tags
 
 # Fixtures
 /test/fixtures/*.yml
