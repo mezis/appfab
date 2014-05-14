@@ -163,7 +163,7 @@ module IdeasHelper
   end
 
   def ideas_board_states
-    IdeaStateMachine.all_state_names - [:draft]
+    IdeaStateMachine.all_state_names - [:draft, :archived, :graveyarded]
   end
 
 
