@@ -22,7 +22,7 @@ class IdeasController < ApplicationController
   DEFAULT_VIEW = VALID_VIEWS.first
 
   LIMIT_RANGE = 5..100
-  DEFAULT_LIMIT = { 'board' => 6, 'cards' => 12 }
+  DEFAULT_LIMIT = { 'board' => 24, 'cards' => 12 }
 
   def index
     @angle    = set_angle_from_params
