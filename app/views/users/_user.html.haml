@@ -29,8 +29,9 @@
           = user.first_name
           - if show_karma
             %span.karma
-              = number_with_delimiter user.karma
-              = user_karma_symbol
+              = surround '(', ')' do
+                = number_with_delimiter user.karma
+                = user_karma_symbol
     - if link_target
       = link_to link_target, link_options do
         = body
