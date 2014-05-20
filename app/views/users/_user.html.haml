@@ -4,7 +4,7 @@
 -# link     (boolean, default true)
 -# avatar   (boolean or integer, default false)
 -# classes  (string, default none)
-= cached_fragment(disabled:false, resource:User, id:user.id, v:8, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :classes, :link), can?(:read, user)]) do
+= cached_fragment(disabled:false, resource:User, id:user.id, v:9, key:[user.login.updated_at, user.updated_at, *local_assigns.values_at(:name, :avatar, :karma, :classes, :link), can?(:read, user)]) do
 
   :ruby
     show_avatar    = !!local_assigns.fetch(:avatar,  true)
@@ -29,8 +29,9 @@
           = user.first_name
           - if show_karma
             %span.karma
-              = number_with_delimiter user.karma
-              = user_karma_symbol
+              = surround '(', ')' do
+                = number_with_delimiter user.karma
+                = user_karma_symbol
     - if link_target
       = link_to link_target, link_options do
         = body

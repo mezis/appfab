@@ -53,8 +53,9 @@
               = link_to path, title: s_('Tooltip|This is you!<br/>Click here to see or edit your profile.<br/>The number next to your name shows the "karma" points you can spend to vote on ideas. Gain more points as you participate!'), :'data-placement' => 'bottom' do
                 %span.first-name= current_login.first_name
                 %span.karma
-                  %span.figure= number_with_delimiter current_user.karma
-                  = user_karma_symbol
+                  = surround '(', ')' do
+                    %span.figure= number_with_delimiter current_user.karma
+                    = user_karma_symbol
             = content_tag_with_path_checking(:li, controller: 'notifications', action: 'index', html: { class:'inbox', title: s_('Tooltip|Your number of unread notifications. Click to view them'), :'data-placement' => 'left' }) do |path|
               = link_to path, class: 'notifications' do
                 - count = current_user.notifications.unread.count
