@@ -102,6 +102,12 @@ When /^I publish the draft$/ do
 end
 
 
+When /^I choose to become the product manager$/ do
+  idea = Mentions[Idea]
+  visit "/ideas/#{idea.id}"
+  click_on "Become product manager"
+end
+
 
 # expectations
 
@@ -163,3 +169,8 @@ Then /^I should be on the idea page$/ do
   page.current_path.should == path
 end
 
+Then /^"(\w+)" should be the product manager$/ do |product_manager_name|
+  idea = Mentions[Idea]
+  path = "/ideas/#{idea.id}"
+  find(".idea .product_manager").should have_content(product_manager_name)
+end
