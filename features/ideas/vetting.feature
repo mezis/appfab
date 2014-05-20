@@ -32,7 +32,12 @@ Feature: Vetting ideas
     When I sign in as "Archie"
     Then I cannot vet the idea
 
-
+  Scenario: Should not be able to vet idea if I submitted it
+    Given I sign in as "Peter"
+    And I am also a submitter
+    And I submit an idea "A flying car"
+    Then the idea should be submitted
+    And I cannot vet the idea
 
 
 
@@ -43,3 +48,4 @@ Feature: Vetting ideas
 # Vetting given a sized idea can be created by an architect
 # Vetting given a sized idea can only be done once by a PM
 # Vetting given a sized idea cannot be created by other roles
+# Vetting given a sized idea cannot be vetted by the submitter
