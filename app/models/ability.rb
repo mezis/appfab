@@ -50,7 +50,10 @@ class Ability
     # Sizing / Vetting
     if user.plays?(:product_manager, :architect)
       can :size,     Idea
-      can :create,   Vetting
+      can :create,   Vetting do |vetting|
+        vetting.idea.author_id != user.id
+      end
+
       can :destroy,  Vetting do |r|
         r.user_id == user.id && r.recently_created?
       end
