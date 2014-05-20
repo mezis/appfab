@@ -6,6 +6,7 @@ Feature: Vetting ideas
   Background:
     Given a product manager named "Peter"
     And an architect named "Archie"
+    And a submitter named "Yoda"
     And a sized idea "Solo, make it so"
     And "Archie" has vetted the idea
 
