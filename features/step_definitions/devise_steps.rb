@@ -16,6 +16,13 @@ Given /^an? (.*) named "(\w+)"$/ do |role, first_name|
   Mentions[User] = user
 end
 
+Given /^I am also a (.*)$/ do |role|
+  login = Mentions[Login]
+  user  = login.users.first
+  role_sym = role.split.join('_').to_sym
+  user.plays! role_sym
+end
+
 Given /^I sign in as "(\w+)"$/ do |first_name|
   login = Login.where(first_name: first_name).first
   visit '/session/sign_out'
