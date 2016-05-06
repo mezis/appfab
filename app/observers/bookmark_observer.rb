@@ -4,6 +4,7 @@ class BookmarkObserver < ActiveRecord::Observer
 
   def after_create(record)
     return true unless record.kind_of?(Idea)
+    return true if record.author.plays? :product_manager
     _create_bookmark_for(record, record.author)
   end
 

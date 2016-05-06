@@ -9,6 +9,17 @@ describe BookmarkObserver do
         Idea.make! author:user
       }.should change { user.bookmarks.count }.by(1)
     end
+
+    context 'user is a PM' do
+      before { user.plays! :product_manager }
+
+      it 'bookmarks it' do
+        lambda {
+          Idea.make! author:user
+        }.should_not change { user.bookmarks.count }
+      end
+
+    end
   end
 
   context 'when a user comments on an idea' do
