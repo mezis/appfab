@@ -31,6 +31,22 @@
       - else
         %li= _('Doesn\'t receive daily digest email')
 
+    - if current_user == @user
+      - if @user.ideas.with_state(:draft).size > 0
+        %h3 My draft ideas
+        %ul
+          - @user.ideas.with_state(:draft).each do |idea|
+            %li
+              = link_to idea.title, idea_path(idea)
+
+      - if @user.ideas.with_state(:submitted).size > 0
+        %h3 My submitted ideas
+        %ul
+          - @user.ideas.with_state(:submitted).each do |idea|
+            %li
+              = link_to idea.title, idea_path(idea)
+
+
   .span3
 
     = link_to users_path, class: 'btn btn-block' do
