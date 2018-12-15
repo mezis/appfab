@@ -516,3 +516,9 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   virtus
   will_paginate
+
+RUBY VERSION
+   ruby 2.1.0p0
+
+BUNDLED WITH
+   1.17.2
