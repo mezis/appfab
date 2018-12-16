@@ -1,10 +1,10 @@
 source ENV.fetch('GEM_SOURCE','https://rubygems.org')
-ruby '2.1.0'
+ruby '2.3.8'
 
 gem 'rails', '~> 4.0.0'
 
 # webservers
-gem 'rainbows', group: :production
+# gem 'rainbows', group: :production
 gem 'thin',     group: :development
 
 # load .env
@@ -149,8 +149,6 @@ group :development do
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
-  # as says on the tin
-  gem 'license_finder',          require:false
 
   # provides /rails/routes, built-in in Rails 4
   gem 'sextant'
