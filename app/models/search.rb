@@ -12,4 +12,8 @@ class Search
   def ideas
     scope.basic_search(query)
   end
+
+  def persisted?
+
+  end
 end

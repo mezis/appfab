@@ -1,6 +1,6 @@
 - if current_account
   - search = @search || Search.new(scope: current_account.ideas)
-  = form_for(search, method: :get, html: { class: 'form-search' }) do |f|
+  = form_for(search, url: '/search', method: :get, html: { class: 'form-search' }) do |f|
     .input-append
       = f.text_field :query, class: 'input-medium search-query', placeholder: 'Search'
       = f.submit 'Go', class: 'btn'
