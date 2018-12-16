@@ -1,10 +1,10 @@
 source ENV.fetch('GEM_SOURCE','https://rubygems.org')
-ruby '2.1.0'
+ruby '2.5.3'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.2.8'
 
 # webservers
-gem 'rainbows', group: :production
+# gem 'rainbows', group: :production
 gem 'thin',     group: :development
 
 # load .env
@@ -42,7 +42,7 @@ gem 'virtus'
 
 # activerecord extensions
 gem 'state_machine', require:false
-gem 'default_value_for', git: 'https://github.com/FooBarWidget/default_value_for.git', branch: 'rails4'
+gem 'default_value_for'
 gem 'rails-observers'
 
 # attached files & image manipulation
@@ -102,7 +102,7 @@ gem 'animation'
 gem 'uglifier', '>= 1.0.3'
 
 # Search
-gem 'textacular', '~> 3.0'
+gem 'textacular', '~> 4.0'
 
 group :development do
   # better generators
@@ -149,8 +149,6 @@ group :development do
   # is that a DBA in your pocket, or are you just happy to see me?
   gem 'query_reviewer'
 
-  # as says on the tin
-  gem 'license_finder',          require:false
 
   # provides /rails/routes, built-in in Rails 4
   gem 'sextant'
@@ -159,7 +157,7 @@ group :development do
   gem 'quiet_assets'
 
   # nicer error messages in the browser
-  gem "better_errors"
+  # gem "better_errors"
   gem "binding_of_caller"
 end
 

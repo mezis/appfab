@@ -8,6 +8,9 @@
 /.bundle
 /vendor/bundle
 
+.idea/*
+.env*
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
